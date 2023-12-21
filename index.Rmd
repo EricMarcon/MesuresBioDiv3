@@ -296,7 +296,7 @@ Le jeu de données utilisé pour les exemples est une version réduite aux arbre
 #| echo: false
 #| fig.cap: '(ref:Paracou6MapFig)'
 #| fig.env: 'figure'
-#| out.width:  !expr ifelse(knitr::is_latex_output(), '\\widthw', '100%')
+#| out.width:  !expr ifelse(knitr::is_latex_output(), '\\widthw', '120%')
 #| ref.label: 'Paracou6MapCode'
 #| results: hide
 ```
@@ -311,7 +311,7 @@ autoplot(
   labelSize = expression(paste("Surface terrière (", cm^2, ")")), 
   labelColor = "Espèce"
 ) +
-theme(legend.position = "bottom", legend.direction = "vertical")
+theme(legend.position = "bottom", legend.direction = "vertical", legend.margin=margin())
 ```
 
 
