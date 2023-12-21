@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-US" xml:lang="en-US">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Mesures de la Biodiversité</title>
+  <meta name="description" content="Définitions, estimation et décompositon de la biodiversité" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Mesures de la Biodiversité" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png" />
+  <meta property="og:description" content="Définitions, estimation et décompositon de la biodiversité" />
+  <meta name="github-repo" content="EricMarcon/MesuresBioDiv3" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Mesures de la Biodiversité" />
+  
+  <meta name="twitter:description" content="Définitions, estimation et décompositon de la biodiversité" />
+  <meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png" />
+
+<meta name="author" content="Eric Marcon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="calculs-et-données.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="" data-path="calculs-et-données.html"><a href="calculs-et-données.html"><i class="fa fa-check"></i>Calculs et données</a></li>
+<li class="chapter" data-level="" data-path="notations.html"><a href="notations.html"><i class="fa fa-check"></i>Notations</a></li>
+<li class="part"><span><b>I Notions</b></span></li>
+<li class="chapter" data-level="1" data-path="chap-Notions.html"><a href="chap-Notions.html"><i class="fa fa-check"></i><b>1</b> Notions de Diversité</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chap-Notions.html"><a href="chap-Notions.html#composantes"><i class="fa fa-check"></i><b>1.1</b> Composantes</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="chap-Notions.html"><a href="chap-Notions.html#richesse"><i class="fa fa-check"></i><b>1.1.1</b> Richesse</a></li>
+<li class="chapter" data-level="1.1.2" data-path="chap-Notions.html"><a href="chap-Notions.html#équitabilité"><i class="fa fa-check"></i><b>1.1.2</b> Équitabilité</a></li>
+<li class="chapter" data-level="1.1.3" data-path="chap-Notions.html"><a href="chap-Notions.html#disparité"><i class="fa fa-check"></i><b>1.1.3</b> Disparité</a></li>
+<li class="chapter" data-level="1.1.4" data-path="chap-Notions.html"><a href="chap-Notions.html#agrégation"><i class="fa fa-check"></i><b>1.1.4</b> Agrégation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="chap-Notions.html"><a href="chap-Notions.html#niveaux-de-létude"><i class="fa fa-check"></i><b>1.2</b> Niveaux de l’étude</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="chap-Notions.html"><a href="chap-Notions.html#diversité-alpha-beta-et-gamma"><i class="fa fa-check"></i><b>1.2.1</b> Diversité <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> et <span class="math inline">\(\gamma\)</span></a></li>
+<li class="chapter" data-level="1.2.2" data-path="chap-Notions.html"><a href="chap-Notions.html#décomposition"><i class="fa fa-check"></i><b>1.2.2</b> Décomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chap-Notions.html"><a href="chap-Notions.html#le-problème-de-lespèce"><i class="fa fa-check"></i><b>1.3</b> Le problème de l’espèce</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-Outils.html"><a href="chap-Outils.html"><i class="fa fa-check"></i><b>2</b> Outils</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chap-Outils.html"><a href="chap-Outils.html#courbes-daccumulation"><i class="fa fa-check"></i><b>2.1</b> Courbes d’accumulation</a></li>
+<li class="chapter" data-level="2.2" data-path="chap-Outils.html"><a href="chap-Outils.html#diversité-asymptotique"><i class="fa fa-check"></i><b>2.2</b> Diversité asymptotique</a></li>
+<li class="chapter" data-level="2.3" data-path="chap-Outils.html"><a href="chap-Outils.html#sec-Couverture"><i class="fa fa-check"></i><b>2.3</b> Taux de couverture</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="chap-Outils.html"><a href="chap-Outils.html#formule-des-fréquences-de-good-turing"><i class="fa fa-check"></i><b>2.3.1</b> Formule des fréquences de Good-Turing</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chap-Outils.html"><a href="chap-Outils.html#taux-de-couverture-et-déficit-de-couverture"><i class="fa fa-check"></i><b>2.3.2</b> Taux de couverture et déficit de couverture</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chap-Outils.html"><a href="chap-Outils.html#complétude"><i class="fa fa-check"></i><b>2.3.3</b> Complétude</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chap-Outils.html"><a href="chap-Outils.html#distribution-de-labondance-des-espèces-sad"><i class="fa fa-check"></i><b>2.4</b> Distribution de l’abondance des espèces (SAD)</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-en-log-séries"><i class="fa fa-check"></i><b>2.4.1</b> La distribution en log-séries</a></li>
+<li class="chapter" data-level="2.4.2" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-broken-stick"><i class="fa fa-check"></i><b>2.4.2</b> La distribution Broken Stick</a></li>
+<li class="chapter" data-level="2.4.3" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-log-normale"><i class="fa fa-check"></i><b>2.4.3</b> La distribution log-normale</a></li>
+<li class="chapter" data-level="2.4.4" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-géométrique"><i class="fa fa-check"></i><b>2.4.4</b> La distribution géométrique</a></li>
+<li class="chapter" data-level="2.4.5" data-path="chap-Outils.html"><a href="chap-Outils.html#synthèse"><i class="fa fa-check"></i><b>2.4.5</b> Synthèse</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mesures de la Biodiversité</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Mesures de la Biodiversité</h1>
+<p class="author"><em>Eric Marcon</em></p>
+<p class="date"><em>21/12/2023</em></p>
+</div>
+<div id="motivation" class="section level1 unnumbered hasAnchor">
+<h1>Motivation<a href="index.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Le terme <em>biodiversity</em> est attribué <span class="citation">(<a href="#ref-Meine2006" role="doc-biblioref">Meine, Soulé, and Noss 2006</a>)</span> à Walter Rosen, un membre du <em>National Research Council</em> américain, qui a commencé à contracter les termes <em>biological diversity</em> pendant la préparation d’un colloque dont les actes seront publiés sous le titre “Biodiversity” <span class="citation">(<a href="#ref-Wilson1988" role="doc-biblioref">Wilson and Peter 1988</a>)</span>.
+La question de la diversité biologique intéressait les écologues bien avant l’invention de la biodiversité, mais le néologisme a connu un succès fulgurant <span class="citation">(<a href="#ref-Blandin2014" role="doc-biblioref">Blandin 2014</a>)</span> en même temps qu’il devenait une notion floue, dans lequel chacun peut placer ce qu’il souhaite y trouver, au point de lui retirer son caractère scientifique <span class="citation">(<a href="#ref-Delord2014" role="doc-biblioref">Delord 2014</a>)</span>.
+Une cause de ce glissement est que la biodiversité a été nommée pour attirer l’attention sur son érosion, en lien avec la biologie de la conservation.
+Cette érosion concernant potentiellement de nombreux aspects du monde vivant, la définition de la biodiversité fluctue selon les besoins: <span class="citation">DeLong (<a href="#ref-DeLong1996" role="doc-biblioref">1996</a>)</span> en recense 85 dans les dix premières années de littérature.
+Les indicateurs de la biodiversité peuvent englober bien d’autres choses que la diversité du vivant: le nombre d’espèces menacées (par exemple la liste rouge de l’IUCN), la taille des populations ou la surface des écosystèmes préservés, la dégradation des habitats, la menace pesant sur des espèces emblématiques…
+Une mesure rigoureuse et cohérente de la diversité peut pourtant être construite pour clarifier beaucoup (mais pas tous) des concepts qui constituent la biodiversité.</p>
+<p>Dans l’introduction du premier chapitre des actes de ce qui était devenu le “Forum sur la Biodiversité”, Wilson utilise le mot dans le sens étroit de nombres d’espèces.
+L’élargissement de la notion aux “systèmes naturels” et à l’opposé à la diversité génétique intraspécifique est venu du monde de la conservation <span class="citation">(<a href="#ref-Speth1992" role="doc-biblioref">Speth, Holdgate, and Tolba 1992</a>)</span>.
+La déclaration de Michel Loreau, président du du comité scientifique de la conférence de Paris en 2005 <span class="citation">(<a href="#ref-Loreau2005" role="doc-biblioref">Loreau 2005</a>)</span> en donne une définition aboutie:</p>
+<blockquote>
+<p>La Terre abrite une extraordinaire diversité biologique, qui inclut non seulement les espèces qui habitent notre planète, mais aussi la diversité de leurs gènes, la multitude des interactions écologiques entre elles et avec leur environnement physique, et la variété des écosystèmes complexes qu’elles constituent. Cette biodiversité, qui est le produit de plus de 3 milliards d’années d’évolution, constitue un patrimoine naturel et une ressource vitale dont l’humanité dépend de multiples façons.</p>
+</blockquote>
+<p>Aujourd’hui encore, le terme <em>biodiversité</em> concerne le plus souvent la richesse en espèces d’un écosystème.
+Pour simplifier la présentation, le niveau d’étude dans ce document sera en général celui des espèces <span class="citation">(autre concept flou, <a href="#ref-Hey2001" role="doc-biblioref">Hey 2001</a>)</span>.
+La prise en compte de la totalité des êtres vivants est généralement hors de portée.
+La mesure de diversité est alors limitée à un taxocène, c’est-à-dire un sous-ensemble des espèces d’une communauté reliées taxonomiquement: les papillons, les mammifères, les arbres (la délimitation du sous-ensemble n’est pas forcément strictement taxonomique)…</p>
+<p>Un objet privilégié des études sur la biodiversité est, depuis le Forum, la forêt tropicale parce qu’elle est très diverse et un enjeu pour la conservation.
+La plupart des exemples concerneront ici les arbres de la forêt tropicale, qui ont l’avantage d’être clairement définis en tant qu’individus (donc simples à compter) et posent des problèmes méthodologiques considérables pour l’estimation de leur diversité à partir de données réelles.</p>
+<p>On peut bien évidemment s’intéresser à d’autres niveaux et d’autres objets, par exemple la diversité génétique (en termes d’allèles différents pour certains gènes ou marqueurs) à l’intérieur d’une population, ou même la diversité des interactions entre espèces d’une communauté <span class="citation">(<a href="#ref-Jizhong1991" role="doc-biblioref">Jizhong, Shijun, and Changming 1991</a>)</span>.
+On gardera toujours à l’esprit que la prise en compte de la diversité spécifique n’est pas la seule approche, les méthodes présentées ici s’appliquent à la mesure de la diversité en général, pas même nécessairement biologique.</p>
+<p>L’objectif de ce document est de traiter la mesure de la biodiversité, pas son importance en tant que telle.
+On se référera par exemple à <span class="citation">Chapin et al. (<a href="#ref-Chapin2000" role="doc-biblioref">2000</a>)</span> pour une revue sur cette question, <span class="citation">Cardinale et al. (<a href="#ref-Cardinale2012" role="doc-biblioref">2012</a>)</span> pour les conséquences de l’érosion de la biodiversité sur les services écosystémiques ou <span class="citation">Ceballos, Ehrlich, and Dirzo (<a href="#ref-Ceballos2017" role="doc-biblioref">2017</a>)</span> pour les propriétés autocatalytiques de la biodiversité.</p>
+<p>La mesure de la diversité est un sujet important en tant que tel <span class="citation">(<a href="#ref-Purvis2000" role="doc-biblioref">Purvis and Hector 2000</a>)</span>, pour permettre de formaliser les concepts et de les appliquer à la réalité.
+La question est loin d’être épuisée, et fait toujours l’objet d’une recherche active et de controverses <span class="citation">(<a href="#ref-Ricotta2005b" role="doc-biblioref">Ricotta 2005</a>)</span>.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Blandin2014" class="csl-entry">
+Blandin, Patrick. 2014. <span>“La Diversité Du Vivant Avant (Et Après) La Biodiversité : Repères Historiques Et Épistémologiques.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 31–68. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Cardinale2012" class="csl-entry">
+Cardinale, Bradley J., J. Emmett Duffy, Andrew Gonzalez, David U. Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. <span>“Biodiversity Loss and Its Impact on Humanity.”</span> <em>Nature</em> 486 (7401): 59–67. <a href="https://doi.org/10.1038/nature11148">https://doi.org/10.1038/nature11148</a>.
+</div>
+<div id="ref-Ceballos2017" class="csl-entry">
+Ceballos, Gerardo, Paul R. Ehrlich, and Rodolfo Dirzo. 2017. <span>“Biological Annihilation via the Ongoing Sixth Mass Extinction Signaled by Vertebrate Population Losses and Declines.”</span> <em>Proceedings of the National Academy of Sciences</em>, 201704949. <a href="https://doi.org/10.1073/pnas.1704949114">https://doi.org/10.1073/pnas.1704949114</a>.
+</div>
+<div id="ref-Chapin2000" class="csl-entry">
+Chapin, F. Stuart III, Erika S. Zavaleta, Valerie T. Eviner, Rosamond L. Naylor, Peter M. Vitousek, Heather L. Reynolds, David U. Hooper, et al. 2000. <span>“Consequences of Changing Biodiversity.”</span> <em>Nature</em> 405 (6783): 234–42. <a href="https://doi.org/10.1038/35012241">https://doi.org/10.1038/35012241</a>.
+</div>
+<div id="ref-DeLong1996" class="csl-entry">
+DeLong, Don C. Jr. 1996. <span>“Defining Biodiversity.”</span> <em>Wildlife Society Bulletin</em> 24 (4): 738–49. <a href="https://www.jstor.org/stable/3783168">https://www.jstor.org/stable/3783168</a>.
+</div>
+<div id="ref-Delord2014" class="csl-entry">
+Delord, Julien. 2014. <span>“La Biodiversité : Imposture Scientifique Ou Ruse Épistémologique ?”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 83–118. <span>Paris</span>: <span>Editions Matériologiques</span>. <a href="https://doi.org/10.3917/edmat.delor.2014.01.0083">https://doi.org/10.3917/edmat.delor.2014.01.0083</a>.
+</div>
+<div id="ref-Hey2001" class="csl-entry">
+Hey, Jody. 2001. <span>“The Mind of the Species Problem.”</span> <em>Trends in Ecology &amp; Evolution</em> 16 (7): 326–29. <a href="https://doi.org/10.1016/S0169-5347(01)02145-0">https://doi.org/10.1016/S0169-5347(01)02145-0</a>.
+</div>
+<div id="ref-Jizhong1991" class="csl-entry">
+Jizhong, Zhou, Ma Shijun, and Chen Changming. 1991. <span>“An Index of Ecosystem Diversity.”</span> <em>Ecological Modelling</em> 59: 151–63. <a href="https://doi.org/10.1016/0304-3800(91)90176-2">https://doi.org/10.1016/0304-3800(91)90176-2</a>.
+</div>
+<div id="ref-Loreau2005" class="csl-entry">
+Loreau, Michel. 2005. <span>“Discours de Clôture.”</span> In <em>Actes de La Conférence Internationale Biodiversité Science Et Gouvernance</em>, edited by Robert Barbault and Jean-Patrick Le Duc, 254–56. <span>Paris, France.</span>: <span>IRD Editions</span>.
+</div>
+<div id="ref-Meine2006" class="csl-entry">
+Meine, Curt, Michael Soulé, and Reed F. Noss. 2006. <span>“"<span>A</span> Mission-Driven Discipline": <span>The</span> Growth of Conservation Biology.”</span> <em>Conservation Biology</em> 20 (3): 631–51. <a href="https://doi.org/10.1111/j.1523-1739.2006.00449.x">https://doi.org/10.1111/j.1523-1739.2006.00449.x</a>.
+</div>
+<div id="ref-Purvis2000" class="csl-entry">
+Purvis, Andy, and Andy Hector. 2000. <span>“Getting the Measure of Biodiversity.”</span> <em>Nature</em> 405 (6783): 212–19. <a href="https://doi.org/10.1038/35012221">https://doi.org/10.1038/35012221</a>.
+</div>
+<div id="ref-Ricotta2005b" class="csl-entry">
+Ricotta, Carlo. 2005. <span>“Through the Jungle of Biological Diversity.”</span> <em>Acta Biotheoretica</em> 53 (1): 29–38. <a href="https://doi.org/10.1007/s10441-005-7001-6">https://doi.org/10.1007/s10441-005-7001-6</a>.
+</div>
+<div id="ref-Speth1992" class="csl-entry">
+Speth, James Gustave, Martin W. Holdgate, and Mostafa K. Tolba. 1992. <span>“Foreword.”</span> In <em>Global Biodiversity Strategy</em>, edited by Kathleen Courrier, v–vi. <span>Washington, D.C.</span>: <span>WRI, IUCN, UNEP</span>.
+</div>
+<div id="ref-Wilson1988" class="csl-entry">
+Wilson, Edward O., and Frances M. Peter, eds. 1988. <em>Biodiversity</em>. <span>Washington, D.C.</span>: <span>The National Academies Press</span>. <a href="https://www.nap.edu/read/989/chapter/1">https://www.nap.edu/read/989/chapter/1</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="calculs-et-données.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["MesuresBD.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
