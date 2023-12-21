@@ -2,17 +2,16 @@
 
 # Notions de Diversité {#chap-Notions}
 
-```{r, include=FALSE}
-library("tidyverse")
-```
-
 ## Composantes
 
 (ref:Composantes) Importance de la richesse (en haut) et de l'équitabilité (en bas) pour la définition de la diversité. Ligne du haut: toutes choses égales par ailleurs, une communauté de 7 espèces semble plus diverse qu'une communauté de 2 espèces. Ligne du bas: à richesse égale, une communauté moins équitable (à gauche) semble moins diverse. Colonne de gauche: une communauté moins riche (en haut) peut sembler plus diverse si elle est plus équitable. Colonne de droite: idem pour la communauté du bas.
-```{r Composantes, fig.cap="(ref:Composantes)", echo=FALSE, out.width='60%'}
+```{r}
+#| label: Composantes
+#| fig.cap: "(ref:Composantes)"
+#| echo: false
+#| out.width='60%'
 knitr::include_graphics('images/Composantes.png')
 ```
-
 
 Une communauté comprenant beaucoup d'espèces mais avec une espèce dominante n'est pas perçue intuitivement comme plus diverse qu'une communauté avec moins d'espèces, mais dont les effectifs sont proches (figure \@ref(fig:Composantes), colonne de gauche). 
 La prise en compte de deux composantes de la diversité, appelées richesse et équitabilité, est nécessaire [@Whittaker1965].
@@ -25,7 +24,7 @@ La richesse [terme introduit par @Mcintosh1967] est le nombre (ou une fonction c
 Un certain nombre d'hypothèses sont assumées plus ou moins explicitement:
 
 * Les classes sont bien connues: compter le nombre d'espèces a peu de sens si la taxonomie n'est pas bien établie.
-C'est parfois une difficulté majeure quand on travaille sur les microorganismes;
+C'est parfois une difficulté majeure quand on travaille sur les micro-organismes;
 * Les classes sont équidistantes: la richesse augmente d'une unité quand on rajoute une espèce, que cette espèce soit proche des précédentes ou extrêmement originale.
 
 L'indice de richesse le plus simple et le plus utilisé est tout simplement le nombre d'espèces $S$.
@@ -80,7 +79,11 @@ Plus précisément, il s'agit de la diversité dans un habitat uniforme de taill
 
 
 (ref:Gaston2000) Patrons de biodiversité. (a) Le nombre d'espèces de vers de terre augmente en fonction de la surface échantillonnée, de 100 m² à plus de 500000 km² selon la relation d'Arrhenius). (b) Nombre d'espèces d'oiseaux en fonction de la latitude. (c) Relation entre la richesse régionale et la richesse locale. (d) Nombre d'espèces de chauves-souris en fonction de l'altitude dans une réserve au Pérou. (e) Nombre d'espèces de végétaux ligneux en fonction des précipitations en Afrique du Sud.
-```{r Gaston2000, fig.cap="(ref:Gaston2000)", echo=FALSE, out.width='100%'}
+```{r}
+#| label: Gaston2000
+#| fig.cap: "(ref:Gaston2000)"
+#| echo: false
+#| out.width: '100%'
 knitr::include_graphics('images/Gaston2000.png')
 ```
 
@@ -147,7 +150,7 @@ L'approche phylogénétique (chapitre \@ref(chap-Phyloentropie)) permet de conto
 ```
 
 
-Quelques outils sont nécessaires avant d'entrer dans le coeur du sujet. 
+Quelques outils sont nécessaires avant d'entrer dans le cœur du sujet. 
 Les relations décrivant le nombre d'espèces en fonction de la taille de l'échantillon (relations aire-espèces) et la distribution de l'abondance des espèces sont importants pour les écologues. 
 La mesure de l'exhaustivité de l'échantillonnage par le taux de couverture sera la base de l'estimation de la diversité à partir de données réelles.
 
@@ -155,7 +158,13 @@ La mesure de l'exhaustivité de l'échantillonnage par le taux de couverture ser
 ## Courbes d'accumulation
 
 (ref:SACFig) Courbe d'accumulation des espèces d'arbres du dispositif de Barro Colorado Island. Le nombre d'espèces est cumulé dans l'ordre des carrés d'un hectare du dispositif.
-```{r SACFig, echo=FALSE, results='hide', message=FALSE, ref.label='SACCode',  fig.cap="(ref:SACFig)"}
+```{r}
+#| label: SACFig
+#| echo: false
+#| results='hide'
+#| message: FALSE
+#| ref.label: 'SACCode'
+#| fig.cap: "(ref:SACFig)"
 ```
 
 Evaluer la diversité d'une communauté nécessite en pratique de l'inventorier. 
@@ -166,13 +175,19 @@ La figure \@ref(fig:SACFig) montre l'accumulation des espèces pour les données
 Une SAC peut être tracée en fonction de la surface, du nombre d'individus ou du nombres de placettes d'échantillonnage, selon les besoins.
 
 Code R pour réaliser la figure \@ref(fig:SACFig):
-```{r SACCode, eval=FALSE, tidy=FALSE}
+```{r }
+#| label: SACCode
+#| eval: FALSE
 library("vegan")
 data(BCI)
 Cumul <- apply(BCI, 2, cumsum)
 Richesse <- apply(Cumul, 1, function(x) sum(x > 0))
-SARplot <- ggplot(data.frame(A = 0:50, 
-                             S = c(0, Richesse))) +
+SARplot <- ggplot(
+  data.frame(
+    A = 0:50, 
+    S = c(0, Richesse)
+  )
+) +
   aes(A, S) +
   geom_line() +
   labs(x = "Surface (ha)")
@@ -300,7 +315,8 @@ Alors:
 
 Dans le package *entropart*, la fonction `Coverage` calcule les trois estimateurs (celui de Zhang et Huang par défaut):
 
-```{r CoverageBCI}
+```{r}
+#| label: CoverageBCI
 library("entropart")
 Ns <- colSums(BCI)
 Coverage(Ns)
@@ -309,7 +325,8 @@ Coverage(Ns)
 Le taux de couverture de BCI est proche de 1 parce que l'inventaire couvre 50&nbsp;ha.
 Il est moindre sur les 6.25&nbsp;ha de la parcelle 6 de Paracou:
 
-```{r CoverageP6}
+```{r}
+#| label: CoverageP6
 library("SpatDiv")
 Coverage(as.AbdVector(Paracou6))
 ```
@@ -335,24 +352,26 @@ Elle compte simplement les espèces et ne doit pas être confondue avec la couve
 La complétude du même échantillon d'arbres de forêt tropicale que dans l'exemple précédent peut être estimée en divisant le nombre d'espèces observées par le nombre d'espèces estimées (voir section \@ref(sec-Richesse)).
 À BCI: 
 
-```{r CompletenessBCI}
+```{r}
+#| label: CompletenessBCI
 # Espèces observées
 (Obs <- Richness(Ns, Correction = "None"))
 # Richesse estimée
 (Est <- Richness(Ns, Correction = "Jackknife"))
 # Complétude
-as.numeric(Obs/Est)
+as.numeric(Obs / Est)
 ```
 
 À Paracou:
 
-```{r CompletenessP6}
+```{r}
+#| label: CompletenessP6
 # Espèces observées
 (Obs <- Richness(Paracou6, Correction = "None"))
 # Richesse estimée
 (Est <- Richness(Paracou6, Correction = "Jackknife"))
 # Complétude
-as.numeric(Obs/Est)
+as.numeric(Obs / Est)
 ```
 
 
@@ -362,7 +381,13 @@ La distribution de l'abondance des espèces (SAD: *Species Abundance Distributio
 Les espèces ne sont pas identifiées individuellement, mais par le nombre d'individus leur appartenant.
 
 (ref:SADFig) Histogramme des fréquences (diagramme de Preston) des arbres du dispositif de Barro Colorado Island. En abscisse: le nombre d'arbres de chaque espèce (en logarithme); en ordonnée: le nombre d'espèces.
-```{r SADFig, echo=FALSE, results='hide', message=FALSE, ref.label='SADCode', fig.cap="(ref:SADFig)"}
+```{r}
+#| label: SADFig
+#| echo: false
+#| results: 'hide'
+#| message: false
+#| ref.label: 'SADCode'
+#| fig.cap: '(ref:SADFig)'
 ```
 
 Elle peut être représentée sous la forme d'un histogramme des fréquences (diagramme de @Preston1948, figure \@ref(fig:SADFig)) ou bien d'un diagramme rang-abondance (RAC: *Rank Abundance Curve* ou diagramme de @Whittaker1965, figure \@ref(fig:RACFig)). 
@@ -370,24 +395,40 @@ Le RAC est souvent utilisé pour reconnaître des distributions connues.
 @Izsak2012 ont étudié les propriétés des RAC pour les principales SAD.
 
 (ref:RACFig) Diagramme rang-abondance (diagramme de Whittaker) des arbres du dispositif de Barro Colorado Island. Les points sont les données: en abscisse: le rang de l'espèce, à partir de la plus abondante; en ordonnée: l'abondance de l'espèce. La courbe est l'ajustement d'une distribution log-normale.
-```{r RACFig, echo=FALSE, results='hide', message=FALSE, ref.label='RACCode',  fig.cap="(ref:RACFig)"}
+```{r}
+#| label: RACFig
+#| echo: false
+#| results: 'hide'
+#| message: false
+#| ref.label: 'RACCode'
+#| fig.cap: '(ref:RACFig)'
 ```
 
 Code de la figure \@ref(fig:SADFig):
-```{r SADCode, eval=FALSE, tidy=FALSE}
+```{r }
+#| label: SADCode
+#| eval: false
 Ns <- sort(colSums(BCI), decreasing = TRUE)
 N <- sum(Ns)
 SADhist <- ggplot(data.frame(Ns), aes(Ns)) + 
-  geom_histogram(bins=nclass.Sturges(log(Ns)), 
-       color="black", fill="white", boundary = 0) +
+  geom_histogram(
+    bins = nclass.Sturges(log(Ns)), 
+    color="black", 
+    fill="white",
+    boundary = 0
+  ) +
   scale_x_log10() +
-  labs(x="Effectifs (échelle logarithmique)", 
-       y="Nombre d'espèces")
+  labs(
+    x = "Effectifs (échelle logarithmique)", 
+    y = "Nombre d'espèces"
+  )
 SADhist
 ```
 
 Code de la figure \@ref(fig:RACFig):
-```{r RACCode, eval=FALSE, tidy=FALSE}
+```{r}
+#| label: RACCode
+#| eval: false
 library("entropart")
 autoplot(as.AbdVector(Ns), Distribution = "lnorm")
 ```
@@ -467,7 +508,15 @@ La distribution est observée dans les communautés pionnières [@Bazzaz1975], p
 ### Synthèse
 
 (ref:DistributionsFig) Diagramme rang-fréquence des distributions de probabilité classiques. Toutes les distributions sont de 100 espèces. Les probabilités inférieures à $10^{-6}$ ne sont pas affichées. Les paramètres choisis sont $\alpha=11$ pour la distribution log-séries, $k=0,2$ pour la distribution géométrique et $\sigma=2$ pour la distribution log-normale.
-```{r DistributionsFig, echo=FALSE, results='hide', out.width='100%', ref.label='DistributionsCode',  fig.cap="(ref:DistributionsFig)"}
+```{r}
+#| label: DistributionsFig
+#| echo: false
+#| results: 'hide'
+#| out.width: '100%'
+#| message: false
+#| ref.label: 'DistributionsCode'
+#| fig.cap: '(ref:DistributionsFig)'
+
 ```
 
 La figure \@ref(fig:DistributionsFig) est inspirée de la figure très connue de @Magurran1988.
@@ -478,35 +527,38 @@ De même, l'écart-type de la distribution log-normale décrit sa dispersion.
 Une valeur supérieure augmenterait sa décroissance.
 
 Le code utilisé pour produire la figure \@ref(fig:DistributionsFig) est le suivant:
-```{r DistributionsCode, eval=FALSE, tidy=FALSE}
+```{r}
+#| label: DistributionsCode
+#| eval: false
 library("entropart")
 # Tirage d'une communauté en log-séries
-lseries <- rCommunity(1, size=1E5, Distribution="lseries", alpha=11)
+lseries <- rCommunity(1, size = 1E5, Distribution = "lseries", alpha = 11)
 # Nombre d'espèces de référence
 S <- length(lseries)
 # Part des ressources accaparées dans la distribution géométrique
-prob=0.2
+prob <- 0.2
 # Calcul des probabilités de la distribution géométrique
-geom <- prob/(1-(1-prob)^S)*(1-prob)^(0:(S-1))
+geom <- prob / (1 - (1 - prob)^S) * (1 - prob)^(0:(S - 1))
 # Dispersion de la loi lognormale
 sd <- 2
 # Tirage de S valeurs dans une loi lognormale
 Nslnorm <- rlnorm(S, 0, sd)
 # Normalisation pour obtenir des probabilités
-lnorm <- Nslnorm/sum(Nslnorm)
+lnorm <- Nslnorm / sum(Nslnorm)
 # Tirage des probabilités de la distribution broken stick
-bstick <- c(cuts <- sort(stats::runif(S-1)), 1)- c(0, cuts)
+bstick <- c(cuts <- sort(stats::runif(S - 1)), 1) - c(0, cuts)
 # Graphique
-tibble(Rang=1:S,
-      `Log-Séries`=sort(lseries/sum(lseries), decreasing=TRUE),
-      `Géometrique`=sort(geom, decreasing=TRUE),
-      `Log-Normale`=sort(lnorm, decreasing=TRUE),
-      `Broken Stick`=sort(bstick, decreasing=TRUE)) %>% 
-  pivot_longer(cols=-Rang) %>% 
+tibble(
+  Rang=1:S,
+  `Log-Séries` = sort(lseries / sum(lseries), decreasing = TRUE),
+  `Géometrique` = sort(geom, decreasing = TRUE),
+  `Log-Normale` = sort(lnorm, decreasing = TRUE),
+  `Broken Stick` = sort(bstick, decreasing = TRUE)) %>% 
+  pivot_longer(cols = -Rang) %>% 
   ggplot() +
-  geom_line(aes(x=Rang, y=value, color=name)) +
-  scale_y_log10(limits=c(1E-6, NA)) +
-  labs(y="Probabilité", color="Distribution")
+    geom_line(aes(x = Rang, y = value, color = name)) +
+    scale_y_log10(limits = c(1E-6, NA)) +
+    labs(y = "Probabilité", color = "Distribution")
 ```
 
 La simulation de ces quatre distributions peut être réalisée par la fonction `rCommunity()` du package *entropart*, où l'argument `Distribution` peut valoir "bstick", "lnorm", "geom" ou "lseries".
@@ -521,7 +573,8 @@ Les fonctions `fitxxx()` complètent les fonctions `RACxxx()` d'*entropart*.
 
 Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec *entropart* ou *sads*.
 
-```{r BCIfit1, warning=FALSE}
+```{r}
+#| label: BCIfit1
 # entropart
 library("entropart")
 fit_entropart_lnorm <- RAClnorm(Ns)
@@ -537,7 +590,8 @@ fit_sads_lnorm@fullcoef
 
 L'ajustement du modèle de Volkov peut être comparé à celui d'une distribution log-normale.
 
-```{r BCIfit2, warning=FALSE}
+```{r}
+#| label: BCIfit2
 # Ajustement du modèle de Volkov
 fit_volkov <- fitvolkov(Ns)
 fit_volkov@fullcoef
@@ -545,7 +599,8 @@ fit_volkov@fullcoef
 
 Graphiquement, l'ajustement est très proche mais la distribution de Volkov prévoit explicitement des effectifs égaux parce qu'entiers.
 
-```{r BCIfit3, warning=FALSE}
+```{r}
+#| label: BCIfit3
 # Comparaison graphique des deux modèles. Log-normal en rouge.
 plot(as.AbdVector(Ns), Distribution="lnorm")
 # Volkov en vert
@@ -554,7 +609,8 @@ lines(sort(rvolkov(length(Ns), fit_volkov@fullcoef[1], fit_volkov@fullcoef[2], f
 
 Les vraisemblances sont proches.
 
-```{r BCIfit4, warning=FALSE}
+```{r}
+#| label: BCIfit4
 # Comparaison des vraisemblances
 fit_sads_lnorm@min
 fit_volkov@min
