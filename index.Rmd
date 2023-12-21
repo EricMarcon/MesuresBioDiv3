@@ -1,0 +1,410 @@
+--- 
+title: "Mesures de la Biodiversité"
+author: "Eric Marcon"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+url: https://github.com/EricMarcon/MesuresBioDiv3/
+github-repo: EricMarcon/MesuresBioDiv3
+description: "Définitions, estimation et décompositon de la biodiversité"
+cover-image: "images/logo.png"
+# Title page
+maintitlepage:
+  epigraph: |
+    Ce document est réalisé de façon dynamique et reproductible grâce à:
+    \begin{itemize}
+      \item \LaTeX, dans sa distribution Miktex (\url{http://miktex.org/}) et la classe memoir (\url{http://www.ctan.org/pkg/memoir}).
+      \item R (\url{http://www.r-project.org/}) et RStudio (\url{http://www.rstudio.com/})
+      \item bookdown (\url{http://bookdown.org/})
+    \end{itemize}
+
+    Son code source est sur GitHub: \url{https://github.com/EricMarcon/MesuresBioDiv2/}.
+    Le texte mis à jour en continu peut être lu sur \url{https://ericmarcon.github.io/MesuresBioDiv2/}.
+    Les versions d'étape sont déposées sur HAL: \url{https://hal-agroparistech.archives-ouvertes.fr/cel-01205813/}.
+  credits: |
+    Photographie en couverture: Hadrien Lalagüe
+  filigrane: filigrane
+# Language
+lang: en-US
+otherlangs: fr-FR
+# Bibliography
+bibliography: references.bib
+# Citation style in HTML
+# citation-style: chicago-author-date.csl # By default.
+# LaTeX
+documentclass: memoir
+classoption:
+  - extrafontsizes
+  - onecolumn
+  - openright
+# Paper, font
+papersize: A4
+fontsize: 11pt
+# memoir Style
+MemoirChapStyle: companion
+MemoirPageStyle: companion
+# Margins
+largemargins: true
+smallmargin: 1.5in
+largemargin: 3in
+marginnote:  1.8in
+spinemargin: 1.2in
+uppermargin: 1.5in
+lowermargin: 1in
+# Table of contents
+toc-depth: 2
+# Section numbering
+secnum-depth: section
+# List of tables / Figures
+lot: false
+lof: false
+biblatexoptions:
+  - backend=biber
+  - style=verbose-inote
+  - pageref=true
+  - isbn=false
+  - backref=true
+  - giveninits=true
+  - uniquename=init
+  - maxcitenames=2
+  - maxbibnames=150
+  - sorting=nyt
+  - sortcites=false
+longbibliography: true
+# Chapter summary text
+chaptersummary: "L'essentiel"
+# Back Cover
+backcover:
+- language: french
+  abstract: |
+    La biodiversité peut être mesurée de nombreuses façons.
+  
+    La dualité entropie-diversité fournit un cadre clair et rigoureux pour le faire.
+    L’entropie est la surprise moyenne fournie par les individus d’une communauté.
+    Le choix de la fonction d’information qui mesure cette surprise à partir des probabilités d’occurence des espèces (ou d’autres catégories) permet de définir les mesures de diversités neutres, fonctionnelles ou phylogénétique présentées ici.
+    L’entropie est transformée en diversité au sens strict par une fonction croissante (l’exponentielle déformée), ce qui simplifie son interprétation en tant que nombre équivalent d’espèces.
+    
+    L’entropie phylogénétique généralise les indices de diversité classique, intègre si nécessaire la distance entre espèces, peut être écomposée et corrigée des biais d’estimation.
+    Sa transformation en diversité au sens strict permet d’interpréter les valeurs sous une forme unique : un nombre équivalent d’espèces et un nombre équivalent de communautés.
+    La diversité de Leinster et Cobbold généralise à son tour la diversité phylogénétique et permet d’autres définitions de la distance entre espèces. 
+    Le paramétrage des mesures (l’ordre de la diversité) permet de donner plus ou moins d’importance aux espèces rares et de tracer des profils de diversité.
+    
+    La construction de ce cadre méthodologique est présentée en détail ainsi que plusieurs approches différentes, qui constituent l'état de l'art de la mesure de la biodiversité.
+  abstractlabel: Résumé
+backcoverfontsize: normalsize
+# Figure cropping may be set to false if ghostscript is not installed
+fig_crop: true
+# URL color
+urlcolor: blue
+# Do not modify
+site: bookdown::bookdown_site
+always_allow_html: true
+graphics: true
+link-citations: true
+colorlinks: true
+csquotes: true
+---
+
+<!-- HTML code necessary for key messages --> 
+<img src="images/trombone.png" alt="image" hidden/>
+
+```{r}
+#| label: DoNotModify
+#| include: false
+### Utilities. Do not modify.
+# Installation of packages if necessary
+InstallPackages <- function(Packages) {
+  InstallPackage <- function(Package) {
+    if (!Package %in% installed.packages()[, 1]) {
+      install.packages(Package, repos = "https://cran.rstudio.com/")
+    }
+  }
+  invisible(sapply(Packages, InstallPackage))
+}
+
+# Basic packages
+InstallPackages(c("bookdown", "formatR", "kableExtra", "magick", "ragg"))
+
+# kableExtra must be loaded 
+if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "docx") {
+  # Word output (https://stackoverflow.com/questions/35144130/in-knitr-how-can-i-test-for-if-the-output-will-be-pdf-or-word)
+  # Do not use autoformat (https://github.com/haozhu233/kableExtra/issues/308)
+  options(kableExtra.auto_format = FALSE)
+}
+library("kableExtra")
+
+# Chunk font size hook: allows size='small' or any valid Latex font size in chunk options
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse(options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+# Output hook for full-width figures
+defOut <- knitr::knit_hooks$get("plot")
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    # Apply the original hook
+    x <- defOut(x, options)
+    # Only full-width figures
+    if (options$out.width == "\\widthw") {
+      # Modify output of the original hook, see code on:
+      # https://github.com/yihui/knitr/blob/master/R/hooks-latex.R
+      # Modify align1 output with align=center. Original code:
+      # switch(a, left = '\n\n', center = '\n\n{\\centering ', right = '\n\n\\hfill{}', '\n')
+      # replace centering by a minipage
+      x  <- gsub(
+        "\\n\\n\\{\\\\centering",
+        "\\\\setbox0=\\\\hbox\\{\\\\begin\\{minipage\\}\\[h\\]\\{\\\\widthw\\}\\\\centering",
+        x
+      )
+      # Modify align2 output with align=center. Original code:
+      # switch(a, left = '\\hfill{}\n\n', '\n\n}\n\n', right = '\n\n', '')
+      # replace } by the necessary code to place the minipage
+      x  <- gsub(
+        "\\n\\n\\}\\n\\n",
+        "\\\\end\\{minipage\\}\\}\\\\needspace\\{\\\\ht0+\\\\dp0+2\\\\baselineskip\\}\\\\definesHSpace\\\\hspace\\{-\\\\rf\\}\\\\box0",
+        x
+      )
+    }
+    return(x)
+  }
+)
+
+# Figures with side captions
+if (rmarkdown::metadata$largemargins)
+  knitr::opts_chunk$set(fig.env='SCfigure')
+```
+
+```{r}
+#| label: Options
+#| include: false
+### Customized options for this document
+# Add necessary packages here
+Packages <- c("ade4", "adespatial", "cowplot", "entropart", "entropy", 
+              "EntropyEstimation", "GoFKernel", "gridExtra", "magrittr", 
+              "ragg", "sads", "sp", "SPECIES", "tidyverse", "untb", "vegan")
+# Install them
+InstallPackages(Packages)
+
+# GitHub packages
+if (!"divent" %in% installed.packages()[, 1]) {
+  remotes::install_github("EricMarcon/divent")
+}
+if (!"SpatDiv" %in% installed.packages()[, 1]) {
+  remotes::install_github("EricMarcon/SpatDiv")
+}
+
+# Create packages.bib file to reference them as @R-package
+knitr::write_bib(Packages, file="packages.bib")
+
+# knitr options
+knitr::opts_chunk$set(
+  cache =   TRUE,     # Cache chunk results
+  include = TRUE,     # Show/Hide chunks
+  echo =    TRUE,     # Show/Hide code
+  warning = FALSE,    # Show/Hide warnings
+  message = FALSE,    # Show/Hide messages
+  # Figure alignment and size
+  fig.align = 'center', out.width = '80%', fig.asp = .75,
+  # Graphic devices (ragg_png is better than standard png)
+  dev = c("ragg_png", "pdf"),
+  # Code chunk format
+  tidy = TRUE, tidy.opts = list(blank = FALSE, width.cutoff = 60),
+  size = "scriptsize", knitr.graphics.auto_pdf = TRUE
+  )
+options(width = 60)
+
+# ggplot style
+library("tidyverse")
+theme_set(theme_bw())
+theme_update(
+  panel.background = element_rect(fill = "transparent", colour = NA),
+  plot.background = element_rect(fill = "transparent", colour = NA)
+)
+knitr::opts_chunk$set(dev.args = list(bg = "transparent"))
+
+# Random seed
+set.seed(973)
+```
+
+
+# Motivation {-}
+
+Le terme *biodiversity* est attribué [@Meine2006] à Walter Rosen, un membre du *National Research Council* américain, qui a commencé à contracter les termes *biological diversity* pendant la préparation d'un colloque dont les actes seront publiés sous le titre "Biodiversity" [@Wilson1988].
+La question de la diversité biologique intéressait les écologues bien avant l'invention de la biodiversité, mais le néologisme a connu un succès fulgurant [@Blandin2014] en même temps qu'il devenait une notion floue, dans lequel chacun peut placer ce qu'il souhaite y trouver, au point de lui retirer son caractère scientifique [@Delord2014]. 
+Une cause de ce glissement est que la biodiversité a été nommée pour attirer l'attention sur son érosion, en lien avec la biologie de la conservation. 
+Cette érosion concernant potentiellement de nombreux aspects du monde vivant, la définition de la biodiversité fluctue selon les besoins: @DeLong1996 en recense 85 dans les dix premières années de littérature. 
+Les indicateurs de la biodiversité peuvent englober bien d'autres choses que la diversité du vivant: le nombre d'espèces menacées (par exemple la liste rouge de l'IUCN), la taille des populations ou la surface des écosystèmes préservés, la dégradation des habitats, la menace pesant sur des espèces emblématiques...
+Une mesure rigoureuse et cohérente de la diversité peut pourtant être construite pour clarifier beaucoup (mais pas tous) des concepts qui constituent la biodiversité. 
+
+Dans l'introduction du premier chapitre des actes de ce qui était devenu le "Forum sur la Biodiversité", Wilson utilise le mot dans le sens étroit de nombres d'espèces. 
+L'élargissement de la notion aux "systèmes naturels" et à l'opposé à la diversité génétique intraspécifique est venu du monde de la conservation [@Speth1992].
+La déclaration de Michel Loreau, président du du comité scientifique de la conférence de Paris en 2005 [@Loreau2005] en donne une définition aboutie:
+
+> La Terre abrite une extraordinaire diversité biologique, qui inclut non seulement les espèces qui habitent notre planète, mais aussi la diversité de leurs gènes, la multitude des interactions écologiques entre elles et avec leur environnement physique, et la variété des écosystèmes complexes qu'elles constituent. Cette biodiversité, qui est le produit de plus de 3 milliards d'années d'évolution, constitue un patrimoine naturel et une ressource vitale dont l'humanité dépend de multiples façons.
+
+Aujourd'hui encore, le terme *biodiversité* concerne le plus souvent la richesse en espèces d'un écosystème. 
+Pour simplifier la présentation, le niveau d'étude dans ce document sera en général celui des espèces [autre concept flou, @Hey2001].
+La prise en compte de la totalité des êtres vivants est généralement hors de portée.
+La mesure de diversité est alors limitée à un taxocène, c'est-à-dire un sous-ensemble des espèces d'une communauté reliées taxonomiquement: les papillons, les mammifères, les arbres (la délimitation du sous-ensemble n'est pas forcément strictement taxonomique)...
+
+Un objet privilégié des études sur la biodiversité est, depuis le Forum, la forêt tropicale parce qu'elle est très diverse et un enjeu pour la conservation. 
+La plupart des exemples concerneront ici les arbres de la forêt tropicale, qui ont l'avantage d'être clairement définis en tant qu'individus (donc simples à compter) et posent des problèmes méthodologiques considérables pour l'estimation de leur diversité à partir de données réelles.
+
+On peut bien évidemment s'intéresser à d'autres niveaux et d'autres objets, par exemple la diversité génétique (en termes d'allèles différents pour certains gènes ou marqueurs) à l'intérieur d'une population, ou  même la diversité des interactions entre espèces d'une communauté [@Jizhong1991].
+On gardera toujours à l'esprit que la prise en compte de la diversité spécifique n'est pas la seule approche, les méthodes présentées ici s'appliquent à la mesure de la diversité en général, pas même nécessairement biologique.
+
+L'objectif de ce document est de traiter la mesure de la biodiversité, pas son importance en tant que telle.
+On se référera par exemple à @Chapin2000 pour une revue sur cette question, @Cardinale2012 pour les conséquences de l'érosion de la biodiversité sur les services écosystémiques ou @Ceballos2017 pour les propriétés autocatalytiques de la biodiversité.
+
+La mesure de la diversité est un sujet important en tant que tel [@Purvis2000], pour permettre de formaliser les concepts et de les appliquer à la réalité. 
+La question est loin d'être épuisée, et fait toujours l'objet d'une recherche active et de controverses [@Ricotta2005b].
+
+
+# Calculs et données {-}
+
+La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
+La liste des notations est fournie ci-dessous, on s'y référera autant que nécessaire.
+
+Les calculs sont réalisés dans R [@R], essentiellement avec le package *entropart* [@Marcon2014c]. 
+L'ensemble du code est disponible sur GitHub^[<https://github.com/EricMarcon/MesuresBioDiv2/>] où se trouvent les mises à jour de ce document^[<https://ericmarcon.github.io/MesuresBioDiv2/>].
+
+Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure \@ref(fig:Paracou6MapFig) en Guyane française [@Gourlet-Fleury2004], d'une surface de 6.25&nbsp;ha.
+Tous les arbres de plus de 10&nbsp;cm de diamètre à hauteur de poitrine (DBH: *Diameter at Breast Height*) y ont été inventoriés en 2016.
+La position de chaque arbre, son espèce et sa surface terrière sont fournis dans le package *SpatDiv*.
+
+```{r}
+#| label: packagesDonnees
+#| include: false
+#| cache: false
+# Chargement des packages utilisés dans les chapitres 0 et 1
+# Pour accéder aux données et ne pas afficher les messages de chargement plus tard
+library("vegan")
+# Pas de lazy loading pour BCI: chargement explicite.
+data(BCI)
+library("entropart")
+library("dbmss")
+library("SpatDiv")
+library("sads")
+```
+
+D'autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI [@Condit2012]: 50&nbsp;ha de forêt tropicale dont les arbres de plus de 1&nbsp;cm de diamètre à hauteur de poitrine (DBH: *Diameter at Breast Height*) ont été inventoriés.
+Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10&nbsp;cm disponible dans le package *vegan* [@Oksanen2012], soient `r sum(BCI)` arbres dans `r ncol(BCI)` espèces.
+
+Enfin, les données fournies par le package *entropart* sous le nom "Paracou618" sont deux inventaires de l'année 2012 limités à un hectare chacun dans les parcelles 6 et 18 de la forêt de Paracou, soient `r Paracou618.MC$N` arbres dans `r sum(Paracou618.MC$Ns>0)` espèces.
+
+(ref:Paracou6MapFig) Carte de la parcelle 6 de Paracou. Les points représentent les arbres. Leur taille est proportionnelle à leur surface terrière. Seules les espèces les plus fréquentes sont identifiées sur la carte.
+```{r}
+#| label: Paracou6MapFig
+#| echo: false
+#| fig.cap: '(ref:Paracou6MapFig)'
+#| fig.env: 'figure'
+#| out.width:  !expr ifelse(knitr::is_latex_output(), '\\widthw', '100%')
+#| ref.label: 'Paracou6MapCode'
+#| results: hide
+```
+
+Le code R pour réaliser la figure est le suivant:
+```{r}
+#| label: Paracou6MapCode
+#| eval: false
+library("dbmss")
+library("SpatDiv")
+autoplot(Paracou6, labelSize = expression(paste("Surface terrière (", cm^2, ")")), labelColor = "Espèce")
+```
+
+
+# Notations {-}
+
+Les notations mathématiques peuvent différer de celles de la littérature citée pour l'homogénéité de ce document.
+
+Les matrices sont notées en caractères gras et majuscules: $\mathbf{X}$.
+Les éléments de la matrice $\mathbf{X}$ sont notés $x_{i,j}$.
+
+Les vecteurs sont notés en gras minuscule: $\mathbf{p}$.
+Les nombres sont notés en minuscules, $n$, et les variables aléatoires en majuscules: $N$.
+Les valeurs maximales des énumérations font exception: elles sont notées en majuscules pour les distinguer des indices: $\sum_{s=1}^{S}{p_s}=1$.
+
+Le produit matriciel de $\mathbf{X}$ et $\mathbf{Y}$ est noté $\mathbf{X}\mathbf{Y}$. Dans les scripts R, l'opérateur est `%*%`.
+Le produit de Hadamard (terme à terme) est noté $\mathbf{X}\circ\mathbf{Y}$ (opérateur `*` dans R).
+De même $\mathbf{X}^n$ indique la puissance $n$ au sens du produit matriciel d'une matrice carrée (opérateur `%^%` du package *expm*), alors que $\mathbf{X}^{\circ n}$ est la matrice dont chaque terme est celui de $\mathbf{X}$ à la puissance $n$ (opérateur `^` de R).
+La matrice transposée de $\mathbf{X}$ est notée $\mathbf{X'}$.
+
+Les notations sont les suivantes:
+
+\noindent ${\mathbf 1}(\cdot)$: la fonction indicatrice, qui vaut 1 si la condition dans la parenthèse est vraie, 0 sinon.
+
+\noindent $\mathbf{1}_s$: le vecteur de longueur $s$ composé uniquement de 1. $\mathbf{1}_s\mathbf{1}_s'=\mathbf{J}_s$ où $\mathbf{J}_s$ est la matrice carré de taille $s$ ne contenant que des 1.
+
+\noindent $A$: l'aire d'étude, et, selon le contexte, sa surface.
+
+\noindent $\alpha_\nu$: la probabilité moyenne des espèces représentées par $\nu$ individus.
+
+\noindent $C$: le taux de couverture de l'échantillon, c'est-à-dire la probabilité qu'un individu de la communauté appartienne à une des espèces échantillonnées. 
+$C^{n}$ est le taux de couverture correspondant à un échantillon de taille $n$.
+
+\noindent $^{q}\!D$: la diversité vraie (nombre de Hill pour les diversités $\alpha$ et $\gamma$), nombre équivalent de communautés pour la diversité $\beta$. 
+$^{q}_{i}\!D_{\alpha}$ est la diversité $\alpha$ mesurée dans la communauté $i$. 
+$^{q}\!\bar{D}\left(T\right)$ est la diversité phylogénétique.
+
+\noindent $\boldsymbol{\Delta}$: la matrice de dissimilarité dont les éléments sont $\delta_{s,t}$, la dissimilarité entre l'espèce $s$ et l'espèce $t$.
+
+\noindent ${\mathbb E}\left(X\right)$: l'espérance de la variable aléatoire $X$.
+
+\noindent $^{q}\!H$: l'entropie de Tsallis (ou HCDT). 
+$^{q}_{i}\!H_{\alpha}$ est l'entropie $\alpha$ mesurée dans la communauté $i$. 
+Si nécessaire, le vecteur des probabilités servant au calcul est précisé sous la forme $^{q}\!H(\mathbf{p})$.
+$^{q}\!\bar{H}(T)$ est l'entropie phylogénétique.
+
+\noindent $I$: le nombre de communautés qui constituent une partition de la méta-communauté dans le cadre de la décomposition de la diversité. 
+Les communautés sont indexées par $i$.
+
+\noindent $I(p_s)$: l'information apportée par l'observation d'un évènement de probabilité $p_s$. 
+$I(q_s,p_s)$ est le gain d'information apporté par l'expérience ($q_s$ est observé) par rapport aux probabilités $p_s$ attendues.
+
+\noindent $\mathbf{I}_s$: la matrice identité de rang $s$: matrice carrée de taille $s\times s$ dont la diagonale ne comporte que des 1 et les autres élements sont nuls. 
+
+\noindent $N$: le nombre (aléatoire) d'individus se trouvant dans l'aire d'étude. 
+$N_s$ est la même variable aléatoire, mais restreinte aux individus de l'espèce $s$.
+
+\noindent $n$: le nombre d'individus échantillonnés. 
+$n_{s,i}$ est le nombre d'individus de l'espèce $s$ dans la communauté $i$. 
+Les effectifs totaux sont $n_{s+}$ (pour l'espèce $s$), $n_{+i}$ pour la communauté $i$ et $n$ le total général. 
+S'il n'y a qu'une communauté, le nombre d'individus par espèce est $n_s$.
+
+\noindent $p_s$: la probabilité qu'un individu tiré au hasard appartienne à l'espèce $s$. 
+Son estimateur, ${\hat{p}}_s$ est la fréquence observée. 
+$p_{s|i}$ est la même probabilité dans la communauté $i$.
+
+\noindent $\mathbf{p}=\left( p_1, p_2, \dots, p_s, \dots, p_S \right)$: le vecteur décrivant la distribution des probabilités $p_s$, appelé simplexe en référence à sa représentation dans l'espace à $S$ dimensions.
+
+\noindent ${\pi}_{\nu}$: la probabilité qu'une espèce choisie au hasard soit représentée par $\nu$ individus, $\sum^n_{\nu=1}{{\pi}_{\nu}}$=1. 
+Si l'espèce est choisie explicitement, la probabilité est notée ${\pi}_{n_s}$.
+
+\noindent $^{q}\!R$: l'entropie de Rényi d'ordre $q$.
+
+\noindent $S$: le nombre d'espèces, considéré comme une variable aléatoire, estimé par $\hat{S}$.
+
+\noindent $S^{n}_{\nu}$: le nombre d'espèces, considéré comme une variable aléatoire, observées $\nu$ fois dans l'échantillonnage. 
+L'indice est le nombre de fois où l'espèce est détectée: par exemple $S_{1}$ ou $S_{\ne 0}$. 
+L'exposant est la taille de l'échantillon: $S^{A}$ pour la surface $A$ ou $\hat{S}^{n}$ pour un échantillon de $n$ individus. 
+$S^{A}_{0}$ est le nombre d'espèces non rencontrées dans la surface $A$. 
+Pour alléger les notations, s'il n'y a pas d'ambiguïté, l'indice est omis pour les espèces présentes: $S^{A}_{\ne 0}$ est noté $S^{A}$. 
+Si l'exposant n'est pas noté, l'échantillon n'est pas précisé et peut être aussi bien un nombre d'individus qu'une surface.
+
+\noindent $s^{n}_{\nu}$: le nombre d'espèces observées, avec les mêmes notations que ci-dessus. 
+$s^{n}_{\nu}$ peut être considéré comme une réalisation de $S^{n}_{\nu}$.
+
+\noindent $t^{n}_{1-\alpha/2}$: le quantile d'une loi de Student à $n$ degrés de liberté au seuil de risque $\alpha$, classiquement 1,96 pour $n$ grand et $\alpha=5\%$.
+
+\noindent $\mathbf{Z}$: la matrice de similarité entre espèces dont les éléments sont $z_{s,t}$, la similarité entre l'espèce $s$ et l'espèce $t$.
+
+\noindent $\mathrm{\Gamma}(\cdot)$: la fonction gamma.
+
+\noindent $\mathrm{\Psi}(\cdot)$: la fonction digamma.
+
+\noindent $\binom{n}{k}$: le nombre de combinaisons de $k$ éléments parmi $n$: $$\binom{n}{k}=\frac{n!}{k!\,(n-k)!}$$.
+
+
+<!-- The \mainmatter command marks the beginning of the LaTeX document body--> 
+<!-- It must not be deleted-->
+\mainmatter

@@ -1,0 +1,28 @@
+# Mesures de la Biodiversité
+
+![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+[![bookdown](https://github.com/EricMarcon/MesuresBioDiv3/actions/workflows/memoir.yml/badge.svg)](https://github.com/EricMarcon/MesuresBioDiv3/actions/workflows/memoir.yml)
+
+Ouvrage de synthèse sur la mesure de la biodiversité.
+
+[Lire en ligne](https://EricMarcon.github.io/MesuresBioDiv3/) ou [télécharger](https://EricMarcon.github.io/MesuresBioDiv3/MesuresBD.pdf)
+
+> Cette nouvelle édition, en cours d'écriture, remplacera la version en cours (https://github.com/EricMarcon/MesuresBioDiv2/), qui ne sera plus mise à jour.
+> Elle repose sur le package R **divent**, qui succèdera à **entropart**.
+>
+> Les versions d'étape du document au format PDF sont [publiées sur HAL.](https://hal-agroparistech.archives-ouvertes.fr/cel-01205813/)
+
+La biodiversité peut être mesurée de nombreuses façons.
+
+La dualité entropie-diversité fournit un cadre clair et rigoureux pour le faire. 
+L'entropie est la surprise moyenne fournie par les individus d'une communauté.
+Le choix de la fonction d'information qui mesure cette surprise à partir des probabilités d'occurrence des espèces (ou d'autres catégories) permet de définir les mesures de diversités neutres, fonctionnelles ou phylogénétique présentées ici. 
+L'entropie est transformée en diversité au sens strict par une fonction croissante (l'exponentielle déformée), ce qui simplifie son interprétation en tant que nombre équivalent d'espèces.
+
+L'entropie phylogénétique généralise les indices de diversité classique, intègre si nécessaire la distance entre espèces, peut être décomposée et corrigée des biais d'estimation.
+Sa transformation en diversité au sens strict permet d'interpréter les valeurs sous une forme unique : un nombre équivalent d'espèces et un nombre équivalent de communautés. 
+La diversité de Leinster et Cobbold généralise à son tour la diversité phylogénétique et permet d'autres définitions de la distance entre espèces. 
+
+Le paramétrage des mesures (l'ordre de la diversité) permet de donner plus ou moins d'importance aux espèces rares et de tracer des profils de diversité. 
+
+La construction de ce cadre méthodologique est présentée en détail ainsi que plusieurs approches différentes, qui constituent l'état de l'art de la mesure de la biodiversité.
