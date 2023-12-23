@@ -264,7 +264,7 @@ La question est loin d'être épuisée, et fait toujours l'objet d'une recherche
 La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
 La liste des notations est fournie ci-dessous, on s'y référera autant que nécessaire.
 
-Les calculs sont réalisés dans R [@R], essentiellement avec le package *divent*, qui succède au package *entropart* [@Marcon2014c]. 
+Les calculs sont réalisés dans R [@R], essentiellement avec le package *divent* [@R-divent], qui succède au package *entropart* [@Marcon2014c]. 
 L'ensemble du code est disponible sur GitHub^[<https://github.com/EricMarcon/MesuresBioDiv3/>] où se trouvent les mises à jour de ce document^[<https://ericmarcon.github.io/MesuresBioDiv3/>].
 
 Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure \@ref(fig:Paracou6MapFig) en Guyane française [@Gourlet-Fleury2004], d'une surface de 6.25&nbsp;ha.
@@ -281,7 +281,6 @@ library("tidyverse")
 library("vegan")
 # Pas de lazy loading pour BCI: chargement explicite.
 data(BCI)
-library("entropart")
 library("dbmss")
 library("divent")
 library("sads")

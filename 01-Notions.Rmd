@@ -391,8 +391,8 @@ La distribution correspondant au modèle estimé peut être affichée sur la fig
 
 Le package *sads* fournit les fonctions classiques de R (densité de probabilité, cumulative, quantile, simulation) pour les distributions utiles en écologie, au-delà de celles présentées ici.
 La distribution de Volkov notamment peut être simulée.
-Les fonctions `fitxxx()` complètent les fonctions `RACxxx()` d'*entropart*.
-Enfin, la fonction `radfit()` du package *vegan* ajuste aux données en même temps les distributions broken-stick (désignée par "Null"), géométrique ("Preemption") et lognormale (en plus des distributions de Zipf et de Mandelbrot non traitées ici), mais pas log-séries.
+Les fonctions `fitxxx()` complètent la fonction `fit_rac()` de *divent*.
+Enfin, la fonction `radfit()` du package *vegan* ajuste aux données en même temps les distributions broken-stick (désignée par "Null"), géométrique ("Preemption") et lognormale, inclut les distributions de Zipf et de Mandelbrot non traitées ici, mais ignore les log-séries.
 Les vraisemblances des différents modèles sont comparées pour choisir celui qui s'ajuste le mieux.
 
 Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec *divent* ou *sads*.
