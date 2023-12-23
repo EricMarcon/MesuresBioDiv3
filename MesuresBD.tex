@@ -454,7 +454,7 @@
 
 \author{Eric Marcon}
 
-\date{21/12/2023}
+\date{23/12/2023}
 
 
 % Include headers (preamble.tex) here
@@ -549,7 +549,8 @@ L'élargissement de la notion aux \enquote{systèmes naturels} et à l'opposé �
 La déclaration de Michel Loreau, président du du comité scientifique de la conférence de Paris en 2005 \autocite{Loreau2005} en donne une définition aboutie:
 
 \begin{quote}
-La Terre abrite une extraordinaire diversité biologique, qui inclut non seulement les espèces qui habitent notre planète, mais aussi la diversité de leurs gènes, la multitude des interactions écologiques entre elles et avec leur environnement physique, et la variété des écosystèmes complexes qu'elles constituent. Cette biodiversité, qui est le produit de plus de 3 milliards d'années d'évolution, constitue un patrimoine naturel et une ressource vitale dont l'humanité dépend de multiples façons.
+La Terre abrite une extraordinaire diversité biologique, qui inclut non seulement les espèces qui habitent notre planète, mais aussi la diversité de leurs gènes, la multitude des interactions écologiques entre elles et avec leur environnement physique, et la variété des écosystèmes complexes qu'elles constituent.
+Cette biodiversité, qui est le produit de plus de 3 milliards d'années d'évolution, constitue un patrimoine naturel et une ressource vitale dont l'humanité dépend de multiples façons.
 \end{quote}
 
 Aujourd'hui encore, le terme \emph{biodiversité} concerne le plus souvent la richesse en espèces d'un écosystème.
@@ -576,17 +577,15 @@ La question est loin d'être épuisée, et fait toujours l'objet d'une recherche
 La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
 La liste des notations est fournie ci-dessous, on s'y référera autant que nécessaire.
 
-Les calculs sont réalisés dans R \autocite{R}, essentiellement avec le package \emph{entropart} \autocite{Marcon2014c}.
-L'ensemble du code est disponible sur GitHub\footnote{\url{https://github.com/EricMarcon/MesuresBioDiv2/}} où se trouvent les mises à jour de ce document\footnote{\url{https://ericmarcon.github.io/MesuresBioDiv2/}}.
+Les calculs sont réalisés dans R \autocite{R}, essentiellement avec le package \emph{divent} \autocite{R-divent}, qui succède au package \emph{entropart} \autocite{Marcon2014c}.
+L'ensemble du code est disponible sur GitHub\footnote{\url{https://github.com/EricMarcon/MesuresBioDiv3/}} où se trouvent les mises à jour de ce document\footnote{\url{https://ericmarcon.github.io/MesuresBioDiv3/}}.
 
 Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure \ref{fig:Paracou6MapFig} en Guyane française \autocite{Gourlet-Fleury2004}, d'une surface de 6.25~ha.
 Tous les arbres de plus de 10~cm de diamètre à hauteur de poitrine (DBH: \emph{Diameter at Breast Height}) y ont été inventoriés en 2016.
-La position de chaque arbre, son espèce et sa surface terrière sont fournis dans le package \emph{SpatDiv}.
+La position de chaque arbre, son espèce et sa surface terrière sont fournis.
 
 D'autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI \autocite{Condit2012}: 50~ha de forêt tropicale dont les arbres de plus de 1~cm de diamètre à hauteur de poitrine (DBH: \emph{Diameter at Breast Height}) ont été inventoriés.
 Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10~cm disponible dans le package \emph{vegan} \autocite{Oksanen2012}, soient 21457 arbres dans 225 espèces.
-
-Enfin, les données fournies par le package \emph{entropart} sous le nom \enquote{Paracou618} sont deux inventaires de l'année 2012 limités à un hectare chacun dans les parcelles 6 et 18 de la forêt de Paracou, soient 1124 arbres dans 229 espèces.
 
 
 
@@ -603,10 +602,13 @@ Le code R pour réaliser la figure est le suivant:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"dbmss"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"SpatDiv"}\NormalTok{)}
-\FunctionTok{autoplot}\NormalTok{(Paracou6, }\AttributeTok{labelSize =} \FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Surface terrière ("}\NormalTok{,}
-\NormalTok{    cm}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }\StringTok{")"}\NormalTok{)), }\AttributeTok{labelColor =} \StringTok{"Espèce"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"divent"}\NormalTok{)}
+\NormalTok{paracou\_6\_wmppp }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{autoplot}\NormalTok{(}
+  \AttributeTok{labelSize =} \FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Surface terrière ("}\NormalTok{, cm}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+  \AttributeTok{labelColor =} \StringTok{"Espèce"}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{, }\AttributeTok{legend.direction =} \StringTok{"vertical"}\NormalTok{, }\AttributeTok{legend.margin=}\FunctionTok{margin}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
@@ -685,15 +687,13 @@ Si l'espèce est choisie explicitement, la probabilité est notée \({\pi}_{n_s}
 
 \noindent \(S\): le nombre d'espèces, considéré comme une variable aléatoire, estimé par \(\hat{S}\).
 
-\noindent \(S^{n}_{\nu}\): le nombre d'espèces, considéré comme une variable aléatoire, observées \(\nu\) fois dans l'échantillonnage.
+\noindent \(S_{\nu}(n)\): le nombre d'espèces, considéré comme une variable aléatoire, observées \(\nu\) fois dans un échantillon de \(n\) individus.
 L'indice est le nombre de fois où l'espèce est détectée: par exemple \(S_{1}\) ou \(S_{\ne 0}\).
-L'exposant est la taille de l'échantillon: \(S^{A}\) pour la surface \(A\) ou \(\hat{S}^{n}\) pour un échantillon de \(n\) individus.
-\(S^{A}_{0}\) est le nombre d'espèces non rencontrées dans la surface \(A\).
-Pour alléger les notations, s'il n'y a pas d'ambiguïté, l'indice est omis pour les espèces présentes: \(S^{A}_{\ne 0}\) est noté \(S^{A}\).
-Si l'exposant n'est pas noté, l'échantillon n'est pas précisé et peut être aussi bien un nombre d'individus qu'une surface.
+La surface \(A\) peut remplacer le nombre d'individus \(n\): \(S_{0}(A)\) est le nombre d'espèces non rencontrées dans la surface \(A\).
+Pour alléger les notations, s'il n'y a pas d'ambiguïté, l'indice est omis pour les espèces présentes: \(S_{\ne 0}(A)\) est noté \(S^{A}\).
 
-\noindent \(s^{n}_{\nu}\): le nombre d'espèces observées, avec les mêmes notations que ci-dessus.
-\(s^{n}_{\nu}\) peut être considéré comme une réalisation de \(S^{n}_{\nu}\).
+\noindent \(s_{\nu}(n)\): le nombre d'espèces observées, avec les mêmes notations que ci-dessus.
+\(s_{\nu}(n)\) peut être considéré comme une réalisation de \(S_{\nu}(n)\).
 
 \noindent \(t^{n}_{1-\alpha/2}\): le quantile d'une loi de Student à \(n\) degrés de liberté au seuil de risque \(\alpha\), classiquement 1,96 pour \(n\) grand et \(\alpha=5\%\).
 
@@ -745,7 +745,7 @@ Un certain nombre d'hypothèses sont assumées plus ou moins explicitement:
 \tightlist
 \item
   Les classes sont bien connues: compter le nombre d'espèces a peu de sens si la taxonomie n'est pas bien établie.
-  C'est parfois une difficulté majeure quand on travaille sur les microorganismes;
+  C'est parfois une difficulté majeure quand on travaille sur les micro-organismes;
 \item
   Les classes sont équidistantes: la richesse augmente d'une unité quand on rajoute une espèce, que cette espèce soit proche des précédentes ou extrêmement originale.
 \end{itemize}
@@ -762,7 +762,7 @@ Sur la figure \ref{fig:Composantes}, la ligne du bas présente deux communautés
 
 Un indice d'équitabilité est indépendant du nombre d'espèces (donc de la richesse).
 
-La plupart des indices courants, comme ceux de Simpson ou de Shannon, évaluent à la fois la richesse et l'équitabilité.
+La plupart des mesures de diversité courantes, comme celle de Simpson ou de Shannon, évaluent à la fois la richesse et l'équitabilité.
 
 \hypertarget{disparituxe9}{%
 \subsection{Disparité}\label{disparituxe9}}
@@ -821,10 +821,11 @@ La tendance est la même pour la diversité génétique intraspécifique \autoci
 La richesse diminue avec l'altitude.
 Elle est généralement plus faible sur les îles, où elle décroît avec la distance au continent, source de migrations.
 
-La diversité \(\beta\) mesure à quel point les systèmes locaux sont différents. Cette définition assez vague fait toujours l'objet de débats \autocite{Moreno2010}.
+La diversité \(\beta\) mesure à quel point les systèmes locaux sont différents.
+Cette définition assez vague a fait l'objet de nombreux débats \autocite{Moreno2010}.
 
 Enfin, la diversité \(\gamma\) est similaire à la diversité \(\alpha\), prise en compte sur l'ensemble du système étudié.
-Les diversités \(\alpha\) et \(\gamma\) se mesurent donc de la même façon.
+Les diversités \(\alpha\) et \(\gamma\) se mesurent donc de la même façon, mais à différentes échelles.
 
 \hypertarget{duxe9composition}{%
 \subsection{Décomposition}\label{duxe9composition}}
@@ -837,56 +838,6 @@ La distinction de nombreux habitats diminue la diversité \(\alpha\) au profit d
 Il est donc important de définir une mesure qui ne dépende pas de ce découpage, donc une mesure cumulative (additive ou multiplicative) décrivant la diversité totale, décomposable en la somme ou le produit convenablement pondérés de toutes les diversités \(\alpha\) des habitats (diversité intra) et de la diversité \(\beta\) inter-habitat.
 
 Nous appellerons \emph{communauté} le niveau de découpage concernant la diversité \(\alpha\) et \emph{méta-communauté} le niveau de regroupement pour l'estimation de la diversité \(\gamma\).
-
-\hypertarget{le-probluxe8me-de-lespuxe8ce}{%
-\section{Le problème de l'espèce}\label{le-probluxe8me-de-lespuxe8ce}}
-
-Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n'est de toute évidence pas le cas \autocite{Casetta2014}.
-Le premier aspect du problème concerne la nature des espèces: réalité naturelle ou seulement représentation simplificatrice.
-Une analyse historique et philosophique en est faite par \textcite{Richards2010}.
-L'autre aspect, avec des conséquences pratiques plus immédiates, concerne leur délimitation.
-\textcite{Mayden1997} recense vingt-deux définitions différentes du concept d'espèce.
-\textcite{Wilkins2011} estime qu'il n'y a qu'un seul concept d'espèce mais sept définitions, c'est-à-dire sept façons de les identifier, et vingt-sept variations ou mélanges de ces définitions.
-
-La définition historique est celle de \emph{morphoespèce}, qui classe les espèces selon leurs formes, supposées d'abord immuables.
-La définition moderne la plus répandue est celle d'espèce \emph{biologique} \autocite{Dobzhansky1937}: un \enquote{groupe de populations naturelles isolées reproductivement les unes des autres} \autocite{Mayr1942}.
-Lorsque les populations d'une espèce sont isolées géographiquement, leur capacité à se reproduire ensemble est toute théorique (et rarement vérifiée expérimentalement).
-Des populations allopatriques n'ont pas de flux de gènes réels entre elles et peuvent être considérées comme des espèces distinctes selon la définition d'espèce \emph{phylogénétique}: \enquote{le plus petit groupe identifiable d'individus avec un pattern commun d'ancêtres et de descendants} \autocite{Cracraft1983}.
-C'est l'unité génétique détectée par la méthode du coalescent pour la délimitation des espèces \autocite{Sukumaran2017}.
-Le nombre d'espèces phylogénétiques est bien supérieur au nombre d'espèces biologiques.
-Enfin, \textcite{VanValen1976} définit les espèces par la niche écologique qu'elles occupent (à partir de l'exemple des chênes blancs européens) plutôt que par les flux de gènes (permanents entre les espèces distinctes): la définition \emph{écologique} d'espèce est proche du concept de complexe d'espèces \autocite[ensemble d'espèces voisines échangeant des gènes,][]{Pernes1984}.
-
-Le choix de la définition modifie considérablement sur la quantification de la richesse \autocite{Agapow2004}.
-Des problèmes méthodologiques s'ajoutent aux problèmes conceptuels \autocite{Hey2001}: la séparation ou le regroupement de plusieurs populations ou morphotypes en un nombre plus ou moins grand d'espèces est un choix qui reflète les connaissances du moment et peut évoluer \autocite{Barberousse2014}.
-
-L'impact du problème de l'espèce sur la mesure de la diversité reste sans solution à ce stade, si ce n'est d'utiliser les mêmes définitions si des communautés différentes doivent être comparées.
-L'approche phylogénétique (chapitre \ref{chap-Phyloentropie}) permet de contourner le problème: si deux taxons très semblables apportent à peine plus de diversité qu'un seul taxon, le choix de les distinguer ou non n'est pas critique.
-
-\hypertarget{chap-Outils}{%
-\chapter{Outils}\label{chap-Outils}}
-
-\scriptsize
-
-\begin{Summary}
-La diversité peut être décrite localement par une courbe d'accumulation
-(SAC) qui représente le nombre d'espèces échantillonnées en fonction de
-l'effort. À une échelle plus large, cette courbe s'appelle relation
-aire-espèces (SAR).
-
-La distribution des abondances des espèces (SAD) est représentée par une
-histogramme des fréquences ou un diagramme rang-abondance.
-
-Le taux de couverture est la somme des probabilités des espèces
-observées étant donné l'effort d'échantillonnage. Il peut être estimé
-précisément à partir des données d'inventaire. Le taux de complétude est
-la proportion (en nombre) des espèces observées.
-\end{Summary}
-
-\normalsize
-
-Quelques outils sont nécessaires avant d'entrer dans le coeur du sujet.
-Les relations décrivant le nombre d'espèces en fonction de la taille de l'échantillon (relations aire-espèces) et la distribution de l'abondance des espèces sont importants pour les écologues.
-La mesure de l'exhaustivité de l'échantillonnage par le taux de couverture sera la base de l'estimation de la diversité à partir de données réelles.
 
 \hypertarget{courbes-daccumulation}{%
 \section{Courbes d'accumulation}\label{courbes-daccumulation}}
@@ -921,14 +872,18 @@ Code R pour réaliser la figure \ref{fig:SACFig}:
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(}\StringTok{"vegan"}\NormalTok{)}
 \FunctionTok{data}\NormalTok{(BCI)}
-\NormalTok{Cumul }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(BCI, }\DecValTok{2}\NormalTok{, cumsum)}
-\NormalTok{Richesse }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(Cumul, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{))}
-\NormalTok{SARplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{A =} \DecValTok{0}\SpecialCharTok{:}\DecValTok{50}\NormalTok{, }
-                             \AttributeTok{S =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, Richesse))) }\SpecialCharTok{+}
-  \FunctionTok{aes}\NormalTok{(A, S) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+\CommentTok{\# Chaque parcelle (ligne) cumule ses abondances à la précédente}
+\NormalTok{cumul }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(BCI, }\DecValTok{2}\NormalTok{, cumsum)}
+\CommentTok{\# Le nombre d\textquotesingle{}espèces de chaque parcelle est cumulé }
+\NormalTok{Richesse }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(cumul, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(}
+  \FunctionTok{data.frame}\NormalTok{(}
+    \AttributeTok{A =} \DecValTok{0}\SpecialCharTok{:}\DecValTok{50}\NormalTok{, }
+    \AttributeTok{S =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, Richesse)}
+\NormalTok{  )}
+\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ A, }\AttributeTok{y =}\NormalTok{ S)) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Surface (ha)"}\NormalTok{)}
-\NormalTok{SARplot}
 \end{Highlighting}
 \end{Shaded}
 
@@ -960,245 +915,32 @@ En d'autres termes, c'est la diversité d'une communauté dont l'inventaire disp
 Evaluer la diversité asymptotique nécessite d'utiliser des estimateurs de diversité, dont la précision dépend de l'exhaustivité de l'échantillonnage.
 La diversité peut aussi être estimée pour un effort donné: un hectare de forêt ou 5000 arbres par exemple, ou encore un taux de couverture choisi, qui décrit mieux la qualité de l'échantillonnage.
 
-\hypertarget{sec-Couverture}{%
-\section{Taux de couverture}\label{sec-Couverture}}
+\hypertarget{le-probluxe8me-de-lespuxe8ce}{%
+\section{Le problème de l'espèce}\label{le-probluxe8me-de-lespuxe8ce}}
 
-\hypertarget{formule-des-fruxe9quences-de-good-turing}{%
-\subsection{Formule des fréquences de Good-Turing}\label{formule-des-fruxe9quences-de-good-turing}}
+Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n'est de toute évidence pas le cas \autocite{Casetta2014}.
+Le premier aspect du problème concerne la nature des espèces: réalité naturelle ou seulement représentation simplificatrice.
+Une analyse historique et philosophique en est faite par \textcite{Richards2010}.
+L'autre aspect, avec des conséquences pratiques plus immédiates, concerne leur délimitation.
+\textcite{Mayden1997} recense vingt-deux définitions différentes du concept d'espèce.
+\textcite{Wilkins2011} estime qu'il n'y a qu'un seul concept d'espèce mais sept définitions, c'est-à-dire sept façons de les identifier, et vingt-sept variations ou mélanges de ces définitions.
 
-La relation fondamentale entre les fréquences des espèces dans un échantillon est due à Turing et a été publiée par \textcite{Good1953}.
-En absence de toute information sur la loi de distribution des espèces, en supposant seulement que les individus sont tirés indépendamment les uns des autres selon une loi multinomiale respectant ces probabilités, la formule de Good-Turing relie la probabilité moyenne \(\alpha_\nu\) d'une espèce représentée \(\nu\) fois (c'est-à-dire par \(\nu\) individus) au rapport entre les nombres d'espèces représentées \(\nu+1\) fois et \(\nu\) fois:
+La définition historique est celle de \emph{morphoespèce}, qui classe les espèces selon leurs formes, supposées d'abord immuables.
+La définition moderne la plus répandue est celle d'espèce \emph{biologique} \autocite{Dobzhansky1937}: un \enquote{groupe de populations naturelles isolées reproductivement les unes des autres} \autocite{Mayr1942}.
+Lorsque les populations d'une espèce sont isolées géographiquement, leur capacité à se reproduire ensemble est toute théorique (et rarement vérifiée expérimentalement).
+Des populations allopatriques n'ont pas de flux de gènes réels entre elles et peuvent être considérées comme des espèces distinctes selon la définition d'espèce \emph{phylogénétique}: \enquote{le plus petit groupe identifiable d'individus avec un pattern commun d'ancêtres et de descendants} \autocite{Cracraft1983}.
+C'est l'unité génétique détectée par la méthode du coalescent pour la délimitation des espèces \autocite{Sukumaran2017}.
+Le nombre d'espèces phylogénétiques est bien supérieur au nombre d'espèces biologiques.
+Enfin, \textcite{VanValen1976} définit les espèces par la niche écologique qu'elles occupent (à partir de l'exemple des chênes blancs européens) plutôt que par les flux de gènes (permanents entre les espèces distinctes): la définition \emph{écologique} d'espèce est proche du concept de complexe d'espèces \autocite[ensemble d'espèces voisines échangeant des gènes,][]{Pernes1984}.
 
-\begin{equation}
-  \label{eq:alphanu}
-  \alpha_\nu \approx \frac{(\nu+1)}{n} \frac{s^{n}_{\nu+1}}{s^{n}_{\nu}}.
-\end{equation}
+Le choix de la définition modifie considérablement sur la quantification de la richesse \autocite{Agapow2004}.
+Des problèmes méthodologiques s'ajoutent aux problèmes conceptuels \autocite{Hey2001}: la séparation ou le regroupement de plusieurs populations ou morphotypes en un nombre plus ou moins grand d'espèces est un choix qui reflète les connaissances du moment et peut évoluer \autocite{Barberousse2014}.
 
-Les singletons (\(s^{n}_{1}\): le nombre d'espèces observées une seule fois) et les doubletons (\(s^{n}_{2}\): le nombre d'espèces observées deux fois) ont une importance centrale.
-Pour \(\nu=1\), on a: \(\alpha_1 = 2 s^{n}_{2}/(ns^{n}_{1})\): la fréquence d'une espèce typiquement représentée par un singleton est proportionnelle au rapport entre le nombre des doubletons et des singletons.
-Pour \(\nu=0\), l'ignorance du nombre d'espèces non échantillonnées \(s^{n}_{0}\) pose problème mais le produit \(\alpha_0 \times s^{n}_{0} = \pi_0\), la probabilité totale des espèces non représentées, peut être estimée par \(s^{n}_{1}/n\).
-Ces relations sont le fondement des estimateurs de richesse de Chao présentées ci-dessous.
-
-La relation a été précisée \autocite[eq. 6 et 7a]{Chiu2014a} en limitant les approximations dans les calculs.
-La seule nécessaire est que les probabilités des espèces représentées le même nombre de fois \(\nu\) varient peu et puissent être considérées toutes égales à \(\alpha_\nu\).
-Alors, \(\alpha_\nu\) est estimé par
-\begin{equation}
-  \label{eq:GoodTuring2014}
-  \hat{\alpha}_\nu = \frac{\left(\nu+1 \right) s^{n}_{\nu+1}}{\left(n-\nu \right) s^{n}_{\nu} + \left(\nu+1 \right) s^{n}_{\nu+1}}.
-\end{equation}
-
-Ce nouvel estimateur est à la base de l'estimateur de Chao amélioré et des estimateurs d'entropie de Chao et Jost (sections \ref{sec-BiaisShannon} et \ref{sec-BiaisHCDT}).
-
-\hypertarget{taux-de-couverture-et-duxe9ficit-de-couverture}{%
-\subsection{Taux de couverture et déficit de couverture}\label{taux-de-couverture-et-duxe9ficit-de-couverture}}
-
-\textcite{Good1953} définit le taux de couverture (\emph{sample coverage}) de l'échantillonnage comme la proportion des espèces découvertes,
-\begin{equation}
-  \label{eq:C}
-  C=\sum^S_{s=1}{{\mathbf 1}\left(n_s>0\right)p_s},
-\end{equation}
-
-où \({\mathbf 1}(\cdot)\) est la fonction indicatrice.
-Son complément à 1 est appelé déficit de couverture (\emph{coverage deficit}).
-
-Le taux de couverture augmente avec l'effort d'échantillonnage.
-Plus il est élevé, meilleures seront les estimations de la diversité.
-Pour comparer deux communautés par des courbes de raréfaction, \textcite{Chao2012b} montrent que le taux de couverture plutôt que la taille de l'échantillon doit être identique.
-Les estimateurs de la diversité développés plus loin reposent largement sur cette notion pour la correction du biais d'échantillonnage \autocite{Dauby2012} (la sous-estimation systématique de la diversité due aux espèces non observées, un des éléments du biais d'estimation).
-
-L'estimateur du taux de couverture, que Good attribue à Turing, est selon la relation des fréquences vues plus haut:
-
-\begin{equation}
-  \label{eq:CGood}
-  \hat{C} = 1-\frac{s^{n}_{1}}{n}.
-\end{equation}
-
-Cet estimateur est biaisé \autocite{Zhang2007}. En réalité,
-\begin{equation}
-  \label{eq:CsansBiais}
-  C = 1-\frac{{\mathbb E}(S^{n}_{1}) - \pi_1}{n}.
-\end{equation}
-
-L'estimateur de Good néglige le terme \(\pi_1\), la somme des probabilités des espèces observées une fois.
-Ce terme peut être estimé avec un biais plus petit.
-\textcite{Chao1988} puis \textcite{Zhang2007} proposent l'estimateur suivant, qui utilise toute l'information disponible et a le plus petit biais possible:
-
-\begin{equation}
-  \label{eq:CZhang}
-  \hat{C}=1-\sum^{n}_{\nu=1}{\left(-1\right)}^{\nu+1}{\binom{n}{\nu}}^{-1}s^{n}_{\nu}.
-\end{equation}
-
-Les termes de la somme décroissent très vite avec \(\nu\).
-En se limitant à \(\nu=1\), l'estimateur se réduit à celui de Good.
-
-\textcite{Esty1983}, complété par \textcite{Zhang2009}, a montré que l'estimateur était asymptotiquement normal et a calculé l'intervalle de confiance de \(\hat{C}\):
-
-\begin{equation}
-  \label{eq:hatC}
-  C=\hat{C}\pm t^{n}_{1-\alpha/2} \frac{\sqrt{s^{n}_{1}\left(1-\frac{s^{n}_{1}}{n}\right)+2s^{n}_{2}}}{n}.
-\end{equation}
-
-Où \(t^{n}_{1-\alpha/2}\) est le quantile d'une loi de Student à \(n\) degrés de libertés au seuil de risque \(\alpha\), classiquement 1,96 pour \(n\) grand et \(\alpha=5\%\).
-
-Un autre estimateur est utilisé dans le logiciel SPADE \autocite{Chao2010a} et son portage sous R, le package \emph{spadeR} \autocite{Chao2016c}.
-Il est la base des estimateurs d'entropie de Chao et Jost (section \ref{sec-BiaisHCDT}).
-L'estimation de l'équation \eqref{eq:CsansBiais} donne la relation
-\begin{equation}
-  \label{eq:hatC2}
-  \hat{C} = 1-\frac{s^{n}_{1} - \hat{\pi}_1}{n}.
-\end{equation}
-
-Or, \(\hat{\pi}_1 = s^{n}_{1} \hat{\alpha}_1\).
-\(\alpha_1\) peut être estimé par la relation de Good-Turing \eqref{eq:GoodTuring2014}, en remplaçant \(s^{n}_{0}\) par l'estimateur Chao1 \eqref{eq:Chao1}.
-Alors:
-
-\begin{equation} 
-  \label{eq:CChao}
-  \hat{C} = 1-\frac{s^{n}_{1}}{n}(1 - \hat{\alpha}_1)
-  = 1-\frac{s^{n}_{1}}{n}\left[\frac{\left(n-1\right)s^{n}_{1}}{\left(n-1\right)s^{n}_{1}+2s^{n}_{2}}\right].
-\end{equation}
-
-Dans le package \emph{entropart}, la fonction \texttt{Coverage} calcule les trois estimateurs (celui de Zhang et Huang par défaut):
-
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"entropart"}\NormalTok{)}
-\NormalTok{Ns }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(BCI)}
-\FunctionTok{Coverage}\NormalTok{(Ns)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## ZhangHuang 
-##  0.9991146
-\end{verbatim}
-
-\normalsize
-
-Le taux de couverture de BCI est proche de 1 parce que l'inventaire couvre 50~ha.
-Il est moindre sur les 6.25~ha de la parcelle 6 de Paracou:
-
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"SpatDiv"}\NormalTok{)}
-\FunctionTok{Coverage}\NormalTok{(}\FunctionTok{as.AbdVector}\NormalTok{(Paracou6))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## ZhangHuang 
-##  0.9723258
-\end{verbatim}
-
-\normalsize
-
-\textcite{Chao2012b} montrent que la pente de la courbe d'accumulation donnant l'espérance du nombre d'espèces en fonction du nombre d'individus (courbe de raréfaction de la figure \ref{fig:Gotelli2001}) est égale au déficit de couverture,
-
-\begin{equation}
-  \label{eq:DefC}
-  1-{\mathbb E}\left(C^{n}\right)={\mathbb E}\left(S^{n+1}\right)-{\mathbb E}\left(S^{n}\right),
-\end{equation}
-
-où \(C^{n}\) est le taux de couverture d'un échantillon de taille \(n\) et \(S^{n}\) le nombre d'espèces découvertes dans cet échantillon.
-
-Les estimateurs présentés ici supposent une population de taille infinie (de façon équivalente, les individus sont tirés avec remise).
-Le cas des populations de taille finie est traité par \textcite{Chao2012} et \textcite{Hwang2014}.
-
-\hypertarget{compluxe9tude}{%
-\subsection{Complétude}\label{compluxe9tude}}
-
-La complétude de l'échantillonnage est la proportion du nombre d'espèces observées: \(s^{n}_{\ne 0}/{S}\).
-Elle compte simplement les espèces et ne doit pas être confondue avec la couverture qui somme leurs probabilités: le taux de complétude est toujours très inférieur au taux de couverture parce que les espèces non échantillonnées sont les plus rares.
-
-La complétude du même échantillon d'arbres de forêt tropicale que dans l'exemple précédent peut être estimée en divisant le nombre d'espèces observées par le nombre d'espèces estimées (voir section \ref{sec-Richesse}).
-À BCI:
-
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Espèces observées}
-\NormalTok{(Obs }\OtherTok{\textless{}{-}} \FunctionTok{Richness}\NormalTok{(Ns, }\AttributeTok{Correction =} \StringTok{"None"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## None 
-##  225
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Richesse estimée}
-\NormalTok{(Est }\OtherTok{\textless{}{-}} \FunctionTok{Richness}\NormalTok{(Ns, }\AttributeTok{Correction =} \StringTok{"Jackknife"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Jackknife 1 
-##         244
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Complétude}
-\FunctionTok{as.numeric}\NormalTok{(Obs}\SpecialCharTok{/}\NormalTok{Est)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.9221311
-\end{verbatim}
-
-\normalsize
-
-À Paracou:
-
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Espèces observées}
-\NormalTok{(Obs }\OtherTok{\textless{}{-}} \FunctionTok{Richness}\NormalTok{(Paracou6, }\AttributeTok{Correction =} \StringTok{"None"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## None 
-##  334
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Richesse estimée}
-\NormalTok{(Est }\OtherTok{\textless{}{-}} \FunctionTok{Richness}\NormalTok{(Paracou6, }\AttributeTok{Correction =} \StringTok{"Jackknife"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Jackknife 2 
-##         471
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Complétude}
-\FunctionTok{as.numeric}\NormalTok{(Obs}\SpecialCharTok{/}\NormalTok{Est)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.7091295
-\end{verbatim}
-
-\normalsize
+L'impact du problème de l'espèce sur la mesure de la diversité reste sans solution à ce stade, si ce n'est d'utiliser les mêmes définitions si des communautés différentes doivent être comparées.
+L'approche phylogénétique (chapitre \ref{chap-Phyloentropie}) permet de contourner le problème: si deux taxons très semblables apportent à peine plus de diversité qu'un seul taxon, le choix de les distinguer ou non n'est pas critique.
 
 \hypertarget{distribution-de-labondance-des-espuxe8ces-sad}{%
-\section{Distribution de l'abondance des espèces (SAD)}\label{distribution-de-labondance-des-espuxe8ces-sad}}
+\chapter{Distribution de l'abondance des espèces (SAD)}\label{distribution-de-labondance-des-espuxe8ces-sad}}
 
 La distribution de l'abondance des espèces (SAD: \emph{Species Abundance Distribution}) est la loi statistique qui donne l'abondance attendue de chaque espèce d'une communauté.
 Les espèces ne sont pas identifiées individuellement, mais par le nombre d'individus leur appartenant.
@@ -1243,15 +985,19 @@ Code de la figure \ref{fig:SADFig}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Ns }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(BCI), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{N }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(Ns)}
-\NormalTok{SADhist }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(Ns), }\FunctionTok{aes}\NormalTok{(Ns)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins=}\FunctionTok{nclass.Sturges}\NormalTok{(}\FunctionTok{log}\NormalTok{(Ns)), }
-       \AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"white"}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{BCI\_abd }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(}\FunctionTok{colSums}\NormalTok{(BCI), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(BCI\_abd), }\FunctionTok{aes}\NormalTok{(BCI\_abd)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}
+    \AttributeTok{bins =} \FunctionTok{nclass.Sturges}\NormalTok{(}\FunctionTok{log}\NormalTok{(BCI\_abd)), }
+    \AttributeTok{color =} \StringTok{"black"}\NormalTok{, }
+    \AttributeTok{fill =} \StringTok{"white"}\NormalTok{,}
+    \AttributeTok{boundary =} \DecValTok{0}
+\NormalTok{  ) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Effectifs (échelle logarithmique)"}\NormalTok{, }
-       \AttributeTok{y=}\StringTok{"Nombre d\textquotesingle{}espèces"}\NormalTok{)}
-\NormalTok{SADhist}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Effectifs (échelle logarithmique)"}\NormalTok{, }
+    \AttributeTok{y =} \StringTok{"Nombre d\textquotesingle{}espèces"}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1263,8 +1009,10 @@ Code de la figure \ref{fig:RACFig}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"entropart"}\NormalTok{)}
-\FunctionTok{autoplot}\NormalTok{(}\FunctionTok{as.AbdVector}\NormalTok{(Ns), }\AttributeTok{Distribution =} \StringTok{"lnorm"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"divent"}\NormalTok{)}
+\NormalTok{BCI\_abd }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{as\_abundances}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{autoplot}\NormalTok{(}\AttributeTok{fit\_rac =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{distribution =} \StringTok{"lnorm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1292,8 +1040,8 @@ Formellement, la distribution des probabilités des espèces, notées \(p_s\), e
 
 Cette distribution est traitée en détail dans le chapitre \ref{chap-Fisher}.
 
-Le nombre d'espèces est lié au nombre d'individus par la relation \({\mathbb E}(S^n)=\alpha\ln(1+n/\alpha)\) où \(S^n\) indique le nombre d'espèces observées dans un échantillon de \(n\) individus.
-\(\alpha\) est le paramètre qui fixe la pente de la partie linéaire de la relation, valide dès que \(n>>\alpha\), où le nombre d'espèces \(S^n\) augmente proportionnellement au logarithme du nombre d'individus \(\ln(n)\).
+Le nombre d'espèces est lié au nombre d'individus par la relation \({\mathbb E}(S^n) = \alpha \ln(1 + n / \alpha)\) où \(S^n\) indique le nombre d'espèces observées dans un échantillon de \(n\) individus.
+\(\alpha\) est le paramètre qui fixe la pente de la partie linéaire de la relation, valide dès que \(n \gg \alpha\), où le nombre d'espèces \(S^n\) augmente proportionnellement au logarithme du nombre d'individus \(\ln(n)\).
 
 La distribution a été obtenue à partir d'inventaires de communautés de papillons en Malaisie et en Angleterre.
 Le modèle est tombé en désuétude faute de confirmation empirique à l'échelle de la communauté, avant d'être remis en valeur par la théorie neutre \autocite{Hubbell2001} dans lequel la distribution de la \emph{méta-communauté} est en log-séries.
@@ -1303,7 +1051,7 @@ Le modèle est tombé en désuétude faute de confirmation empirique à l'échel
 
 Si les espèces se partagent les ressources ou l'espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les \(S-1\) cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d'espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de \textcite{MacArthur1957}.
 
-Parmi les distributions classiques, c'est la plus équitable: la distribution uniforme des probabilités (\(p_s=1/S\) pour tout \(s\)) n'est jamais approchée.
+Parmi les distributions classiques, c'est la plus équitable: la distribution uniforme des probabilités (\(p_s = 1 / S\) pour tout \(s\)) n'est jamais approchée.
 
 Elle est peu observée empiriquement.
 
@@ -1317,7 +1065,7 @@ Son espérance est obtenue à partir du nombre d'espèces et de \(\sigma\), pour
 \textcite{May1975} explique cette distribution par le théorème de la limite centrale: la variable aléatoire valant 1 si un individu est de l'espèce \(s\) et 0 sinon est le produit de nombreuses variables de loi inconnues valant 1 en cas de succès (germination d'une graine, survie à de nombreux évènements\ldots).
 Le logarithme de ce produit est une somme de variables aléatoire dont la loi est forcément normale par application du théorème de la limite centrale.
 
-La distribution est aussi le résultat d'un algorithme de bâton brisé (\emph{broken stick}) hiérarchique\autocite{Bulmer1974}:
+La distribution est aussi le résultat d'un algorithme de bâton brisé (\emph{broken stick}) hiérarchique \autocite{Bulmer1974}:
 
 \begin{itemize}
 \tightlist
@@ -1385,84 +1133,78 @@ Le code utilisé pour produire la figure \ref{fig:DistributionsFig} est le suiva
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"entropart"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"divent"}\NormalTok{)}
 \CommentTok{\# Tirage d\textquotesingle{}une communauté en log{-}séries}
-\NormalTok{lseries }\OtherTok{\textless{}{-}} \FunctionTok{rCommunity}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{size=}\FloatTok{1E5}\NormalTok{, }\AttributeTok{Distribution=}\StringTok{"lseries"}\NormalTok{, }\AttributeTok{alpha=}\DecValTok{11}\NormalTok{)}
-\CommentTok{\# Nombre d\textquotesingle{}espèces de référence}
-\NormalTok{S }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(lseries)}
+\NormalTok{size }\OtherTok{\textless{}{-}} \FloatTok{1E5}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \DecValTok{11}
+\NormalTok{species\_number }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{alpha }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(alpha }\SpecialCharTok{/}\NormalTok{ (size }\SpecialCharTok{+}\NormalTok{ alpha))}
+\NormalTok{abd\_lseries }\OtherTok{\textless{}{-}} \FunctionTok{rlseries}\NormalTok{(species\_number, size, alpha)}
 \CommentTok{\# Part des ressources accaparées dans la distribution géométrique}
-\NormalTok{prob}\OtherTok{=}\FloatTok{0.2}
+\NormalTok{prob }\OtherTok{\textless{}{-}} \FloatTok{0.2}
 \CommentTok{\# Calcul des probabilités de la distribution géométrique}
-\NormalTok{geom }\OtherTok{\textless{}{-}}\NormalTok{ prob}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{prob)}\SpecialCharTok{\^{}}\NormalTok{S)}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{prob)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\NormalTok{(S}\DecValTok{{-}1}\NormalTok{))}
+\NormalTok{prob\_geom }\OtherTok{\textless{}{-}}\NormalTok{ prob }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ prob)}\SpecialCharTok{\^{}}\NormalTok{species\_number) }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ prob)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\NormalTok{(species\_number }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{))}
 \CommentTok{\# Dispersion de la loi lognormale}
 \NormalTok{sd }\OtherTok{\textless{}{-}} \DecValTok{2}
 \CommentTok{\# Tirage de S valeurs dans une loi lognormale}
-\NormalTok{Nslnorm }\OtherTok{\textless{}{-}} \FunctionTok{rlnorm}\NormalTok{(S, }\DecValTok{0}\NormalTok{, sd)}
-\CommentTok{\# Normalisation pour obtenir des probabilités}
-\NormalTok{lnorm }\OtherTok{\textless{}{-}}\NormalTok{ Nslnorm}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(Nslnorm)}
+\NormalTok{abd\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{rlnorm}\NormalTok{(species\_number, }\AttributeTok{meanlog =} \DecValTok{0}\NormalTok{, }\AttributeTok{sdlog =}\NormalTok{ sd)}
 \CommentTok{\# Tirage des probabilités de la distribution broken stick}
-\NormalTok{bstick }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(cuts }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(stats}\SpecialCharTok{::}\FunctionTok{runif}\NormalTok{(S}\DecValTok{{-}1}\NormalTok{)), }\DecValTok{1}\NormalTok{)}\SpecialCharTok{{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, cuts)}
+\NormalTok{prob\_bstick }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(cuts }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(stats}\SpecialCharTok{::}\FunctionTok{runif}\NormalTok{(species\_number }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)), }\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, cuts)}
 \CommentTok{\# Graphique}
-\FunctionTok{tibble}\NormalTok{(}\AttributeTok{Rang=}\DecValTok{1}\SpecialCharTok{:}\NormalTok{S,}
-      \StringTok{\textasciigrave{}}\AttributeTok{Log{-}Séries}\StringTok{\textasciigrave{}}\OtherTok{=}\FunctionTok{sort}\NormalTok{(lseries}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(lseries), }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{),}
-      \StringTok{\textasciigrave{}}\AttributeTok{Géometrique}\StringTok{\textasciigrave{}}\OtherTok{=}\FunctionTok{sort}\NormalTok{(geom, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{),}
-      \StringTok{\textasciigrave{}}\AttributeTok{Log{-}Normale}\StringTok{\textasciigrave{}}\OtherTok{=}\FunctionTok{sort}\NormalTok{(lnorm, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{),}
-      \StringTok{\textasciigrave{}}\AttributeTok{Broken Stick}\StringTok{\textasciigrave{}}\OtherTok{=}\FunctionTok{sort}\NormalTok{(bstick, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols=}\SpecialCharTok{{-}}\NormalTok{Rang) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{rank =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{species\_number,}
+  \StringTok{\textasciigrave{}}\AttributeTok{Log{-}Séries}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sort}\NormalTok{(abd\_lseries }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(abd\_lseries), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Géometrique}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sort}\NormalTok{(prob\_geom, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Log{-}Normale}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sort}\NormalTok{(abd\_lnorm }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(abd\_lnorm), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Broken Stick}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sort}\NormalTok{(prob\_bstick, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \SpecialCharTok{{-}}\NormalTok{rank) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Rang, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{color=}\NormalTok{name)) }\SpecialCharTok{+}
-  \FunctionTok{scale\_y\_log10}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\FloatTok{1E{-}6}\NormalTok{, }\ConstantTok{NA}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Probabilité"}\NormalTok{, }\AttributeTok{color=}\StringTok{"Distribution"}\NormalTok{)}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ rank, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{color =}\NormalTok{ name)) }\SpecialCharTok{+}
+    \FunctionTok{scale\_y\_log10}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\FloatTok{1E{-}6}\NormalTok{, }\ConstantTok{NA}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Probabilité"}\NormalTok{, }\AttributeTok{color =} \StringTok{"Distribution"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 
-La simulation de ces quatre distributions peut être réalisée par la fonction \texttt{rCommunity()} du package \emph{entropart}, où l'argument \texttt{Distribution} peut valoir \enquote{bstick}, \enquote{lnorm}, \enquote{geom} ou \enquote{lseries}.
+La simulation de ces quatre distributions peut être réalisée par la fonction \texttt{rcommunity()} du package \emph{divent}, où l'argument \texttt{distribution} peut valoir \enquote{bstick}, \enquote{lnorm}, \enquote{geom} ou \enquote{lseries}.
 La simulation des communautés autres que log-séries passe par le tirage des probabilités des espèces (le calcul est déterministe dans le cas de la distribution géométrique) puis le tirage d'un nombre d'individus dans une loi multinomiale respectant ces probabilités et l'effectif total.
 
-Les fonction \texttt{RACbstick()}, \texttt{RAClnorm()}, \texttt{RACgeom()} et \texttt{RAClseries()} permettent d'inférer à partir d'un vecteur d'abondance les paramètres d'une distribution.
+La fonction \texttt{fit\_rac()} permet d'inférer les paramètres d'une distribution à partir d'un vecteur d'abondance.
 La distribution correspondant au modèle estimé peut être affichée sur la figure Rang-Abondance (figure \ref{fig:SADFig}).
 
 Le package \emph{sads} fournit les fonctions classiques de R (densité de probabilité, cumulative, quantile, simulation) pour les distributions utiles en écologie, au-delà de celles présentées ici.
 La distribution de Volkov notamment peut être simulée.
-Les fonctions \texttt{fitxxx()} complètent les fonctions \texttt{RACxxx()} d'\emph{entropart}.
+Les fonctions \texttt{fitxxx()} complètent la fonction \texttt{fit\_rac()} de \emph{divent}.
+Enfin, la fonction \texttt{radfit()} du package \emph{vegan} ajuste aux données en même temps les distributions broken-stick (désignée par \enquote{Null}), géométrique (\enquote{Preemption}) et lognormale, inclut les distributions de Zipf et de Mandelbrot non traitées ici, mais ignore les log-séries.
+Les vraisemblances des différents modèles sont comparées pour choisir celui qui s'ajuste le mieux.
 
-Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec \emph{entropart} ou \emph{sads}.
+Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec \emph{divent} ou \emph{sads}.
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# entropart}
-\FunctionTok{library}\NormalTok{(}\StringTok{"entropart"}\NormalTok{)}
-\NormalTok{fit\_entropart\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{RAClnorm}\NormalTok{(Ns)}
+\CommentTok{\# divent}
+\FunctionTok{library}\NormalTok{(}\StringTok{"divent"}\NormalTok{)}
+\NormalTok{fit\_divent\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{fit\_rac}\NormalTok{(BCI\_abd, }\AttributeTok{distribution =} \StringTok{"lnorm"}\NormalTok{)}
 \CommentTok{\# Affichage des paramètres estimés}
-\NormalTok{fit\_entropart\_lnorm}\SpecialCharTok{$}\NormalTok{mu}
+\NormalTok{fit\_divent\_lnorm}\SpecialCharTok{$}\NormalTok{parameters}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.142695
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit\_entropart\_lnorm}\SpecialCharTok{$}\NormalTok{sigma}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1.791177
+## # A tibble: 1 x 2
+##      mu sigma
+##   <dbl> <dbl>
+## 1  3.14  1.79
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# sads}
 \FunctionTok{library}\NormalTok{(}\StringTok{"sads"}\NormalTok{)}
-\CommentTok{\# Estimation. Les données sont tronquées: les espèces}
-\CommentTok{\# observées 0 fois ne sont pas comptées.}
-\NormalTok{fit\_sads\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{fitlnorm}\NormalTok{(Ns, }\AttributeTok{trunc =} \DecValTok{0}\NormalTok{)}
+\CommentTok{\# Estimation. Les données sont tronquées: les espèces observées 0 fois ne sont pas comptées.}
+\NormalTok{fit\_sads\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{fitlnorm}\NormalTok{(BCI\_abd, }\AttributeTok{trunc=}\DecValTok{0}\NormalTok{)}
 \NormalTok{fit\_sads\_lnorm}\SpecialCharTok{@}\NormalTok{fullcoef}
 \end{Highlighting}
 \end{Shaded}
@@ -1470,6 +1212,34 @@ Le code suivant montre comment ajuster une distribution log-normale aux données
 \begin{verbatim}
 ##  meanlog    sdlog 
 ## 3.142695 1.787195
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#vegan}
+\FunctionTok{library}\NormalTok{(}\StringTok{"vegan"}\NormalTok{)}
+\NormalTok{fit\_vegan\_lnorm }\OtherTok{\textless{}{-}} \FunctionTok{radfit}\NormalTok{(BCI\_abd)}
+\NormalTok{fit\_vegan\_lnorm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## RAD models, family poisson 
+## No. of species 225, total abundance 21457
+## 
+##            par1      par2     par3    Deviance AIC     
+## Null                                  10261.14 11387.97
+## Preemption  0.034063                   3788.38  4917.21
+## Lognormal   3.3569    1.5738            744.30  1875.13
+## Zipf        0.14679  -0.94912          4335.50  5466.33
+## Mandelbrot  17.014   -2.0064   15.048   988.02  2120.85
+##            BIC     
+## Null       11387.97
+## Preemption  4920.63
+## Lognormal   1881.96
+## Zipf        5473.16
+## Mandelbrot  2131.10
 \end{verbatim}
 
 \normalsize
@@ -1481,7 +1251,7 @@ L'ajustement du modèle de Volkov peut être comparé à celui d'une distributio
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Ajustement du modèle de Volkov}
-\NormalTok{fit\_volkov }\OtherTok{\textless{}{-}} \FunctionTok{fitvolkov}\NormalTok{(Ns)}
+\NormalTok{fit\_volkov }\OtherTok{\textless{}{-}} \FunctionTok{fitvolkov}\NormalTok{(BCI\_abd)}
 \NormalTok{fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef}
 \end{Highlighting}
 \end{Shaded}
@@ -1499,25 +1269,21 @@ Graphiquement, l'ajustement est très proche mais la distribution de Volkov pré
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Comparaison graphique des deux modèles. Log{-}normal en}
-\CommentTok{\# rouge.}
-\FunctionTok{plot}\NormalTok{(}\FunctionTok{as.AbdVector}\NormalTok{(Ns), }\AttributeTok{Distribution =} \StringTok{"lnorm"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $mu
-## [1] 3.142695
-## 
-## $sigma
-## [1] 1.791177
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\CommentTok{\# Comparaison graphique des deux modèles. Log{-}normal en rouge.}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{as\_abundances}\NormalTok{(BCI\_abd), }\AttributeTok{fit\_rac =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{distribution=}\StringTok{"lnorm"}\NormalTok{)}
 \CommentTok{\# Volkov en vert}
-\FunctionTok{lines}\NormalTok{(}\FunctionTok{sort}\NormalTok{(}\FunctionTok{rvolkov}\NormalTok{(}\FunctionTok{length}\NormalTok{(Ns), fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{1}\NormalTok{], fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{2}\NormalTok{],}
-\NormalTok{    fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{3}\NormalTok{]), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}
+  \FunctionTok{sort}\NormalTok{(}
+    \FunctionTok{rvolkov}\NormalTok{(}
+      \FunctionTok{length}\NormalTok{(BCI\_abd), }
+\NormalTok{      fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{1}\NormalTok{], }
+\NormalTok{      fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{2}\NormalTok{], }
+\NormalTok{      fit\_volkov}\SpecialCharTok{@}\NormalTok{fullcoef[}\DecValTok{3}\NormalTok{]}
+\NormalTok{    ), }
+    \AttributeTok{decreasing=}\ConstantTok{TRUE}
+\NormalTok{  ), }
+  \AttributeTok{col=}\StringTok{"green"}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Distribution de l’abondance des espèces (SAD) | Mesures de la Biodiversité</title>
+<meta name="author" content="Eric Marcon">
+<meta name="description" content="La distribution de l’abondance des espèces (SAD : Species Abundance Distribution) est la loi statistique qui donne l’abondance attendue de chaque espèce d’une communauté. Les espèces ne sont pas...">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="2 Distribution de l’abondance des espèces (SAD) | Mesures de la Biodiversité">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/distribution-de-labondance-des-espèces-sad.html">
+<meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<meta property="og:description" content="La distribution de l’abondance des espèces (SAD : Species Abundance Distribution) est la loi statistique qui donne l’abondance attendue de chaque espèce d’une communauté. Les espèces ne sont pas...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2 Distribution de l’abondance des espèces (SAD) | Mesures de la Biodiversité">
+<meta name="twitter:description" content="La distribution de l’abondance des espèces (SAD : Species Abundance Distribution) est la loi statistique qui donne l’abondance attendue de chaque espèce d’une communauté. Les espèces ne sont pas...">
+<meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1B3PLBCM6"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-C1B3PLBCM6');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Mesures de la Biodiversité</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Motivation</a></li>
+<li><a class="" href="calculs-et-donn%C3%A9es.html">Calculs et données</a></li>
+<li><a class="" href="notations.html">Notations</a></li>
+<li class="book-part">Notions</li>
+<li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
+<li><a class="active" href="distribution-de-labondance-des-esp%C3%A8ces-sad.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/EricMarcon/MesuresBioDiv2">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="distribution-de-labondance-des-espèces-sad" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)<a class="anchor" aria-label="anchor" href="#distribution-de-labondance-des-esp%C3%A8ces-sad"><i class="fas fa-link"></i></a>
+</h1>
+<p>La distribution de l’abondance des espèces (SAD : <em>Species Abundance Distribution</em>) est la loi statistique qui donne l’abondance attendue de chaque espèce d’une communauté.
+Les espèces ne sont pas identifiées individuellement, mais par le nombre d’individus leur appartenant.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:SADFig"></span>
+<img src="MesuresBD_files/figure-html/SADFig-1.png" alt="Histogramme des fréquences (diagramme de Preston) des arbres du dispositif de Barro Colorado Island. En abscisse : le nombre d’arbres de chaque espèce (en logarithme) ; en ordonnée : le nombre d’espèces." width="80%"><p class="caption">
+Figure 2.1: Histogramme des fréquences (diagramme de Preston) des arbres du dispositif de Barro Colorado Island. En abscisse : le nombre d’arbres de chaque espèce (en <span style="white-space:nowrap">logarithme) ;</span> en ordonnée : le nombre d’espèces.
+</p>
+</div>
+<p></p>
+<p>Elle peut être représentée sous la forme d’un histogramme des fréquences (diagramme de <span class="citation">Preston (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Preston1948" role="doc-biblioref">1948</a>)</span>, figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:SADFig">2.1</a>) ou bien d’un diagramme rang-abondance (RAC : <em>Rank Abundance Curve</em> ou diagramme de <span class="citation">Whittaker (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Whittaker1965" role="doc-biblioref">1965</a>)</span>, figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:RACFig">2.2</a>).
+Le RAC est souvent utilisé pour reconnaître des distributions connues.
+<span class="citation">Izsák and Pavoine (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Izsak2012" role="doc-biblioref">2012</a>)</span> ont étudié les propriétés des RAC pour les principales SAD.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:RACFig"></span>
+<img src="MesuresBD_files/figure-html/RACFig-1.png" alt="Diagramme rang-abondance (diagramme de Whittaker) des arbres du dispositif de Barro Colorado Island. Les points sont les données : en abscisse : le rang de l’espèce, à partir de la plus abondante ; en ordonnée : l’abondance de l’espèce. La courbe est l’ajustement d’une distribution log-normale." width="80%"><p class="caption">
+Figure 2.2: Diagramme rang-abondance (diagramme de Whittaker) des arbres du dispositif de Barro Colorado Island. Les points sont les données : en abscisse : le rang de l’espèce, à partir de la plus <span style="white-space:nowrap">abondante ;</span> en ordonnée : l’abondance de l’espèce. La courbe est l’ajustement d’une distribution log-normale.
+</p>
+</div>
+<p></p>
+<p>Code de la figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:SADFig">2.1</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">BCI_abd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span></span>
+<span>    bins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/nclass.html">nclass.Sturges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>    color <span class="op">=</span> <span class="st">"black"</span>, </span>
+<span>    fill <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>    boundary <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_log10</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Effectifs (échelle logarithmique)"</span>, </span>
+<span>    y <span class="op">=</span> <span class="st">"Nombre d'espèces"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Code de la figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:RACFig">2.2</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="va">BCI_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span>fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Les SAD sont traitées en détail par <span class="citation">Magurran (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Magurran1988" role="doc-biblioref">1988</a>)</span> ou <span class="citation">McGill et al. (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-McGill2007" role="doc-biblioref">2007</a>)</span>.
+Les principales distributions, nécessaires à la compréhension de la suite sont présentées ici :</p>
+<ul>
+<li>La distribution en log-séries de <span class="citation">Fisher, Corbet, and Williams (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Fisher1943" role="doc-biblioref">1943</a>)</span><span style="white-space:nowrap"> ;</span>
+</li>
+<li>La distribution géométrique <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Motomura1932" role="doc-biblioref">Motomura 1932</a>; <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Whittaker1972" role="doc-biblioref">Whittaker 1972</a>)</span><span style="white-space:nowrap"> ;</span>
+</li>
+<li>La distribution log-normale <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Preston1948" role="doc-biblioref">Preston 1948</a>)</span><span style="white-space:nowrap"> ;</span>
+</li>
+<li>Le modèle Broken Stick <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-MacArthur1957" role="doc-biblioref">MacArthur 1957</a>)</span>.</li>
+</ul>
+<p>Formellement, la distribution des probabilités des espèces, notées <span class="math inline">\(p_s\)</span>, est à établir.</p>
+<div id="la-distribution-en-log-séries" class="section level3" number="2.0.1">
+<h3>
+<span class="header-section-number">2.0.1</span> La distribution en log-séries<a class="anchor" aria-label="anchor" href="#la-distribution-en-log-s%C3%A9ries"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cette distribution est traitée en détail dans le chapitre <a href="#chap-Fisher"><strong>??</strong></a>.</p>
+<p>Le nombre d’espèces est lié au nombre d’individus par la relation <span class="math inline">\({\mathbb E}(S^n) = \alpha \ln(1 + n / \alpha)\)</span> où <span class="math inline">\(S^n\)</span> indique le nombre d’espèces observées dans un échantillon de <span class="math inline">\(n\)</span> individus.
+<span class="math inline">\(\alpha\)</span> est le paramètre qui fixe la pente de la partie linéaire de la relation, valide dès que <span class="math inline">\(n \gg \alpha\)</span>, où le nombre d’espèces <span class="math inline">\(S^n\)</span> augmente proportionnellement au logarithme du nombre d’individus <span class="math inline">\(\ln(n)\)</span>.</p>
+<p>La distribution a été obtenue à partir d’inventaires de communautés de papillons en Malaisie et en Angleterre.
+Le modèle est tombé en désuétude faute de confirmation empirique à l’échelle de la communauté, avant d’être remis en valeur par la théorie neutre <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Hubbell2001" role="doc-biblioref">Hubbell 2001</a>)</span> dans lequel la distribution de la <em>méta-communauté</em> est en log-séries.</p>
+</div>
+<div id="la-distribution-broken-stick" class="section level3" number="2.0.2">
+<h3>
+<span class="header-section-number">2.0.2</span> La distribution Broken Stick<a class="anchor" aria-label="anchor" href="#la-distribution-broken-stick"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si les espèces se partagent les ressources ou l’espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les <span class="math inline">\(S-1\)</span> cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d’espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de <span class="citation">MacArthur (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-MacArthur1957" role="doc-biblioref">1957</a>)</span>.</p>
+<p>Parmi les distributions classiques, c’est la plus équitable : la distribution uniforme des probabilités (<span class="math inline">\(p_s = 1 / S\)</span> pour tout <span class="math inline">\(s\)</span>) n’est jamais approchée.</p>
+<p>Elle est peu observée empiriquement.</p>
+</div>
+<div id="la-distribution-log-normale" class="section level3" number="2.0.3">
+<h3>
+<span class="header-section-number">2.0.3</span> La distribution log-normale<a class="anchor" aria-label="anchor" href="#la-distribution-log-normale"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dans une distribution log-normale, le logarithme des probabilités des espèces (notées <span class="math inline">\(p_s\)</span> pour l’espèce <span class="math inline">\(s\)</span>) suit une loi normale.
+L’écart-type <span class="math inline">\(\sigma\)</span> de cette distribution règle l’équitabilité de la distribution.
+Son espérance est obtenue à partir du nombre d’espèces et de <span class="math inline">\(\sigma\)</span>, pour que la somme des probabilités égale 1.</p>
+<p><span class="citation">May (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-May1975" role="doc-biblioref">1975</a>)</span> explique cette distribution par le théorème de la limite centrale : la variable aléatoire valant 1 si un individu est de l’espèce <span class="math inline">\(s\)</span> et 0 sinon est le produit de nombreuses variables de loi inconnues valant 1 en cas de succès (germination d’une graine, survie à de nombreux évènements…).
+Le logarithme de ce produit est une somme de variables aléatoire dont la loi est forcément normale par application du théorème de la limite centrale.</p>
+<p>La distribution est aussi le résultat d’un algorithme de bâton brisé (<em>broken stick</em>) hiérarchique <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Bulmer1974" role="doc-biblioref">Bulmer 1974</a>)</span> :</p>
+<ul>
+<li>Si les ressources (représentées par un bâton) sont partagées une première fois aléatoirement, selon une loi quelconque,</li>
+<li>Si chaque bâton obtenu est partagé à nouveau selon le même procédé, et que l’opération est répétée un assez grand nombre de fois,</li>
+<li>Si l’abondance de chaque espèce est proportionnelle aux ressources dont elle dispose,</li>
+<li>Alors la distribution des espèces est log-normale.</li>
+</ul>
+<p>Ce mécanisme décrit assez bien un mécanisme de partage successif des ressources, par exemple entre groupes d’espèces de plus en plus petits, correspondant à des niches écologiques de plus en plus étroites.</p>
+<p>D’autres arguments existent dans la littérature.
+Par exemple, <span class="citation">Engen and Lande (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Engen1996" role="doc-biblioref">1996</a>)</span> obtiennent une distribution normale à partir d’un modèle de dynamique des populations.</p>
+<p>La distribution log-normale décrit assez bien (mais pas exactement) une communauté locale dans le cadre de la théorie neutre <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Hubbell2001" role="doc-biblioref">Hubbell 2001</a>)</span> comme le montre la figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:RACFig">2.2</a>.
+Le nombre d’espèces rares est un peu surestimé.
+La distribution exacte est donnée par <span class="citation">Volkov et al. (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Volkov2003" role="doc-biblioref">2003</a>)</span>.</p>
+</div>
+<div id="la-distribution-géométrique" class="section level3" number="2.0.4">
+<h3>
+<span class="header-section-number">2.0.4</span> La distribution géométrique<a class="anchor" aria-label="anchor" href="#la-distribution-g%C3%A9om%C3%A9trique"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si les espèces se partagent les ressources selon un algorithme <em>broken stick</em> séquentiel (comme dans la distribution log-normale) mais de proportion fixe <span class="math inline">\(0&lt;k&lt;1\)</span>, alors la distribution obtenue est géométrique.
+Les abondances successives sont proportionnelles à <span class="math inline">\(k, k(1-k), k(1-k)^2, \dots, k(1-k)^s, \dots, k(1-k)^S\)</span>.</p>
+<p>Ce modèle a été établi par <span class="citation">Motomura (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Motomura1932" role="doc-biblioref">1932</a>)</span> cité par <span class="citation">May (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-May1975" role="doc-biblioref">1975</a>)</span>.
+Ses propriétés ont été étudiées par <span class="citation">Whittaker (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Whittaker1972" role="doc-biblioref">1972</a>)</span>.</p>
+<p>C’est la distribution qui traduit l’absence de relation entre la taille de l’échantillon et l’abondance des espèces <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Pueyo2007" role="doc-biblioref">Pueyo, He, and Zillio 2007</a>)</span> : la distribution du logarithme de ses probabilités est uniforme.
+En d’autre termes, l’ordre de grandeur de l’abondance d’une espèce est uniformément distribué.</p>
+<p>La distribution est observée dans les communautés pionnières <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Bazzaz1975" role="doc-biblioref">Bazzaz 1975</a>)</span>, peu diverses, ou les communautés microbiennes <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Haegeman2013" role="doc-biblioref">Haegeman et al. 2013</a>)</span>.</p>
+</div>
+<div id="synthèse" class="section level3" number="2.0.5">
+<h3>
+<span class="header-section-number">2.0.5</span> Synthèse<a class="anchor" aria-label="anchor" href="#synth%C3%A8se"><i class="fas fa-link"></i></a>
+</h3>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:DistributionsFig"></span>
+<img src="MesuresBD_files/figure-html/DistributionsFig-1.png" alt="Diagramme rang-fréquence des distributions de probabilité classiques. Toutes les distributions sont de 100 espèces. Les probabilités inférieures à \(10^{-6}\) ne sont pas affichées. Les paramètres choisis sont \(\alpha=11\) pour la distribution log-séries, \(k=0,2\) pour la distribution géométrique et \(\sigma=2\) pour la distribution log-normale." width="100%"><p class="caption">
+Figure 2.3: Diagramme rang-fréquence des distributions de probabilité classiques. Toutes les distributions sont de 100 espèces. Les probabilités inférieures à <span class="math inline">\(10^{-6}\)</span> ne sont pas affichées. Les paramètres choisis sont <span class="math inline">\(\alpha=11\)</span> pour la distribution log-séries, <span class="math inline">\(k=0,2\)</span> pour la distribution géométrique et <span class="math inline">\(\sigma=2\)</span> pour la distribution log-normale.
+</p>
+</div>
+<p></p>
+<p>La figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:DistributionsFig">2.3</a> est inspirée de la figure très connue de <span class="citation">Magurran (<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Magurran1988" role="doc-biblioref">1988</a>)</span>.
+Elle montre bien une gradation en termes de décroissance de probabilité entre des distributions de même richesse : de la plus équitable (broken stick) à la plus inéquitable (géométrique).
+Elle doit être nuancée : la proportion <span class="math inline">\(k\)</span> de la distribution géométrique fixe la pente de la droite qui la représente sur la figure.
+<span class="math inline">\(k=10\%\)</span> sur la figure : une valeur plus faible diminuerait la pente.
+De même, l’écart-type de la distribution log-normale décrit sa dispersion.
+Une valeur supérieure augmenterait sa décroissance.</p>
+<p>Le code utilisé pour produire la figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:DistributionsFig">2.3</a> est le suivant :</p>
+<p></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="co"># Tirage d'une communauté en log-séries</span></span>
+<span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fl">1E5</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">11</span></span>
+<span><span class="va">species_number</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">alpha</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">alpha</span> <span class="op">/</span> <span class="op">(</span><span class="va">size</span> <span class="op">+</span> <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">abd_lseries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/rlseries.html">rlseries</a></span><span class="op">(</span><span class="va">species_number</span>, <span class="va">size</span>, <span class="va">alpha</span><span class="op">)</span></span>
+<span><span class="co"># Part des ressources accaparées dans la distribution géométrique</span></span>
+<span><span class="va">prob</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span><span class="co"># Calcul des probabilités de la distribution géométrique</span></span>
+<span><span class="va">prob_geom</span> <span class="op">&lt;-</span> <span class="va">prob</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prob</span><span class="op">)</span><span class="op">^</span><span class="va">species_number</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">prob</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="va">species_number</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Dispersion de la loi lognormale</span></span>
+<span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="co"># Tirage de S valeurs dans une loi lognormale</span></span>
+<span><span class="va">abd_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">species_number</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
+<span><span class="co"># Tirage des probabilités de la distribution broken stick</span></span>
+<span><span class="va">prob_bstick</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">species_number</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">cuts</span><span class="op">)</span></span>
+<span><span class="co"># Graphique</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  rank <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">species_number</span>,</span>
+<span>  `Log-Séries` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">abd_lseries</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">abd_lseries</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  `Géometrique` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">prob_geom</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  `Log-Normale` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">abd_lnorm</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">abd_lnorm</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  `Broken Stick` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">prob_bstick</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">rank</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">rank</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_y_log10</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1E-6</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probabilité"</span>, color <span class="op">=</span> <span class="st">"Distribution"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>La simulation de ces quatre distributions peut être réalisée par la fonction <code><a href="https://rdrr.io/pkg/divent/man/rcommunity.html">rcommunity()</a></code> du package <em>divent</em>, où l’argument <code>distribution</code> peut valoir “bstick”, “lnorm”, “geom” ou “lseries”.
+La simulation des communautés autres que log-séries passe par le tirage des probabilités des espèces (le calcul est déterministe dans le cas de la distribution géométrique) puis le tirage d’un nombre d’individus dans une loi multinomiale respectant ces probabilités et l’effectif total.</p>
+<p>La fonction <code><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac()</a></code> permet d’inférer les paramètres d’une distribution à partir d’un vecteur d’abondance.
+La distribution correspondant au modèle estimé peut être affichée sur la figure Rang-Abondance (figure <a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#fig:SADFig">2.1</a>).</p>
+<p>Le package <em>sads</em> fournit les fonctions classiques de R (densité de probabilité, cumulative, quantile, simulation) pour les distributions utiles en écologie, au-delà de celles présentées ici.
+La distribution de Volkov notamment peut être simulée.
+Les fonctions <code>fitxxx()</code> complètent la fonction <code><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac()</a></code> de <em>divent</em>.
+Enfin, la fonction <code><a href="https://rdrr.io/pkg/vegan/man/radfit.html">radfit()</a></code> du package <em>vegan</em> ajuste aux données en même temps les distributions broken-stick (désignée par “Null”), géométrique (“Preemption”) et lognormale, inclut les distributions de Zipf et de Mandelbrot non traitées ici, mais ignore les log-séries.
+Les vraisemblances des différents modèles sont comparées pour choisir celui qui s’ajuste le mieux.</p>
+<p>Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec <em>divent</em> ou <em>sads</em>.</p>
+<p></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># divent</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="va">fit_divent_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac</a></span><span class="op">(</span><span class="va">BCI_abd</span>, distribution <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span></span>
+<span><span class="co"># Affichage des paramètres estimés</span></span>
+<span><span class="va">fit_divent_lnorm</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##      mu sigma
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  3.14  1.79</code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sads</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://piLaboratory.github.io/sads">"sads"</a></span><span class="op">)</span></span>
+<span><span class="co"># Estimation. Les données sont tronquées: les espèces observées 0 fois ne sont pas comptées.</span></span>
+<span><span class="va">fit_sads_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sads/man/fitsad.html">fitlnorm</a></span><span class="op">(</span><span class="va">BCI_abd</span>, trunc<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">fit_sads_lnorm</span><span class="op">@</span><span class="va">fullcoef</span></span></code></pre></div>
+<pre><code>##  meanlog    sdlog 
+## 3.142695 1.787195</code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#vegan</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/vegandevs/vegan">"vegan"</a></span><span class="op">)</span></span>
+<span><span class="va">fit_vegan_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/radfit.html">radfit</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span></span>
+<span><span class="va">fit_vegan_lnorm</span></span></code></pre></div>
+<pre><code>## 
+## RAD models, family poisson 
+## No. of species 225, total abundance 21457
+## 
+##            par1      par2     par3    Deviance AIC     
+## Null                                  10261.14 11387.97
+## Preemption  0.034063                   3788.38  4917.21
+## Lognormal   3.3569    1.5738            744.30  1875.13
+## Zipf        0.14679  -0.94912          4335.50  5466.33
+## Mandelbrot  17.014   -2.0064   15.048   988.02  2120.85
+##            BIC     
+## Null       11387.97
+## Preemption  4920.63
+## Lognormal   1881.96
+## Zipf        5473.16
+## Mandelbrot  2131.10</code></pre>
+<p></p>
+<p>L’ajustement du modèle de Volkov peut être comparé à celui d’une distribution log-normale.</p>
+<p></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ajustement du modèle de Volkov</span></span>
+<span><span class="va">fit_volkov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sads/man/fitsad.html">fitvolkov</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span></span>
+<span><span class="va">fit_volkov</span><span class="op">@</span><span class="va">fullcoef</span></span></code></pre></div>
+<pre><code>##        theta            m            J 
+## 4.767129e+01 9.238201e-02 2.145700e+04</code></pre>
+<p></p>
+<p>Graphiquement, l’ajustement est très proche mais la distribution de Volkov prévoit explicitement des effectifs égaux parce qu’entiers.</p>
+<p></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Comparaison graphique des deux modèles. Log-normal en rouge.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span>, fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution<span class="op">=</span><span class="st">"lnorm"</span><span class="op">)</span></span>
+<span><span class="co"># Volkov en vert</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/sads/man/dvolkov.html">rvolkov</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span>, </span>
+<span>      <span class="va">fit_volkov</span><span class="op">@</span><span class="va">fullcoef</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
+<span>      <span class="va">fit_volkov</span><span class="op">@</span><span class="va">fullcoef</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, </span>
+<span>      <span class="va">fit_volkov</span><span class="op">@</span><span class="va">fullcoef</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span>    <span class="op">)</span>, </span>
+<span>    decreasing<span class="op">=</span><span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span>, </span>
+<span>  col<span class="op">=</span><span class="st">"green"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="MesuresBD_files/figure-html/BCIfit3-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p></p>
+<p>Les vraisemblances sont proches.</p>
+<p></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Comparaison des vraisemblances</span></span>
+<span><span class="va">fit_sads_lnorm</span><span class="op">@</span><span class="va">min</span></span></code></pre></div>
+<pre><code>## [1] 1157.013</code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit_volkov</span><span class="op">@</span><span class="va">min</span></span></code></pre></div>
+<pre><code>## [1] 1150.182</code></pre>
+<p></p>
+<p>Les paramètres du modèle de communauté locale de la théorie neutre sont <span class="math inline">\(\theta\)</span>, le “nombre fondamental de la biodiversité” égal à deux fois le nombre d’espèces apparaissant par pas de temps dans la méta-communauté, <span class="math inline">\(m\)</span>, le taux de migration, et <span class="math inline">\(J\)</span>, la taille de la communauté locale (qui n’est pas à proprement parler un paramètre mais une statistique décrivant les données).</p>
+<p>La différence entre les logarithmes de vraisemblance des deux modèles en faveur du modèle de Volkov, alors que le nombre de paramètres est le même.
+L’ajustement est donc meilleur mais la différence est petite et la complexité du modèle et des calculs pour l’estimer ne se justifient pas en général : le modèle de Volkov est très peu utilisé en pratique.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Agapow2004" class="csl-entry">
+Agapow, Paul Michael, Olaf R. P. Binindal-Emonds, Keith A. Crandall, John L. Gittleman, Georgina M. Mace, Jonathon C. Marshall, and Andy Purvis. 2004. <span>“The Impact of Species Concept on Biodiversity Studies.”</span> <em>The Quarterly Review of Biology</em> 79 (2): 161–79. <a href="https://doi.org/10.1086/383542">https://doi.org/10.1086/383542</a>.
+</div>
+<div id="ref-Barberousse2014" class="csl-entry">
+Barberousse, Anouk, and Sarah Samadi. 2014. <span>“La Taxonomie Et Les Collections d’histoire Naturelle à l’heure de La Sixième Extinction.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 155–82. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Bazzaz1975" class="csl-entry">
+Bazzaz, F. A. 1975. <span>“Plant <span>Species Diversity</span> in <span>Old-Field Successional Ecosystems</span> in <span>Southern Illinois</span>.”</span> <em>Ecology</em> 56 (2): 485–88. <a href="https://doi.org/10.2307/1934981">https://doi.org/10.2307/1934981</a>.
+</div>
+<div id="ref-Blandin2014" class="csl-entry">
+Blandin, Patrick. 2014. <span>“La Diversité Du Vivant Avant (Et Après) La Biodiversité : Repères Historiques Et Épistémologiques.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 31–68. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Bulmer1974" class="csl-entry">
+Bulmer, M. G. 1974. <span>“On Fitting the Poisson Lognormal Distribution to Species-Abundance Data.”</span> <em>Biometrics</em> 30 (1): 101–10. <a href="https://doi.org/10.2307/1939021">https://doi.org/10.2307/1939021</a>.
+</div>
+<div id="ref-Cardinale2012" class="csl-entry">
+Cardinale, Bradley J., J. Emmett Duffy, Andrew Gonzalez, David U. Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. <span>“Biodiversity Loss and Its Impact on Humanity.”</span> <em>Nature</em> 486 (7401): 59–67. <a href="https://doi.org/10.1038/nature11148">https://doi.org/10.1038/nature11148</a>.
+</div>
+<div id="ref-Casetta2014" class="csl-entry">
+Casetta, Elena. 2014. <span>“Évaluer Et Conserver La Biodiversité Face Au Problème Des Espèces.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 139–54. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Ceballos2017" class="csl-entry">
+Ceballos, Gerardo, Paul R. Ehrlich, and Rodolfo Dirzo. 2017. <span>“Biological Annihilation via the Ongoing Sixth Mass Extinction Signaled by Vertebrate Population Losses and Declines.”</span> <em>Proceedings of the National Academy of Sciences</em>, 201704949. <a href="https://doi.org/10.1073/pnas.1704949114">https://doi.org/10.1073/pnas.1704949114</a>.
+</div>
+<div id="ref-Chapin2000" class="csl-entry">
+Chapin, F. Stuart III, Erika S. Zavaleta, Valerie T. Eviner, Rosamond L. Naylor, Peter M. Vitousek, Heather L. Reynolds, David U. Hooper, et al. 2000. <span>“Consequences of Changing Biodiversity.”</span> <em>Nature</em> 405 (6783): 234–42. <a href="https://doi.org/10.1038/35012241">https://doi.org/10.1038/35012241</a>.
+</div>
+<div id="ref-Condit2012" class="csl-entry">
+Condit, Richard, Ryan A. Chisholm, and Stephen P. Hubbell. 2012. <span>“Thirty Years of Forest Census at Barro Colorado and the Importance of Immigration in Maintaining Diversity.”</span> <em>PLoS ONE</em> 7 (11): e49826. <a href="https://doi.org/10.1371/journal.pone.0049826">https://doi.org/10.1371/journal.pone.0049826</a>.
+</div>
+<div id="ref-Cracraft1983" class="csl-entry">
+Cracraft, Joel. 1983. <span>“Species Concepts and Speciation Analysis.”</span> In <em>Current Ornithology Volume 1</em>, edited by Richard F. Johnston, 1:159–87. Current Ornithology. <span>Springer US</span>. <a href="https://doi.org/10.1007/978-1-4615-6781-3_6">https://doi.org/10.1007/978-1-4615-6781-3_6</a>.
+</div>
+<div id="ref-DeLong1996" class="csl-entry">
+DeLong, Don C. Jr. 1996. <span>“Defining Biodiversity.”</span> <em>Wildlife Society Bulletin</em> 24 (4): 738–49. <a href="https://www.jstor.org/stable/3783168">https://www.jstor.org/stable/3783168</a>.
+</div>
+<div id="ref-Delord2014" class="csl-entry">
+Delord, Julien. 2014. <span>“La Biodiversité : Imposture Scientifique Ou Ruse Épistémologique ?”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 83–118. <span>Paris</span>: <span>Editions Matériologiques</span>. <a href="https://doi.org/10.3917/edmat.delor.2014.01.0083">https://doi.org/10.3917/edmat.delor.2014.01.0083</a>.
+</div>
+<div id="ref-Dengler2009" class="csl-entry">
+Dengler, Jürgen. 2009. <span>“Which Function Describes the Species-Area Relationship Best? <span>A</span> Review and Empirical Evaluation.”</span> <em>Journal of Biogeography</em> 36 (4): 728–44. <a href="https://doi.org/10.1111/j.1365-2699.2008.02038.x">https://doi.org/10.1111/j.1365-2699.2008.02038.x</a>.
+</div>
+<div id="ref-Dobzhansky1937" class="csl-entry">
+Dobzhansky, T. 1937. <em>Genetics and the Origin of Species</em>. <span>New York</span>: <span>Columbia University Press</span>. <a href="http://en.wikipedia.org/wiki/Genetics_and_the_Origin_of_Species">http://en.wikipedia.org/wiki/Genetics_and_the_Origin_of_Species</a>.
+</div>
+<div id="ref-Engen1996" class="csl-entry">
+Engen, Steinar, and Russell Lande. 1996. <span>“Population Dynamic Models Generating the Lognormal Species Abundance Distribution.”</span> <em>Mathematical Biosciences</em> 132 (2): 169–83. <a href="https://doi.org/10.1016/0025-5564(95)00054-2">https://doi.org/10.1016/0025-5564(95)00054-2</a>.
+</div>
+<div id="ref-Fisher1943" class="csl-entry">
+Fisher, R. A., A. Steven Corbet, and Carrington Bonsor Williams. 1943. <span>“The Relation Between the Number of Species and the Number of Individuals in a Random Sample of an Animal Population.”</span> <em>Journal of Animal Ecology</em> 12: 42–58. <a href="https://doi.org/10.2307/1411">https://doi.org/10.2307/1411</a>.
+</div>
+<div id="ref-Gaston2000" class="csl-entry">
+Gaston, Kevin J. 2000. <span>“Global Patterns in Biodiversity.”</span> <em>Nature</em> 405 (6783): 220–27. <a href="https://doi.org/10.1038/35012228">https://doi.org/10.1038/35012228</a>.
+</div>
+<div id="ref-Gourlet-Fleury2004" class="csl-entry">
+Gourlet-Fleury, Sylvie, Jean Marc Guehl, and Olivier Laroussinie. 2004. <em>Ecology &amp; Management of a Neotropical Rainforest. <span>Lessons</span> Drawn from <span>Paracou</span>, a Long-Term Experimental Research Site in <span>French Guiana</span></em>. <span>Paris</span>: <span>Elsevier</span>.
+</div>
+<div id="ref-Haegeman2013" class="csl-entry">
+Haegeman, Bart, Jérôme Hamelin, John Moriarty, Peter Neal, Jonathan Dushoff, and Joshua S Weitz. 2013. <span>“Robust Estimation of Microbial Diversity in Theory and in Practice.”</span> <em>The ISME Journal</em> 7 (6): 1092–1101. <a href="https://doi.org/10.1038/ismej.2013.10">https://doi.org/10.1038/ismej.2013.10</a>.
+</div>
+<div id="ref-Hey2001" class="csl-entry">
+Hey, Jody. 2001. <span>“The Mind of the Species Problem.”</span> <em>Trends in Ecology &amp; Evolution</em> 16 (7): 326–29. <a href="https://doi.org/10.1016/S0169-5347(01)02145-0">https://doi.org/10.1016/S0169-5347(01)02145-0</a>.
+</div>
+<div id="ref-Hubbell2001" class="csl-entry">
+Hubbell, Stephen P. 2001. <em>The Unified Neutral Theory of Biodiversity and Biogeography</em>. <span>Princeton University Press</span>.
+</div>
+<div id="ref-Izsak2012" class="csl-entry">
+Izsák, János, and Sandrine Pavoine. 2012. <span>“Links Between the Species Abundance Distribution and the Shape of the Corresponding Rank Abundance Curve.”</span> <em>Ecological Indicators</em> 14 (1): 1–6. <a href="https://doi.org/10.1016/j.ecolind.2011.06.030">https://doi.org/10.1016/j.ecolind.2011.06.030</a>.
+</div>
+<div id="ref-Jizhong1991" class="csl-entry">
+Jizhong, Zhou, Ma Shijun, and Chen Changming. 1991. <span>“An Index of Ecosystem Diversity.”</span> <em>Ecological Modelling</em> 59: 151–63. <a href="https://doi.org/10.1016/0304-3800(91)90176-2">https://doi.org/10.1016/0304-3800(91)90176-2</a>.
+</div>
+<div id="ref-Jost2010" class="csl-entry">
+Jost, Lou. 2010. <span>“The Relation Between Evenness and Diversity.”</span> <em>Diversity</em> 2 (2): 207–32. <a href="https://doi.org/10.3390/d2020207">https://doi.org/10.3390/d2020207</a>.
+</div>
+<div id="ref-Loreau2005" class="csl-entry">
+Loreau, Michel. 2005. <span>“Discours de Clôture.”</span> In <em>Actes de La Conférence Internationale Biodiversité Science Et Gouvernance</em>, edited by Robert Barbault and Jean-Patrick Le Duc, 254–56. <span>Paris, France.</span>: <span>IRD Editions</span>.
+</div>
+<div id="ref-MacArthur1957" class="csl-entry">
+MacArthur, Robert H. 1957. <span>“On the Relative Abundance of Bird Species.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 43 (3): 293–95. <a href="https://doi.org/10.1073/pnas.43.3.293">https://doi.org/10.1073/pnas.43.3.293</a>.
+</div>
+<div id="ref-Magurran1988" class="csl-entry">
+Magurran, Anne E. 1988. <em>Ecological Diversity and Its Measurement</em>. <span>Princeton, NJ</span>: <span>Princeton University Press</span>.
+</div>
+<div id="ref-Marcon2014c" class="csl-entry">
+Marcon, Eric, and Bruno Hérault. 2015. <span>“Entropart, an <span>R</span> Package to Measure and Partition Diversity.”</span> <em>Journal of Statistical Software</em> 67 (8): 1–26. <a href="https://doi.org/10.18637/jss.v067.i08">https://doi.org/10.18637/jss.v067.i08</a>.
+</div>
+<div id="ref-May1975" class="csl-entry">
+May, Robert M. 1975. <span>“Patterns of Species Abundance and Diversity.”</span> In <em>Ecology and Evolution of Communities</em>, edited by M L Cody and J M Diamond, 81–120. <span>Harvard University Press</span>.
+</div>
+<div id="ref-Mayden1997" class="csl-entry">
+Mayden, Richard L. 1997. <span>“A Hierarchy of Species Concepts: The Denouement in the Saga of the Species Problem.”</span> In <em>Species. <span>The</span> Units of Biodiversity.</em>, edited by M. F. Claridge, H. A. Dawah, and M. R. Wilson, 381–424. <span>London</span>: <span>Chapman and Hall</span>.
+</div>
+<div id="ref-Mayr1942" class="csl-entry">
+Mayr, Ernst. 1942. <em>Systematics and the Origin of Species from the Viewpoint of a Zoologist</em>. <span>New York</span>: <span>Columbia University Press</span>.
+</div>
+<div id="ref-McGill2007" class="csl-entry">
+McGill, Brian J., Rampal S. Etienne, John S. Gray, David Alonso, Marti J. Anderson, Habtamu Kassa Benecha, Maria Dornelas, et al. 2007. <span>“Species Abundance Distributions: Moving Beyond Single Prediction Theories to Integration Within an Ecological Framework.”</span> <em>Ecology Letters</em> 10 (10): 995–1015. <a href="https://doi.org/10.1111/j.1461-0248.2007.01094.x">https://doi.org/10.1111/j.1461-0248.2007.01094.x</a>.
+</div>
+<div id="ref-Mcintosh1967" class="csl-entry">
+Mcintosh, Robert P. 1967. <span>“An Index of Diversity and the Relation of Certain Concepts to Diversity.”</span> <em>Ecology</em> 48 (3): 392–404. <a href="https://doi.org/10.2307/1932674">https://doi.org/10.2307/1932674</a>.
+</div>
+<div id="ref-Meine2006" class="csl-entry">
+Meine, Curt, Michael Soulé, and Reed F. Noss. 2006. <span>“"<span>A</span> Mission-Driven Discipline": <span>The</span> Growth of Conservation Biology.”</span> <em>Conservation Biology</em> 20 (3): 631–51. <a href="https://doi.org/10.1111/j.1523-1739.2006.00449.x">https://doi.org/10.1111/j.1523-1739.2006.00449.x</a>.
+</div>
+<div id="ref-Miraldo2016" class="csl-entry">
+Miraldo, Andreia, Sen Li, Michael K. Borregaard, A. Florez-Rodriguez, Shyam Gopalakrishnan, Mirnesa Rizvanovic, Zhiheng Wang, Carsten Rahbek, Katharine A. Marske, and D. Nogues-Bravo. 2016. <span>“An <span>Anthropocene</span> Map of Genetic Diversity.”</span> <em>Science</em> 353 (6307): 1532–35. <a href="https://doi.org/10.1126/science.aaf4381">https://doi.org/10.1126/science.aaf4381</a>.
+</div>
+<div id="ref-Moreno2010" class="csl-entry">
+Moreno, Claudia E., and Pilar Rodríguez. 2010. <span>“A Consistent Terminology for Quantifying Species Diversity?”</span> <em>Oecologia</em> 163 (2): 279–82. <a href="https://doi.org/10.1007/s00442-010-1591-7">https://doi.org/10.1007/s00442-010-1591-7</a>.
+</div>
+<div id="ref-Motomura1932" class="csl-entry">
+Motomura, I. 1932. <span>“On the statistical treatment of communities.”</span> <em>Zoological Magazine</em> 44: 379–83.
+</div>
+<div id="ref-Mouillot2005" class="csl-entry">
+Mouillot, David, Wendy Stubbs, Matthieu Faure, Olivier Dumay, Jean-Antoine Tomasini, J. Bastow Wilson, and Thang Do Chi. 2005. <span>“Niche Overlap Estimates Based on Quantitative Functional Traits: A New Family of Non-Parametric Indices.”</span> <em>Oecologia</em> 145 (3): 345–53. <a href="https://doi.org/10.1007/s00442-005-0151-z">https://doi.org/10.1007/s00442-005-0151-z</a>.
+</div>
+<div id="ref-Oksanen2012" class="csl-entry">
+Oksanen, Jari, F. Guillaume Blanchet, Roeland Kindt, Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Gavin L. Simpson, Peter Solymos, M. Henry H. Stevens, and Helene Wagner. 2012. <span>“Vegan: <span>Community</span> Ecology Package.”</span> <a href="http://cran.r-project.org/package=vegan">http://cran.r-project.org/package=vegan</a>.
+</div>
+<div id="ref-Pavoine2011" class="csl-entry">
+Pavoine, Sandrine, and Michael B. Bonsall. 2011. <span>“Measuring Biodiversity to Explain Community Assembly: A Unified Approach.”</span> <em>Biological Reviews</em> 86 (4): 792–812. <a href="https://doi.org/10.1111/j.1469-185X.2010.00171.x">https://doi.org/10.1111/j.1469-185X.2010.00171.x</a>.
+</div>
+<div id="ref-Pernes1984" class="csl-entry">
+Pernès, J., ed. 1984. <em>Gestion Des Ressources Génétiques Des Plantes. <span>Tome</span> 2 : <span>Manuel</span></em>. <span>Paris</span>: <span>Agence de Coopération culturelle et technique</span>.
+</div>
+<div id="ref-Preston1948" class="csl-entry">
+Preston, F. W. 1948. <span>“The Commonness, and Rarity, of Species.”</span> <em>Ecology</em> 29 (3): 254–83. <a href="https://doi.org/10.2307/1930989">https://doi.org/10.2307/1930989</a>.
+</div>
+<div id="ref-Pueyo2007" class="csl-entry">
+Pueyo, Salvador, Fangliang He, and Tommaso Zillio. 2007. <span>“The Maximum Entropy Formalism and the Idiosyncratic Theory of Biodiversity.”</span> <em>Ecology Letters</em> 10 (11): 1017–28. <a href="https://doi.org/10.1111/j.1461-0248.2007.01096.x">https://doi.org/10.1111/j.1461-0248.2007.01096.x</a>.
+</div>
+<div id="ref-Purvis2000" class="csl-entry">
+Purvis, Andy, and Andy Hector. 2000. <span>“Getting the Measure of Biodiversity.”</span> <em>Nature</em> 405 (6783): 212–19. <a href="https://doi.org/10.1038/35012221">https://doi.org/10.1038/35012221</a>.
+</div>
+<div id="ref-R" class="csl-entry">
+R Core Team. 2022. <em>R: <span>A</span> Language and Environment for Statistical Computing</em>. <span>Vienna, Austria</span>: <span>R Foundation for Statistical Computing</span>. <a href="http://www.r-project.org">http://www.r-project.org</a>.
+</div>
+<div id="ref-Richards2010" class="csl-entry">
+Richards, Richard A. 2010. <em>The Species Problem. <span>A</span> Philosophical Analysis</em>. <span>Cambridge</span>: <span>Cambridge University Press</span>.
+</div>
+<div id="ref-Ricotta2005b" class="csl-entry">
+Ricotta, Carlo. 2005. <span>“Through the Jungle of Biological Diversity.”</span> <em>Acta Biotheoretica</em> 53 (1): 29–38. <a href="https://doi.org/10.1007/s10441-005-7001-6">https://doi.org/10.1007/s10441-005-7001-6</a>.
+</div>
+<div id="ref-Ricotta2007" class="csl-entry">
+———. 2007. <span>“A Semantic Taxonomy for Diversity Measures.”</span> <em>Acta Biotheoretica</em> 55 (1): 23–33. <a href="https://doi.org/10.1007/s10441-007-9008-7">https://doi.org/10.1007/s10441-007-9008-7</a>.
+</div>
+<div id="ref-Runnegar1987" class="csl-entry">
+Runnegar, B. 1987. <span>“Rates and Modes of Evolution in the Mollusca.”</span> In <em>Rates of Evolution</em>, edited by M. Campbell and M. F. Day, 39–60. <span>London</span>: <span>Allen &amp; Unwin</span>.
+</div>
+<div id="ref-Scheiner2003" class="csl-entry">
+Scheiner, Samuel M. 2003. <span>“Six Types of Species-Area Curves.”</span> <em>Global Ecology and Biogeography</em> 12 (6): 441–47. <a href="https://doi.org/10.1046/j.1466-822X.2003.00061.x">https://doi.org/10.1046/j.1466-822X.2003.00061.x</a>.
+</div>
+<div id="ref-Speth1992" class="csl-entry">
+Speth, James Gustave, Martin W. Holdgate, and Mostafa K. Tolba. 1992. <span>“Foreword.”</span> In <em>Global Biodiversity Strategy</em>, edited by Kathleen Courrier, v–vi. <span>Washington, D.C.</span>: <span>WRI, IUCN, UNEP</span>.
+</div>
+<div id="ref-Stirling2007" class="csl-entry">
+Stirling, Andy. 2007. <span>“A General Framework for Analysing Diversity in Science, Technology and Society.”</span> <em>Journal of the Royal Society, Interface</em> 4 (15): 707–19. <a href="https://doi.org/10.1098/rsif.2007.0213">https://doi.org/10.1098/rsif.2007.0213</a>.
+</div>
+<div id="ref-Sukumaran2017" class="csl-entry">
+Sukumaran, Jeet, and L. Lacey Knowles. 2017. <span>“Multispecies Coalescent Delimits Structure, Not Species.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> in press. <a href="https://doi.org/10.1073/PNAS.1607921114">https://doi.org/10.1073/PNAS.1607921114</a>.
+</div>
+<div id="ref-VanValen1976" class="csl-entry">
+Van Valen, Leigh. 1976. <span>“Ecological Species, Multispecies, and Oaks.”</span> <em>Taxon</em> 25 (2/3): 233–39. <a href="https://doi.org/10.2307/1219444">https://doi.org/10.2307/1219444</a>.
+</div>
+<div id="ref-Volkov2003" class="csl-entry">
+Volkov, Igor, Jayanth R. Banavar, Stephen P. Hubbell, and Amos Maritan. 2003. <span>“Neutral Theory and Relative Species Abundance in Ecology.”</span> <em>Nature</em> 424 (6952): 1035–37. <a href="https://doi.org/10.1038/nature01883">https://doi.org/10.1038/nature01883</a>.
+</div>
+<div id="ref-Whittaker1960" class="csl-entry">
+Whittaker, R. H. 1960. <span>“Vegetation of the <span>Siskiyou</span> Mountains, <span>Oregon</span> and <span>California</span>.”</span> <em>Ecological Monographs</em> 30 (3): 279–338. <a href="https://doi.org/10.2307/1943563">https://doi.org/10.2307/1943563</a>.
+</div>
+<div id="ref-Whittaker1965" class="csl-entry">
+———. 1965. <span>“Dominance and Diversity in Land Plant Communities.”</span> <em>Science</em> 147 (3655): 250–60. <a href="https://doi.org/10.1126/science.147.3655.250">https://doi.org/10.1126/science.147.3655.250</a>.
+</div>
+<div id="ref-Whittaker1972" class="csl-entry">
+———. 1972. <span>“Evolution and Measurement of Species Diversity.”</span> <em>Taxon</em> 21 (2/3): 213–51. <a href="https://doi.org/10.2307/1218190">https://doi.org/10.2307/1218190</a>.
+</div>
+<div id="ref-Whittaker1977" class="csl-entry">
+———. 1977. <span>“Evolution of Species Diversity in Land Communities.”</span> Edited by M. K. Hecht, W. C. Steere, and B. Wallace. <em>Evolutionary Biology</em> 10: 1–67.
+</div>
+<div id="ref-Wilkins2011" class="csl-entry">
+Wilkins, John S. 2011. <span>“Philosophically Speaking, How Many Species Concepts Are There?”</span> <em>Zootaxa</em> 2765 (1): 58–60. <a href="https://doi.org/10.11646/zootaxa.2765.1.5">https://doi.org/10.11646/zootaxa.2765.1.5</a>.
+</div>
+<div id="ref-Wilson1988" class="csl-entry">
+Wilson, Edward O., and Frances M. Peter, eds. 1988. <em>Biodiversity</em>. <span>Washington, D.C.</span>: <span>The National Academies Press</span>. <a href="https://www.nap.edu/read/989/chapter/1">https://www.nap.edu/read/989/chapter/1</a>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li>
+<a class="nav-link" href="#distribution-de-labondance-des-esp%C3%A8ces-sad"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#la-distribution-en-log-s%C3%A9ries"><span class="header-section-number">2.0.1</span> La distribution en log-séries</a></li>
+<li><a class="nav-link" href="#la-distribution-broken-stick"><span class="header-section-number">2.0.2</span> La distribution Broken Stick</a></li>
+<li><a class="nav-link" href="#la-distribution-log-normale"><span class="header-section-number">2.0.3</span> La distribution log-normale</a></li>
+<li><a class="nav-link" href="#la-distribution-g%C3%A9om%C3%A9trique"><span class="header-section-number">2.0.4</span> La distribution géométrique</a></li>
+<li><a class="nav-link" href="#synth%C3%A8se"><span class="header-section-number">2.0.5</span> Synthèse</a></li>
+</ul>
+</li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/EricMarcon/MesuresBioDiv2/blob/master/01-Notions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/EricMarcon/MesuresBioDiv2/edit/master/01-Notions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 23/12/2023.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,334 +1,156 @@
 <!DOCTYPE html>
-<html lang="en-US" xml:lang="en-US">
+<html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Calculs et données | Mesures de la Biodiversité</title>
+<meta name="author" content="Eric Marcon">
+<meta name="description" content="La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique. La liste des notations est fournie ci-dessous, on s’y référera autant que nécessaire. Les...">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Calculs et données | Mesures de la Biodiversité">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/calculs-et-données.html">
+<meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<meta property="og:description" content="La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique. La liste des notations est fournie ci-dessous, on s’y référera autant que nécessaire. Les...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calculs et données | Mesures de la Biodiversité">
+<meta name="twitter:description" content="La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique. La liste des notations est fournie ci-dessous, on s’y référera autant que nécessaire. Les...">
+<meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1B3PLBCM6"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Calculs et données | Mesures de la Biodiversité</title>
-  <meta name="description" content="Définitions, estimation et décompositon de la biodiversité" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Calculs et données | Mesures de la Biodiversité" />
-  <meta property="og:type" content="book" />
-  <meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png" />
-  <meta property="og:description" content="Définitions, estimation et décompositon de la biodiversité" />
-  <meta name="github-repo" content="EricMarcon/MesuresBioDiv3" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Calculs et données | Mesures de la Biodiversité" />
-  
-  <meta name="twitter:description" content="Définitions, estimation et décompositon de la biodiversité" />
-  <meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png" />
-
-<meta name="author" content="Eric Marcon" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="notations.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
+      gtag('config', 'G-C1B3PLBCM6');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Motivation</a></li>
-<li class="chapter" data-level="" data-path="calculs-et-données.html"><a href="calculs-et-données.html"><i class="fa fa-check"></i>Calculs et données</a></li>
-<li class="chapter" data-level="" data-path="notations.html"><a href="notations.html"><i class="fa fa-check"></i>Notations</a></li>
-<li class="part"><span><b>I Notions</b></span></li>
-<li class="chapter" data-level="1" data-path="chap-Notions.html"><a href="chap-Notions.html"><i class="fa fa-check"></i><b>1</b> Notions de Diversité</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="chap-Notions.html"><a href="chap-Notions.html#composantes"><i class="fa fa-check"></i><b>1.1</b> Composantes</a>
-<ul>
-<li class="chapter" data-level="1.1.1" data-path="chap-Notions.html"><a href="chap-Notions.html#richesse"><i class="fa fa-check"></i><b>1.1.1</b> Richesse</a></li>
-<li class="chapter" data-level="1.1.2" data-path="chap-Notions.html"><a href="chap-Notions.html#équitabilité"><i class="fa fa-check"></i><b>1.1.2</b> Équitabilité</a></li>
-<li class="chapter" data-level="1.1.3" data-path="chap-Notions.html"><a href="chap-Notions.html#disparité"><i class="fa fa-check"></i><b>1.1.3</b> Disparité</a></li>
-<li class="chapter" data-level="1.1.4" data-path="chap-Notions.html"><a href="chap-Notions.html#agrégation"><i class="fa fa-check"></i><b>1.1.4</b> Agrégation</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="chap-Notions.html"><a href="chap-Notions.html#niveaux-de-létude"><i class="fa fa-check"></i><b>1.2</b> Niveaux de l’étude</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="chap-Notions.html"><a href="chap-Notions.html#diversité-alpha-beta-et-gamma"><i class="fa fa-check"></i><b>1.2.1</b> Diversité <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> et <span class="math inline">\(\gamma\)</span></a></li>
-<li class="chapter" data-level="1.2.2" data-path="chap-Notions.html"><a href="chap-Notions.html#décomposition"><i class="fa fa-check"></i><b>1.2.2</b> Décomposition</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="chap-Notions.html"><a href="chap-Notions.html#le-problème-de-lespèce"><i class="fa fa-check"></i><b>1.3</b> Le problème de l’espèce</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="chap-Outils.html"><a href="chap-Outils.html"><i class="fa fa-check"></i><b>2</b> Outils</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="chap-Outils.html"><a href="chap-Outils.html#courbes-daccumulation"><i class="fa fa-check"></i><b>2.1</b> Courbes d’accumulation</a></li>
-<li class="chapter" data-level="2.2" data-path="chap-Outils.html"><a href="chap-Outils.html#diversité-asymptotique"><i class="fa fa-check"></i><b>2.2</b> Diversité asymptotique</a></li>
-<li class="chapter" data-level="2.3" data-path="chap-Outils.html"><a href="chap-Outils.html#sec-Couverture"><i class="fa fa-check"></i><b>2.3</b> Taux de couverture</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="chap-Outils.html"><a href="chap-Outils.html#formule-des-fréquences-de-good-turing"><i class="fa fa-check"></i><b>2.3.1</b> Formule des fréquences de Good-Turing</a></li>
-<li class="chapter" data-level="2.3.2" data-path="chap-Outils.html"><a href="chap-Outils.html#taux-de-couverture-et-déficit-de-couverture"><i class="fa fa-check"></i><b>2.3.2</b> Taux de couverture et déficit de couverture</a></li>
-<li class="chapter" data-level="2.3.3" data-path="chap-Outils.html"><a href="chap-Outils.html#complétude"><i class="fa fa-check"></i><b>2.3.3</b> Complétude</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="chap-Outils.html"><a href="chap-Outils.html#distribution-de-labondance-des-espèces-sad"><i class="fa fa-check"></i><b>2.4</b> Distribution de l’abondance des espèces (SAD)</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-en-log-séries"><i class="fa fa-check"></i><b>2.4.1</b> La distribution en log-séries</a></li>
-<li class="chapter" data-level="2.4.2" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-broken-stick"><i class="fa fa-check"></i><b>2.4.2</b> La distribution Broken Stick</a></li>
-<li class="chapter" data-level="2.4.3" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-log-normale"><i class="fa fa-check"></i><b>2.4.3</b> La distribution log-normale</a></li>
-<li class="chapter" data-level="2.4.4" data-path="chap-Outils.html"><a href="chap-Outils.html#la-distribution-géométrique"><i class="fa fa-check"></i><b>2.4.4</b> La distribution géométrique</a></li>
-<li class="chapter" data-level="2.4.5" data-path="chap-Outils.html"><a href="chap-Outils.html#synthèse"><i class="fa fa-check"></i><b>2.4.5</b> Synthèse</a></li>
-</ul></li>
-</ul></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Mesures de la Biodiversité</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mesures de la Biodiversité</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Motivation</a></li>
+<li><a class="active" href="calculs-et-donn%C3%A9es.html">Calculs et données</a></li>
+<li><a class="" href="notations.html">Notations</a></li>
+<li class="book-part">Notions</li>
+<li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
+<li><a class="" href="distribution-de-labondance-des-esp%C3%A8ces-sad.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/EricMarcon/MesuresBioDiv2">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="calculs-et-données" class="section level1 unnumbered hasAnchor">
-<h1>Calculs et données<a href="calculs-et-données.html#calculs-et-données" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="calculs-et-données" class="section level1 unnumbered">
+<h1>Calculs et données<a class="anchor" aria-label="anchor" href="#calculs-et-donn%C3%A9es"><i class="fas fa-link"></i></a>
+</h1>
 <p>La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
 La liste des notations est fournie ci-dessous, on s’y référera autant que nécessaire.</p>
-<p>Les calculs sont réalisés dans R <span class="citation">(<a href="#ref-R" role="doc-biblioref">R Core Team 2022</a>)</span>, essentiellement avec le package <em>entropart</em> <span class="citation">(<a href="#ref-Marcon2014c" role="doc-biblioref">Marcon and Hérault 2015</a>)</span>.
-L’ensemble du code est disponible sur GitHub<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> où se trouvent les mises à jour de ce document<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-<p>Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure <a href="calculs-et-données.html#fig:Paracou6MapFig">0.1</a> en Guyane française <span class="citation">(<a href="#ref-Gourlet-Fleury2004" role="doc-biblioref">Gourlet-Fleury, Guehl, and Laroussinie 2004</a>)</span>, d’une surface de 6.25 ha.
-Tous les arbres de plus de 10 cm de diamètre à hauteur de poitrine (DBH: <em>Diameter at Breast Height</em>) y ont été inventoriés en 2016.
-La position de chaque arbre, son espèce et sa surface terrière sont fournis dans le package <em>SpatDiv</em>.</p>
-<p>D’autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI <span class="citation">(<a href="#ref-Condit2012" role="doc-biblioref">Condit, Chisholm, and Hubbell 2012</a>)</span>: 50 ha de forêt tropicale dont les arbres de plus de 1 cm de diamètre à hauteur de poitrine (DBH: <em>Diameter at Breast Height</em>) ont été inventoriés.
-Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10 cm disponible dans le package <em>vegan</em> <span class="citation">(<a href="#ref-Oksanen2012" role="doc-biblioref">Oksanen et al. 2012</a>)</span>, soient 21457 arbres dans 225 espèces.</p>
-<p>Enfin, les données fournies par le package <em>entropart</em> sous le nom “Paracou618” sont deux inventaires de l’année 2012 limités à un hectare chacun dans les parcelles 6 et 18 de la forêt de Paracou, soient 1124 arbres dans 229 espèces.</p>
+<p>Les calculs sont réalisés dans R <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-R" role="doc-biblioref">R Core Team 2022</a>)</span>, essentiellement avec le package <em>divent</em> <span class="citation">(<a href="#ref-R-divent" role="doc-biblioref"><strong>R-divent?</strong></a>)</span>, qui succède au package <em>entropart</em> <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Marcon2014c" role="doc-biblioref">Marcon and Hérault 2015</a>)</span>.
+L’ensemble du code est disponible sur GitHub<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://github.com/EricMarcon/MesuresBioDiv3/" class="uri"&gt;https://github.com/EricMarcon/MesuresBioDiv3/&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> où se trouvent les mises à jour de ce document<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://ericmarcon.github.io/MesuresBioDiv3/" class="uri"&gt;https://ericmarcon.github.io/MesuresBioDiv3/&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a>.</p>
+<p>Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure <a href="calculs-et-donn%C3%A9es.html#fig:Paracou6MapFig">0.1</a> en Guyane française <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Gourlet-Fleury2004" role="doc-biblioref">Gourlet-Fleury, Guehl, and Laroussinie 2004</a>)</span>, d’une surface de 6.25 ha.
+Tous les arbres de plus de 10 cm de diamètre à hauteur de poitrine (DBH : <em>Diameter at Breast Height</em>) y ont été inventoriés en 2016.
+La position de chaque arbre, son espèce et sa surface terrière sont fournis.</p>
+<p>D’autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Condit2012" role="doc-biblioref">Condit, Chisholm, and Hubbell 2012</a>)</span> : 50 ha de forêt tropicale dont les arbres de plus de 1 cm de diamètre à hauteur de poitrine (DBH : <em>Diameter at Breast Height</em>) ont été inventoriés.
+Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10 cm disponible dans le package <em>vegan</em> <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Oksanen2012" role="doc-biblioref">Oksanen et al. 2012</a>)</span>, soient 21457 arbres dans 225 espèces.</p>
 
 <p></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Paracou6MapFig"></span>
-<img src="MesuresBD_files/figure-html/Paracou6MapFig-1.png" alt="Carte de la parcelle 6 de Paracou. Les points représentent les arbres. Leur taille est proportionnelle à leur surface terrière. Seules les espèces les plus fréquentes sont identifiées sur la carte." width="100%" />
-<p class="caption">
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:Paracou6MapFig"></span>
+<img src="MesuresBD_files/figure-html/Paracou6MapFig-1.png" alt="Carte de la parcelle 6 de Paracou. Les points représentent les arbres. Leur taille est proportionnelle à leur surface terrière. Seules les espèces les plus fréquentes sont identifiées sur la carte." width="120%"><p class="caption">
 Figure 0.1: Carte de la parcelle 6 de Paracou. Les points représentent les arbres. Leur taille est proportionnelle à leur surface terrière. Seules les espèces les plus fréquentes sont identifiées sur la carte.
 </p>
 </div>
 <p></p>
-<p>Le code R pour réaliser la figure est le suivant:</p>
+<p>Le code R pour réaliser la figure est le suivant :</p>
 <p></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="calculs-et-données.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dbmss&quot;</span>)</span>
-<span id="cb1-2"><a href="calculs-et-données.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;SpatDiv&quot;</span>)</span>
-<span id="cb1-3"><a href="calculs-et-données.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(Paracou6, <span class="at">labelSize =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;Surface terrière (&quot;</span>,</span>
-<span id="cb1-4"><a href="calculs-et-données.html#cb1-4" aria-hidden="true" tabindex="-1"></a>    cm<span class="sc">^</span><span class="dv">2</span>, <span class="st">&quot;)&quot;</span>)), <span class="at">labelColor =</span> <span class="st">&quot;Espèce&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="va">paracou_6_wmppp</span> <span class="op">%&gt;%</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span></span>
+<span>  labelSize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Surface terrière ("</span>, <span class="va">cm</span><span class="op">^</span><span class="fl">2</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  labelColor <span class="op">=</span> <span class="st">"Espèce"</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, legend.direction <span class="op">=</span> <span class="st">"vertical"</span>, legend.margin<span class="op">=</span><span class="fu">margin</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p></p>
 </div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Condit2012" class="csl-entry">
-Condit, Richard, Ryan A. Chisholm, and Stephen P. Hubbell. 2012. <span>“Thirty Years of Forest Census at Barro Colorado and the Importance of Immigration in Maintaining Diversity.”</span> <em>PLoS ONE</em> 7 (11): e49826. <a href="https://doi.org/10.1371/journal.pone.0049826">https://doi.org/10.1371/journal.pone.0049826</a>.
-</div>
-<div id="ref-Gourlet-Fleury2004" class="csl-entry">
-Gourlet-Fleury, Sylvie, Jean Marc Guehl, and Olivier Laroussinie. 2004. <em>Ecology &amp; Management of a Neotropical Rainforest. <span>Lessons</span> Drawn from <span>Paracou</span>, a Long-Term Experimental Research Site in <span>French Guiana</span></em>. <span>Paris</span>: <span>Elsevier</span>.
-</div>
-<div id="ref-Marcon2014c" class="csl-entry">
-Marcon, Eric, and Bruno Hérault. 2015. <span>“Entropart, an <span>R</span> Package to Measure and Partition Diversity.”</span> <em>Journal of Statistical Software</em> 67 (8): 1–26. <a href="https://doi.org/10.18637/jss.v067.i08">https://doi.org/10.18637/jss.v067.i08</a>.
-</div>
-<div id="ref-Oksanen2012" class="csl-entry">
-Oksanen, Jari, F. Guillaume Blanchet, Roeland Kindt, Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Gavin L. Simpson, Peter Solymos, M. Henry H. Stevens, and Helene Wagner. 2012. <span>“Vegan: <span>Community</span> Ecology Package.”</span> <a href="http://cran.r-project.org/package=vegan">http://cran.r-project.org/package=vegan</a>.
-</div>
-<div id="ref-R" class="csl-entry">
-R Core Team. 2022. <em>R: <span>A</span> Language and Environment for Statistical Computing</em>. <span>Vienna, Austria</span>: <span>R Foundation for Statistical Computing</span>. <a href="http://www.r-project.org">http://www.r-project.org</a>.
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p><a href="https://github.com/EricMarcon/MesuresBioDiv2/" class="uri">https://github.com/EricMarcon/MesuresBioDiv2/</a><a href="calculs-et-données.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://ericmarcon.github.io/MesuresBioDiv2/" class="uri">https://ericmarcon.github.io/MesuresBioDiv2/</a><a href="calculs-et-données.html#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="notations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Motivation</a></div>
+<div class="next"><a href="notations.html">Notations</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#calculs-et-donn%C3%A9es">Calculs et données</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/EricMarcon/MesuresBioDiv2/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/EricMarcon/MesuresBioDiv2/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 23/12/2023.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["MesuresBD.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -340,7 +162,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
