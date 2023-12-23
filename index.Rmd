@@ -16,8 +16,8 @@ maintitlepage:
       \item bookdown (\url{http://bookdown.org/})
     \end{itemize}
 
-    Son code source est sur GitHub: \url{https://github.com/EricMarcon/MesuresBioDiv2/}.
-    Le texte mis à jour en continu peut être lu sur \url{https://ericmarcon.github.io/MesuresBioDiv2/}.
+    Son code source est sur GitHub: \url{https://github.com/EricMarcon/MesuresBioDiv3/}.
+    Le texte mis à jour en continu peut être lu sur \url{https://ericmarcon.github.io/MesuresBioDiv3/}.
     Les versions d'étape sont déposées sur HAL: \url{https://hal-agroparistech.archives-ouvertes.fr/cel-01205813/}.
   credits: |
     Photographie en couverture: Hadrien Lalagüe

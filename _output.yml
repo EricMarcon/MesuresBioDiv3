@@ -10,7 +10,7 @@ bookdown::pdf_book:
   keep_tex: yes
 bookdown::bs4_book:
   repo:
-    base: https://github.com/EricMarcon/MesuresBioDiv2
+    base: https://github.com/EricMarcon/MesuresBioDiv3
     branch: master
   includes:
     in_header: gtag.js
