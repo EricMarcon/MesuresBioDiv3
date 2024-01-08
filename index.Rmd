@@ -377,7 +377,8 @@ Les effectifs totaux sont $n_{s+}$ (pour l'espèce $s$), $n_{+i}$ pour la commun
 S'il n'y a qu'une communauté, le nombre d'individus par espèce est $n_s$.
 
 \noindent $p_s$: la probabilité qu'un individu tiré au hasard appartienne à l'espèce $s$. 
-Son estimateur, ${\hat{p}}_s$ est la fréquence observée. 
+Son estimateur le plus simple, ${\hat{p}}_s$ est la fréquence observée. 
+Selon le contexte,  ${\hat{p}}_s$ peut désigner un estimateur plus élaboré.
 $p_{s|i}$ est la même probabilité dans la communauté $i$.
 
 \noindent $\mathbf{p}=\left( p_1, p_2, \dots, p_s, \dots, p_S \right)$: le vecteur décrivant la distribution des probabilités $p_s$, appelé simplexe en référence à sa représentation dans l'espace à $S$ dimensions.
