@@ -198,7 +198,7 @@ L'approche phylogénétique (chapitre \@ref(chap-Phyloentropie)) permet de conto
 
 
 
-# Distribution de l'abondance des espèces (SAD)
+# Distribution de l'abondance des espèces (SAD) {#sec-SAD}
 
 La distribution de l'abondance des espèces (SAD: *Species Abundance Distribution*) est la loi statistique qui donne l'abondance attendue de chaque espèce d'une communauté. 
 Les espèces ne sont pas identifiées individuellement, mais par le nombre d'individus leur appartenant.
@@ -268,7 +268,7 @@ Les principales distributions, nécessaires à la compréhension de la suite son
 Formellement, la distribution des probabilités des espèces, notées $p_s$, est à établir.
 
 
-### La distribution en log-séries
+## La distribution en log-séries
 
 Cette distribution est traitée en détail dans le chapitre \@ref(chap-Fisher).
 
@@ -279,7 +279,7 @@ La distribution a été obtenue à partir d'inventaires de communautés de papil
 Le modèle est tombé en désuétude faute de confirmation empirique à l'échelle de la communauté, avant d'être remis en valeur par la théorie neutre [@Hubbell2001] dans lequel la distribution de la *méta-communauté* est en log-séries.
 
 
-### La distribution Broken Stick
+## La distribution Broken Stick
 
 Si les espèces se partagent les ressources ou l'espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les $S-1$ cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d'espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de @MacArthur1957.
 
@@ -288,7 +288,7 @@ Parmi les distributions classiques, c'est la plus équitable: la distribution un
 Elle est peu observée empiriquement.
 
 
-### La distribution log-normale
+## La distribution log-normale
 
 Dans une distribution log-normale, le logarithme des probabilités des espèces (notées $p_s$ pour l'espèce $s$) suit une loi normale.
 L'écart-type $\sigma$ de cette distribution règle l'équitabilité de la distribution.
@@ -314,7 +314,7 @@ Le nombre d'espèces rares est un peu surestimé.
 La distribution exacte est donnée par @Volkov2003.
 
 
-### La distribution géométrique
+## La distribution géométrique
 
 Si les espèces se partagent les ressources selon un algorithme *broken stick* séquentiel (comme dans la distribution log-normale) mais de proportion fixe $0<k<1$, alors la distribution obtenue est géométrique.
 Les abondances successives sont proportionnelles à $k, k(1-k), k(1-k)^2, \dots, k(1-k)^s, \dots, k(1-k)^S$.
@@ -328,7 +328,7 @@ En d'autre termes, l'ordre de grandeur de l'abondance d'une espèce est uniform�
 La distribution est observée dans les communautés pionnières [@Bazzaz1975], peu diverses, ou les communautés microbiennes [@Haegeman2013].
 
 
-### Synthèse
+## Synthèse
 
 (ref:DistributionsFig) Diagramme rang-fréquence des distributions de probabilité classiques. Toutes les distributions sont de 100 espèces. Les probabilités inférieures à $10^{-6}$ ne sont pas affichées. Les paramètres choisis sont $\alpha=11$ pour la distribution log-séries, $k=0,2$ pour la distribution géométrique et $\sigma=2$ pour la distribution log-normale.
 ```{r}
