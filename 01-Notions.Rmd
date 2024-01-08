@@ -173,6 +173,188 @@ Evaluer la diversité asymptotique nécessite d'utiliser des estimateurs de dive
 La diversité peut aussi être estimée pour un effort donné: un hectare de forêt ou 5000 arbres par exemple, ou encore un taux de couverture choisi, qui décrit mieux la qualité de l'échantillonnage.
 
 
+## Couverture {#sec-Couverture}
+
+Le taux de couverture (*sample coverage*) de l'échantillon est la proportion des espèces découvertes,
+\begin{equation}
+  (\#eq:C)
+  C = \sum^S_{s=1}{{\mathbf 1}\left( n_s > 0 \right) p_s},
+\end{equation}
+
+où ${\mathbf 1}(\cdot)$ est la fonction indicatrice. 
+Son complément à 1 est appelé déficit de couverture (*coverage deficit*).
+
+Le déficit de couverture est la probabilité qu'un individu tiré au hasard dans la communauté appartienne à une espèce absente de l'échantillon inventorié.
+C'est donc aussi la probabilité qu'un individu ajouté à l'inventaire lui ajoute une nouvelle espèce [@Good1953].
+La pente de la courbe d'accumulation donnant l'espérance du nombre d'espèces en fonction du nombre d'individus (courbe de raréfaction de la figure \@ref(fig:Gotelli2001)) est donc égale au déficit de couverture [@Chao2012b]:
+
+\begin{equation}
+  (\#eq:DefC)
+  1 - {\mathbb E}\left[ C\left( n \right) \right] = {\mathbb E}\left[ S\left( n + 1 \right) \right] - {\mathbb E}\left[ S\left( n \right) \right],
+\end{equation}
+
+où $C(n)$ est le taux de couverture d'un échantillon de taille $n$ et $S(n)$ le nombre d'espèces découvertes dans cet échantillon.
+
+Le taux de couverture augmente avec l'effort d'échantillonnage.
+Plus il est élevé, meilleures seront les estimations de la diversité: la diversité asymptotique est obtenue quand il atteint 1.
+Les estimateurs de la diversité asymptotique développés plus loin reposent largement sur cette notion pour la correction du biais d'échantillonnage [@Dauby2012], c'est-à-dire la sous-estimation systématique de la diversité due aux espèces non observées, qui est un des éléments du biais d'estimation.
+
+Pour comparer la diversité non asymptotique de deux communautés avec le même effort d'échantillonnage, @Chao2012b montrent que le taux de couverture plutôt que la taille de l'échantillon doit être identique.
+
+
+### Formule des fréquences de Good-Turing
+
+La relation fondamentale entre les fréquences des espèces dans un échantillon est due à Turing et a été publiée par @Good1953.
+En absence de toute information sur la loi de distribution des espèces, en supposant seulement que les individus sont tirés indépendamment les uns des autres selon une loi multinomiale respectant ces probabilités, la formule de Good-Turing relie la probabilité attendue ${\mathbb E}(p_\nu)$ d'une espèce représentée par $\nu$ individus au rapport entre les nombres d'espèces représentées $\nu+1$ fois et $\nu$ fois:
+
+\begin{equation}
+  (\#eq:alphanu)
+  {\mathbb E}\left( p_\nu \right) 
+  \approx \frac{(\nu + 1)}{n} \frac{{\mathbb E}\left( f_{\nu+1} \right)}{{\mathbb E}\left( f_\nu \right)}.
+\end{equation}
+
+La variance de $p_\nu$ est connue:
+
+\begin{equation}
+  (\#eq:varpnu)
+  \operatorname{Var}\left( p_\nu \right) 
+  \approx {\mathbb E}\left( p_\nu \right) \left[ {\mathbb E}\left( p_{\nu + 1} \right) - {\mathbb E}\left( p_\nu \right) \right].
+\end{equation}
+
+Elle est petite en comparaison de l'espérance.
+
+Le nombres d'espèces observées $\nu$ et $\nu + 1$ fois varient selon l'échantillonnage.
+La relation de Good-Turing concerne leur espérance mais comme on ne dispose en général que d'un seul inventaire, les espérances ${\mathbb E}(f_\nu)$ et ${\mathbb E}(f_{\nu + 1})$ sont remplacées par les valeurs observées.
+De même, chacune des espèces observées $\nu$ fois a une probabilité différente: la relation ne permet pas de prédire précisément, pour un échantillon, les probabilités de chaque espèce.
+
+Ces relations sont le fondement de plusieurs estimateurs de biodiversité présentés plus loin.
+Les singletons ($f_{1}$: le nombre d'espèces observées une seule fois) et les doubletons ($f_{2}$: le nombre d'espèces observées deux fois) ont une importance centrale.
+Pour $\nu=1$, on a par exemple $\alpha_1 = 2 f_{2}/(nf_{1})$: la fréquence d'une espèce typiquement représentée par un singleton est proportionnelle au rapport entre le nombre des doubletons et des singletons.
+Cet estimateur de probabilité est meilleur que l'estimateur naïf $1/n$: en d'autres termes, la distribution des fréquences observées permet d'estimer les probabilités de façon non triviale.
+
+La relation a été précisée [@Chiu2014a, eq. 6 et 7a] en limitant les approximations dans les calculs.
+La seule approximation nécessaire est que les probabilités des espèces représentées le même nombre de fois $\nu$ varient peu et puissent être considérées toutes égales à  ${\mathbb E}(p_\nu)$, ce qui est acceptable puisque la variance de $p_\nu$ est petite.
+On peut alors estimer directement 
+\begin{equation}
+  (\#eq:GoodTuring2014)
+   \hat{p_\nu} 
+   = \frac{\left( \nu + 1 \right) f_{\nu + 1}}{\left(n - \nu \right) f_{\nu} + \left(\nu + 1 \right) f_{\nu + 1}}
+\end{equation}
+
+en remplaçant les espérances par les valeurs observées.
+
+Ce nouvel estimateur est à la base de l'estimateur de Chao amélioré et des estimateurs d'entropie de Chao et Jost (sections \@ref(sec-BiaisShannon) et \@ref(sec-BiaisHCDT)).
+
+
+### Estimation du taux de couverture
+
+En posant $\nu=0$ dans l'équation \@ref(eq:alphanu), ${\mathbb E}(p_0) \times f_{0} = \pi_0$, la probabilité totale des espèces non représentées, vaut approximativement $f_{1}/n$.
+C'est l'estimateur de Good ou Good-Turing, parfois appelé abusivement "formule de Turing" [@Zhang2007]:
+
+\begin{equation}
+  (\#eq:CGood)
+  \hat{C} = 1 - \frac{f_1}{n}.
+\end{equation}
+
+Cet estimateur est biaisé [@Zhang2007]. En réalité,
+\begin{equation}
+  (\#eq:CsansBiais)
+  C = 1 - \frac{{\mathbb E}(f_1) - \pi_1}{n}.
+\end{equation}
+
+L'estimateur de Good néglige le terme $\pi_1$, la somme des probabilités des espèces observées une fois. 
+Ce terme peut être estimé avec un biais plus petit.
+@Chao1988 puis @Zhang2007 proposent l'estimateur suivant, qui utilise toute l'information disponible et a le plus petit biais possible:
+
+\begin{equation}
+  (\#eq:CZhang)
+  \hat{C} = 1 - \sum^{n}_{\nu = 1}{\left( -1 \right)}^{\nu + 1}{\binom{n}{\nu}}^{-1}f_\nu.
+\end{equation}
+
+Les termes de la somme décroissent très vite avec $\nu$.
+En se limitant à $\nu=1$, l'estimateur se réduit à celui de Good.
+
+@Esty1983, complété par @Zhang2009, a montré que l'estimateur était asymptotiquement normal et a calculé l'intervalle de confiance de $\hat{C}$:
+
+\begin{equation}
+  (\#eq:hatC)
+  C = \hat{C} \pm t^{n}_{1 - \alpha / 2} \frac{\sqrt{f_1 \left( 1 - \frac{f_{1}}{n} \right) + 2f_2}}{n}.
+\end{equation}
+
+Où $t^{n}_{1 - \alpha / 2}$ est le quantile d'une loi de Student à $n$ degrés de libertés au seuil de risque $\alpha$, classiquement 1,96 pour $n$ grand et $\alpha = 5\%$.
+
+
+Un autre estimateur est utilisé dans le logiciel SPADE [@Chao2010a] et son portage sous R, le package *spadeR* [@Chao2016c].
+Il est la base des estimateurs d'entropie de Chao et Jost (section \@ref(sec-BiaisHCDT)).
+L'estimation de l'équation \@ref(eq:CsansBiais) donne la relation
+\begin{equation}
+  (\#eq:hatC2)
+  \hat{C} = 1 - \frac{f_{1} - \hat{\pi}_1}{n}.
+\end{equation}
+
+Or, $\hat{\pi}_1 = f_{1} \hat{\p}_1$.
+$\p_1$ peut être estimé par la relation de Good-Turing \@ref(eq:GoodTuring2014), en remplaçant $f_0$ par l'estimateur Chao1 \@ref(eq:Chao1).
+Alors:
+
+\begin{equation} 
+  (\#eq:CChao)
+  \hat{C} 
+  = 1 - \frac{f_1}{n}(1 - \hat{p}_1)
+  = 1 - \frac{f_1}{n}\left[ \frac{\left( n - 1 \right) f_1}{\left( n - 1 \right) f_1 + 2f_2} \right].
+\end{equation}
+
+
+Dans le package *divent*, la fonction `coverage` calcule les trois estimateurs (celui de Zhang et Huang par défaut):
+
+```{r CoverageBCI}
+library("divent")
+BCI %>% 
+  colSums() %>% 
+  coverage()
+```
+
+Le taux de couverture de BCI est proche de 1 parce que l'inventaire couvre 50&nbsp;ha.
+Il est moindre sur les 6.25&nbsp;ha de la parcelle 6 de Paracou:
+
+```{r CoverageP6}
+paracou_6_abd %>% 
+  colSums() %>% 
+  coverage()
+```
+
+Les estimateurs présentés ici supposent une population de taille infinie (de façon équivalente, les individus sont tirés avec remise).
+Le cas des populations de taille finie est traité par @Chao2012 et @Hwang2014.
+
+### Complétude
+
+La complétude de l'échantillonnage est la proportion du nombre d'espèces observées: $f_{>0} / S$.
+Elle compte simplement les espèces et ne doit pas être confondue avec la couverture qui somme leurs probabilités: le taux de complétude est toujours très inférieur au taux de couverture parce que les espèces non échantillonnées sont les plus rares.
+
+La complétude du même échantillon d'arbres de forêt tropicale que dans l'exemple précédent peut être estimée en divisant le nombre d'espèces observées par le nombre d'espèces estimées (voir section \@ref(sec-Richesse)).
+À BCI: 
+
+```{r CompletenessBCI}
+bci_abd <- colSums(BCI)
+# Espèces observées
+(obs <- div_richness(bci_abd, estimator  = "naive"))
+# Richesse estimée
+(est <- div_richness(bci_abd))
+# Complétude
+obs$diversity / est$diversity
+```
+
+À Paracou:
+
+```{r CompletenessP6}
+# Espèces observées
+(obs <- div_richness(colSums(paracou_6_abd), estimator  = "naive"))
+# Richesse estimée
+(est <- div_richness(colSums(paracou_6_abd)))
+# Complétude
+obs$diversity / est$diversity
+```
+
+
 ## Le problème de l'espèce
 
 Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n'est de toute évidence pas le cas [@Casetta2014]. 
