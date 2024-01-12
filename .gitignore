@@ -7,6 +7,8 @@
 .Rbuildignore
 # RStudio files
 .Rproj.user/
+# R profile
+.Rprofile
 
 # knitr and R markdown default cache directories
 /*_files/
