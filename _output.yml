@@ -6,6 +6,7 @@ bookdown::bs4_book:
     in_header: gtag.js
   pandoc_args:
     - --lua-filter=fr-nbsp.lua
+  css: bs4_style.css
 bookdown::pdf_book:
   template: latex/template.tex
   pandoc_args: --top-level-division=chapter
