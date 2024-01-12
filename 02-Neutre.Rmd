@@ -339,7 +339,7 @@ autoplot(abundances, fit_rac = TRUE, distribution="lnorm")
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'BiaisJack1Code'
-#| fig_cap: "Echantillon de 1000 individus tiré dans une communauté log-normale."
+#| fig.cap: "Echantillon de 1000 individus tiré dans une communauté log-normale."
 ```
 
 
@@ -401,7 +401,7 @@ A partir de 6 termes, les valeurs du biais d'estimation sont presque parfaitemen
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'BiaisJack3Code'
-#| fig_cap: "(ref:BiaisJack3Fig)"
+#| fig.cap: "(ref:BiaisJack3Fig)"
 ```
 
 Code de la figure \@ref(fig:BiaisJack3Fig):
@@ -540,7 +540,7 @@ La complétude est inférieure à la couverture: toutes les espèces ont le mêm
 ```{r}
 #| label: Brose2003
 #| echo: false
-#| fig_cap: "(ref:Brose2003)"
+#| fig.cap: "(ref:Brose2003)"
 knitr::include_graphics('images/Brose2003.png')
 ```
 
@@ -563,9 +563,8 @@ La parcelle 6 de Paracou nécessite l'estimateur jackknife 2:
 library("divent")
 div_richness(colSums(paracou_6_abd))
 # Complétude
-as.numeric(
-  Richness(Paracou6, Correction = "None") / Richness(Paracou6, Correction = "Jackknife")
-)
+div_richness(colSums(paracou_6_abd), estimator = "naive", as_numeric = TRUE) / 
+  div_richness(colSums(paracou_6_abd), as_numeric = TRUE)
 ```
 
 @Chiu2014a, à partir d'autres simulations, préfèrent l'utilisation de l'estimateur *iChao1*.
@@ -622,7 +621,7 @@ bci_abd %>%
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'NonObsNCode'
-#| fig_cap: "(ref:NonObsNFig)"
+#| fig.cap: "(ref:NonObsNFig)"
 ```
 
 Le taux de couverture de l'inventaire de BCI est très proche de 100\%, donc peu de nouvelles espèces seront découvertes en augmentant l'effort d'échantillonnage. 
@@ -676,7 +675,7 @@ veiledspec(bci_preston)
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'PrestonSansOCode'
-#| fig_cap: "(ref:PrestonSansOFig)"
+#| fig.cap: "(ref:PrestonSansOFig)"
 ```
 
 Le code R nécessaire pour réaliser la figure est:
@@ -917,7 +916,7 @@ log(coefs["a"] / coefs["c"]) / coefs["z"]
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'SobLLorCode'
-#| fig_cap: "(ref:SobLLorFig)"
+#| fig.cap: "(ref:SobLLorFig)"
 ```
 
 
@@ -1278,7 +1277,7 @@ L'indice de Shannon est concave (figure \@ref(fig:ShannonFig)) donc son estimate
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'ShannonCode'
-#| fig_cap: "(ref:ShannonFig)"
+#| fig.cap: "(ref:ShannonFig)"
 ```
 
 Code de la figure \@ref(fig:ShannonFig):
@@ -1304,7 +1303,7 @@ Le biais de l'indice de Shannon est la somme des biais pour toutes les probabili
 #| echo: false
 #| results: 'hide'
 #| ref.label: 'ShannonBiaisCode'
-#| fig_cap: "(ref:ShannonBiaisFig)"
+#| fig.cap: "(ref:ShannonBiaisFig)"
 ```
 
 Code de la figure \@ref(fig:ShannonBiaisFig):
@@ -1492,7 +1491,6 @@ Le calcul de la diversité de Hurlbert est possible dans *divent*:
 
 ```{r}
 #| label: Hurlbert
-#| eval: false
 # Indice de Hurlbert (probabilités)
 ent_hurlbert(as_probabilities(colSums(BCI)), k = 2)
 # Estimateur sans biais (abondances)
