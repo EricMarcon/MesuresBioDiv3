@@ -9,7 +9,7 @@
 #| label: Composantes
 #| fig.cap: "(ref:Composantes)"
 #| echo: false
-#| out.width: '60%'
+#| out_width: '60%'
 knitr::include_graphics('images/Composantes.png')
 ```
 
@@ -119,7 +119,6 @@ Nous appellerons *communauté* le niveau de découpage concernant la diversité 
 #| label: SACFig
 #| echo: false
 #| results: 'hide'
-#| message: FALSE
 #| ref.label: 'SACCode'
 #| fig.cap: "(ref:SACFig)"
 ```
@@ -132,7 +131,7 @@ La figure \@ref(fig:SACFig) montre l'accumulation des espèces pour les données
 Une SAC peut être tracée en fonction de la surface, du nombre d'individus ou du nombres de placettes d'échantillonnage, selon les besoins.
 
 Code R pour réaliser la figure \@ref(fig:SACFig):
-```{r }
+```{r}
 #| label: SACCode
 #| eval: FALSE
 library("vegan")
@@ -306,7 +305,8 @@ Alors:
 
 Dans le package *divent*, la fonction `coverage` calcule les trois estimateurs (celui de Zhang et Huang par défaut):
 
-```{r CoverageBCI}
+```{r}
+#| label: CoverageBCI
 library("divent")
 BCI %>% 
   colSums() %>% 
@@ -316,7 +316,8 @@ BCI %>%
 Le taux de couverture de BCI est proche de 1 parce que l'inventaire couvre 50&nbsp;ha.
 Il est moindre sur les 6.25&nbsp;ha de la parcelle 6 de Paracou:
 
-```{r CoverageP6}
+```{r}
+#| label: CoverageP6
 paracou_6_abd %>% 
   colSums() %>% 
   coverage()
@@ -333,7 +334,8 @@ Elle compte simplement les espèces et ne doit pas être confondue avec la couve
 La complétude du même échantillon d'arbres de forêt tropicale que dans l'exemple précédent peut être estimée en divisant le nombre d'espèces observées par le nombre d'espèces estimées (voir section \@ref(sec-Richesse)).
 À BCI: 
 
-```{r CompletenessBCI}
+```{r}
+#| label: CompletenessBCI
 bci_abd <- colSums(BCI)
 # Espèces observées
 (obs <- div_richness(bci_abd, estimator  = "naive"))
@@ -345,7 +347,8 @@ obs$diversity / est$diversity
 
 À Paracou:
 
-```{r CompletenessP6}
+```{r}
+#| label: CompletenessP6
 # Espèces observées
 (obs <- div_richness(colSums(paracou_6_abd), estimator  = "naive"))
 # Richesse estimée
@@ -410,7 +413,7 @@ Le RAC est souvent utilisé pour reconnaître des distributions connues.
 ```
 
 Code de la figure \@ref(fig:SADFig):
-```{r }
+```{r}
 #| label: SADCode
 #| eval: false
 BCI_abd <- sort(colSums(BCI), decreasing = TRUE)
