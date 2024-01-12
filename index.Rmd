@@ -193,8 +193,7 @@ if (!"divent" %in% installed.packages()[, 1]) {
 }
 
 # Create packages.bib file to reference them as @R-package
-c(Packages, "divent") %>% 
-  knitr::write_bib(file="packages.bib")
+knitr::write_bib(file="packages.bib")
 
 # knitr options
 knitr::opts_chunk$set(
