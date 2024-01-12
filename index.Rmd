@@ -185,6 +185,7 @@ Packages <- c("ade4", "adespatial", "cowplot", "dbmss", "entropy",
               "untb", "vegan")
 # Install them
 InstallPackages(Packages)
+library("tidyverse")
 
 # GitHub packages
 if (!"divent" %in% installed.packages()[, 1]) {
@@ -192,7 +193,8 @@ if (!"divent" %in% installed.packages()[, 1]) {
 }
 
 # Create packages.bib file to reference them as @R-package
-knitr::write_bib(Packages, file="packages.bib")
+c(Packages, "divent") %>% 
+  knitr::write_bib(file="packages.bib")
 
 # knitr options
 knitr::opts_chunk$set(
@@ -212,7 +214,6 @@ knitr::opts_chunk$set(
 options(width = 60)
 
 # ggplot style
-library("tidyverse")
 theme_set(theme_bw())
 theme_update(
   panel.background = element_rect(fill = "transparent", colour = NA),
