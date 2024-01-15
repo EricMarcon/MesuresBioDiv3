@@ -1638,7 +1638,7 @@ Quelques formes possibles de $H(\mathbf{q}, \mathbf{p})$ sont:
 #| results: 'hide'
 #| ref.label: 'KullbackLeiblerCode'
 #| fig.cap: "(ref:KullbackLeiblerFig)"
-#| fig.asp=1
+#| fig.asp: 1
 ```
 
 
@@ -1973,7 +1973,7 @@ Si les courbes se croisent, il n'y a pas de relation d'ordre [@Tothmeresz1995].
 
 @Lande2000 montrent que si la diversité de Simpson et la richesse de deux communautés n'ont pas le même ordre, alors les courbes d'accumulation du nombre d'espèces en fonction du nombre d'individus échantillonnés se croisent aussi.
 
-(ref:ProfilDivFig) Profil de diversité calculé pour deux parcelles de Paracou (Parcelle 6: trait plein et Parcelle 18: trait pointillé). La correction du biais d'estimation est celle de Chao et Jost.
+(ref:ProfilDivFig) Profils de diversité des quatre carrés de la parcelle 6 de Paracou. La correction du biais d'estimation est celle de Chao et Jost. Le carré 2 est plus divers que le carré 4, mais pas que les carrés 1 et 3, qui sont plus divers dans les grands ordres de diversité. Le profil de diversité est tracé ici jusqu'à l'ordre $q = 3$.
 ```{r}
 #| label: ProfilDivFig
 #| echo: false
@@ -1986,11 +1986,13 @@ Code R pour réaliser la figure \@ref(fig:ProfilDivFig):
 ```{r}
 #| label: ProfilDivCode
 #| eval: false
-orders <- seq(0, 2, .1)
-  P6D<- CommunityProfile(Diversity, Paracou618.MC$Nsi[, 1], q.seq)
-  P18D<- CommunityProfile(Diversity, Paracou618.MC$Nsi[, 2], q.seq)
-  autoplot(P6D, xlab = "q", ylab = "Diversité") +
-    geom_line(aes(x, y), as.data.frame.list(P18D), lty = 2)
+paracou_6_abd %>% 
+  # Suppression de "subplot_" dans les noms des carrés
+  mutate(site = str_replace(.$site, "subplot_", "")) %>% 
+  # Profil
+  profile_hill(orders = seq(0, 3, .1), estimator = "ChaoJost") %>%
+  autoplot() +
+  labs(color = "Carré")
 ```
 
 @Pallmann2012 ont développé un test statistique pour comparer la diversité de deux communautés pour plusieurs valeurs de $q$ simultanément.
@@ -2001,24 +2003,47 @@ Ils montrent que les communautés séparables selon un troisième type de profil
 Le profil de la queue de distribution est construit en classant les espèces de la plus fréquente à la plus rare et en traçant la probabilité qu'un individu appartienne à une espèce plus rare que l'espèce en abscisse (figure \@ref(fig:ProfilQueueFig)).
 
 
-(ref:ProfilQueueFig) Profil de queue de distribution calculé pour les deux parcelles de Paracou (Parcelle 6: trait plein et Parcelle 18: trait pointillé). En abscisse: rang de l'espèce dans le classement de la plus fréquente à la plus rare; en ordonnée: probabilité qu'un individu de la communauté appartienne à une espèce plus rare.
-```{r ProfilQueueFig, echo=FALSE, results='hide', ref.label='ProfilQueueCode', fig.cap="(ref:ProfilQueueFig)"}
+(ref:ProfilQueueFig) Profil de queue de distribution calculé pour les carrés de la parcelle 6 de Paracou. En abscisse: rang de l'espèce dans le classement de la plus fréquente à la plus rare; en ordonnée: probabilité qu'un individu de la communauté appartienne à une espèce plus rare. Les profils de queue de distribution se croisent d'autant plus tôt qu'ils se croisent pour de grands ordres de diversité dans la figure \@ref(fig:ProfilDivFig).
+```{r}
+#| label: ProfilQueueFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'ProfilQueueCode'
+#| fig.cap: "(ref:ProfilQueueFig)"
 ```
 
 Code R:
 ```{r}
 #| label: ProfilQueueCode
 #| eval: false
-# Elimination des espèces absentes des deux parcelles
-  Psi <- as.data.frame(Paracou618.MC$Psi[Paracou618.MC$Ps>0,])
-  Psi[,1] %<>% sort %>% cumsum %>% rev
-  Psi[,2] %<>% sort %>% cumsum %>% rev
-  Psi$x <- 1:nrow(Psi)
-  ggplot(Psi, aes(x)) +
-    geom_path(aes(y=P006)) +
-    geom_path(aes(y=P018), lty=2) +
-    labs(x="Espèces", y="Fréquence") +
-    scale_x_log10()
+paracou_6_abd %>%
+  # Transformation en probabilités
+  as_probabilities() %>%
+  # Elimination des colonnes de description
+  as.matrix() %>% 
+  # Tri des espèces par ordre croissant de probabilité
+  apply(MARGIN = 1, FUN = sort) %>% 
+  # Cumul des probabilités. Attention: apply a transposé la matrice
+  apply(MARGIN = 2, FUN = cumsum) %>% 
+  # Classement par valeurs décroissantes
+  apply(MARGIN = 2, FUN = rev) %>% 
+  # Création d'un tibble pour le graphique
+  as_tibble() %>% 
+  # Nom des colonnes: 1 à 4
+  rename_with(~ str_replace(., "V", "")) %>% 
+  # Ajout d'une colonne pour l'ordre
+  mutate(rank = seq_len(nrow(.))) %>% 
+  # Création du graphique
+  pivot_longer(cols = -rank) %>% 
+  ggplot() +
+    geom_line(aes(x = rank, y = value, color = name, lty = name)) +
+    scale_x_log10() +
+    labs(
+      x = "Rang de l'espèce", 
+      y = "Probabilité", 
+      color = "Carré",
+      lty = "Carré"
+    ) 
 ```
 
 Les coordonnées des points du profil sont définies par
@@ -2033,4 +2058,3 @@ Ce profil est exhaustif (toutes les espèces sont représentées) alors que les 
 En revanche, il ne prend pas en compte les espèces non observées.
 
 @Fattorini1999 proposent un test pour comparer deux profils de queue de distribution à partir d'échantillonnages multiples (nécessaires pour évaluer la variance de chacune des probabilités) mais qui néglige les espèces non observées.
-
