@@ -291,7 +291,7 @@ L'estimation de l'équation \@ref(eq:CsansBiais) donne la relation
   \hat{C} = 1 - \frac{f_{1} - \hat{\pi}_1}{n}.
 \end{equation}
 
-Or, $\hat{\pi}_1 = f_{1} \hat{\p}_1$.
+Or, $\hat{\pi}_1 = f_{1} \hat{p}_1$.
 $\p_1$ peut être estimé par la relation de Good-Turing \@ref(eq:GoodTuring2014), en remplaçant $f_0$ par l'estimateur Chao1 \@ref(eq:Chao1).
 Alors:
 
