@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 Mesures classiques de la diversité \(\alpha\) ou \(\gamma\) | Mesures de la Biodiversité</title>
+<meta name="author" content="Eric Marcon">
+<meta name="description" content="Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique. Ils peuvent être estimés à partir des données d’inventaire. L’estimation de la richesse est...">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="3 Mesures classiques de la diversité \(\alpha\) ou \(\gamma\) | Mesures de la Biodiversité">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/chap-MesuresNeutres.html">
+<meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<meta property="og:description" content="Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique. Ils peuvent être estimés à partir des données d’inventaire. L’estimation de la richesse est...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Mesures classiques de la diversité \(\alpha\) ou \(\gamma\) | Mesures de la Biodiversité">
+<meta name="twitter:description" content="Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique. Ils peuvent être estimés à partir des données d’inventaire. L’estimation de la richesse est...">
+<meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1B3PLBCM6"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-C1B3PLBCM6');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Mesures de la Biodiversité</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Motivation</a></li>
+<li><a class="" href="calculs-et-donn%C3%A9es.html">Calculs et données</a></li>
+<li><a class="" href="notations.html">Notations</a></li>
+<li class="book-part">Notions</li>
+<li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
+<li><a class="" href="sec-SAD.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li class="book-part">Diversité neutre d’une communauté</li>
+<li><a class="active" href="chap-MesuresNeutres.html"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></li>
+<li><a class="" href="entropie.html"><span class="header-section-number">4</span> Entropie</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/EricMarcon/MesuresBioDiv3">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chap-MesuresNeutres" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Mesures classiques de la diversité <span class="math inline">\(\alpha\)</span> ou <span class="math inline">\(\gamma\)</span><a class="anchor" aria-label="anchor" href="#chap-MesuresNeutres"><i class="fas fa-link"></i></a>
+</h1>
+<div class="Summary">
+<p>Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique.
+Ils peuvent être estimés à partir des données d’inventaire.
+L’estimation de la richesse est particulièrement difficile et fait l’objet d’une abondante littérature : les estimateurs non-paramétriques (Chao et Jackknife) sont les plus utilisés.</p>
+</div>
+<p>Les mesures classiques <span class="citation">(<a href="entropie.html#ref-Peet1974" role="doc-biblioref">Peet 1974</a>)</span> considèrent que chaque classe d’objets est différente de toutes les autres, sans que certaines soient plus ou moins semblables.
+Dans ce chapitre, les classes seront des espèces.
+Les mesures sont qualifiées de neutres (<em>species-neutral</em>) au sens où elles ne prennent en compte aucune caractéristique propre des espèces.
+La diversité neutre est souvent appelée diversité taxonomique <span class="citation">(<a href="entropie.html#ref-Devictor2010" role="doc-biblioref">Devictor et al. 2010</a>; <a href="entropie.html#ref-Stegen2011" role="doc-biblioref">Stegen and Hurlbert 2011</a>)</span>, même si le terme peut prêter à confusion avec la diversité phylogénétique, quand la phylogénie se réduit à une taxonomie <span class="citation">(<a href="entropie.html#ref-Clarke2001" role="doc-biblioref">Clarke and Warwick 2001</a>; <a href="entropie.html#ref-Ricotta2003c" role="doc-biblioref">Ricotta and Avena 2003</a>)</span>.</p>
+<p>Ce type de mesure n’a de sens qu’à l’intérieur d’un taxocène bien défini : sommer un nombre d’espèces d’insectes à un nombre d’espèces de mammifères a peu d’intérêt.
+Ces méthodes ne sont donc pas forcément les plus adaptées à la conservation : à grande échelle, des indicateurs de biodiversité <span class="citation">(<a href="entropie.html#ref-Balmford2003" role="doc-biblioref">Balmford, Green, and Jenkins 2003</a>)</span> peuvent être plus pertinents.
+D’autre part, les communautés sont considérées comme limitées, avec un nombre d’espèces fini : la courbe d’accumulation des espèces atteint donc théoriquement une asymptote quand l’effort d’inventaire est suffisant.
+Cette approche est opposée à celle, traitée dans les chapitres <a href="#chap-Fisher"><strong>??</strong></a> et suivants, qui considère que la diversité augmente indéfiniment avec la surface <span class="citation">(<a href="entropie.html#ref-Williamson2001" role="doc-biblioref">Williamson, Gaston, and Lonsdale 2001</a>)</span>, que ce soit par changement d’échelle (élargir l’inventaire ajoute de nouvelles communautés) ou, plus théoriquement, parce que les communautés réelles sont considérées comme un tirage aléatoire parmi une infinités d’espèces <span class="citation">(<a href="entropie.html#ref-Fisher1943" role="doc-biblioref">Fisher, Corbet, and Williams 1943</a>)</span>.</p>
+<p>Les mesures présentées ici sont les plus utilisées : richesse, indices de Shannon et de Simpson, et l’indice de Hurlbert.
+Elles sont sujettes à des biais d’estimation <span class="citation">(<a href="entropie.html#ref-Mouillot1999" role="doc-biblioref">Mouillot and Leprêtre 1999</a>)</span>, notamment (mais pas seulement) à cause des espèces non échantillonnées.</p>
+<p>Au chapitre suivant, l’entropie HCDT permettra d’unifier ces mesures et les nombres de Hill, et de leur donner un sens intuitif.</p>
+<div id="sec-Richesse" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Richesse spécifique<a class="anchor" aria-label="anchor" href="#sec-Richesse"><i class="fas fa-link"></i></a>
+</h2>
+<p>La richesse est tout simplement le nombre d’espèces présentes dans le taxocène considéré.
+C’est la mesure conceptuellement la plus simple mais pratiquement la plus délicate dans des systèmes très riches comme les forêts tropicales : même avec des efforts d’inventaire considérables, il n’est en général pas possible de relever toutes les espèces rares, ce qui implique de recourir à des modèles mathématiques pour en estimer le nombre.</p>
+<p>On ne fait pas de supposition sur la forme de la SAD (voir section <a href="sec-SAD.html#sec-SAD">2</a>) quand on utilise des méthodes d’estimation non paramétriques.
+Les estimateurs les plus connus sont ceux de <span class="citation">Chao (<a href="entropie.html#ref-Chao1984" role="doc-biblioref">1984</a>)</span> et le <em>jackknife</em> <span class="citation">(<a href="entropie.html#ref-Burnham1979" role="doc-biblioref">Burnham and Overton 1979</a>)</span>.</p>
+<p>Une alternative consiste à inférer à partir des données les paramètres d’une SAD choisie, et particulièrement le nombre total d’espèces.
+Cette approche est bien moins répandue parce qu’elle suppose le bon choix du modèle et est beaucoup plus intensive en calcul.
+Il n’existe pas de meilleur estimateur universel <span class="citation">(<a href="entropie.html#ref-OHara2005" role="doc-biblioref">O’Hara 2005</a>)</span> et il peut être efficace d’utiliser plusieurs méthodes d’estimation de façon concurrente sur les mêmes données <span class="citation">(<a href="entropie.html#ref-Basset2012" role="doc-biblioref">Basset et al. 2012</a>)</span>.</p>
+<div id="techniques-destimation-non-paramétrique" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> Techniques d’estimation non paramétrique<a class="anchor" aria-label="anchor" href="#techniques-destimation-non-param%C3%A9trique"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dans le cadre d’un échantillonnage de <span class="math inline">\(n\)</span> individus, on observe <span class="math inline">\(f_{&gt;0}\)</span> espèces différentes parmi les <span class="math inline">\(S\)</span> existantes.
+Chaque individu a une probabilité <span class="math inline">\(p_s\)</span> d’appartenir à l’espèce <span class="math inline">\(s\)</span>.</p>
+<p>On ne sait rien sur la loi des <span class="math inline">\(p_s\)</span>.
+On sait seulement, comme les individus sont tirés indépendamment les uns des autres, que l’espérance du nombre <span class="math inline">\(n_s\)</span> d’individus de l’espèce <span class="math inline">\(s\)</span> observé dans l’échantillon est <span class="math inline">\(np_s\)</span>.
+La probabilité de ne pas observer l’espèce est <span class="math inline">\((1-p_s)^n\)</span>.</p>
+<p>Pour les espèces fréquentes, <span class="math inline">\(np_s\)</span> est grand, et les espèces sont observées systématiquement.
+La difficulté est due aux espèces pour lesquelles <span class="math inline">\(np_s\)</span>, l’espérance du nombre d’observations, est petit.
+La probabilité de les observer est donnée par la loi binomiale : si <span class="math inline">\(np_s\)</span> est proche de 0, la probabilité d’observer un individu est faible.</p>
+<p>Les estimateurs non paramétriques cherchent à tirer le maximum d’information de la distribution des abondances <span class="math inline">\(n_s\)</span> pour estimer le nombre d’espèces non observées.
+Une présentation détaillée du problème et des limites à sa résolution est fournie par <span class="citation">Mao and Colwell (<a href="entropie.html#ref-Mao2005" role="doc-biblioref">2005</a>)</span> qui concluent notamment que les estimateurs ne peuvent fournir qu’une borne inférieure de l’intervalle des possibles valeurs du nombre réel d’espèces.</p>
+<div id="chao1-et-chao2" class="section level4" number="3.1.1.1">
+<h4>
+<span class="header-section-number">3.1.1.1</span> Chao1 et Chao2<a class="anchor" aria-label="anchor" href="#chao1-et-chao2"><i class="fas fa-link"></i></a>
+</h4>
+<p><span class="citation">Chao (<a href="entropie.html#ref-Chao1984" role="doc-biblioref">1984</a>)</span> estime le nombre d’espèces non observées à partir de celles observées 1 ou 2 fois.</p>
+<p>Dans un échantillon de taille <span class="math inline">\(n\)</span> résultant d’un tirage indépendant des individus, la probabilité que l’espèce <span class="math inline">\(s\)</span> soit observée <span class="math inline">\(\nu\)</span> fois est obtenue en écrivant la probabilité de tirer dans l’ordre <span class="math inline">\(\nu\)</span> fois l’espèce <span class="math inline">\(s\)</span> puis <span class="math inline">\(n-\nu\)</span> fois une autre espèce, multiplié par le nombre de combinaisons possible pour prendre en compte l’ordre des tirages :
+<span class="math display" id="eq:psnu">\[\begin{equation}
+  \tag{3.1}
+  p_{s, \nu}(n) = \binom{n}{\nu} {p_s^\nu \left( 1 - p_s \right)^{n - \nu}}.
+\end{equation}\]</span></p>
+<p>L’espérance du nombre d’espèces observées <span class="math inline">\(\nu\)</span> fois, <span class="math inline">\({\mathbb E}(f_{\nu})\)</span>, est obtenue en sommant pour toutes les espèces la probabilité de les observer <span class="math inline">\(\nu\)</span> fois :
+<span class="math display" id="eq:Esnnu">\[\begin{equation}
+  \tag{3.2}
+  {\mathbb E}\left( f_{\nu} \right) = \binom{n}{\nu} \sum_s{p_s^\nu \left( 1 - p_s \right)^{n - \nu}}.
+\end{equation}\]</span></p>
+<p>Le carré de la norme du vecteur en <span class="math inline">\(S\)</span> dimensions dont les coordonnées sont <span class="math inline">\((1 - p_s)^{n / 2}\)</span> est
+<span class="math display">\[\sum_s{(1 - p_s)^n},\]</span>
+c’est-à-dire <span class="math inline">\({\mathbb E}(f_{0})\)</span>, l’espérance du nombre d’espèces non observées.
+Celui du vecteur de coordonnées <span class="math inline">\(p_s (1 - p_s)^{n / 2 - 1}\)</span> est
+<span class="math display">\[\sum_s{p_s^2 (1 - p_s)^{n - 2}} = \frac{2}{n (n - 1)}{\mathbb E}(f_{2}).\]</span>
+Enfin, le produit scalaire des deux vecteurs vaut
+<span class="math display">\[\sum_s{p_s (1 - p_s)^{n - 1}} = \frac{1}{n}{\mathbb E}(f_{1}).\]</span></p>
+<p>L’inégalité de Cauchy-Schwarz (le produit scalaire est inférieur au produit des normes des vecteurs) peut être appliquée aux deux vecteurs (tous les termes sont au carré) :
+<span class="math display" id="eq:CauchySchwarz">\[\begin{equation}
+  \tag{3.3}
+  \left[ \sum_s{(1 - p_s)^n} \right] \left[ \sum_s{p_s^2 (1 - p_s)^{n-2}} \right]
+   \ge \left[ \sum_s{p_s (1 - p_s)^{n-1}} \right]^2,
+\end{equation}\]</span></p>
+<p>d’où
+<span class="math display" id="eq:Esn0">\[\begin{equation}
+  \tag{3.4}
+  {\mathbb E}(f_{0})
+  \ge \frac{n - 1}{n}\frac{\left[ {\mathbb E}(f_{1}) \right]^2}{2 {\mathbb E}(f_{2})}.
+\end{equation}\]</span></p>
+<p>L’estimateur est obtenu en remplaçant les espérances par les valeurs observées :</p>
+<p><span class="math display" id="eq:Chao1">\[\begin{equation}
+  \tag{3.5}
+  {\hat{S}}_\mathit{Chao1}
+   = f_{&gt;0} + \frac{\left(n - 1 \right){\left( f_{1} \right)}^2}{2n {f_{2}}},
+\end{equation}\]</span></p>
+<p>où <span class="math inline">\(f_{&gt;0}\)</span> est le nombre d’espèces différentes observé.</p>
+<p>Il s’agit d’un estimateur minimum : l’espérance du nombre d’espèces est supérieure ou égale au nombre estimé.</p>
+<p><span class="citation">Béguinot (<a href="entropie.html#ref-Beguinot2014" role="doc-biblioref">2014</a>)</span> a montré que l’estimateur est sans biais si le nombre d’espèces non observées décroît exponentiellement avec la taille de l’échantillon :
+<span class="math display" id="eq:BiaisChao">\[\begin{equation}
+  \tag{3.6}
+  f_{0} = S e^{-kn},
+\end{equation}\]</span>
+où <span class="math inline">\(k\)</span> est un réel strictement positif.
+Cette relation est cohérente avec un échantillonnage poissonien dans lequel la densité des individus est constante : voir le chapitre <a href="#chap-Accumulation"><strong>??</strong></a>.</p>
+<p>Si aucune espèce n’est observée deux fois, l’estimateur est remplacé par
+<span class="math display" id="eq:Chao1sansf2">\[\begin{equation}
+  \tag{3.7}
+  {\hat{S}}_\mathit{Chao1} = f_{&gt;0} + \frac{\left( n - 1 \right){f_{1}}\left( f_{1} - 1 \right)}{2n}.
+\end{equation}\]</span></p>
+<p>Si <span class="math inline">\(n\)</span> n’est pas trop petit, les approximations suivantes sont possibles :</p>
+<p><span class="math display" id="eq:Chao1sansn">\[\begin{equation}
+  \tag{3.8}
+  \hat{S}_\mathit{Chao1}
+   = {f_{&gt;0}} + \frac{{\left( f_{1} \right)}^2}{2f_{2}}.
+\end{equation}\]</span></p>
+<p>Si aucune espèce n’est observée deux fois, l’estimateur est remplacé <span class="citation">(<a href="entropie.html#ref-Chao2004" role="doc-biblioref">Chao 2004</a>)</span> par</p>
+<p><span class="math display" id="eq:Chao1sansnf2">\[\begin{equation}
+  \tag{3.9}
+  {\hat{S}}_\mathit{Chao1}
+  = {f_{&gt;0}} + {f_{1}\left( f_{1} - 1 \right)} / {2}.
+\end{equation}\]</span></p>
+<p>La variance de l’estimateur est connue, mais pas sa distribution :</p>
+<p><span class="math display" id="eq:VarChao1">\[\begin{equation}
+  \tag{3.10}
+  \operatorname{Var}{\left( {\hat{S}}_\mathit{Chao1} \right)}
+  = {f_{2}}\left[
+      \frac{1}{2}{\left( \frac{f_{1}}{f_{2}} \right)}^2
+      + {\left( \frac{f_{1}}{f_{2}} \right)}^3
+      + \frac{1}{4}{\left( \frac{f_{1}}{f_{2}} \right)}^4
+    \right].
+\end{equation}\]</span></p>
+<p>Si aucune espèce n’est observée deux fois :</p>
+<p><span class="math display" id="eq:VarChao1sansf2">\[\begin{equation}
+  \tag{3.11}
+  \operatorname{Var}{\left( {\hat{S}}_\mathit{Chao1} \right)}
+  = \frac{f_{1}\left(f_{1}-1\right)}{2}
+    + \frac{f_{1}{\left( 2f_{1} -1 \right)}^2}{4}
+    + \frac{{\left( f_{1} \right)}^4}{4f_{&gt;0}}.
+\end{equation}\]</span></p>
+<p><span class="citation">Chao (<a href="entropie.html#ref-Chao1987" role="doc-biblioref">1987</a>)</span> donne une approximation de l’intervalle de confiance à 95 % en assumant une distribution normale :</p>
+<p><span class="math display" id="eq:ICChao1">\[\begin{equation}
+  \tag{3.12}
+  f_{&gt;0} + \frac{{\hat{S}}_\mathit{Chao1} - {f_{&gt;0}}}{c}
+  \le S
+  \le {f_{&gt;0}} + \left( {\hat{S}}_\mathit{Chao1} - {f_{&gt;0}} \right)c,
+\end{equation}\]</span></p>
+<p>où</p>
+<p><span class="math display" id="eq:ICChao1c">\[\begin{equation}
+  \tag{3.13}
+  c = e^{
+    t^{n}_{1 - \alpha / 2} \sqrt{
+      \ln\left( 1 + \frac{\operatorname{Var}\left( {\hat{S}}_\mathit{Chao1} \right)}{{\left( {\hat{S}}_\mathit{Chao1} - {f_{&gt;0}} \right)}^2} \right)
+    }
+  }.
+\end{equation}\]</span></p>
+<p><span class="citation">Eren et al. (<a href="entropie.html#ref-Eren2012" role="doc-biblioref">2012</a>, eq. 8)</span> calculent un intervalle de confiance qui est plus petit quand la valeur maximum théorique du nombre d’espèces est connue, ce qui est rarement le cas en écologie.</p>
+<p><span class="citation">Chao (<a href="entropie.html#ref-Chao1987" role="doc-biblioref">1987</a>)</span> propose un estimateur du nombre d’espèces appliqué aux données de présence-absence (un certain nombre de relevés contiennent seulement l’information de présence ou absence de chaque espèce), appelé Chao2. Il est identique à Chao1 mais <span class="math inline">\(n\)</span> est le nombre de relevés, en général trop petit pour appliquer l’approximation de Chao1.</p>
+<p><span class="citation">Chiu et al. (<a href="entropie.html#ref-Chiu2014a" role="doc-biblioref">2014</a>)</span> améliorent l’estimateur en reprenant la démarche originale de Chao mais en utilisant un estimateur plus précis du taux de couverture, <a href="chap-Notions.html#eq:CChao">(1.11)</a> au lieu de <a href="chap-Notions.html#eq:CGood">(1.6)</a> :</p>
+<p><span class="math display" id="eq:iChao1">\[\begin{equation}
+  \tag{3.14}
+  {\hat{S}}_\mathit{iChao1}
+  = {\hat{S}}_\mathit{Chao1}
+    + \frac{f_{3}}{4f_{4}}
+    \,\max\left( f_{1} - \frac{f_{2}f_{3}}{2f_{4}} ; 0 \right).
+\end{equation}\]</span></p>
+<p><span class="citation">Chao et al. (<a href="entropie.html#ref-Chao2017" role="doc-biblioref">2017</a>)</span> étendent l’applicabilité de l’estimateur Chao2 à des données dans lesquelles les espèces sont notées uniquement comme singletons ou doubletons et plus, sans distinction entre doubletons et espèces plus fréquentes.
+Une relation entre le nombre de doubletons et les données disponibles est <span style="white-space:nowrap">fournie ;</span> sa résolution numérique (le code R nécessaire est disponible avec l’article) permet d’estimer <span class="math inline">\(f_{2}\)</span> et de l’injecter dans l’estimateur Chao2.</p>
+</div>
+<div id="lestimateur-ace" class="section level4" number="3.1.1.2">
+<h4>
+<span class="header-section-number">3.1.1.2</span> L’estimateur ACE<a class="anchor" aria-label="anchor" href="#lestimateur-ace"><i class="fas fa-link"></i></a>
+</h4>
+<p><span class="citation">Chao and Lee (<a href="entropie.html#ref-Chao1992" role="doc-biblioref">1992</a>)</span> développent l’estimateur ACE (<em>Abundance-based coverage estimator</em>) à travers l’estimation du taux de couverture <span class="math inline">\(C\)</span>.
+L’estimateur ACE utilise toutes les valeurs de <span class="math inline">\(f_\nu\)</span> correspondant aux espèces rares : concrètement, la valeur limite de <span class="math inline">\(\nu\)</span> notée <span class="math inline">\(\kappa\)</span> est fixée arbitrairement, généralement à 10.</p>
+<p>L’estimateur prend en compte le coefficient de variation de la distribution des fréquences (<span class="math inline">\({\hat{p}}_s\)</span>) : plus les probabilités sont hétérogènes, plus le nombre d’espèces non observées sera grand.
+Finalement :</p>
+<p><span class="math display" id="eq:ACE">\[\begin{equation}
+  \tag{3.15}
+  \hat{S}_{\mathit{ACE}}
+  = f_{&gt;\kappa} + \frac{f_{\le\kappa}}{\hat{C}_\mathit{rare}} + \frac{f_{1}}{{\hat{C}}_\mathit{rare}}{\hat{\gamma}}_\mathit{rare}.
+\end{equation}\]</span></p>
+<p><span class="math inline">\(f_{&gt;\kappa}\)</span> est le nombre d’espèces dites abondantes, observées plus de <span class="math inline">\(\kappa\)</span> fois, <span class="math inline">\(f_{\le\kappa}\)</span> le nombre d’espèces dites rares, observées <span class="math inline">\(\kappa\)</span> fois ou moins.
+<span class="math inline">\(\hat{C}_\mathit{rare}\)</span> est le taux de couverture ne prenant en compte que les espèces rares.</p>
+<p>L’estimateur du coefficient de variation au carré est</p>
+<p><span class="math display" id="eq:ACEcv">\[\begin{equation}
+  \tag{3.16}
+  \hat{\gamma}^{2}_\mathit{rare}
+  = \max\left(
+    \frac{
+      f_{\le\kappa} \sum^{\kappa}_{\nu=1}{\nu\left( \nu - 1 \right){f_\nu}}
+    }{
+      \hat{C}_\mathit{rare} \left( \sum^{\kappa}_{\nu = 1}{\nu f_{\nu}} \right) \left( \sum^{\kappa}_{\nu = 1}{\nu f_{\nu}} - 1 \right)
+    } - 1 ; 0
+  \right).
+\end{equation}\]</span></p>
+<p>Lorsque l’hétérogénéité est très forte, un autre estimateur est plus performant :</p>
+<p><span class="math display" id="eq:ACEcv2">\[\begin{equation}
+  \tag{3.17}
+  \tilde{\gamma}^{2}_\mathit{rare}
+  = \max\left(
+    {\hat{\gamma}}^2_\mathit{rare} \left(
+      1 + \frac{
+        \left( 1 - {\hat{C}}_\mathit{rare} \right) \sum^{\kappa}_{\nu = 1}{\nu\left( \nu - 1 \right){f_\nu}}
+      }{
+        {\hat{C}}_\mathit{rare} \left( \sum^{\kappa}_{\nu = 1}{\nu f_\nu - 1} \right)
+      }
+    \right) ; 0
+  \right).
+\end{equation}\]</span></p>
+<p><span class="citation">Chao and Shen (<a href="entropie.html#ref-Chao2010a" role="doc-biblioref">2010</a>)</span> conseillent d’utiliser le deuxième estimateur dès que <span class="math inline">\({\hat{\gamma}}^2_\mathit{rare}\)</span> dépasse 0,8.
+L’estimateur ACE donne normalement une valeur plus grande que Chao1.
+Si ce n’est pas le cas, la limite des espèces rares <span class="math inline">\(\kappa\)</span> doit être augmentée.</p>
+</div>
+<div id="lestimateur-jackknife" class="section level4" number="3.1.1.3">
+<h4>
+<span class="header-section-number">3.1.1.3</span> L’estimateur jackknife<a class="anchor" aria-label="anchor" href="#lestimateur-jackknife"><i class="fas fa-link"></i></a>
+</h4>
+<p>La méthode jackknife a pour objectif de réduire le biais d’un estimateur en considérant des jeux de données dans lesquels on a supprimé un certain nombre d’observations (ce nombre est l’<em>ordre</em> de la méthode).
+Burnham et Overton <span class="citation">(<a href="entropie.html#ref-Burnham1978" role="doc-biblioref">1978</a>, <a href="entropie.html#ref-Burnham1979" role="doc-biblioref">1979</a>)</span> ont utilisé cette technique pour obtenir des estimateurs du nombre d’espèces, appelés jackknife à l’ordre <span class="math inline">\(j\)</span>, prenant en compte les valeurs de <span class="math inline">\(f_1\)</span> à <span class="math inline">\(f_j\)</span>.
+Les estimateurs du premier et du deuxième ordre sont les plus utilisés en pratique :</p>
+<p><span class="math display" id="eq:Jack1">\[\begin{equation}
+  \tag{3.18}
+  \hat{S}_\mathit{J1} = {f_{&gt;0}} + \frac{\left( n - 1 \right) f_1}{n},
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:Jack2">\[\begin{equation}
+  \tag{3.19}
+  \hat{S}_\mathit{J2}
+  = {f_{&gt;0}} + \frac{\left( 2n - 3 \right) f_1}{n}
+    - \frac{{\left( n - 2 \right)}^2 f_2}{n \left( n - 1 \right)}.
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:Jack3">\[\begin{equation}
+  \tag{3.20}
+  \hat{S}_\mathit{J3}
+  = {f_{&gt;0}} + \frac{\left( 3n - 6 \right) f_1}{n}
+    - \frac{\left( 3n^2 - 15n +19 \right) f_2}{n \left( n - 1 \right)}
+    + \frac{{\left( n - 3 \right)}^3 f_3}{n \left( n - 1 \right) \left( n - 2 \right)}.
+\end{equation}\]</span></p>
+<p>Augmenter l’ordre du jackknife diminue le biais mais augmente la variance de l’estimateur.</p>
+<p><span class="citation">Chao (<a href="entropie.html#ref-Chao1984" role="doc-biblioref">1984</a>)</span> a montré que les estimateurs jackknife pouvaient être retrouvés par approximation de l’indice Chao1.</p>
+<p>La variance du jackknife d’ordre 1 est <span class="citation">(<a href="entropie.html#ref-Heltshe1983" role="doc-biblioref">Heltshe and Forrester 1983</a>)</span>
+<span class="math display" id="eq:VarJack1">\[\begin{equation}
+  \tag{3.21}
+  \operatorname{Var}{\left( \hat{S}_\mathit{J1} \right)}
+  = \frac{n - 1}{n} \left( \sum_{j = 1}^{n}{j^2 f_j} - \frac{f_{&gt;0}^2}{n} \right).
+\end{equation}\]</span></p>
+<p>L’estimateur est construit à partir de l’hypothèse selon laquelle le nombre d’espèces non observées est de la forme
+<span class="math display">\[f_0(n) = \sum_{i = 1}^{\infty}{\frac{a_i}{n^i}},\]</span></p>
+<p>où la notation <span class="math inline">\(f_0(n)\)</span> est utilisée pour expliciter sa dépendance à l’effort d’échantillonnage.</p>
+<p>Pour cette raison, <span class="citation">Cormack (<a href="entropie.html#ref-Cormack1989" role="doc-biblioref">1989</a>)</span> affirme qu’il n’a pas de support théorique solide.
+L’espérance du nombre d’espèces non observées est (eq. <a href="chap-MesuresNeutres.html#eq:Esnnu">(3.2)</a>) <span class="math inline">\(\sum_s{(1 - p_s)^n}\)</span>, qui décroît beaucoup plus rapidement que <span class="math inline">\(\sum_{i}{{a_i}/{n^i}}\)</span>: l’hypothèse est bien fausse.
+En revanche, pour une gamme de <span class="math inline">\(n\)</span> fixée (de la taille de l’inventaire à une taille suffisante pour approcher la richesse asymptotique par exemple), il est toujours possible d’écrire le nombre d’espèces non observées sous la forme d’une série de puissances négatives de <span class="math inline">\(n\)</span>, comme dans l’illustration ci-dessous.</p>
+<p>Une communauté log-normale, similaire à BCI (300 espèces, écart-type égal à 2) est simulée et un échantillon de 1000 individus est tiré.</p>
+<p></p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ecart-type</span></span>
+<span><span class="va">sdlog</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="co"># Nombre d'espèces</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fl">300</span></span>
+<span><span class="co"># Tirage des probabilités log-normales</span></span>
+<span><span class="va">lnorm_abd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">S</span>, <span class="fl">0</span>, <span class="va">sdlog</span><span class="op">)</span></span>
+<span><span class="va">lnorm_prob</span> <span class="op">&lt;-</span> <span class="va">lnorm_abd</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lnorm_abd</span><span class="op">)</span></span>
+<span><span class="co"># Taille de l'échantillon</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="co"># Tirage d'un échantillon</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="va">abundances</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/rcommunity.html">rcommunity</a></span><span class="op">(</span><span class="fl">1</span>, size <span class="op">=</span> <span class="va">n</span>, prob <span class="op">=</span> <span class="va">lnorm_prob</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>L’échantillon est présenté en figure <a href="chap-MesuresNeutres.html#fig:BiaisJack1Fig">3.1</a>.</p>
+<p>Code de la figure <a href="chap-MesuresNeutres.html#fig:BiaisJack1Fig">3.1</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">abundances</span>, fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution<span class="op">=</span><span class="st">"lnorm"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:BiaisJack1Fig"></span>
+<img src="MesuresBD_files/figure-html/BiaisJack1Fig-1.png" alt="Echantillon de 1000 individus tiré dans une communauté log-normale." width="80%"><p class="caption">
+Figure 3.1: Echantillon de 1000 individus tiré dans une communauté log-normale.
+</p>
+</div>
+<p></p>
+<p>Il est possible de vérifier que l’espérance du nombre d’espèces non observées correspond bien à la moyenne des observations.</p>
+<p></p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Espérance des espèces non vues</span></span>
+<span><span class="va">E0</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">lnorm_prob</span><span class="op">)</span><span class="op">^</span><span class="va">n</span></span>
+<span><span class="op">(</span><span class="va">f0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">E0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 169.7165</code></pre>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Tirage de 1000 échantillons, nombre moyen d'espèces observées</span></span>
+<span><span class="op">(</span><span class="va">s_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Multinom.html">rmultinom</a></span><span class="op">(</span><span class="fl">1000</span>, size <span class="op">=</span> <span class="va">n</span>, prob <span class="op">=</span> <span class="va">lnorm_prob</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 130.37</code></pre>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Vérification: nombre d'espèces observées en moyenne et non observées</span></span>
+<span><span class="va">s_obs</span> <span class="op">+</span> <span class="va">f0</span></span></code></pre></div>
+<pre><code>## [1] 300.0865</code></pre>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Nombre total d'espèces dans la communauté</span></span>
+<span><span class="op">(</span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lnorm_prob</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 300</code></pre>
+<p></p>
+<p>Le nombre d’espèces non observées peut être écrit sous la forme d’une série de puissances négatives de <span class="math inline">\(n\)</span>, comme le prévoit le jackknife, entre deux valeurs de <span class="math inline">\(n\)</span> fixées.</p>
+<p></p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Echantillonnage de 500 à 5000 individus</span></span>
+<span><span class="va">n_seq</span> <span class="op">&lt;-</span> <span class="fl">500</span><span class="op">:</span><span class="fl">5000</span></span>
+<span><span class="co"># Calcul du nombre d'espèces non observées</span></span>
+<span><span class="va">bias</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">n_seq</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">lnorm_prob</span><span class="op">)</span><span class="op">^</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Le nombre d’espèces non observées, qui est le biais de l’estimateur de la richesse, est présenté en figure <a href="chap-MesuresNeutres.html#fig:BiaisJack3Fig">3.2</a>.</p>
+<p>La courbe peut être approchée par une série de puissances négatives de <span class="math inline">\(n\)</span> dont quelques termes sont présentés sur la figure.</p>
+<p></p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ordre 1</span></span>
+<span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bias</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span>  <span class="op">/</span><span class="va">n_seq</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Ordre 2</span></span>
+<span><span class="va">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bias</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Ordre 4</span></span>
+<span><span class="va">lm4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span></span>
+<span>  <span class="va">bias</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">^</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_seq</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Les termes <span class="math inline">\(a_i\)</span> de la série de puissances négatives sont estimées par des modèles linéaires.
+A l’ordre 1, le modèle <em>lm1</em> fournit une approximation grossière du nombre d’espèces non observées avec un seul terme (<span class="math inline">\(f_0(n) \approx a_1 / n\)</span>).
+Le modèle s’appproche de plus en plus des données en augmentant le nombre de terme.
+Le modèle <em>lm4</em> contient 4 termes <span class="math inline">\(a_1\)</span> à <span class="math inline">\(a_4\)</span> :</p>
+<p></p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm4</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
+<pre><code>##    I(1/n_seq)  I(1/n_seq^2)  I(1/n_seq^3)  I(1/n_seq^4) 
+##  5.663927e+05 -8.042330e+08  5.199467e+11 -1.184486e+14</code></pre>
+<p>
+A partir de 6 termes, les valeurs du biais d’estimation sont presque parfaitement estimées.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:BiaisJack3Fig"></span>
+<img src="MesuresBD_files/figure-html/BiaisJack3Fig-1.png" alt="Nombre d’espèces non observées dans un échantillon de taille croissante et sa décomposition en séries de puissances négatives de \(n\). Le nombre d’espèces non observées est représenté par la courbe continue. Les séries de puissances négatives d’ordre 1, 2 et 4, notées lm1 à lm4, sont représentées en pointillés. Les courbes d’ordre 6 et plus sont confondues avec la courbe noire." width="80%"><p class="caption">
+Figure 3.2: Nombre d’espèces non observées dans un échantillon de taille croissante et sa décomposition en séries de puissances négatives de <span class="math inline">\(n\)</span>. Le nombre d’espèces non observées est représenté par la courbe continue. Les séries de puissances négatives d’ordre 1, 2 et 4, notées <em>lm1</em> à <em>lm4</em>, sont représentées en pointillés. Les courbes d’ordre 6 et plus sont confondues avec la courbe noire.
+</p>
+</div>
+<p></p>
+<p>Code de la figure <a href="chap-MesuresNeutres.html#fig:BiaisJack3Fig">3.2</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="va">n_seq</span>, </span>
+<span>  Biais <span class="op">=</span> <span class="va">bias</span>, </span>
+<span>  lm1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span>,</span>
+<span>  lm2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">)</span>, </span>
+<span>  lm4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm4</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">n</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">name</span>, lty <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">coord_cartesian</span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span></span>
+<span>      color <span class="op">=</span> <span class="st">"Nombre d'espèces"</span>, </span>
+<span>      lty <span class="op">=</span> <span class="st">"Nombre d'espèces"</span>,</span>
+<span>      y <span class="op">=</span> <span class="st">"Nombre d'espèces"</span></span>
+<span>    <span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>L’ajustement est possible pour des valeurs de <span class="math inline">\(n\)</span> différentes mais les coefficients <span class="math inline">\(a_i\)</span> sont alors différents : la forme du biais n’est valide que pour une gamme de valeurs de <span class="math inline">\(n\)</span> fixée.</p>
+<p><span class="citation">Béguinot (<a href="entropie.html#ref-Beguinot2016" role="doc-biblioref">2016</a>)</span> apporte un autre argument important en faveur du jackknife.
+À condition que <span class="math inline">\(n\)</span> soit suffisamment grand, l’estimateur du nombre d’espèces non observées est une fonction linéaire du nombre d’espèces observées <span class="math inline">\(\nu\)</span> fois : <span class="math inline">\(f_1\)</span> pour le jackknife 1, <span class="math inline">\(2 f_1 - f_2\)</span> pour le jackknife 2 et ainsi de suite pour les ordres suivants, contrairement à l’estimateur de Chao.
+Grâce à cette propriété, l’estimateur du jackknife est additif quand plusieurs groupes d’espèces disjoints sont pris en compte : l’estimation du nombre d’espèces de papillons et de scarabées inventoriées ensemble est égale à la somme des estimations des deux groupes inventoriés séparément.
+Ce n’est pas le cas pour l’estimateur de Chao.</p>
+<p>L’estimateur du jackknife est très utilisé parce qu’il est efficace en pratique, notamment parce que son ordre peut être adapté aux données.</p>
+</div>
+<div id="lestimateur-du-bootstrap" class="section level4" number="3.1.1.4">
+<h4>
+<span class="header-section-number">3.1.1.4</span> L’estimateur du bootstrap<a class="anchor" aria-label="anchor" href="#lestimateur-du-bootstrap"><i class="fas fa-link"></i></a>
+</h4>
+<p>L’estimateur du bootstrap <span class="citation">(<a href="entropie.html#ref-Smith1984" role="doc-biblioref">E. P. Smith and Belle 1984</a>)</span> est
+<span class="math display" id="eq:Smith1984">\[\begin{equation}
+  \tag{3.22}
+  \hat{S}_\mathit{b} = {f_{&gt;0}} + \sum_s{(1 - p_s)^n}.
+\end{equation}\]</span></p>
+<p>Il est peu utilisé parce que le jackknife est plus performant <span class="citation">(<a href="entropie.html#ref-Colwell1994" role="doc-biblioref">Colwell and Coddington 1994</a>)</span>.</p>
+</div>
+<div id="calcul" class="section level4" number="3.1.1.5">
+<h4>
+<span class="header-section-number">3.1.1.5</span> Calcul<a class="anchor" aria-label="anchor" href="#calcul"><i class="fas fa-link"></i></a>
+</h4>
+<p>Ces estimateurs peuvent être calculés de façon relativement simple à l’aide du logiciel SPADE, dans sa version pour R <span class="citation">(<a href="entropie.html#ref-Chao2016c" role="doc-biblioref">Chao et al. 2016</a>)</span>.
+Le guide de l’utilisateur présente quelques estimateurs supplémentaires et des directives pour choisir.
+Il est conseillé d’utiliser Chao1 pour une estimation minimale, et ACE pour une estimation moins biaisée de la richesse.</p>
+<p>Les intervalles de confiance de chaque estimateur sont calculés par bootstrap : même quand la variance d’un estimateur est connue, sa loi ne l’est généralement pas, et le calcul analytique de l’intervalle de confiance n’est pas possible.</p>
+<p>Les estimateurs et leurs intervalles de confiance peuvent également être calculés avec le package <em>vegan</em> qui dispose pour cela de deux fonctions : <code>specpool</code> et <code>estimateR</code>.</p>
+<p><code>specpool</code> est basé sur les incidences des espèces dans un ensemble de sites d’observation et donne une estimation unique de la richesse selon les méthodes Chao2, jackknife (ordre 1 et 2) et bootstrap.
+L’écart-type de l’estimateur est également fourni par la fonction, sauf pour le jackknife d’ordre 2.</p>
+<p><code>estimateR</code> est basé sur les abondances des espèces et retourne un estimateur de la richesse spécifique par site et non global comme <code>specpool</code>.</p>
+</div>
+<div id="exemple" class="section level4" number="3.1.1.6">
+<h4>
+<span class="header-section-number">3.1.1.6</span> Exemple<a class="anchor" aria-label="anchor" href="#exemple"><i class="fas fa-link"></i></a>
+</h4>
+<p>On utilise les données de Barro Colorado Island (BCI).
+La parcelle a été divisée en carrés de 1 ha.
+Le tableau d’entrée est un <code>dataframe</code> contenant, pour chaque espèce d’arbres (<span class="math inline">\(\mathit{DBH}\ge\)</span> 10 cm), ses effectifs par carré.</p>
+<p>On charge le tableau de données :</p>
+<p></p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/vegandevs/vegan">"vegan"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>On utilise la fonction <code>estimateR</code> pour calculer la richesse des deux premiers carrés :</p>
+<p></p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/specpool.html">estimateR</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                   1          2
+## S.obs     93.000000  84.000000
+## S.chao1  117.473684 117.214286
+## se.chao1  11.583785  15.918953
+## S.ACE    122.848959 117.317307
+## se.ACE     5.736054   5.571998</code></pre>
+<p></p>
+<p>Le package <em>SPECIES</em> <span class="citation">(<a href="entropie.html#ref-Wang2011" role="doc-biblioref">Wang 2011</a>)</span> permet de calculer les estimateurs jackknife d’ordre supérieur à 2 et surtout choisit l’ordre qui fournit le meilleur compromis entre biais et variance.</p>
+<p>Comparaison des fonctions sur l’ensemble du dispositif BCI (<span class="math inline">\(f_{&gt;0}=225\)</span>, <span class="math inline">\(f_1=19\)</span>) :</p>
+<p></p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/specpool.html">specpool</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     Species     chao chao.se  jack1 jack1.se    jack2
+## All     225 236.3732 6.54361 245.58 5.650522 247.8722
+##         boot  boot.se  n
+## All 235.6862 3.468888 50</code></pre>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"SPECIES"</span><span class="op">)</span></span>
+<span><span class="co"># Distribution du nombre d'espèces (vecteur: </span></span>
+<span><span class="co"># noms = nombre d'individus</span></span>
+<span><span class="co"># valeurs = nombres d'espèces ayant ce nombre d'individus)</span></span>
+<span><span class="va">bci_abd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span>
+<span><span class="co"># Mise au format requis (matrice:</span></span>
+<span><span class="co"># colonne 1 = nombre d'individus</span></span>
+<span><span class="co"># colonne 2 = nombres d'espèces ayant ce nombre d'individus)</span></span>
+<span><span class="co"># par la fonction abd_freq_count dans divent</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SPECIES/man/jackknife.html">jackknife</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/abd_freq_count.html">abd_freq_count</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Your specified order is larger than that determined by the test, 
+## Therefore the order from the test is used.</code></pre>
+<pre><code>## $JackknifeOrder
+## [1] 1
+## 
+## $Nhat
+## [1] 244
+## 
+## $SE
+## [1] 6.164414
+## 
+## $CI
+##       lb  ub
+## [1,] 232 256</code></pre>
+<p></p>
+<p>Comparaison avec la valeur de l’équation <a href="chap-MesuresNeutres.html#eq:Jack1">(3.18)</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Nombre d'espèces par effectif observé</span></span>
+<span><span class="va">bci_abd_freq_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">bci_abd</span>, <span class="va">bci_abd</span>, <span class="va">length</span><span class="op">)</span></span>
+<span><span class="co"># Calcul direct de Jack1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">bci_abd_freq_count</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="va">bci_abd_freq_count</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        1 
+## 243.9991</code></pre>
+<p></p>
+<p>La valeur du jackknife 1 fournie par <code>specpool</code> est fausse.
+La fonction <code>jackknife</code> de <em>SPECIES</em> donne le bon résultat, avec un intervalle de confiance calculé en supposant que la distribution est normale (<span class="math inline">\(\pm\)</span> 1,96 écart-type au seuil de <span style="white-space:nowrap">95 %)</span></p>
+<p>L’estimateur du bootstrap est calculable simplement :</p>
+<p></p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Effectif total</span></span>
+<span><span class="va">bci_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span></span>
+<span><span class="co"># Probabilités</span></span>
+<span><span class="va">bci_prob</span> <span class="op">&lt;-</span> <span class="va">bci_abd</span> <span class="op">/</span> <span class="va">bci_n</span></span>
+<span><span class="co"># Estimateur du bootstrap</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">bci_prob</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">bci_prob</span><span class="op">)</span><span class="op">^</span><span class="va">bci_n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 234.3517</code></pre>
+<p></p>
+</div>
+<div id="sec-ChoixEstimateur" class="section level4" number="3.1.1.7">
+<h4>
+<span class="header-section-number">3.1.1.7</span> Choix de l’estimateur<a class="anchor" aria-label="anchor" href="#sec-ChoixEstimateur"><i class="fas fa-link"></i></a>
+</h4>
+<p>Des tests empiriques poussés ont été menés par <span class="citation">Brose, Martinez, and Williams (<a href="entropie.html#ref-Brose2003" role="doc-biblioref">2003</a>)</span> pour permettre le choix du meilleur estimateur de la richesse en fonction de la complétude de l’échantillonnage <span class="math inline">\(f_{&gt;0}/{S}\)</span>.
+Les auteurs appellent cette proportion couverture (<em>coverage</em>).
+Le terme <em>completeness</em> a été proposé par <span class="citation">Beck and Schwanghart (<a href="entropie.html#ref-Beck2010" role="doc-biblioref">2010</a>)</span> pour éviter la confusion avec le taux de couverture défini par Good (vu en section <a href="chap-Notions.html#sec-Couverture">1.5</a>).
+La complétude est inférieure à la couverture : toutes les espèces ont le même poids alors que les espèces manquantes sont plus rares et pénalisent moins le taux de couverture.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:Brose2003"></span>
+<img src="images/Brose2003.png" alt="Arbre de décision du meilleur estimateur du nombre d’espèces." width="80%"><p class="caption">
+Figure 3.3: Arbre de décision du meilleur estimateur du nombre d’espèces.
+</p>
+</div>
+<p></p>
+<p>Dans tous les cas, les estimateurs jackknife sont les meilleurs.
+L’arbre de décision est en figure <a href="chap-MesuresNeutres.html#fig:Brose2003">3.3</a> <span class="citation">(<a href="entropie.html#ref-Brose2003" role="doc-biblioref">Brose, Martinez, and Williams 2003, fig. 6</a>)</span>.
+Le choix dépend principalement de la complétude (<em>coverage</em> sur la figure).
+Une première estimation est nécessaire par plusieurs estimateurs.
+Si les résultats sont cohérents, choisir un estimateur jackknife d’ordre d’autant plus faible que la complétude est grande.
+Au-delà de 96%, le nombre d’espèces observé est plus performant parce que les jackknifes surestiment <span class="math inline">\(S\)</span>.
+S’ils sont incohérents (intervalle des estimations supérieur à 50 % de leur moyenne), le critère majeur est l’équitabilité (voir section <a href="#sec-Equitabilite"><strong>??</strong></a>).
+Si elle est faible (de l’ordre de 0,5 à 0,6), les estimateurs jackknife 2 à 4 sont performants, l’ordre diminuant avec l’intensité d’échantillonnage (forte : 10%, faible : 0,5 % de la communauté).
+Pour une forte équitabilité (0,8 à 0,9), on préférera jackknife 1 ou 2.</p>
+<p>Pour BCI, le nombre d’espèces estimé par jackknife 1 est 244.
+La complétude est <span class="math inline">\({225}/{244} = 92\%\)</span>, dans le domaine de validité du jackknife 1 (74 % à <span style="white-space:nowrap">96 %)</span> qui est donc le bon estimateur.</p>
+<p>La parcelle 6 de Paracou nécessite l’estimateur jackknife 2 :</p>
+<p></p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator   order diversity
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Jackknife 2     0       473</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Complétude</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"naive"</span>, as_numeric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span>, as_numeric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.7082452</code></pre>
+<p></p>
+<p><span class="citation">Chiu et al. (<a href="entropie.html#ref-Chiu2014a" role="doc-biblioref">2014</a>)</span>, à partir d’autres simulations, préfèrent l’utilisation de l’estimateur <em>iChao1</em>.
+Quand l’échantillonnage est suffisant, les estimateurs de Chao ont l’avantage de posséder une base théorique solide et de fournir une borne inférieure du nombre d’espèces possible.
+Dans ce cas, les estimations du jackknife d’ordre 1 sont cohérentes avec celles de Chao.
+En revanche, quand l’échantillonnage est insuffisant, l’estimateur jackknife d’ordre supérieur à 1 permet de réduire le biais d’estimation, au prix d’une variance accrue <span class="citation">(<a href="entropie.html#ref-Marcon2015a" role="doc-biblioref">Marcon 2015</a>)</span>.</p>
+<p>Enfin, Beguinot <span class="citation">(<a href="entropie.html#ref-Beguinot2015a" role="doc-biblioref">2015</a>, <a href="entropie.html#ref-Beguinot2016" role="doc-biblioref">2016</a>)</span> suggère d’utiliser en règle générale le jackknife 2 (mais ne traite pas les cas dans lesquels l’échantillonnage est trop faible pour justifier un ordre supérieur) tant que le nombre de singletons est supérieur à <span class="math inline">\(2-\sqrt(2) \approx 0,6\)</span> fois le nombre de doubletons.
+Le ratio des singletons sur les doubletons diminue quand l’échantillonnage approche de l’exhaustivité.
+Quand le seuil de 0,6 est dépassé, la valeur de l’estimateur de Chao devient supérieur au jackknife 2 et doit être utilisé.
+Ce seuil est cohérent avec les règles de <span class="citation">Brose, Martinez, and Williams (<a href="entropie.html#ref-Brose2003" role="doc-biblioref">2003</a>)</span>.</p>
+</div>
+<div id="sec-Extrapol" class="section level4" number="3.1.1.8">
+<h4>
+<span class="header-section-number">3.1.1.8</span> Prédiction de la richesse d’un nouvel échantillon<a class="anchor" aria-label="anchor" href="#sec-Extrapol"><i class="fas fa-link"></i></a>
+</h4>
+<p>La prédiction du nombre d’espèces <span class="math inline">\(\hat{S'}\)</span> découvert dans une nouvelle placette d’un habitat dans lequel on a déjà échantillonné est une question importante, par exemple pour évaluer le nombre d’espèces préservées dans le cadre d’une mise en réserve, ou évaluer le nombre d’espèces perdues en réduisant la surface d’une forêt.</p>
+<p><span class="citation">Shen, Chao, and Lin (<a href="entropie.html#ref-Shen2003" role="doc-biblioref">2003</a>)</span> proposent un estimateur et le confrontent avec succès à des estimateurs antérieurs.
+On note <span class="math inline">\(\hat{f_0}(n)\)</span> l’estimateur du nombre d’espèces non observées dans le premier échantillon, et <span class="math inline">\(\hat{C}\)</span> l’estimateur de son taux de couverture.
+L’estimateur du nombre d’espèces du nouvel échantillon de <span class="math inline">\(n'\)</span> individus est</p>
+<p><span class="math display">\[\begin{equation}
+  \hat{S'}
+  = \hat{f_0}(n) \left[
+    1 - {\left( 1 - \frac{1 - \hat{C}}{\hat{f_0}(n)} \right)}^{n'}
+  \right].
+\end{equation}\]</span></p>
+<p><span class="math inline">\(\hat{f_0}(n)\)</span> est obtenu par la différence entre les nombres d’espèces estimé et observé : <span class="math inline">\(\hat{f_0}(n) = \hat{S} - f_{&gt;0}(n)\)</span>.</p>
+<p>Exemple de BCI, suite : combien de nouvelles espèces seront découvertes en échantillonnant <span style="white-space:nowrap">plus ?</span></p>
+<p></p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Espèces non observées</span></span>
+<span><span class="va">bci_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pull</span><span class="op">(</span><span class="va">diversity</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">`-`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span></span>
+<span>  <span class="va">bci_f_0</span></span></code></pre></div>
+<pre><code>## [1] 19</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Taux de couverture</span></span>
+<span><span class="va">bci_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="va">coverage</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pull</span><span class="op">(</span><span class="va">coverage</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="va">print</span> <span class="op">-&gt;</span> </span>
+<span>  <span class="va">bci_C</span></span></code></pre></div>
+<pre><code>## [1] 0.9991146</code></pre>
+<p></p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:NonObsNFig"></span>
+<img src="MesuresBD_files/figure-html/NonObsNFig-1.png" alt="Nombre de nouvelles espèces découvertes en fonction de l’effort d’échantillonnage supplémentaire (données de BCI). Seulement 7 nouvelles espèces seront observées en échantillonnant 10000 arbres supplémentaires (environ 25 ha en plus des 50 ha de la parcelle qui contiennent 225 espèces)." width="80%"><p class="caption">
+Figure 3.4: Nombre de nouvelles espèces découvertes en fonction de l’effort d’échantillonnage supplémentaire (données de BCI). Seulement 7 nouvelles espèces seront observées en échantillonnant 10000 arbres supplémentaires (environ 25 ha en plus des 50 ha de la parcelle qui contiennent 225 espèces).
+</p>
+</div>
+<p></p>
+<p>Le taux de couverture de l’inventaire de BCI est très proche de 100%, donc peu de nouvelles espèces seront découvertes en augmentant l’effort d’échantillonnage.
+La courbe obtenue est en figure <a href="chap-MesuresNeutres.html#fig:NonObsNFig">3.4</a>.</p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Nouvelles espèces en fonction du nombre de nouveaux individus</span></span>
+<span><span class="va">S_prime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n_prime</span>, <span class="va">f_0</span>, <span class="va">C</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">f_0</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">C</span><span class="op">)</span> <span class="op">/</span> <span class="va">f_0</span><span class="op">)</span><span class="op">^</span><span class="va">n_prime</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># Graphique</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">stat_function</span><span class="op">(</span></span>
+<span>    fun <span class="op">=</span> <span class="va">S_prime</span>, </span>
+<span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>f_0 <span class="op">=</span> <span class="va">bci_f_0</span>, C <span class="op">=</span> <span class="va">bci_C</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"n'"</span>, y <span class="op">=</span> <span class="st">"S'"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>La question de l’extrapolation de la richesse est traitée plus en détail dans les sections <a href="#sec-RarExtrapol"><strong>??</strong></a> et <a href="#sec-Extrapolation"><strong>??</strong></a>.</p>
+</div>
+</div>
+<div id="inférence-du-nombre-despèces-à-partir-de-la-sad" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Inférence du nombre d’espèces à partir de la SAD<a class="anchor" aria-label="anchor" href="#inf%C3%A9rence-du-nombre-desp%C3%A8ces-%C3%A0-partir-de-la-sad"><i class="fas fa-link"></i></a>
+</h3>
+<div id="distribution-de-preston" class="section level4" number="3.1.2.1">
+<h4>
+<span class="header-section-number">3.1.2.1</span> Distribution de Preston<a class="anchor" aria-label="anchor" href="#distribution-de-preston"><i class="fas fa-link"></i></a>
+</h4>
+<p><span class="citation">Preston (<a href="entropie.html#ref-Preston1948" role="doc-biblioref">1948</a>)</span> fournit dès l’introduction de son modèle log-normal une technique d’estimation du nombre total d’espèces par la célèbre méthode des octaves.
+Elle est disponible dans le package <em>vegan</em> :</p>
+<p></p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/fisherfit.html">veiledspec</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Extrapolated     Observed       Veiled 
+##    235.40577    225.00000     10.40577</code></pre>
+<p></p>
+<p>L’ajustement direct du modèle aux données, sans regroupement par octaves <span class="citation">(<a href="entropie.html#ref-Williamson2005" role="doc-biblioref">Williamson and Gaston 2005</a>)</span>, est également possible (figure <a href="chap-MesuresNeutres.html#fig:PrestonSansOFig">3.5</a>) :</p>
+<p></p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bci_preston</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/fisherfit.html">prestondistr</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/fisherfit.html">veiledspec</a></span><span class="op">(</span><span class="va">bci_preston</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Extrapolated     Observed       Veiled 
+##   230.931018   225.000000     5.931018</code></pre>
+<p></p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:PrestonSansOFig"></span>
+<img src="MesuresBD_files/figure-html/PrestonSansOFig-1.png" alt="Ajustement du modèle de Preston aux données de BCI." width="80%"><p class="caption">
+Figure 3.5: Ajustement du modèle de Preston aux données de BCI.
+</p>
+</div>
+<p></p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">bci_preston</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+</div>
+<div id="maximum-de-vraisemblance-dune-distribution-de-fisher" class="section level4" number="3.1.2.2">
+<h4>
+<span class="header-section-number">3.1.2.2</span> Maximum de vraisemblance d’une distribution de Fisher<a class="anchor" aria-label="anchor" href="#maximum-de-vraisemblance-dune-distribution-de-fisher"><i class="fas fa-link"></i></a>
+</h4>
+<p><span class="citation">Norris and Pollock (<a href="entropie.html#ref-Norris1998" role="doc-biblioref">1998</a>)</span> supposent que la distribution des espèces suit le modèle de Fisher (voir chapitre <a href="#chap-Fisher"><strong>??</strong></a>) et infèrent le nombre d’espèces par maximum de vraisemblance non paramétrique (ils ne cherchent pas à inférer les paramètres de la loi de probabilité de <span class="math inline">\(p_s\)</span> mais seulement à ajuster au mieux le modèle de Poisson aux valeurs de <span class="math inline">\({\hat{p}}_s\)</span> observées).</p>
+<p>Le calcul est possible avec la librairie <em>SPECIES</em> de R :</p>
+<p></p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Mise au format requis (matrice:</span></span>
+<span><span class="co"># colonne 1 = nombre d'individus</span></span>
+<span><span class="co"># colonne 2 = nombres d'espèces ayant ce nombre d'individus)</span></span>
+<span><span class="va">bci_abd_freq_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/abd_freq_count.html">abd_freq_count</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Regroupement de la queue de distribution: la longueur du vecteur est limitée à 25 pour alléger les calculs.</span></span>
+<span><span class="va">bci_abd_freq_count</span><span class="op">[</span><span class="fl">25</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span></span>
+<span>  <span class="va">bci_abd_freq_count</span><span class="op">[</span><span class="fl">25</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">bci_abd_freq_count</span><span class="op">)</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">bci_abd_freq_count</span> <span class="op">&lt;-</span> <span class="va">bci_abd_freq_count</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SPECIES/man/unpmle.html">unpmle</a></span><span class="op">(</span><span class="va">bci_abd_freq_count</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Method: Unconditional NPMLE method by Norris and Pollock 1996, 1998, 
+##         using algorithm by Wang and Lindsay 2005: 
+## 
+##         MLE=                                239 
+##         Estimated Poisson mixture components:       
+##         p=                                  1.10372 3.595437 10.60832 
+##         pi=                                 0.402579 0.2525368 0.3448842</code></pre>
+<pre><code>## $Nhat
+## [1] 239</code></pre>
+<p></p>
+<p>Le problème de cette méthode d’estimation est qu’elle diverge fréquemment.
+Les calculs n’aboutissent pas si la queue de distribution n’est pas regroupée (il existe 108 valeurs différentes de <span class="math inline">\(n_s\)</span> dans l’exemple de BCI : aucune des fonctions de <em>SPECIES</em> ne fonctionne en l’état).</p>
+<p><span class="citation">Wang et al. (<a href="entropie.html#ref-Wang2005" role="doc-biblioref">2005</a>)</span> ont amélioré sa stabilité en pénalisant le calcul de la vraisemblance :</p>
+<p></p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SPECIES/man/pnpmle.html">pnpmle</a></span><span class="op">(</span><span class="va">bci_abd_freq_count</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Method: Penalized NPMLE method by  Wang and Lindsay 2005. 
+## 
+##         MLE=                                243 
+##         Estimated zero-truncated Poisson mixture components:       
+##         p=                                  0.9033625 3.397048 10.59029 
+##         pi=                                 0.2771211 0.3208847 0.4019942</code></pre>
+<pre><code>## $Nhat
+## [1] 243</code></pre>
+<p></p>
+<p>Enfin, <span class="citation">Wang (<a href="entropie.html#ref-Wang2010" role="doc-biblioref">2010</a>)</span> perfectionne la technique d’estimation en supposant que les <span class="math inline">\(p_s\)</span> suivent une loi gamma et en estimant aussi ses paramètres.
+La souplesse de la loi gamma permet d’ajuster le modèle à des lois diverses et l’estimateur de Wang est très performant.</p>
+<p>Il est disponible dans <em>SPECIES</em> : fonction <code>pcg</code>.
+Son défaut est qu’il nécessite un très long temps de calcul (plusieurs heures selon les données).</p>
+<p></p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Calcul long</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SPECIES/man/pcg.html">pcg</a></span><span class="op">(</span><span class="va">bci_abd_freq_count</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+</div>
+</div>
+<div id="sec-RichesseSAC" class="section level3" number="3.1.3">
+<h3>
+<span class="header-section-number">3.1.3</span> Inférence du nombre d’espèces à partir de courbes d’accumulation<a class="anchor" aria-label="anchor" href="#sec-RichesseSAC"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cette approche consiste à extrapoler la courbe d’accumulation observée.</p>
+<p>Le modèle le plus connu est celui de Michaelis-Menten <span class="citation">(<a href="entropie.html#ref-Michaelis1913" role="doc-biblioref">Michaelis and Menten 1913</a>)</span> proposé par <span class="citation">Clench (<a href="entropie.html#ref-Clench1979" role="doc-biblioref">1979</a>)</span>.
+En fonction de l’effort d’échantillonnage <span class="math inline">\(n\)</span>, évalué en temps (il s’agit de la collecte de papillons), le nombre d’espèces découvert augmente jusqu’à une asymptote égale au nombre d’espèces total :</p>
+<p><span class="math display">\[\begin{equation}
+  S(n) = S\frac{n}{K + n}.
+\end{equation}\]</span></p>
+<p><span class="math inline">\(K\)</span> est une constante, que Clench relie à la difficulté de collecte.</p>
+<p>L’estimation empirique du modèle de Michaelis-Menten peut être faite avec R<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt; Fiche TD de J.R. Lobry : &lt;a href="http://pbil.univ-lyon1.fr/R/pdf/tdr47.pdf" class="uri"&gt;http://pbil.univ-lyon1.fr/R/pdf/tdr47.pdf&lt;/a&gt;&lt;/p&gt;'><sup>3</sup></a>.
+Les 50 carrés de BCI sont utilisés pour fabriquer une courbe d’accumulation :</p>
+<p></p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Cumul de l'inventaire</span></span>
+<span><span class="co"># Nombre d'arbres par espèce, cumulé par carré</span></span>
+<span><span class="va">bci_cumul_n_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">BCI</span>, <span class="fl">2</span>, <span class="va">cumsum</span><span class="op">)</span></span>
+<span><span class="co"># Nombre d'arbres cumulé par carré</span></span>
+<span><span class="va">bci_cumul_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Nombre total d'arbres</span></span>
+<span><span class="va">bci_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span>
+<span><span class="co"># Nombre d'espèces cumulées par carré</span></span>
+<span><span class="va">bci_cumul_S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">bci_cumul_n_s</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Le modèle est ajusté par <code>nlsfit</code>.
+Des valeurs de départ doivent être fournies pour <span class="math inline">\(K\)</span> et <span class="math inline">\(\hat{S}\)</span>.
+<span class="math inline">\(K\)</span> est la valeur de <span class="math inline">\(n\)</span> correspondant à <span class="math inline">\(\hat{S}^{n} = \hat{S} / 2\)</span>.
+Une approximation suffisante est <span class="math inline">\(n / 4\)</span>.
+Pour <span class="math inline">\(\hat{S}\)</span>, le nombre total d’espèces inventoriées est un bon choix.
+Le résultat se trouve en figure <a href="chap-MesuresNeutres.html#fig:SobLLorFig">3.7</a>.</p>
+<p></p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ajustement du modèle</span></span>
+<span><span class="op">(</span><span class="va">nlsfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span><span class="op">(</span></span>
+<span>  <span class="va">bci_cumul_S</span> <span class="op">~</span> <span class="va">S</span> <span class="op">*</span> <span class="va">bci_cumul_n</span> <span class="op">/</span> <span class="op">(</span><span class="va">K</span> <span class="op">+</span> <span class="va">bci_cumul_n</span><span class="op">)</span>, </span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">bci_cumul_n</span>, <span class="va">bci_cumul_S</span><span class="op">)</span>, </span>
+<span>  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">bci_cumul_n</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span>, S <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">bci_cumul_S</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Nonlinear regression model
+##   model: bci_cumul_S ~ S * bci_cumul_n/(K + bci_cumul_n)
+##    data: list(bci_cumul_n, bci_cumul_S)
+##      K      S 
+## 1251.0  232.8 
+##  residual sum-of-squares: 3066
+## 
+## Number of iterations to convergence: 6 
+## Achieved convergence tolerance: 7.861e-06</code></pre>
+<p></p>
+<p>L’estimation précédente utilise la méthode des moindres carrés, qui suppose l’indépendance des résidus, hypothèses évidemment violée par une courbe d’accumulation <span class="citation">(<a href="entropie.html#ref-Colwell1994" role="doc-biblioref">Colwell and Coddington 1994</a>)</span>.
+L’estimation par le maximum de vraisemblance est plus convenable <span class="citation">(<a href="entropie.html#ref-Raaijmakers1987" role="doc-biblioref">Raaijmakers 1987</a>)</span>.
+Elle utilise la totalité des points de la courbe d’accumulation.
+La courbe d’accumulation de BCI est présentée en figure <a href="#fig:specaccumFig"><strong>??</strong></a>.
+Ses données sont utilisées ici :</p>
+<p></p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bci_sac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/specaccum.html">specaccum</a></span><span class="op">(</span><span class="va">BCI</span>, <span class="st">"random"</span><span class="op">)</span></span>
+<span><span class="co"># Calculs intermédiaires</span></span>
+<span><span class="va">y_i</span> <span class="op">&lt;-</span> <span class="va">bci_sac</span><span class="op">$</span><span class="va">richness</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y_i</span><span class="op">)</span></span>
+<span><span class="va">x_i</span> <span class="op">&lt;-</span> <span class="va">y_i</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">x_bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x_i</span><span class="op">)</span></span>
+<span><span class="va">y_bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y_i</span><span class="op">)</span></span>
+<span><span class="va">S_yy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_i</span> <span class="op">-</span> <span class="va">y_bar</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">S_xx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x_i</span> <span class="op">-</span> <span class="va">x_bar</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">S_xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x_i</span> <span class="op">-</span> <span class="va">x_bar</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="va">y_i</span> <span class="op">-</span> <span class="va">y_bar</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Estimations</span></span>
+<span><span class="op">(</span><span class="va">K_hat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x_bar</span> <span class="op">*</span> <span class="va">S_yy</span> <span class="op">-</span> <span class="va">y_bar</span> <span class="op">*</span> <span class="va">S_xy</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">y_bar</span> <span class="op">*</span> <span class="va">S_xx</span> <span class="op">-</span> <span class="va">x_bar</span> <span class="op">*</span> <span class="va">S_xy</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.704586</code></pre>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">S_hat</span> <span class="op">&lt;-</span> <span class="va">y_bar</span> <span class="op">+</span> <span class="va">K_hat</span> <span class="op">*</span> <span class="va">x_bar</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 223.5082</code></pre>
+<p></p>
+<p>L’estimation précédente repose sur une approximation numérique.
+Le paramètre <span class="math inline">\(K\)</span> peut être estimé plus précisément par résolution numérique de l’équation exacte du maximum de vraisemblance :</p>
+<p></p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Equation que K_hat doit annuler</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">K_hat</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">S_xy</span> <span class="op">+</span> </span>
+<span>    <span class="va">K_hat</span> <span class="op">*</span> <span class="va">S_xx</span> <span class="op">-</span> </span>
+<span>    <span class="op">(</span><span class="va">S_yy</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">K_hat</span> <span class="op">*</span> <span class="va">S_xy</span> <span class="op">+</span> <span class="va">K_hat</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">S_xx</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x_i</span> <span class="op">/</span> <span class="op">(</span><span class="va">y_i</span> <span class="op">+</span> <span class="va">K_hat</span> <span class="op">*</span> <span class="va">x_i</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># Résolution numérique, l'intervalle de recherche doit être fourni</span></span>
+<span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">f</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1E+7</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">K_hat</span> <span class="op">&lt;-</span> <span class="va">solution</span><span class="op">$</span><span class="va">root</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.7046</code></pre>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">S_hat</span> <span class="op">&lt;-</span> <span class="va">y_bar</span> <span class="op">+</span> <span class="va">K_hat</span> <span class="op">*</span> <span class="va">x_bar</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 223.5084</code></pre>
+<p></p>
+<p>Le nombre d’espèces estimé est 224, inférieur au nombre d’espèces observé.</p>
+<p>Pour calculer l’intervalle de confiance, il est plus simple de passer par une transformation linéaire du modèle <span class="citation">(<a href="entropie.html#ref-Lineweaver1934" role="doc-biblioref">Lineweaver and Burk 1934</a>)</span> :</p>
+<p><span class="math display" id="eq:Lineweaver1934">\[\begin{equation}
+  \tag{3.23}
+  \left [\frac{1}{\hat{S}(n)} \right]
+  = \frac{K}{\hat{S}} \left[ \frac{1}{n} \right] + \frac{1}{\hat{S}}
+\end{equation}\]</span></p>
+<p>Le nombre d’espèces est estimé par l’inverse de l’ordonnée à l’origine du modèle.</p>
+<p></p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">bci_cumul_S</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">bci_cumul_n</span></span>
+<span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="va">lm1</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## (Intercept) 
+##     217.002</code></pre>
+<p></p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:LineweaverFig"></span>
+<img src="MesuresBD_files/figure-html/LineweaverFig-1.png" alt="Ajustement du même modèle de Michaelis-Menten transformé selon Lineweaver et Burk." width="80%"><p class="caption">
+Figure 3.6: Ajustement du même modèle de Michaelis-Menten transformé selon Lineweaver et Burk.
+</p>
+</div>
+<p></p>
+<p>On voit assez clairement que le modèle (figure <a href="chap-MesuresNeutres.html#fig:LineweaverFig">3.6</a>) s’ajuste mal quand il est représenté sous cette forme <span class="citation">(<a href="entropie.html#ref-Raaijmakers1987" role="doc-biblioref">Raaijmakers 1987</a>)</span>.</p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"1/n"</span>, y<span class="op">=</span><span class="st">"1/S"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Le nombre d’espèces estimé est inférieur au nombre observé, qui ne se trouve même pas dans l’intervalle de confiance à 95%.
+Le modèle de Michaelis-Menten ne convient pas.</p>
+<p><span class="citation">Soberón M. and Llorente B. (<a href="entropie.html#ref-Soberon1993" role="doc-biblioref">1993</a>)</span> développent un cadre théorique plus vaste qui permet d’ajuster la courbe d’accumulation à plusieurs modèles.
+Ces modèles sont efficaces empiriquement mais manquent de support théorique pour justifier leur forme.
+Le modèle le plus simple est exponentiel négatif.
+Si la probabilité de trouver une nouvelle espèce est proportionnelle au nombre d’espèces non encore découvertes, la courbe d’accumulation suit la relation</p>
+<p><span class="math display" id="eq:Soberon1993a">\[\begin{equation}
+  \tag{3.24}
+  S() = S \left( 1 - e^{kn} \right).
+\end{equation}\]</span></p>
+<p>Les paramètres peuvent être estimés par la méthode des moindres carrés :</p>
+<p></p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">nlsexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span><span class="op">(</span></span>
+<span>  <span class="va">bci_cumul_S</span> <span class="op">~</span> <span class="va">S</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">k</span> <span class="op">*</span> <span class="va">bci_cumul_n</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">bci_cumul_n</span>, <span class="va">bci_cumul_S</span><span class="op">)</span>, </span>
+<span>  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>S <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">bci_cumul_S</span><span class="op">)</span>, k <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Nonlinear regression model
+##   model: bci_cumul_S ~ S * (1 - exp(k * bci_cumul_n))
+##    data: list(bci_cumul_n, bci_cumul_S)
+##          S          k 
+## 212.198081  -0.000494 
+##  residual sum-of-squares: 10664
+## 
+## Number of iterations to convergence: 13 
+## Achieved convergence tolerance: 8.047e-06</code></pre>
+<p></p>
+<p>Ce modèle, proposé par <span class="citation">Holdridge et al. (<a href="entropie.html#ref-Holdridge1971" role="doc-biblioref">1971</a>)</span>, sous-estime la richesse parce que la probabilité de découvrir une nouvelle espèce diminue plus vite que le nombre d’espèces restant à découvrir : les dernières espèces sont plus rares et donc plus difficiles à détecter.</p>
+<p>Un modèle plus réaliste définit cette probabilité comme une fonction décroissante du nombre d’espèces manquantes.
+La fonction la plus simple est une exponentielle négative mais elle ne s’annule jamais et le nombre d’espèces n’a pas d’asymptote.
+Un paramètre supplémentaire pour obtenir l’asymptote est nécessaire et aboutir à la relation</p>
+<p><span class="math display" id="eq:Soberon1993b">\[\begin{equation}
+  \tag{3.25}
+  f = \frac{1}{z} \ln \left[ \frac{a}{c} - \frac{a-c}{c} e^{-czn} \right].
+\end{equation}\]</span></p>
+<p>Les paramètres à estimer sont <span class="math inline">\(z\)</span>, <span class="math inline">\(a\)</span> et <span class="math inline">\(c\)</span>.</p>
+<p></p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">nlslog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span><span class="op">(</span></span>
+<span>  <span class="va">bci_cumul_S</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">z</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">a</span> <span class="op">/</span> <span class="va">c</span> <span class="op">-</span> <span class="op">(</span><span class="va">a</span> <span class="op">-</span> <span class="va">c</span><span class="op">)</span> <span class="op">/</span> <span class="va">c</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">c</span> <span class="op">*</span> <span class="va">z</span> <span class="op">*</span> <span class="va">bci_cumul_n</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">bci_cumul_n</span>, <span class="va">bci_cumul_S</span><span class="op">)</span>, </span>
+<span>  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fl">.05</span>, a <span class="op">=</span> <span class="fl">1</span>, c <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Nonlinear regression model
+##   model: bci_cumul_S ~ 1/z * log(a/c - (a - c)/c * exp(-c * z * bci_cumul_n))
+##    data: list(bci_cumul_n, bci_cumul_S)
+##        z        a        c 
+## 0.025139 0.755365 0.001114 
+##  residual sum-of-squares: 446.1
+## 
+## Number of iterations to convergence: 4 
+## Achieved convergence tolerance: 4.366e-06</code></pre>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Nombre d'espèces</span></span>
+<span><span class="va">coefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">nlslog</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">coefs</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span> <span class="op">/</span> <span class="va">coefs</span><span class="op">[</span><span class="st">"c"</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">coefs</span><span class="op">[</span><span class="st">"z"</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##        a 
+## 259.3128</code></pre>
+<p></p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:SobLLorFig"></span>
+<img src="MesuresBD_files/figure-html/SobLLorFig-1.png" alt="Ajustement des modèles de Michaelis-Menten et de de Soberón et Llorente (modèle exponentiel négatif et modèle à trois paramètres) aux données de BCI. Les points représentent le nombre d’espèces cumulées en fonction du nombre d’arbres. Le modèle exponentiel négatif (Holdridge) sous-estime la richesse, plus que celui de Michaelis-Menten (Clench). Le modèle à trois paramètres s’ajuste mieux aux données, mais il surestime probablement la richesse." width="80%"><p class="caption">
+Figure 3.7: Ajustement des modèles de Michaelis-Menten et de de Soberón et Llorente (modèle exponentiel négatif et modèle à trois paramètres) aux données de BCI. Les points représentent le nombre d’espèces cumulées en fonction du nombre d’arbres. Le modèle exponentiel négatif (Holdridge) sous-estime la richesse, plus que celui de Michaelis-Menten (Clench). Le modèle à trois paramètres s’ajuste mieux aux données, mais il surestime probablement la richesse.
+</p>
+</div>
+<p></p>
+<p>L’estimation est cette fois supérieure à celle du jackknife (244 espèces).</p>
+<p>La figure <a href="chap-MesuresNeutres.html#fig:SobLLorFig">3.7</a> présente les deux ajustements de modèle de Soberón et Llorente avec celui de Clench.
+L’estimation de la richesse par extrapolation est plus incertaine que par les méthodes non paramétriques.
+Elle est très peu utilisée.</p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">bci_cumul_n</span><span class="op">)</span>, length <span class="op">=</span> <span class="fl">255</span><span class="op">)</span></span>
+<span><span class="va">x_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>bci_cumul_n <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>, </span>
+<span>  `Michaelis-Menten` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">nlsfit</span>, newdata <span class="op">=</span> <span class="va">x_new</span><span class="op">)</span>,</span>
+<span>  `Exponentiel` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">nlsexp</span>, newdata <span class="op">=</span> <span class="va">x_new</span><span class="op">)</span>,</span>
+<span>  `Trois paramètres` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">nlslog</span>, newdata <span class="op">=</span> <span class="va">x_new</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">value</span>, lty <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">bci_cumul_n</span>, <span class="va">bci_cumul_S</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">bci_cumul_n</span>, <span class="va">bci_cumul_S</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="st">"Nombre d'arbres"</span>, </span>
+<span>      y <span class="op">=</span> <span class="st">"Nombre d'espèces"</span>, </span>
+<span>      lty <span class="op">=</span> <span class="st">"Modèle"</span></span>
+<span>    <span class="op">)</span></span></code></pre></div>
+<p></p>
+</div>
+<div id="diversité-générique" class="section level3" number="3.1.4">
+<h3>
+<span class="header-section-number">3.1.4</span> Diversité générique<a class="anchor" aria-label="anchor" href="#diversit%C3%A9-g%C3%A9n%C3%A9rique"><i class="fas fa-link"></i></a>
+</h3>
+<p>La détermination des genres est plus facile et fiable que celle des espèces, le biais d’échantillonnage moins sensible (le nombre de singletons diminue rapidement en regroupant les données), et les coûts d’inventaire sont généralement largement réduits <span class="citation">(<a href="entropie.html#ref-Balmford1996b" role="doc-biblioref">Balmford, Jayasuriya, and Green 1996</a>)</span>.
+Le choix d’estimer la diversité de taxons de rang supérieur (genres ou même familles au lieu des espèces) est envisageable <span class="citation">(<a href="entropie.html#ref-Williams1994" role="doc-biblioref">Williams and Gaston 1994</a>)</span>.</p>
+<p>Empiriquement, la corrélation entre la richesse générique et la richesse spécifique (des angiospermes, des oiseaux et des mammifères) est bonne en forêt tropicale <span class="citation">(<a href="entropie.html#ref-Balmford1996a" role="doc-biblioref">Balmford, Green, and Murray 1996</a>)</span>, suffisante pour comparer les communautés, même si la prédiction de la richesse spécifique à partir de la richesse générique est très imprécise.</p>
+<p><span class="citation">Cartozo et al. (<a href="entropie.html#ref-Cartozo2008" role="doc-biblioref">2008</a>)</span> ont montré que le nombre de taxons de niveau supérieur (genre par rapport aux espèces, ordres par rapport aux sous-ordres) est universellement proportionnel au nombre de taxons du niveau immédiatement inférieur à la puissance 0,61. Cette relation est validée à l’échelle mondiale pour les systèmes végétaux. La loi de puissance reste valide pour des assemblages aléatoires, c’est donc la conséquence de propriétés mathématiques <span class="citation">(<a href="entropie.html#ref-Caldarelli2002" role="doc-biblioref">Caldarelli et al. 2002</a>)</span>, mais la puissance de la relation est plus élevée (les communautés réelles sont plus agrégées du point de vue phylogénétique que sous l’hypothèse nulle d’un assemblage aléatoire) et varie entre les niveaux.</p>
+</div>
+<div id="combien-y-a-t-il-despèces-différentes-sur-terre" class="section level3" number="3.1.5">
+<h3>
+<span class="header-section-number">3.1.5</span> Combien y a-t-il d’espèces différentes sur <span style="white-space:nowrap">Terre ?</span><a class="anchor" aria-label="anchor" href="#combien-y-a-t-il-desp%C3%A8ces-diff%C3%A9rentes-sur-terre"><i class="fas fa-link"></i></a>
+</h3>
+<p>La question de l’estimation du nombre total d’espèces génère une abondante littérature.
+<span class="citation">Mora et al. (<a href="entropie.html#ref-Mora2011" role="doc-biblioref">2011</a>)</span> en font une revue et proposent une méthode nouvelle.</p>
+<p>Dans chaque règne, le nombre de taxons de niveaux supérieurs (phylums, classes, ordres, familles et même genres) est estimé par des modèles prolongeant jusqu’à leur asymptote les valeurs connues en fonction du temps.
+Cette méthode est applicable jusqu’au niveau du genre (figure <a href="#fig:Mora2011"><strong>??</strong></a>, A à E).
+Le nombre de taxon de chaque niveau est lié à celui du niveau précédent, ce qui est représenté par la figure <a href="#fig:Mora2011"><strong>??</strong></a>, G <span class="citation">(<a href="entropie.html#ref-Mora2011" role="doc-biblioref">Mora et al. 2011, fig. 1</a>)</span> sous la forme du relation linéaire entre le logarithme du logarithme du nombre de taxons et le rang (1 pour les phylums, 5 pour les genres).
+La droite est prolongée jusqu’au rang 6 pour obtenir le nombre d’espèces.
+Une façon alternative de décrire la méthode est de dire que le nombre de taxons du niveau <span class="math inline">\(n+1\)</span> est égal à celui du niveau <span class="math inline">\(n\)</span> à la puissance <span class="math inline">\(k\)</span>.
+La pente de la droite de la figure est <span class="math inline">\(\ln{k}\)</span>.
+Aucune justification de ce résultat majeur n’est donnée par les auteurs, si ce n’est leur vérification empirique.</p>
+<p>Le nombre total d’espèces estimé est 8,7 millions, tous règnes confondus, dans la fourchette des estimations précédentes (de 3 à 100 millions), et nécessitant près de 500 ans d’inventaires au rythme actuel des découvertes <span class="citation">(<a href="entropie.html#ref-May2011" role="doc-biblioref">May 2011</a>)</span>.</p>
+
+<p></p>
+<div class="inline-figure"><img src="images/Mora2011.png" width="80%" style="display: block; margin: auto;"></div>
+<p></p>
+<p>En se limitant aux arbres, l’estimation se monte à 16000 espèces pour l’Amazonie <span class="citation">(<a href="entropie.html#ref-TerSteege2013" role="doc-biblioref">ter Steege et al. 2013</a>)</span>, de l’ordre de 5000 pour l’Afrique et entre 40000 et 53000 pour l’ensemble des tropiques <span class="citation">(<a href="entropie.html#ref-Slik2015" role="doc-biblioref">Slik et al. 2015</a>)</span> (donc pour l’ensemble de la planète, le nombre d’espèces non-tropicales étant négligeable).
+Ces estimations sont obtenues par extrapolation du modèle en log-séries (chapitre <a href="#chap-Fisher"><strong>??</strong></a>) et sont sujettes au paradoxe de Fisher : les espèces représentées par un très petit nombre d’individu dans le modèle, notamment les singletons, sont les plus nombreuses.
+Une discussion approfondie est donnée par <span class="citation">Stephen P. Hubbell (<a href="entropie.html#ref-Hubbell2015" role="doc-biblioref">2015</a>)</span> : les espèces récemment apparues au sens du modèle ne sont pas détectables avant plusieurs générations, créant un décalage entre le nombre d’espèces reconnues par la taxonomie et le modèle.</p>
+<p><span class="citation">J. B. Wilson et al. (<a href="entropie.html#ref-Wilson2012" role="doc-biblioref">2012</a>)</span> compilent les relevés du nombre d’espèces de plantes vasculaires en fonction de la surface et retiennent uniquement les plus riches à chaque échelle spatiale (du millimètre carré à l’hectare).
+Ces relevés sont tous situés en forêt tropicale ou en prairie tempérée gérée (les perturbations régulières et modérées y favorisent la diversité, conformément à la théorie de la perturbation intermédiaire <span class="citation">(<a href="entropie.html#ref-Connell1978" role="doc-biblioref">Connell 1978</a>)</span>).
+La relation entre le nombre d’espèces et la surface est celle d’Arrhenius.
+Son extrapolation à la surface terrestre donne environ 220000 espèces, comparables à l’estimation de 275000 espèces rapportée par Mora et al.</p>
+</div>
+</div>
+<div id="indice-de-simpson" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Indice de Simpson<a class="anchor" aria-label="anchor" href="#indice-de-simpson"><i class="fas fa-link"></i></a>
+</h2>
+<div id="définition" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> Définition<a class="anchor" aria-label="anchor" href="#d%C3%A9finition"><i class="fas fa-link"></i></a>
+</h3>
+<p>On note <span class="math inline">\(p_s\)</span> la probabilité qu’un individu tiré au hasard appartienne à l’espèce <span class="math inline">\(s\)</span>.
+L’indice de <span class="citation">Simpson (<a href="entropie.html#ref-Simpson1949" role="doc-biblioref">1949</a>)</span>, ou Gini-Simpson, est</p>
+<p><span class="math display" id="eq:SimpsonE">\[\begin{equation}
+  \tag{3.26}
+  E = 1 - \sum^{S}_{s=1}{p^2_s}.
+\end{equation}\]</span></p>
+<p>Il peut être interprété comme la probabilité que deux individus tirés au hasard soient d’espèces différentes.
+Il est compris dans l’intervalle <span class="math inline">\(\left[ 0 ; 1 \right[\)</span>.
+Sa valeur diminue avec la régularité de la distribution : <span class="math inline">\(E=0\)</span> si une seule espèce a une probabilité de 1, <span class="math inline">\(E = 1 - 1 / S\)</span> si les <span class="math inline">\(S\)</span> espèces ont la même probabilité <span class="math inline">\(p_s = 1 / S\)</span>.
+La valeur 1 est atteinte pour un nombre infini d’espèces, de probabilités nulles.</p>
+<p>Deux autres formes de l’indice sont utilisées.
+Tout d’abord, la probabilité que deux individus soient de la même espèce, souvent appelée <em>indice de concentration de Simpson</em>, qui est celui défini dans l’article original de Simpson :</p>
+<p><span class="math display" id="eq:SimpsonD">\[\begin{equation}
+  \tag{3.27}
+  D = \sum^{S}_{s=1}{p^2_s}.
+\end{equation}\]</span></p>
+<p>L’indice de Simpson est parfois considéré comme une mesure d’équitabilité <span class="citation">(<a href="entropie.html#ref-Olszewski2004" role="doc-biblioref">Olszewski 2004</a>)</span> mais il varie avec la richesse : cette approche est donc erronée.
+<span class="citation">Hurlbert (<a href="entropie.html#ref-Hurlbert1971" role="doc-biblioref">1971</a>)</span> l’a divisé par sa valeur maximale <span class="math inline">\(1 - 1 / S\)</span> pour obtenir une mesure d’équitabilité valide généralisée plus tard par <span class="citation">Mendes et al. (<a href="entropie.html#ref-Mendes2008" role="doc-biblioref">2008</a>)</span>, voir section <a href="#sec-Mendes"><strong>??</strong></a>.
+Le nombre d’espèces doit être estimé par les méthodes présentées plus haut, pour ne pas dépendre de la taille de l’échantillon.</p>
+<p>L’estimateur du maximum de vraisemblance de l’indice est</p>
+<p><span class="math display" id="eq:EstEML">\[\begin{equation}
+  \tag{3.28}
+  \hat{E} = 1 - \sum^{f_{&gt;0}}_{s=1}{\hat{p}^2_s}.
+\end{equation}\]</span></p>
+<p>Le calcul de l’indice de Simpson peut se faire avec la fonction <code>diversity</code> disponible dans le package <em>vegan</em> de R ou avec la fonction <code>ent_simpson</code> du package <em>divent</em>, qui peut traiter plusieurs sites en même temps :</p>
+<p></p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">paracou_6_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Transformation des abondances en probabilités</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_probabilities</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_simpson.html">ent_simpson</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   site      weight estimator order entropy
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 subplot_1   1.56 naive         2   0.975
+## 2 subplot_2   1.56 naive         2   0.976
+## 3 subplot_3   1.56 naive         2   0.978
+## 4 subplot_4   1.56 naive         2   0.971</code></pre>
+<p></p>
+<p>Un historique de la définition de l’indice, de <span class="citation">Gini (<a href="entropie.html#ref-Gini1912" role="doc-biblioref">1912</a>)</span> à Simpson, inspiré par Turing, est fourni par Ellerman <span class="citation">(<a href="entropie.html#ref-Ellerman2013" role="doc-biblioref">2013</a>)</span>.</p>
+</div>
+<div id="estimation" class="section level3" number="3.2.2">
+<h3>
+<span class="header-section-number">3.2.2</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Définissons l’indicatrice <span class="math inline">\({{\mathbf 1}}_{sh}\)</span> valant 1 si l’individu <span class="math inline">\(h\)</span> appartient à l’espèce <span class="math inline">\(s\)</span>, 0 sinon.
+<span class="math inline">\({{\mathbf 1}}_{sh}\)</span> suit une loi de Bernoulli d’espérance <span class="math inline">\(p_s\)</span> et de variance <span class="math inline">\(p_s \left( 1 - p_s \right)\)</span>.
+<span class="math inline">\(E\)</span> est la somme sur toutes les espèces de cette variance.
+Un estimateur non biaisé d’une variance à partir d’un échantillon est la somme des écarts quadratiques divisée par le nombre d’observation moins une.
+L’estimateur <span class="math inline">\(\hat{E}\)</span> est légèrement biaisé parce qu’il est calculé à partir des <span class="math inline">\({\hat{p}}_s\)</span>, ce qui revient à diviser la somme des écarts par <span class="math inline">\(n\)</span>, et non <span class="math inline">\(n-1\)</span>.
+Un estimateur non biaisé est <span class="citation">(<a href="entropie.html#ref-Good1953" role="doc-biblioref">Good 1953</a>; <a href="entropie.html#ref-Lande1996" role="doc-biblioref">Lande 1996</a>)</span></p>
+<p><span class="math display" id="eq:BiaisSimpson">\[\begin{equation}
+  \tag{3.29}
+  \tilde{E}
+  = \left( \frac{n}{n-1} \right) \left( 1 - \sum^{f_{&gt;0}}_{s=1}{{\hat{p}}^2_s} \right).
+\end{equation}\]</span></p>
+<p>La correction par <span class="math inline">\(n / (n - 1)\)</span> tend rapidement vers 1 quand la taille de l’échantillon augmente : l’estimateur est très peu biaisé.</p>
+<p>Le non-échantillonnage des espèces rares est pris en compte dans cette correction parce qu’elle considère que <span class="math inline">\(\tilde{E}\)</span> est l’estimateur de variance d’un échantillon et non d’une population complètement connue.
+Il est négligeable : si <span class="math inline">\(p_s\)</span> est petit, <span class="math inline">\(p^2_s\)</span> est négligeable dans la somme.</p>
+<p>Simpson a fourni un estimateur non biaisé de <span class="math inline">\(D\)</span>, à partir du calcul du nombre de paires d’individus tirés sans remise :</p>
+<p><span class="math display" id="eq:EstSimpson1949">\[\begin{equation}
+  \tag{3.30}
+  \tilde{D}
+  = \frac{\sum^{S}_{s=1}{n_s \left( n_s - 1 \right)}}{n \left( n - 1 \right)}.
+\end{equation}\]</span></p>
+<p>L’argumentation est totalement différente, mais le résultat est le même : <span class="math inline">\(\tilde{E}=1-\tilde{D}\)</span>.</p>
+<p>La fonction <code>ent_simpson</code> de <em>divent</em> accepte comme argument un vecteur d’abondances ou un dataframe contenant les données et propose par défaut la correction de Lande :</p>
+<p></p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">paracou_6_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_simpson.html">ent_simpson</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   site      weight estimator order entropy
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 subplot_1   1.56 Lande         2   0.976
+## 2 subplot_2   1.56 Lande         2   0.978
+## 3 subplot_3   1.56 Lande         2   0.980
+## 4 subplot_4   1.56 Lande         2   0.972</code></pre>
+<p></p>
+</div>
+</div>
+<div id="indice-de-shannon" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Indice de Shannon<a class="anchor" aria-label="anchor" href="#indice-de-shannon"><i class="fas fa-link"></i></a>
+</h2>
+<div id="définition-1" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Définition<a class="anchor" aria-label="anchor" href="#d%C3%A9finition-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>L’indice de Shannon <span class="citation">(<a href="entropie.html#ref-Shannon1948" role="doc-biblioref">Shannon 1948</a>; <a href="entropie.html#ref-Shannon1963" role="doc-biblioref">Shannon and Weaver 1963</a>)</span>, aussi appelé indice de Shannon-Weaver ou Shannon-Wiener <span class="citation">(<a href="entropie.html#ref-Spellerberg2003" role="doc-biblioref">Spellerberg and Feder 2003</a>)</span>, ou simplement <em>entropie</em> est dérivé de la théorie de l’information :</p>
+<p><span class="math display" id="eq:Shannon">\[\begin{equation}
+  \tag{3.31}
+  H = -\sum^S_{s=1}{p_s\ln{p_s}}.
+\end{equation}\]</span></p>
+<p>Considérons une placette forestière contenant <span class="math inline">\(S\)</span> espèces végétales différentes.
+La probabilité qu’une plante choisie au hasard appartienne à l’espèce <span class="math inline">\(s\)</span> est notée <span class="math inline">\(p_s\)</span>.
+On prélève <span class="math inline">\(n\)</span> plantes, et on enregistre la liste ordonnée des espèces des <span class="math inline">\(n\)</span> plantes.
+Si <span class="math inline">\(n\)</span> est suffisamment grand, le nombre de plantes de l’espèce <span class="math inline">\(s\)</span> est <span class="math inline">\(np_s\)</span>.
+On note <span class="math inline">\(L\)</span> le nombre de listes respectant ces conditions :</p>
+<p><span class="math display" id="eq:ShannonL">\[\begin{equation}
+  \tag{3.32}
+  L = \frac{n!}{\prod^S_{i=1}{\left( {np}_s \right)!}}.
+\end{equation}\]</span></p>
+<p>Ce résultat est obtenu en calculant le nombre de positions possibles dans la liste pour les individus de la première espèce : <span class="math inline">\(\binom{n}{np_1}\)</span>.
+Le nombre de positions pour la deuxième espèce est <span class="math inline">\(\binom{n-np_1}{np_2}\)</span>.
+Pour la <span class="math inline">\(S\)</span>-ième espèce, le nombre est <span class="math inline">\(\binom{n-np_1-\dots -np_{s-1}}{np_i}\)</span>.
+Les produits de combinaisons se simplifient pour donner l’équation <a href="chap-MesuresNeutres.html#eq:ShannonL">(3.32)</a>.</p>
+<p>On peut maintenant écrire le logarithme de <span class="math inline">\(L\)</span>:
+<span class="math display">\[\ln{L} = \ln{n!} - \sum^S_{s=1}{\ln{np_s}!}.\]</span>
+On utilise l’approximation de Stirling,
+<span class="math display">\[\ln{n!} \approx n \ln{n} - n,\]</span>
+pour obtenir après simplifications :</p>
+<p><span class="math display" id="eq:ShannonlnL">\[\begin{equation}
+  \tag{3.33}
+  \ln{L} = -n \sum^S_{s=1}{p_s \ln{p_s}}.
+\end{equation}\]</span></p>
+<p><span class="math inline">\(H = (\ln{L}) / n\)</span> est l’indice de Shannon.
+Ce résultat est connu sous le nom de formule de <span class="citation">Brillouin (<a href="entropie.html#ref-Brillouin1962" role="doc-biblioref">1962</a>)</span>.
+À l’origine, Shannon a utilisé un logarithme de base 2 pour que <span class="math inline">\(H\)</span> soit le nombre moyen de questions binaires (réponse oui ou non) nécessaire pour identifier l’espèce d’une plante (un caractère utilisé dans une chaîne dans le contexte du travail de Shannon).
+Les logarithmes naturels, de base 2 ou 10 ont été utilisés par la suite <span class="citation">(<a href="entropie.html#ref-Pielou1966a" role="doc-biblioref">Pielou 1966b</a>)</span>.</p>
+<p>La formule <a href="chap-MesuresNeutres.html#eq:ShannonlnL">(3.33)</a> est celle de l’indice de <span class="citation">Theil (<a href="entropie.html#ref-Theil1967" role="doc-biblioref">1967</a>)</span>, présenté en détail par <span class="citation">Conceição and Ferreira (<a href="entropie.html#ref-Conceicao2000" role="doc-biblioref">2000</a>)</span>, à l’origine utilisé pour mesurer les inégalités de revenu puis pour caractériser les structures spatiales en économie.
+L’indice est proportionnel au nombre de plantes choisies, on peut donc le diviser par <span class="math inline">\(n\)</span> et on obtient l’indice de biodiversité de Shannon.
+Ces indices ont été définis en choisissant des lettres au hasard pour former des chaînes de caractères.
+Leur valeur est le nombre de chaînes de caractères différentes que l’on peut obtenir avec l’ensemble des lettres disponibles, c’est-à-dire la quantité d’information contenue dans l’ensemble des lettres.
+L’indice de Shannon donne une mesure de la biodiversité en tant que quantité d’information.</p>
+<p>L’estimateur du maximum de vraisemblance de l’indice est</p>
+<p><span class="math display" id="eq:EstShannonML">\[\begin{equation}
+  \tag{3.34}
+  \hat{H} = -\sum^{f_{&gt;0}}_{s=1}{\hat{p}_s \ln{\hat{p}_s}}.
+\end{equation}\]</span></p>
+<p>Le calcul de l’indice de Shannon peut se faire avec la fonction <code>diversity</code> disponible dans le package <em>vegan</em> de R ou avec la fonction <code>ent_shannon</code> de <em>divent</em> :</p>
+<p></p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bci_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_probabilities</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   site           weight estimator order entropy
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 site_707269321      1 naive         1    4.27</code></pre>
+<p></p>
+<p>La distribution de l’estimateur est connue <span class="citation">(<a href="entropie.html#ref-Hutcheson1970" role="doc-biblioref">Hutcheson 1970</a>)</span> mais elle est inutile en pratique à cause du biais d’estimation.</p>
+<p><span class="citation">Bulmer (<a href="entropie.html#ref-Bulmer1974" role="doc-biblioref">1974</a>)</span> établit une relation entre l’indice de Shannon et l’indice <span class="math inline">\(\alpha\)</span> de Fisher, à condition que la distribution de l’abondance des espèces soit log-normale :</p>
+<p><span class="math display" id="eq:Bulmer1974">\[\begin{equation}
+  \tag{3.35}
+  \hat{H}
+  = \mathrm{\Psi} \left( \hat{\alpha} + 1 \right) - \mathrm{\Psi} \left( 1 \right).
+\end{equation}\]</span></p>
+<p><span class="math inline">\(\mathrm{\Psi}(\cdot)\)</span> est la fonction digamma, et <span class="math inline">\(\hat{\alpha}\)</span> est l’estimateur de l’indice de Fisher <a href="#eq:AlphaFisher">(<strong>??</strong>)</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">digamma</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html">fisher.alpha</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">digamma</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 4.148322</code></pre>
+<p></p>
+<p>La sous-estimation est assez sévère sur cet exemple.</p>
+</div>
+<div id="sec-BiaisShannon" class="section level3" number="3.3.2">
+<h3>
+<span class="header-section-number">3.3.2</span> Estimation<a class="anchor" aria-label="anchor" href="#sec-BiaisShannon"><i class="fas fa-link"></i></a>
+</h3>
+<p><span class="citation">Basharin (<a href="entropie.html#ref-Basharin1959" role="doc-biblioref">1959</a>)</span> a montré que l’estimateur de l’indice de Shannon était biaisé parce que des espèces ne sont pas échantillonnées.
+Si <span class="math inline">\(S\)</span> est le nombre d’espèces réel et <span class="math inline">\(n\)</span> le nombre d’individus échantillonnés, le biais est</p>
+<p><span class="math display" id="eq:Basharin1959">\[\begin{equation}
+  \tag{3.36}
+  \mathbb{E}\left( \hat{H} \right) - H
+  = -\frac{S - 1}{2n} + O\left(n^{-2}\right).
+\end{equation}\]</span></p>
+<p><span class="math inline">\(O(n^{-2})\)</span> est un terme négligeable.
+La valeur estimée à partir des données est donc trop faible, d’autant plus que le nombre d’espèces total est grand mais d’autant moins que l’échantillonnage est important.
+Comme le nombre d’espèces <span class="math inline">\(S\)</span> n’est pas observable, le biais réel est inconnu.</p>
+<p>L’estimateur de Miller-Madow <span class="citation">(<a href="entropie.html#ref-Miller1955" role="doc-biblioref">Miller 1955</a>)</span> utilise l’information disponible, en sous-estimant le nombre d’espèces et donc l’entropie :
+<span class="math display" id="eq:MillerMadow">\[\begin{equation}
+  \tag{3.37}
+  \tilde{H} = -\sum^{f_{&gt;0}}_{s=1}{\hat{p}_s \ln{\hat{p}_s}} + \frac{f_{&gt;0} - 1}{2n}.
+\end{equation}\]</span></p>
+<p><span class="citation">Chao and Shen (<a href="entropie.html#ref-Chao2003" role="doc-biblioref">2003</a>)</span> établissent un estimateur moins biaisé à partir du taux de couverture de l’échantillonnage <span class="math inline">\(\hat{C}\)</span>:</p>
+<p><span class="math display" id="eq:ChaoShen">\[\begin{equation}
+  \tag{3.38}
+  \tilde{H}
+  = -\sum_{s=1}^{f_{&gt;0}}{\frac
+    {\hat{C} \hat{p}_s \ln\left( \hat{C} \hat{p}_s \right)}
+    {1 - \left( 1 - \hat{C}\hat{p}_s \right)^n}}.
+\end{equation}\]</span></p>
+<p>Multiplier les fréquences observées par le taux de couverture permet d’obtenir un estimateur non biaisé des probabilités conditionnellement aux espèces non observées <span class="citation">(<a href="entropie.html#ref-Ashbridge2000" role="doc-biblioref">Ashbridge and Goudie 2000</a>)</span>.</p>
+<p>Le terme au dénominateur est la correction de <span class="citation">Horvitz and Thompson (<a href="entropie.html#ref-Horvitz1952" role="doc-biblioref">1952</a>)</span> : chaque terme de la somme est divisé par la probabilité d’observer au moins une fois l’espèce correspondante.
+Il tend vers 1 quand la taille de l’échantillon augmente.</p>
+<p><span class="citation">Beck and Schwanghart (<a href="entropie.html#ref-Beck2010" role="doc-biblioref">2010</a>)</span> montrent que la correction du biais est efficace, même à des niveaux de complétude de l’échantillonnage (voir section <a href="chap-MesuresNeutres.html#sec-ChoixEstimateur">3.1.1.7</a>) très faibles. <span class="citation">Vu, Yu, and Kass (<a href="entropie.html#ref-Vu2007" role="doc-biblioref">2007</a>)</span> étudient la vitesse de convergence de l’estimateur.</p>
+<p><span class="citation">Z. Zhang (<a href="entropie.html#ref-Zhang2012" role="doc-biblioref">2012</a>)</span> définit l’indice de Simpson généralisé :</p>
+<p><span class="math display" id="eq:zeta">\[\begin{equation}
+  \tag{3.39}
+  \zeta_{u,v} = \sum^S_{s=1}{p^u_s{\left( 1 - p_s \right)}^v},
+\end{equation}\]</span></p>
+<p>où <span class="math inline">\(\zeta_{u,v}\)</span> est la somme sur toutes les espèces de la probabilité de rencontrer <span class="math inline">\(u\)</span> fois l’espèce dans un échantillon de taille <span class="math inline">\(u+v\)</span>.
+L’indice de Shannon peut s’exprimer en fonction de <span class="math inline">\(\zeta_{1,v}\)</span>:</p>
+<p><span class="math display" id="eq:HzetaInf">\[\begin{equation}
+  \tag{3.40}
+  H = \sum^{\infty}_{v=1}{\frac{1}{v} \zeta_{1,v}}.
+\end{equation}\]</span></p>
+<p>Les premiers termes de la somme, jusqu’à <span class="math inline">\(v=n-1\)</span> peuvent être estimés à partir des données, les suivants constituent le biais de l’estimateur, qui est calculé en pratique par</p>
+<p><span class="math display" id="eq:Hzetanu">\[\begin{equation}
+  \tag{3.41}
+  H_z
+  = \sum^{n-1}_{v=1}{\frac{1}{v}\left\{
+    \frac{n^{v+1}\left[ n - \left(v + 1 \right) \right]!}{n!}
+    \sum^{f_{&gt;0}}_{s=1}{p_s \prod^{v-1}_{j=0}{
+      \left( 1 - \hat{p}_s - \frac{j}{n} \right)}
+    }
+  \right\}}.
+\end{equation}\]</span></p>
+<p><span class="citation">Z. Zhang (<a href="entropie.html#ref-Zhang2013a" role="doc-biblioref">2013</a>)</span> montre que le biais de l’estimateur <span class="math inline">\(H_z\)</span> est asymptotiquement normal et calcule sa variance.
+<span class="citation">Z. Zhang and Grabchak (<a href="entropie.html#ref-Zhang2013" role="doc-biblioref">2013</a>)</span> améliorent l’estimateur en le complétant par un estimateur de son biais, mais les calculs deviennent excessivement complexes.
+<span class="citation">Vinck et al. (<a href="entropie.html#ref-Vinck2012" role="doc-biblioref">2012</a>)</span> appliquent la même démarche avec un estimateur bayésien du biais, utilisant un prior aussi plat que possible pour la valeur de l’entropie (et non un prior plat sur les probabilités, qui tire l’estimateur vers l’entropie maximale).
+Cet estimateur nécessite de connaître le nombre d’espèces, ce qui empêche son utilisation sur des données d’écologie.</p>
+<p><span class="citation">Pielou (<a href="entropie.html#ref-Pielou1966" role="doc-biblioref">1966a</a>)</span> a développé une autre méthode de correction de biais lorsque de nombreux relevés de petite taille sont disponibles.
+<span class="math inline">\(\ln{L}\)</span> est calculé pour un relevé choisi aléatoirement puis les données du premier relevé sont ajoutées à celles d’un autre, puis un autre jusqu’à ce que <span class="math inline">\(H=(\ln{L}) / n\)</span> n’augmente plus : la diversité augmente dans un premier temps mais se stabilise quand l’effet des espèces ajoutées est compensé par celui de la diminution de l’équitabilité due aux espèces présentes dans tous les relevés.
+À partir de ce seuil, l’augmentation de <span class="math inline">\(\ln{L}\)</span> par individu ajouté est calculée pour chaque relevé supplémentaire.
+Son espérance, estimée par sa moyenne calculée en ajoutant tous les relevés disponibles, est <span class="math inline">\(\tilde{H}\)</span>.</p>
+<p><span class="citation">Chao, Wang, and Jost (<a href="entropie.html#ref-Chao2013" role="doc-biblioref">2013</a>)</span> utilisent l’estimateur de la pente de la courbe de raréfaction, calculé précédemment <span class="citation">(<a href="entropie.html#ref-Chao2012b" role="doc-biblioref">Chao and Jost 2012</a>)</span> pour estimer la richesse spécifique, pour fournir un estimateur extrêmement performant :</p>
+<p><span class="math display" id="eq:Chao2013">\[\begin{align}
+  \tag{3.42}
+  \tilde{H}
+  = &amp;-\sum_{s=1}^{f_{&gt;0}}
+    {\frac{n_s}{n} \left( \mathrm{\Psi}\left( n \right) - \mathrm{\Psi}\left( n_s \right) \right)} \\
+    &amp;-\frac{s_{1}}{n} {\left(1 - A \right)}^{1 - n} \left(
+      -\ln\left( A \right) -\sum^{n-1}_{r=1}{\frac{1}{r}{\left( 1 - A \right)}^r} \right
+    ),
+\end{align}\]</span></p>
+<p>où <span class="math inline">\(\mathrm{\Psi}(\cdot)\)</span> est la fonction digamma et <span class="math inline">\(A\)</span> vaut :</p>
+<ul>
+<li>
+<span class="math inline">\(2s_{2} / [(n - 1) s_{1} + 2 s_{2}]\)</span> en présence de singletons et <span style="white-space:nowrap">doubletons ;</span>
+</li>
+<li>
+<span class="math inline">\(2 / [(n - 1) (s_1 -1) + 2]\)</span> en présence de singletons <span style="white-space:nowrap">seulement ;</span>
+</li>
+<li>
+<span class="math inline">\(1\)</span> en absence de singletons et doubletons.</li>
+</ul>
+<p>Enfin, la littérature de physique statistique s’est abondamment intéressée à cette question (<span class="citation">Bonachela, Hinrichsen, and Muñoz (<a href="entropie.html#ref-Bonachela2008" role="doc-biblioref">2008</a>)</span> en font une revue).
+Le problème traité est la non-linéarité de l’indice de Shannon par rapport aux probabilités qui entraîne un biais d’estimation.
+La fonction logarithme fournit un exemple simple : l’espérance de <span class="math inline">\(\ln(p_s)\)</span> n’est pas le logarithme de l’espérance de <span class="math inline">\(p_s\)</span> parce que la fonction <span class="math inline">\(\ln\)</span> est concave.
+Chaque estimateur <span class="math inline">\({\hat{p}}_s\)</span> fluctue autour de <span class="math inline">\(p_s\)</span> mais vaut <span class="math inline">\(p_s\)</span> en moyenne.
+À cause de la concavité, <span class="math inline">\(\ln(\hat{p}_s)\)</span> est en moyenne inférieur à <span class="math inline">\(\ln(p_s)\)</span>: cette relation est connue sous le nom d’inégalité de <span class="citation">Jensen (<a href="entropie.html#ref-Jensen1906" role="doc-biblioref">1906</a>)</span>.
+L’indice de Shannon est concave (figure <a href="chap-MesuresNeutres.html#fig:ShannonFig">3.8</a>) donc son estimateur <a href="chap-MesuresNeutres.html#eq:Shannon">(3.31)</a> est biaisé négativement, même sans prendre en considération les espèces non observées.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:ShannonFig"></span>
+<img src="MesuresBD_files/figure-html/ShannonFig-1.png" alt="Courbe de \(x\ln x\) entre 0 et 1." width="80%"><p class="caption">
+Figure 3.8: Courbe de <span class="math inline">\(x\ln x\)</span> entre 0 et 1.
+</p>
+</div>
+<p></p>
+<p>Code de la figure <a href="chap-MesuresNeutres.html#fig:ShannonFig">3.8</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p"</span>, y <span class="op">=</span> <span class="st">"H(p)"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Le biais peut être évalué par simulation : 10000 tirages sont réalisés dans une loi normale d’espérance <span class="math inline">\(p_s\)</span> choisie et d’écart-type 0.01.
+Le biais est la différence entre <span class="math inline">\(-p_s \ln{p_s}\)</span> (connu) et la moyenne des 1000 valeurs de <span class="math inline">\(-\hat{p}_s \ln{\hat{p}}_s\)</span> (la probabilité est estimée par sa réalisation à chaque tirage).
+La valeur du biais en fonction de <span class="math inline">\(p_s\)</span> est en figure <a href="chap-MesuresNeutres.html#fig:ShannonBiaisFig">3.9</a>.
+Le biais de l’indice de Shannon est la somme des biais pour toutes les probabilités spécifiques de la communauté étudiée, et son calcul est toujours l’objet de recherches.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:ShannonBiaisFig"></span>
+<img src="MesuresBD_files/figure-html/ShannonBiaisFig-1.png" alt="Biais de \(\hat{p}_s \ln\hat{p}_s\) entre 0 et 1." width="80%"><p class="caption">
+Figure 3.9: Biais de <span class="math inline">\(\hat{p}_s \ln\hat{p}_s\)</span> entre 0 et 1.
+</p>
+</div>
+<p></p>
+<p>Code de la figure <a href="chap-MesuresNeutres.html#fig:ShannonBiaisFig">3.9</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bias_p</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">p_s</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="va">p</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span>  <span class="va">p</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_s</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p_s</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">bias</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">p_s</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Applique bias_p à chaque valeur de p_s</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">p_s</span>, <span class="va">bias_p</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">bias</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p"</span>, y <span class="op">=</span> <span class="st">"Biais"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p><span class="citation">Grassberger (<a href="entropie.html#ref-Grassberger1988" role="doc-biblioref">1988</a>)</span> a fourni la correction de référence :</p>
+<p><span class="math display" id="eq:Grassberger1988">\[\begin{equation}
+  \tag{3.43}
+  \tilde{H}
+  = -\sum^{f_{&gt;0}}_{s=1}{
+    \frac{n_s}{n} \left( \ln\left( n \right) - \mathrm{\Psi}\left( n_s \right)
+    -\frac{{\left( -1 \right)}^{n_s}}{n_s + 1} \right)
+  }.
+\end{equation}\]</span></p>
+<p><span class="citation">Grassberger (<a href="entropie.html#ref-Grassberger2003" role="doc-biblioref">2003</a>)</span> l’a perfectionnée :</p>
+<p><span class="math display" id="eq:Grassberger2003">\[\begin{equation}
+  \tag{3.44}
+  \tilde{H}
+  = -\sum^{f_{&gt;0}}_{s=1}{
+    \frac{n_s}{n} \left( \mathrm{\Psi}\left( n \right) - \mathrm{\Psi}\left( n_s \right)
+    -{\left( -1 \right)}^{n_s} \int^1_0{\frac{t^{n_s - 1}}{1 + t} \mathop{dt}} \right)
+  }.
+\end{equation}\]</span></p>
+<p>Enfin, <span class="citation">Schürmann (<a href="entropie.html#ref-Schurmann2004" role="doc-biblioref">2004</a>)</span> l’a généralisée pour définir une famille de corrections dépendant d’un paramètre <span class="math inline">\(\xi\)</span>:</p>
+<p><span class="math display" id="eq:Schurmann2004">\[\begin{equation}
+  \tag{3.45}
+  \tilde{H}
+  = -\sum^{f_{&gt;0}}_{s=1}{
+    \frac{n_s}{n} \left( \mathrm{\Psi}\left( n \right) - \mathrm{\Psi}\left( n_s \right)
+    - {\left( -1 \right)}^{n_s} \int^{\frac{1}{\xi} - 1}_0{\frac{t^{n_s - 1}}{1 + t} \mathop{dt}} \right)
+  }.
+\end{equation}\]</span></p>
+<p>Le biais d’estimation diminue avec <span class="math inline">\(\xi\)</span> mais l’erreur quadratique augmente.
+Schürmann suggère d’utiliser <span class="math inline">\(\xi=e^{-1/2}\)</span> comme meilleur compromis.</p>
+<p>La fonction <code>ent_shannon</code> permet toutes ces corrections.</p>
+<p></p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"ChaoJost"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ChaoJost      1    4.28</code></pre>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"Grassberger"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator   order entropy
+##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Grassberger     1    4.28</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"Grassberger2003"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator       order entropy
+##   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Grassberger2003     1    4.28</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"Schurmann"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Schurmann     1    4.28</code></pre>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"ZhangHz"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ZhangHz       1    4.27</code></pre>
+<p></p>
+<p>D’autres estimateurs peu utilisés en écologie sont disponibles dans le package <em>entropy</em> <span class="citation">(<a href="entropie.html#ref-Hausser2009" role="doc-biblioref">Hausser and Strimmer 2009</a>)</span>.
+La contraction de Stein <span class="citation">(<a href="entropie.html#ref-James1961" role="doc-biblioref">James and Stein 1961</a>)</span> consiste à estimer la distribution des probabilités d’occurrence des espèces par la pondération optimale entre un estimateur à faible biais et un estimateur à faible variance.
+L’estimateur <span class="math inline">\(\hat{p}_s\)</span> est sans biais mais a une variance importante.
+L’estimateur <span class="math inline">\(1/S\)</span>, si <span class="math inline">\(S\)</span> est connu, est de variance nulle mais est très biaisé.
+Comme le nombre d’espèces est en général inconnu, il doit être estimé par une méthode quelconque, mais de préférence le surestimant plutôt que le sous-estimant.
+L’estimateur de James-Stein (<em>shrinkage estimator</em>) optimal est
+<span class="math display" id="eq:JamesStein1">\[\begin{equation}
+  \tag{3.46}
+  \tilde{p}_s = \hat{\lambda}\frac{1}{\hat{S}} + \left( 1 - \hat{\lambda} \right) \hat{p}_s,
+\end{equation}\]</span></p>
+<p>où
+<span class="math display" id="eq:JamesStein2">\[\begin{equation}
+  \tag{3.47}
+  \hat{\lambda} = \frac
+    {1 - \sum^{f_{&gt;0}}_{s=1}{\left( \hat{p}_s \right)^2}}
+    {\left( n - 1 \right) \sum^{f_{&gt;0}}_{s=1}{\left( \frac{1}{\hat{S}} - \hat{p}_s \right)^2}}.
+\end{equation}\]</span></p>
+<p>L’entropie est ensuite simplement estimée par l’estimateur plug-in : <span class="math inline">\(\tilde{H} = -\sum^{f_{&gt;0}}_{s=1}{\tilde{p}_s \ln{\tilde{p}_s}}\)</span>.
+Le calcul sous R est le suivant :</p>
+<p></p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://strimmerlab.github.io/software/entropy/">"entropy"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/entropy/man/entropy.shrink.html">entropy.shrink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Estimating optimal shrinkage intensity lambda.freq (frequencies): 0.0021</code></pre>
+<pre><code>## [1] 4.275689
+## attr(,"lambda.freqs")
+## [1] 0.002074043</code></pre>
+<p></p>
+<p>Le principe même de l’estimation rapproche la distribution de l’équiprobabilité des espèces et donc augmente l’entropie.
+L’estimation précédente ignore les espèces non observées.
+Pour les inclure, le vecteur des abondance doit être allongé par autant de zéros que d’espèces estimées :</p>
+<p></p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/entropy/man/entropy.shrink.html">entropy.shrink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">bci_f_0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Estimating optimal shrinkage intensity lambda.freq (frequencies): 0.002</code></pre>
+<pre><code>## [1] 4.276543
+## attr(,"lambda.freqs")
+## [1] 0.002041748</code></pre>
+<p></p>
+<p>Les fréquences sont estimées par la fonction <code>freqs.shrink</code>.
+Leur utilisation dans l’estimateur plug-in donne le même résultat :</p>
+<p></p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_shannon.html">ent_shannon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/entropy/man/entropy.shrink.html">freqs.shrink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">bci_f_0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Estimating optimal shrinkage intensity lambda.freq (frequencies): 0.002</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 naive         1    4.28</code></pre>
+<p></p>
+<p>Appliqué à des données de biodiversité aquatique, l’estimateur de James-Stein obtient de meilleurs résultats que celui de Chao et Shen <span class="citation">(<a href="entropie.html#ref-Liu2015" role="doc-biblioref">D. Liu et al. 2016</a>)</span> quand l’échantillonnage est réduit.</p>
+</div>
+</div>
+<div id="sec-Hurlbert" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Indice de Hurlbert<a class="anchor" aria-label="anchor" href="#sec-Hurlbert"><i class="fas fa-link"></i></a>
+</h2>
+<div id="définition-2" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Définition<a class="anchor" aria-label="anchor" href="#d%C3%A9finition-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>L’indice de <span class="citation">Hurlbert (<a href="entropie.html#ref-Hurlbert1971" role="doc-biblioref">1971</a>)</span> est l’espérance du nombre d’espèces observées dans un échantillon de taille <span class="math inline">\(k\)</span> choisie :</p>
+<p><span class="math display" id="eq:HurlbertSk">\[\begin{equation}
+  \tag{3.48}
+  _{k}S = \sum^S_{s=1}{\left[ 1 - {\left( 1 - p_s \right)}^k \right]}.
+\end{equation}\]</span></p>
+<p>Chaque terme de la somme est la probabilité d’observer au moins une fois l’espèce correspondante.</p>
+<p>L’augmentation de la valeur de <span class="math inline">\(k\)</span> permet de donner plus d’importance aux espèces rares.</p>
+<p>L’indice peut être converti en nombre équivalent d’espèces <span class="citation">(<a href="entropie.html#ref-Dauby2012" role="doc-biblioref">Dauby and Hardy 2012</a>)</span>, c’est-à-dire le nombre d’espèces équiprobables nécessaire pour obtenir la même diversité, notés <span class="math inline">\(_{k}D\)</span> à partir de la relation</p>
+<p><span class="math display" id="eq:HurlbertD">\[\begin{equation}
+  \tag{3.49}
+  _{k}S = {_{k}D} \left[ 1 - {\left( 1 - \frac{1}{_{k}D} \right)}^k \right].
+\end{equation}\]</span></p>
+<p>L’équation doit être résolue pour obtenir <span class="math inline">\(_{k}D\)</span> à partir de la valeur de <span class="math inline">\(_{k}S\)</span> estimée, numériquement pour <span class="math inline">\(k&gt;3\)</span>.</p>
+<p>Dans deux cas particuliers, les nombres équivalents d’espèces de Hurlbert sont identiques aux nombres de Hill : <span class="math inline">\(_{2}D = {^{2}\!D}\)</span> et <span class="math inline">\(_{\infty}D = {^{0}\!D}\)</span>.</p>
+<p>Pour les autres ordres entiers de diversité, il existe une correspondance parfaite entre les deux mesures <span class="citation">(<a href="entropie.html#ref-Chao2014" role="doc-biblioref">Chao et al. 2014</a>, Annexe S2)</span> : la connaissance de l’une permet d’obtenir l’autre. Pour <span class="math inline">\(k&gt;1\)</span>, on a <span class="citation">(<a href="entropie.html#ref-Leinster2012" role="doc-biblioref">Leinster and Cobbold 2012</a>)</span></p>
+<p><span class="math display" id="eq:HurlbertDq">\[\begin{equation}
+  \tag{3.50}
+  _{k}S = k + \sum_{q=2}^{k}{\binom{k}{q} \left( -1 \right)^{q + 1} \left( ^{q}\!D \right)^{1-q}}.
+\end{equation}\]</span></p>
+<p>On a vu que <span class="math inline">\(^{0}\!D\)</span> égale <span class="math inline">\(_{\infty}D\)</span>, donc <span class="math inline">\(_{\infty}S = {^{0}\!D}\)</span> <a href="chap-MesuresNeutres.html#eq:HurlbertD">(3.49)</a>.</p>
+<p>Inversement, pour <span class="math inline">\(q &gt; 1\)</span>:</p>
+<p><span class="math display" id="eq:DqHurlbert">\[\begin{equation}
+  \tag{3.51}
+  (^{q}\!D)^{1-q} = q + \sum_{k=2}^{q}{\binom{q}{k} \left( -1 \right)^{k + 1} {_{k}S}}.
+\end{equation}\]</span></p>
+<p>Pour <span class="math inline">\(q=1\)</span>, la relation est <span class="citation">(<a href="entropie.html#ref-Mao2007" role="doc-biblioref">Mao 2007</a>)</span>
+<span class="math display" id="eq:Mao2007">\[\begin{equation}
+  \tag{3.52}
+  ^{1}\!H = -1 + \sum_{k=2}^{\infty}{\frac{_{k}S}{k \left( k - 1 \right)}}.
+\end{equation}\]</span></p>
+</div>
+<div id="estimation-1" class="section level3" number="3.4.2">
+<h3>
+<span class="header-section-number">3.4.2</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hurlbert fournit un estimateur non biaisé de son indice (<span class="math inline">\(n\)</span> est la taille de l’échantillon, <span class="math inline">\(n_s\)</span> le nombre d’individus de l’espèce <span class="math inline">\(s\)</span>) :</p>
+<p><span class="math display" id="eq:EstHurlbert">\[\begin{equation}
+  \tag{3.53}
+  _k{\tilde{S}}
+  = \sum_{s=1}^{f_{&gt;0}}{\left[ 1-{\binom{n - n_s}{k}}/{\binom{n}{k}} \right]}.
+\end{equation}\]</span></p>
+<p><span class="citation">Dauby and Hardy (<a href="entropie.html#ref-Dauby2012" role="doc-biblioref">2012</a>)</span> montrent que cet estimateur est très peu sensible à la taille de l’échantillon, et obtient de meilleurs résultats sur ce point que les estimateurs de Chao et Shen pour l’indice de Shannon ou du nombre d’espèces.
+<span class="citation">W. Smith and Grassle (<a href="entropie.html#ref-Smith1977" role="doc-biblioref">1977</a>)</span> ont calculé sa variance.</p>
+<p>Le calcul de la diversité de Hurlbert est possible dans <em>divent</em> :</p>
+<p></p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Indice de Hurlbert (probabilités)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_hurlbert.html">ent_hurlbert</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_probabilities</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   site           weight estimator order entropy
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 site_402217706      1 naive         2    1.97</code></pre>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Estimateur sans biais (abondances)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_hurlbert.html">ent_hurlbert</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Hurlbert      2    1.97</code></pre>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Nombre effectif d'espèces</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_hurlbert.html">div_hurlbert</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order diversity
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Hurlbert      2      38.1</code></pre>
+<p></p>
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="sec-SAD.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></div>
+<div class="next"><a href="entropie.html"><span class="header-section-number">4</span> Entropie</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chap-MesuresNeutres"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></li>
+<li>
+<a class="nav-link" href="#sec-Richesse"><span class="header-section-number">3.1</span> Richesse spécifique</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#techniques-destimation-non-param%C3%A9trique"><span class="header-section-number">3.1.1</span> Techniques d’estimation non paramétrique</a></li>
+<li><a class="nav-link" href="#inf%C3%A9rence-du-nombre-desp%C3%A8ces-%C3%A0-partir-de-la-sad"><span class="header-section-number">3.1.2</span> Inférence du nombre d’espèces à partir de la SAD</a></li>
+<li><a class="nav-link" href="#sec-RichesseSAC"><span class="header-section-number">3.1.3</span> Inférence du nombre d’espèces à partir de courbes d’accumulation</a></li>
+<li><a class="nav-link" href="#diversit%C3%A9-g%C3%A9n%C3%A9rique"><span class="header-section-number">3.1.4</span> Diversité générique</a></li>
+<li><a class="nav-link" href="#combien-y-a-t-il-desp%C3%A8ces-diff%C3%A9rentes-sur-terre"><span class="header-section-number">3.1.5</span> Combien y a-t-il d’espèces différentes sur Terre ?</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#indice-de-simpson"><span class="header-section-number">3.2</span> Indice de Simpson</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d%C3%A9finition"><span class="header-section-number">3.2.1</span> Définition</a></li>
+<li><a class="nav-link" href="#estimation"><span class="header-section-number">3.2.2</span> Estimation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#indice-de-shannon"><span class="header-section-number">3.3</span> Indice de Shannon</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d%C3%A9finition-1"><span class="header-section-number">3.3.1</span> Définition</a></li>
+<li><a class="nav-link" href="#sec-BiaisShannon"><span class="header-section-number">3.3.2</span> Estimation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#sec-Hurlbert"><span class="header-section-number">3.4</span> Indice de Hurlbert</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d%C3%A9finition-2"><span class="header-section-number">3.4.1</span> Définition</a></li>
+<li><a class="nav-link" href="#estimation-1"><span class="header-section-number">3.4.2</span> Estimation</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/EricMarcon/MesuresBioDiv3/blob/master/02-Neutre.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/EricMarcon/MesuresBioDiv3/edit/master/02-Neutre.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 16/01/2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

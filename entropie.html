@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>4 Entropie | Mesures de la Biodiversité</title>
+<meta name="author" content="Eric Marcon">
+<meta name="description" content="L’entropie est la surprise moyenne apportée par l’observation des individus d’une communauté, d’autant plus grande qu’un individu appartient à une espèce plus rare. L’entropie HCDT permet...">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="4 Entropie | Mesures de la Biodiversité">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/entropie.html">
+<meta property="og:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<meta property="og:description" content="L’entropie est la surprise moyenne apportée par l’observation des individus d’une communauté, d’autant plus grande qu’un individu appartient à une espèce plus rare. L’entropie HCDT permet...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4 Entropie | Mesures de la Biodiversité">
+<meta name="twitter:description" content="L’entropie est la surprise moyenne apportée par l’observation des individus d’une communauté, d’autant plus grande qu’un individu appartient à une espèce plus rare. L’entropie HCDT permet...">
+<meta name="twitter:image" content="https://github.com/EricMarcon/MesuresBioDiv3/images/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1B3PLBCM6"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-C1B3PLBCM6');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Mesures de la Biodiversité</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Motivation</a></li>
+<li><a class="" href="calculs-et-donn%C3%A9es.html">Calculs et données</a></li>
+<li><a class="" href="notations.html">Notations</a></li>
+<li class="book-part">Notions</li>
+<li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
+<li><a class="" href="sec-SAD.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li class="book-part">Diversité neutre d’une communauté</li>
+<li><a class="" href="chap-MesuresNeutres.html"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></li>
+<li><a class="active" href="entropie.html"><span class="header-section-number">4</span> Entropie</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/EricMarcon/MesuresBioDiv3">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="entropie" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Entropie<a class="anchor" aria-label="anchor" href="#entropie"><i class="fas fa-link"></i></a>
+</h1>
+<div class="Summary">
+<p>L’entropie est la surprise moyenne apportée par l’observation des individus d’une communauté, d’autant plus grande qu’un individu appartient à une espèce plus rare.
+L’entropie HCDT permet d’unifier les indices classiques de diversité : son paramètre, appelé ordre, fixe l’importance donnée aux espèces rares. L’entropie d’ordre 0 est la <span style="white-space:nowrap">richesse ;</span> celle d’ordre 1, l’indice de <span style="white-space:nowrap">Shannon ;</span> celle d’ordre 2, celui de Simpson.
+L’entropie est la moyenne du logarithme déformé de la rareté des espèces, définie comme l’inverse de leur probabilité.</p>
+<p>L’entropie va de pair avec la diversité au sens strict (Nombres de Hill) : le nombre d’espèces équiprobables dont l’entropie est la même que celle de la communauté réelle.
+La diversité est l’exponentielle déformée de l’entropie.
+Les profils de diversité représentent la diversité en fonction de son ordre et permettent la comparaison de communautés.</p>
+<p>L’estimation de la diversité est difficile pour des ordres inférieurs à <span class="math inline">\(0,5\)</span> dans des taxocènes très divers comme les arbres des forêts tropicales.</p>
+</div>
+<p>L’entropie peut être entendue comme la surprise moyenne fournie par l’observation d’un échantillon.
+C’est intuitivement une bonne mesure de diversité <span class="citation">(<a href="entropie.html#ref-Pielou1975" role="doc-biblioref">Pielou 1975</a>)</span>.
+Ses propriétés mathématiques permettent d’unifier les mesures de diversité dans un cadre général.</p>
+<div id="définition-de-lentropie" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Définition de l’entropie<a class="anchor" aria-label="anchor" href="#d%C3%A9finition-de-lentropie"><i class="fas fa-link"></i></a>
+</h2>
+<p>Les textes fondateurs sont <span class="citation">Davis (<a href="entropie.html#ref-Davis1941" role="doc-biblioref">1941</a>)</span> et surtout <span class="citation">Theil (<a href="entropie.html#ref-Theil1967" role="doc-biblioref">1967</a>)</span> en économétrie, et Shannon <span class="citation">(<a href="entropie.html#ref-Shannon1948" role="doc-biblioref">1948</a>; <a href="entropie.html#ref-Shannon1963" role="doc-biblioref">1963</a>)</span> pour la mesure de la diversité.
+Une revue est fournie par <span class="citation">Maasoumi (<a href="entropie.html#ref-Maasoumi1993" role="doc-biblioref">1993</a>)</span>.</p>
+<p>Considérons une expérience dont les résultats possibles sont <span class="math inline">\(\{r_1, r_2, \dots , \ r_S\}\)</span>.
+La probabilité d’obtenir <span class="math inline">\(r_s\)</span> est <span class="math inline">\(p_s\)</span>, et <span class="math inline">\(\mathbf{p}=(p_1, p_2, \dots, p_S)\)</span> est le vecteur composé des probabilités d’obtenir chaque résultat.
+Les probabilités sont connues <em>a priori</em>.
+Tout ce qui suit est vrai aussi pour des valeurs de <span class="math inline">\(r\)</span> continues, dont on connaîtrait la densité de probabilité.</p>
+<p>On considère maintenant un échantillon de valeurs de <span class="math inline">\(r\)</span>.
+La présence de <span class="math inline">\(r_s\)</span> dans l’échantillon est peu étonnante si <span class="math inline">\(p_s\)</span> est grande : elle apporte peu d’information supplémentaire par rapport à la simple connaissance des probabilités.
+En revanche, si <span class="math inline">\(p_s\)</span> est petite, la présence de <span class="math inline">\(r_s\)</span> est surprenante.
+On définit donc une fonction d’information, <span class="math inline">\(I(p_s)\)</span>, décroissante quand la probabilité augmente, de <span class="math inline">\(I(0) &gt; 0\)</span> (éventuellement <span class="math inline">\(+\infty\)</span>) à <span class="math inline">\(I(1) = 0\)</span>, parce qu’observer un résultat certain n’apporte aucune information.
+Chaque valeur observée dans l’échantillon apporte une certaine quantité d’information, dont la somme est l’information de l’échantillon.
+<span class="citation">Patil and Taillie (<a href="entropie.html#ref-Patil1982" role="doc-biblioref">1982</a>)</span> appellent l’information “rareté”.</p>
+<p>La quantité d’information attendue de l’expérience est <span class="math inline">\(\sum^S_{s=1}{p_s I(p_s) = H(\mathbf{p})}\)</span>.
+Si on choisit <span class="math inline">\(I(p_s) = -\ln(p_s)\)</span>, <span class="math inline">\(H(\mathbf{p})\)</span> est l’indice de Shannon, mais bien d’autres formes de <span class="math inline">\(I(p_s)\)</span> sont possibles.
+<span class="math inline">\(H(\mathbf{p})\)</span> est appelée <em>entropie</em>.
+C’est une mesure de l’incertitude (de la volatilité) du résultat de l’expérience.
+Si le résultat est certain (une seule valeur <span class="math inline">\(p_S\)</span> vaut 1), l’entropie est nulle.
+L’entropie est maximale quand les résultats sont équiprobables.</p>
+<p>Si <span class="math inline">\(\mathbf{p}\)</span> est la distribution des probabilité des espèces dans une communauté, <span class="citation">Patil and Taillie (<a href="entropie.html#ref-Patil1982" role="doc-biblioref">1982</a>)</span> montrent que :</p>
+<ul>
+<li>Si <span class="math inline">\(I(p_s) = (1 - p_s) / {p_s}\)</span>, alors <span class="math inline">\(H(\mathbf{p})\)</span> est le nombre d’espèces <span class="math inline">\(S\)</span> moins <span style="white-space:nowrap">1 ;</span>
+</li>
+<li>Si <span class="math inline">\(I(p_s) = -\ln(p_s)\)</span>, alors <span class="math inline">\(H(\mathbf{p})\)</span> est l’indice de <span style="white-space:nowrap">Shannon ;</span>
+</li>
+<li>Si <span class="math inline">\(I(p_s) = 1 - p_s\)</span>, alors <span class="math inline">\(H(\mathbf{p})\)</span> est l’indice de Simpson.</li>
+</ul>
+<p></p>
+<p></p>
+<p>Ces trois fonctions d’information sont représentées en figure <a href="#fig:IFig"><strong>??</strong></a>.</p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">I0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span> <span class="va">p</span><span class="op">)</span> <span class="op">/</span> <span class="va">p</span></span>
+<span><span class="va">I1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="va">I2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">p</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">I0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">I1</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">I2</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">coord_cartesian</span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p"</span>, y <span class="op">=</span> <span class="st">"I(p)"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:EntropieFig"></span>
+<img src="MesuresBD_files/figure-html/EntropieFig-1.png" alt="Valeur de \(p_{s}I(p_s)\) dans le nombre d’espèces (trait plein), l’indice de Shannon (pointillés longs) et l’indice de Simpson (pointillés). Les espèces rares contribuent peu, sauf pour le nombre d’espèces." width="80%"><p class="caption">
+Figure 4.1: Valeur de <span class="math inline">\(p_{s}I(p_s)\)</span> dans le nombre d’espèces (trait plein), l’indice de Shannon (pointillés longs) et l’indice de Simpson (pointillés). Les espèces rares contribuent peu, sauf pour le nombre d’espèces.
+</p>
+</div>
+<p></p>
+<p>La contribution de chaque espèce à la valeur totale de l’entropie est représentée figure <a href="entropie.html#fig:EntropieFig">4.1</a>.</p>
+<p>Code R :</p>
+<p></p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">H0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">p</span></span>
+<span><span class="va">H1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span><span class="va">p</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="va">H2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="va">p</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">p</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">H0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">H1</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">H2</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p"</span>, y <span class="op">=</span> <span class="st">"H(p)"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+</div>
+<div id="entropie-relative" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Entropie relative<a class="anchor" aria-label="anchor" href="#entropie-relative"><i class="fas fa-link"></i></a>
+</h2>
+<p>Considérons maintenant les probabilités <span class="math inline">\(q_s\)</span> formant l’ensemble <span class="math inline">\(\mathbf{q}\)</span> obtenues par la réalisation de l’expérience.
+Elles sont différentes des probabilités <span class="math inline">\(p_s\)</span>, par exemple parce que l’expérience ne s’est pas déroulée exactement comme prévu.
+On définit le gain d’information <span class="math inline">\(I(q_s, p_s)\)</span> comme la quantité d’information supplémentaire fournie par l’observation d’un résultat de l’expérience, connaissant les probabilités <em>a priori</em>.
+La quantité totale d’information fournie par l’expérience, <span class="math inline">\(\sum^S_{s=1}{q_s I(q_s, p_s)} = H(\mathbf{q}, \mathbf{p})\)</span>, est souvent appelée entropie relative.
+Elle peut être vue comme une distance entre la distribution <em>a priori</em> et la distribution <em>a posteriori</em>.
+Il est possible que les distributions <span class="math inline">\(\mathbf{p}\)</span> et <span class="math inline">\(\mathbf{q}\)</span> soit identiques, que le gain d’information soit donc nul, mais les estimateurs empiriques n’étant pas exactement égaux entre eux, des tests de significativité de la valeur de <span class="math inline">\(\hat{H}(\mathbf{q},\mathbf{p})\)</span> seront nécessaires.</p>
+<p>Quelques formes possibles de <span class="math inline">\(H(\mathbf{q}, \mathbf{p})\)</span> sont :</p>
+<ul>
+<li>La divergence de Kullback-Leibler <span class="citation">(<a href="entropie.html#ref-Kullback1951" role="doc-biblioref">Kullback and Leibler 1951</a>)</span> connue par les économistes comme l’indice de dissimilarité de <span class="citation">Theil (<a href="entropie.html#ref-Theil1967" role="doc-biblioref">1967</a>)</span> :
+<span class="math display" id="eq:Theil">\[\begin{equation}
+\tag{4.1}
+T = \sum^S_{s=1}{q_{s}\ln\frac{q_s}{p_s}};
+\end{equation}\]</span>
+</li>
+<li>Sa proche parente, appelée parfois deuxième mesure de Theil <span class="citation">(<a href="entropie.html#ref-Conceicao2000" role="doc-biblioref">Conceição and Ferreira 2000</a>)</span>, qui inverse simplement les rôles de <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>:
+<span class="math display" id="eq:Theil2">\[\begin{equation}
+\tag{4.2}
+L = \sum^S_{s=1}{p_{s}\ln\frac{p_s}{q_s}}.
+\end{equation}\]</span>
+</li>
+</ul>
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:KullbackLeiblerFig"></span>
+<img src="MesuresBD_files/figure-html/KullbackLeiblerFig-1.png" alt="Valeur de \(q \ln(q / p)\) en fonction de \(p\) et \(q\). La divergence de Kullback-Leibler est la somme de cette valeur pour toutes les espèces" width="80%"><p class="caption">
+Figure 4.2: Valeur de <span class="math inline">\(q \ln(q / p)\)</span> en fonction de <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>. La divergence de Kullback-Leibler est la somme de cette valeur pour toutes les espèces
+</p>
+</div>
+<p></p>
+<p>L’entropie relative est essentielle pour la définition de la diversité <span class="math inline">\(\beta\)</span> présentée dans le chapitre <a href="#chap-DedompHCDT"><strong>??</strong></a>.
+En se limitant à la diversité <span class="math inline">\(\alpha\)</span>, on peut remarquer que l’indice de Shannon est la divergence de Kullback-Leibler entre la distribution observée et l’équiprobabilité des espèces <span class="citation">(<a href="entropie.html#ref-Marcon2012a" role="doc-biblioref">Marcon et al. 2012</a>)</span>.</p>
+<p>La contribution à la divergence de chaque couple <span class="math inline">\((p_s, q_s)\)</span> est représentées en figure <a href="entropie.html#fig:KullbackLeiblerFig">4.2</a>.
+Elle est positive quand <span class="math inline">\(q_s &gt; p_s\)</span> (la valeur observée est plus grande que la valeur attendue), et croît avec <span class="math inline">\(q_s\)</span> pour <span class="math inline">\(p_s\)</span> fixé.
+Elle tend vers l’infini quand <span class="math inline">\(p_s \to 0\)</span>.
+Les valeurs les plus négatives ne sont pas obtenues pour les valeurs minimales de <span class="math inline">\(q\)</span> parce que les évènements très rarement observés influent peu sur la quantité d’information totale.
+Le minimum <span class="math inline">\(-e^{-1} \approx 0.37\)</span> est atteint pour <span class="math inline">\(p_s = 1\)</span> et <span class="math inline">\(q_s = e^{-1}\)</span>, la valeur qui annule la dérivée de <span class="math inline">\(q \ln(q)\)</span>.
+En somme, la divergence de Kullback-Leibler est surtout influencée par les évènements beaucoup plus observés qu’attendus.</p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">1</span>, <span class="fl">.01</span><span class="op">)</span></span>
+<span><span class="va">KB</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span><span class="op">)</span> <span class="va">q</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">q</span> <span class="op">/</span> <span class="va">p</span><span class="op">)</span></span>
+<span><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span>, FUN <span class="op">=</span> <span class="st">"KB"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/edzer/sp/">"sp"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span></span>
+<span>  <span class="va">xyz</span>, </span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>, </span>
+<span>  xlab <span class="op">=</span> <span class="st">"p"</span>, </span>
+<span>  ylab <span class="op">=</span> <span class="st">"q"</span>, </span>
+<span>  asp <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/contour.html">contour</a></span><span class="op">(</span></span>
+<span>  <span class="va">xyz</span>, </span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.3</span>, <span class="fl">0</span>, <span class="fl">.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  labcex <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>  add <span class="op">=</span> <span class="cn">T</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p></p>
+</div>
+<div id="lappropriation-de-lentropie-par-la-biodiversité" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> L’appropriation de l’entropie par la biodiversité<a class="anchor" aria-label="anchor" href="#lappropriation-de-lentropie-par-la-biodiversit%C3%A9"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="citation">MacArthur (<a href="entropie.html#ref-MacArthur1955" role="doc-biblioref">1955</a>)</span> est le premier à avoir introduit la théorie de l’information en écologie <span class="citation">(<a href="entropie.html#ref-Ulanowicz2001" role="doc-biblioref">Ulanowicz 2001</a>)</span>.
+MacArthur s’intéressait aux réseaux trophiques et cherchait à mesurer leur stabilité : l’indice de Shannon qui comptabilise le nombre de relations possibles lui paraissait une bonne façon de l’évaluer.
+Mais l’efficacité implique la spécialisation, ignorée dans <span class="math inline">\(H\)</span> qui est une mesure neutre (toutes les espèces y jouent le même rôle).
+MacArthur a abandonné cette voie.</p>
+<p>Les premiers travaux consistant à généraliser l’indice de Shannon sont dus à <span class="citation">Rényi (<a href="entropie.html#ref-Renyi1961" role="doc-biblioref">1961</a>)</span>.
+L’entropie d’ordre <span class="math inline">\(q\)</span> de Rényi est</p>
+<p><span class="math display">\[\begin{equation}
+^{q}\!R =\frac{1}{1 - q \ln\sum^S_{q=1}{p^q_s}}.
+\end{equation}\]</span></p>
+<p>Rényi pose également les axiomes pour une mesure d’entropie <span class="math inline">\(R(\mathbf{p})\)</span>, où <span class="math inline">\(\mathbf{p}=(p_1, p_2, \dots, p_S)\)</span>:</p>
+<ul>
+<li>La symétrie : les espèces doivent être interchangeables, aucune n’a de rôle particulier et leur ordre est <span style="white-space:nowrap">indifférent ;</span>
+</li>
+<li>La mesure doit être continue par rapport aux <span style="white-space:nowrap">probabilités ;</span>
+</li>
+<li>La valeur maximale est atteinte si toutes les probabilités sont égales.</li>
+</ul>
+<p>Il montre que <span class="math inline">\(^{q}\!R\)</span> respecte les 3 axiomes.</p>
+<p><span class="citation">Patil and Taillie (<a href="entropie.html#ref-Patil1982" role="doc-biblioref">1982</a>)</span> ont montré de plus que :</p>
+<ul>
+<li>L’introduction d’une espèce dans une communauté augmente sa diversité (conséquence de la décroissance de <span class="math inline">\(g(p_s)\)</span><span style="white-space:nowrap">) ;</span>
+</li>
+<li>Le remplacement d’un individu d’une espèce fréquente par un individu d’une espèce plus rare augmente l’entropie à condition que <span class="math inline">\(R(\mathbf{p})\)</span> soit concave.
+Dans la littérature économique sur les inégalités, cette propriété est connue sous le nom de Pigou-Dalton <span class="citation">(<a href="entropie.html#ref-Dalton1920" role="doc-biblioref">Dalton 1920</a>)</span>.</li>
+</ul>
+<p><span class="citation">Hill (<a href="entropie.html#ref-Hill1973" role="doc-biblioref">1973</a>)</span> transforme l’entropie de Rényi en <em>nombres de Hill</em>, qui en sont simplement l’exponentielle :</p>
+<p><span class="math display" id="eq:Hill1973">\[\begin{equation}
+  \tag{4.3}
+  ^{q}\!D = {\left(\sum^S_{s=1}{p^q_s}\right)}^{\frac{1}{1 - q}}.
+\end{equation}\]</span></p>
+<p>Le souci de Hill était de rendre les indices de diversité intelligibles après l’article remarqué de <span class="citation">Hurlbert (<a href="entropie.html#ref-Hurlbert1971" role="doc-biblioref">1971</a>)</span> intitulé “le non-concept de diversité spécifique”.
+Hurlbert reprochait à la littérature sur la diversité sa trop grande abstraction et son éloignement des réalités biologiques, notamment en fournissant des exemples dans lesquels l’ordre des communautés n’est pas le même selon l’indice de diversité choisi.
+Les nombres de Hill sont le nombre d’espèces équiprobables donnant la même valeur de diversité que la distribution observée.
+Ils sont des transformations simples des indices classiques :</p>
+<ul>
+<li>
+<span class="math inline">\(^{0}\!D\)</span> est le nombre <span style="white-space:nowrap">d’espèces ;</span>
+</li>
+<li>
+<span class="math inline">\(^{1}\!D = e^H\)</span>, l’exponentielle de l’indice de <span style="white-space:nowrap">Shannon ;</span>
+</li>
+<li>
+<span class="math inline">\(^{2}\!D = {1} / {(1- E)}\)</span>, l’inverse de l’indice de concentration de Simpson, connu sous le nom d’indice de <span class="citation">Stoddart (<a href="entropie.html#ref-Stoddart1983" role="doc-biblioref">1983</a>)</span>.</li>
+</ul>
+<p>Ces résultats avaient déjà été obtenus avec une autre approche par <span class="citation">MacArthur (<a href="entropie.html#ref-MacArthur1965" role="doc-biblioref">1965</a>)</span> et repris par <span class="citation">Adelman (<a href="entropie.html#ref-Adelman1969" role="doc-biblioref">1969</a>)</span> dans la littérature économique.</p>
+<p>Les nombres de Hill sont des “nombres effectifs” ou “nombres équivalents”.
+Le concept a été défini rigoureusement par <span class="citation">Gregorius (<a href="entropie.html#ref-Gregorius1991" role="doc-biblioref">1991</a>)</span>, d’après <span class="citation">Wright (<a href="entropie.html#ref-Wright1931" role="doc-biblioref">1931</a>)</span> (qui avait le premier défini la taille effective d’une population) : étant donné une variable caractéristique (ici, l’entropie) fonction seulement d’une variable numérique (ici, le nombre d’espèces), dans un cas idéal (ici, l’équiprobabilité des espèces), le nombre effectif est la valeur de la variable numérique pour laquelle la variable caractéristique est celle du jeu de données.</p>
+<p><span class="citation">Gregorius (<a href="entropie.html#ref-Gregorius2014" role="doc-biblioref">2014</a>)</span> montre que de nombreux autres indices de diversité sont acceptables dans le sens où ils vérifient les axiomes précédents et, de plus, que la diversité d’un assemblage de communautés est obligatoirement supérieure à la diversité moyenne de ces communautés (l’égalité n’étant possible que si les communautés sont toutes identiques).
+Cette dernière propriété sera traitée en détail dans la partie consacrée à la décomposition de la diversité.
+Ces indices doivent vérifier deux propriétés : leur fonction d’information doit être décroissante, et ils doivent être une fonction strictement concave de <span class="math inline">\(p_s\)</span>.
+Parmi les possibilités, <span class="math inline">\(I(p_s) = \cos{(p_s \pi / 2)}\)</span> est envisageable par exemple : le choix de la fonction d’information est virtuellement illimité, mais seules quelques unes seront interprétables clairement.</p>
+<p>Un nombre équivalent d’espèces existe pour tous ces indices, il est toujours égal à l’inverse de l’image de l’indice par la réciproque de la fonction d’information :</p>
+<p><span class="math display" id="eq:Gregorius2014">\[\begin{equation}
+  \tag{4.4}
+  D = \frac{1}{I^{-1} \left( \sum^S_{s=1}{p_s I(p_s)} \right)}.
+\end{equation}\]</span></p>
+<p>D’autres entropies ont été utilisées, avec plus ou moins de succès.
+Par exemple, <span class="citation">Ricotta and Avena (<a href="entropie.html#ref-Ricotta2003c" role="doc-biblioref">2003</a>)</span> proposent d’utiliser la fonction d’information <span class="math inline">\(I(p_s) = -\ln(k_s)\)</span> où <span class="math inline">\(k_s\)</span> est la dissimilarité totale de l’espèce <span class="math inline">\(s\)</span> avec les autres (par exemple, la somme des distances aux autres espèces dans un arbre phylogénétique, voir section <a href="#sec-Dphylo"><strong>??</strong></a>), normalisée pour que <span class="math inline">\(\sum_s{k_s} = 1\)</span>.
+Ainsi, les espèces les plus originales apportent peu d’information, ce qui n’est pas très intuitif.
+Les auteurs montrent que leur mesure est la somme de l’entropie de Shannon et de la divergence de Kullback-Leibler entre les probabilités et les dissimilarités des espèces.
+<span class="citation">Ricotta and Szeidl (<a href="entropie.html#ref-Ricotta2006b" role="doc-biblioref">2006</a>)</span> ont défini plus tard une entropie augmentant avec l’originalité de chaque espèce, présentée au chapitre <a href="#chap-LeinsterCobbold"><strong>??</strong></a>.</p>
+</div>
+<div id="entropie-hcdt" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Entropie HCDT<a class="anchor" aria-label="anchor" href="#entropie-hcdt"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="citation">Tsallis (<a href="entropie.html#ref-Tsallis1988" role="doc-biblioref">1988</a>)</span> propose une classe de mesures appelée entropie généralisée, définie par <span class="citation">Havrda and Charvát (<a href="entropie.html#ref-Havrda1967" role="doc-biblioref">1967</a>)</span> pour la première fois et redécouverte plusieurs fois, notamment par <span class="citation">Daróczy (<a href="entropie.html#ref-Daroczy1970" role="doc-biblioref">1970</a>)</span>, d’où son nom <em>entropie HCDT</em> (voir <span class="citation">Mendes et al. (<a href="entropie.html#ref-Mendes2008" role="doc-biblioref">2008</a>)</span>, page 451, pour un historique complet) :</p>
+<p><span class="math display" id="eq:HCDT">\[\begin{equation}
+  \tag{4.5}
+  ^{q}\!H = \frac{1}{q-1} \left( 1 - \sum^S_{s=1}{p^q_s} \right).
+\end{equation}\]</span></p>
+<p>Tsallis a montré que les indices de Simpson et de Shannon étaient des cas particuliers d’entropie généralisée, retrouvant, sans faire le rapprochement <span class="citation">(<a href="entropie.html#ref-Ricotta2005" role="doc-biblioref">Ricotta 2005a</a>)</span>, la définition d’un indice de diversité de <span class="citation">Patil and Taillie (<a href="entropie.html#ref-Patil1982" role="doc-biblioref">1982</a>)</span>.</p>
+<p>Ces résultats ont été complétés par d’autres et repris en écologie par <span class="citation">Keylock (<a href="entropie.html#ref-Keylock2005" role="doc-biblioref">2005</a>)</span> et Jost <span class="citation">(<a href="entropie.html#ref-Jost2006" role="doc-biblioref">2006</a>, <a href="entropie.html#ref-Jost2007" role="doc-biblioref">2007</a>)</span>.
+Là encore :</p>
+<ul>
+<li>Le nombre d’espèces moins 1 est <span class="math inline">\(^{0}\!H\)</span>;</li>
+<li>L’indice de Shannon est <span class="math inline">\(^{1}\!H\)</span>;</li>
+<li>L’indice de Gini-Simpson est <span class="math inline">\(^{2}\!H\)</span>.</li>
+</ul>
+<p>L’entropie HCDT est particulièrement attractive parce que sa relation avec la diversité au sens strict est simple, après introduction du formalisme adapté (les logarithmes déformés).
+Son biais d’estimation peut être corrigé globalement, et non seulement pour les cas particuliers (nombre d’espèces, Shannon, Simpson).
+Enfin, sa décomposition sera présentée en détail dans le chapitre <a href="#chap-DedompHCDT"><strong>??</strong></a>.</p>
+</div>
+<div id="logarithmes-déformés" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Logarithmes déformés<a class="anchor" aria-label="anchor" href="#logarithmes-d%C3%A9form%C3%A9s"><i class="fas fa-link"></i></a>
+</h2>
+<p>L’écriture de l’entropie HCDT est largement simplifiée en introduisant le formalisme des logarithmes déformés <span class="citation">(<a href="entropie.html#ref-Tsallis1994" role="doc-biblioref">Tsallis 1994</a>)</span>.
+Le logarithme d’ordre <span class="math inline">\(q\)</span> est défini par
+<span class="math display" id="eq:lnq">\[\begin{equation}
+  \tag{4.6}
+  \ln_q{x} = \frac{x^{1-q} - 1}{1 - q},
+\end{equation}\]</span>
+dont la forme est identique à la transformation de <span class="citation">Box and Cox (<a href="entropie.html#ref-Box1964" role="doc-biblioref">1964</a>)</span> utilisée en statistiques pour normaliser une variable.</p>
+<p>Le logarithme déformé converge vers le logarithme naturel quand <span class="math inline">\(q \to 1\)</span> (figure <a href="entropie.html#fig:lnqFig">4.3</a>).</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:lnqFig"></span>
+<img src="MesuresBD_files/figure-html/lnqFig-1.png" alt="Valeur du logarithme d’ordre \(q\) de probabilités entre 0 et 1 pour différentes valeurs de \(q\): \(q = 0\) (pointillés longs rouges), la courbe est une droite ; \(q = 1\) (trait plein) : logarithme naturel ; \(q = 2\) (pointillés courts bleus) : la courbe a la même forme que le logarithme naturel pour les valeurs positives de \(q\); \(q = -1\) (pointillés alternés verts) : la courbe est convexe pour les valeurs négatives de \(q\)." width="80%"><p class="caption">
+Figure 4.3: Valeur du logarithme d’ordre <span class="math inline">\(q\)</span> de probabilités entre 0 et 1 pour différentes valeurs de <span class="math inline">\(q\)</span>: <span class="math inline">\(q = 0\)</span> (pointillés longs rouges), la courbe est une <span style="white-space:nowrap">droite ;</span> <span class="math inline">\(q = 1\)</span> (trait plein) : logarithme <span style="white-space:nowrap">naturel ;</span> <span class="math inline">\(q = 2\)</span> (pointillés courts bleus) : la courbe a la même forme que le logarithme naturel pour les valeurs positives de <span class="math inline">\(q\)</span>; <span class="math inline">\(q = -1\)</span> (pointillés alternés verts) : la courbe est convexe pour les valeurs négatives de <span class="math inline">\(q\)</span>.
+</p>
+</div>
+<p></p>
+<p>Le code R nécessaire pour réaliser la figure est :</p>
+<p></p>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ln0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu">lnq</span><span class="op">(</span><span class="va">p</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">ln2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu">lnq</span><span class="op">(</span><span class="va">p</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">lnm1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu">lnq</span><span class="op">(</span><span class="va">p</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">log</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">ln0</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">ln2</span>, lty <span class="op">=</span> <span class="fl">3</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">stat_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">lnm1</span>, lty <span class="op">=</span> <span class="fl">4</span>, col <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">coord_cartesian</span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">ln</span><span class="op">[</span><span class="va">q</span><span class="op">]</span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p>Sa fonction inverse est l’exponentielle d’ordre <span class="math inline">\(q\)</span>:</p>
+<p><span class="math display" id="eq:expq">\[\begin{equation}
+  \tag{4.7}
+  e^x_q = \left[ 1 + \left( 1 - q \right) x \right]^{\frac{1}{1 - q}}.
+\end{equation}\]</span></p>
+<p>Enfin, le logarithme déformé est subadditif :</p>
+<p><span class="math display" id="eq:lnqsubadd">\[\begin{equation}
+  \tag{4.8}
+  \ln_q\left( xy \right)
+  = \ln_q{x} + \ln_q{y}
+    - \left( q - 1 \right) \left( \ln_q{x} \right) \left( \ln_q{y} \right).
+\end{equation}\]</span></p>
+<p>Ses propriétés sont les suivantes :</p>
+<p><span class="math display" id="eq:lnqinv">\[\begin{equation}
+  \tag{4.9}
+  \ln_q\frac{1}{x} = -x^{q - 1} \ln_q{x};
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:lnqprod">\[\begin{equation}
+  \tag{4.10}
+  \ln_q\left( xy \right) = \ln_q{x} + x^{1-q} \ln_q{y};
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:lnqdiv">\[\begin{equation}
+  \tag{4.11}
+  \ln_q\left( \frac{x}{y} \right)
+  = \ln_q{x} - {\left( \frac{x}{y} \right)}^{1 - q} \ln_q{y};
+\end{equation}\]</span></p>
+<p>et</p>
+<p><span class="math display" id="eq:expqsum">\[\begin{equation}
+  \tag{4.12}
+  e^{x + y}_q = e_q^x e_q^{\frac{y}{1 + \left( 1 - q \right) x}}.
+\end{equation}\]</span></p>
+<p>Si <span class="math inline">\(q &gt; 1\)</span>, <span class="math inline">\(\mathop{\lim}_{x \to +\infty}(\ln_q{x}) = {1} / {(q - 1)}\)</span>, donc <span class="math inline">\(e_q^x\)</span> n’est pas définie pour <span class="math inline">\(x &gt; 1 / (q - 1)\)</span>.</p>
+<p>La dérivée du logarithme déformé est, quel que soit <span class="math inline">\(q\)</span>,
+<span class="math display" id="eq:lnqprime">\[\begin{equation}
+  \tag{4.13}
+  \ln'_q\left( x \right) = x^{-q}.
+\end{equation}\]</span></p>
+<p>Les dérivées première et seconde de l’exponentielle déformée sont, quel que soit <span class="math inline">\(q\)</span>:
+<span class="math display" id="eq:expqprime">\[\begin{equation}
+  \tag{4.14}
+  \exp'_q\left( x \right) = \left( e_q^x \right)^{q};
+\end{equation}\]</span>
+<span class="math display" id="eq:expqsec">\[\begin{equation}
+  \tag{4.15}
+  \exp''_q\left( x \right) = \left( e_q^x \right)^{2q - 1}.
+\end{equation}\]</span></p>
+<p>Ces fonctions sont implémentées dans le package <em>divent</em> : <code>ln_q(x, q)</code> et <code>exp_q(x, q)</code>.</p>
+<p>L’entropie d’ordre <span class="math inline">\(q\)</span> s’écrit</p>
+<p><span class="math display" id="eq:EntropieHCDT">\[\begin{equation}
+  \tag{4.16}
+  ^{q}\!H
+  = \frac{1}{q - 1} \left( 1 - \sum^S_{s=1}{p^q_s} \right)
+  = -\sum_s{p^q_s} \ln_q{p_s}
+  = \sum_s{p_s}{\ln_q\frac{1}{p_s}}.
+\end{equation}\]</span></p>
+<p>Ces trois formes sont équivalentes mais les deux dernières s’interprètent comme une généralisation de l’entropie de Shannon <span class="citation">(<a href="entropie.html#ref-Marcon2014a" role="doc-biblioref">Marcon et al. 2014</a>)</span>.
+La dernière est la plus intéressante parce qu’elle permet de définir l’entropie en général comme la moyenne du logarithme de l’inverse des probabilités, que nous appellerons la rareté des espèces.</p>
+<p>Le calcul de <span class="math inline">\(^{q}\!H\)</span> peut se faire avec la fonction <code>ent_tsallis</code> de la librairie <em>divent</em> :</p>
+<p></p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/ent_tsallis.html">ent_tsallis</a></span><span class="op">(</span><span class="va">bci_prob</span>, q<span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order entropy
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 naive       1.5    1.72</code></pre>
+<p></p>
+</div>
+<div id="entropie-et-diversité" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Entropie et diversité<a class="anchor" aria-label="anchor" href="#entropie-et-diversit%C3%A9"><i class="fas fa-link"></i></a>
+</h2>
+<p>On voit immédiatement que l’entropie de Tsallis est le logarithme d’ordre <span class="math inline">\(q\)</span> du nombre de Hill correspondant, comme l’entropie de Rényi en est le logarithme naturel :</p>
+<p><span class="math display" id="eq:HlnD">\[\begin{equation}
+  \tag{4.17}
+  ^{q}\!H = \ln_q{^{q}\!D};
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:DexpH">\[\begin{equation}
+  \tag{4.18}
+  ^{q}\!D = e_q^{^{q}\!H}.
+\end{equation}\]</span></p>
+<p>L’entropie est utile pour les calculs : la correction des biais d’estimation notamment.
+Les nombres de Hill, ou <em>nombres équivalents d’espèces</em> ou <em>nombres effectif d’espèces</em> permettent une appréhension plus intuitive de la notion de biodiversité <span class="citation">(<a href="entropie.html#ref-Jost2006" role="doc-biblioref">Jost 2006</a>)</span>.
+En raison de leurs propriétés, notamment de décomposition (voir le chapitre <a href="#chap-DedompHCDT"><strong>??</strong></a>), <span class="citation">Jost (<a href="entropie.html#ref-Jost2007" role="doc-biblioref">2007</a>)</span> les appelle “vraie diversité”.
+<span class="citation">Hoffmann and Hoffmann (<a href="entropie.html#ref-Hoffmann2008" role="doc-biblioref">2008</a>)</span> critiquent cette définition totalitaire et fournissent une revue historique plus lointaine sur les origines de ces mesures.
+<span class="citation">Jost (<a href="entropie.html#ref-Jost2009" role="doc-biblioref">2009</a>)</span> reconnaît qu’un autre terme aurait pu être choisi (“diversité neutre” ou “diversité mathématique” par exemple).</p>
+<p><span class="citation">Dauby and Hardy (<a href="entropie.html#ref-Dauby2012" role="doc-biblioref">2012</a>)</span> écrivent “diversité au sens strict”<span style="white-space:nowrap"> ;</span> <span class="citation">Gregorius (<a href="entropie.html#ref-Gregorius2010" role="doc-biblioref">2010</a>)</span> “diversité explicite”.</p>
+<p>Quoi qu’il en soit, les nombres de Hill respectent le principe de réplication (voir <span class="citation">Chao, Chiu, and Jost (<a href="entropie.html#ref-Chao2010" role="doc-biblioref">2010</a>)</span>, section 3 pour une discussion et un historique) : si <span class="math inline">\(I\)</span> communautés de même taille, de même niveau de diversité <span class="math inline">\(D\)</span>, mais sans espèces en commun sont regroupées dans une méta-communauté, la diversité de la méta-communauté doit être <span class="math inline">\(I \times D\)</span>.</p>
+<p>L’intérêt de ces approches est de fournir une définition paramétrique de la diversité, qui donne plus ou moins d’importance aux espèces rares :</p>
+<ul>
+<li>
+<span class="math inline">\(^{-\infty}\!D = {1} / {\min(p_S)}\)</span> est l’inverse de la proportion de la communauté représentée par l’espèce la plus rare (toutes les autres espèces sont ignorées).
+Le biais d’estimation est incontrôlable : l’espèce la plus rare n’est pas dans l’échantillon tant que l’inventaire n’est pas <span style="white-space:nowrap">exhaustif ;</span>
+</li>
+<li>
+<span class="math inline">\(^{0}\!D\)</span> est le nombre d’espèces (alors que <span class="math inline">\(^{0}\!H\)</span> est le nombre d’espèces moins 1).
+C’est la mesure classique qui donne le plus d’importance aux espèces rares : toutes les espèces ont la même importance, quel que soit leur effectif en termes d’individus.
+Il est bien adapté à une approche patrimoniale, celle du collectionneur qui considère que l’existence d’une espèce supplémentaire a un intérêt en soi, par exemple parce qu’elle peut contenir une molécule valorisable.
+Comme les espèces rares sont difficiles à échantillonner, le biais d’estimation est très important, et sa résolution a généré une littérature en soi (section <span style="white-space:nowrap"><a href="chap-MesuresNeutres.html#sec-Richesse">3.1</a>) ;</span>
+</li>
+<li>
+<span class="math inline">\(^{1}\!D\)</span> est l’exponentielle de l’indice de Shannon donne la même importance à tous les individus.
+Il est adapté à une approche d’écologue, intéressé par les interactions possibles : le nombre de combinaisons d’espèces en est une approche satisfaisante.
+Le biais d’estimation est <span style="white-space:nowrap">sensible ;</span>
+</li>
+<li>
+<span class="math inline">\(^{2}\!D\)</span> est l’inverse de l’indice de concentration de Gini-Simpson donne moins d’importance aux espèces rares.
+<span class="citation">Hill (<a href="entropie.html#ref-Hill1973" role="doc-biblioref">1973</a>)</span> l’appelle “le nombre d’espèces très abondantes”.
+Il comptabilise les interactions possibles entre paires d’individus : les espèces rares interviennent dans peu de paires, et influent peu sur l’indice.
+En conséquence, le biais d’estimation est très <span style="white-space:nowrap">petit ;</span> de plus, un estimateur non biaisé <span style="white-space:nowrap">existe ;</span>
+</li>
+<li>
+<span class="math inline">\(^{\infty}\!D = {1} / {d}\)</span> est l’inverse de l’indice de Berger-Parker <span class="citation">(<a href="entropie.html#ref-Berger1970" role="doc-biblioref">Berger and Parker 1970</a>)</span> qui est la proportion de la communauté représentée par l’espèce la plus abondante : <span class="math inline">\(d = \max(\mathbf{p})\)</span>.
+Toutes les autres espèces sont ignorées.</li>
+</ul>
+<p>Le calcul de <span class="math inline">\(^{q}\!D\)</span> peut se faire avec la fonction <code>div_hill</code> de la librairie <em>divent</em> :</p>
+<p></p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_hill.html">div_hill</a></span><span class="op">(</span><span class="va">bci_prob</span>, q <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   estimator order diversity
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 naive       1.5      49.6</code></pre>
+<p></p>
+<p>Les propriétés mathématiques de la diversité ne sont pas celles de l’entropie.
+L’entropie doit être une fonction concave des probabilités comme on l’a vu plus haut, mais pas la diversité (un exemple de confusion est fourni par <span class="citation">Gadagkar (<a href="entropie.html#ref-Gadagkar1989" role="doc-biblioref">1989</a>)</span>, qui reproche à <span class="math inline">\(^{2}\!D\)</span> de ne pas être concave).
+L’entropie est une moyenne pondérée par les probabilités de la fonction d’information, c’est donc une fonction linéaire des probabilités, propriété importante pour définir l’entropie <span class="math inline">\(\alpha\)</span> (section <a href="#sec-defalpha"><strong>??</strong></a>) comme la moyenne des entropies de plusieurs communautés, ou l’entropie phylogénétique (chapitre <a href="#chap-Phyloentropie"><strong>??</strong></a>) comme la moyenne de l’entropie sur les périodes d’un arbre.
+La diversité n’est pas une fonction linéaire des probabilités : la diversité moyenne n’est en général pas la moyenne des diversités.</p>
+</div>
+<div id="synthèse-1" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Synthèse<a class="anchor" aria-label="anchor" href="#synth%C3%A8se-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>L’inverse de la probabilité d’une espèce, <span class="math inline">\(1/p_s\)</span>, définit sa rareté.
+L’entropie est la moyenne du logarithme de la rareté :</p>
+<p><span class="math display" id="eq:EntropieRarete">\[\begin{equation}
+  \tag{4.19}
+  ^{q}\!H
+  = \frac{1}{q-1} \left( 1 - \sum^S_{s=1}{p^q_s} \right)
+  = \sum_s{p_s}\ln_q\frac{1}{p_s}.
+\end{equation}\]</span></p>
+<p>La diversité est son exponentielle :</p>
+<p><span class="math display" id="eq:DexpHSynthese">\[\begin{equation}
+  \tag{4.20}
+  ^{q}\!D = e_q^{^{q}\!H}.
+\end{equation}\]</span></p>
+</div>
+<div id="profils-de-diversité" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> Profils de diversité<a class="anchor" aria-label="anchor" href="#profils-de-diversit%C3%A9"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="citation">Leinster and Cobbold (<a href="entropie.html#ref-Leinster2012" role="doc-biblioref">2012</a>)</span>, après <span class="citation">Hill (<a href="entropie.html#ref-Hill1973" role="doc-biblioref">1973</a>)</span>, <span class="citation">Patil and Taillie (<a href="entropie.html#ref-Patil1982" role="doc-biblioref">1982</a>)</span>, <span class="citation">Tothmeresz (<a href="entropie.html#ref-Tothmeresz1995" role="doc-biblioref">1995</a>)</span> et <span class="citation">Kindt, Van Damme, and Simons (<a href="entropie.html#ref-Kindt2006" role="doc-biblioref">2006</a>)</span>, recommandent de tracer des profils de diversité, c’est-à-dire la valeur de la diversité <span class="math inline">\(^{q}\!D\)</span> en fonction de l’ordre <span class="math inline">\(q\)</span> (figure <a href="entropie.html#fig:ProfilDivFig">4.4</a>) pour comparer plusieurs communautés.
+Une communauté peut être déclarée plus diverse qu’une autre si son profil de diversité est au-dessus de l’autre pour toutes les valeurs de <span class="math inline">\(q\)</span>.
+Si les courbes se croisent, il n’y a pas de relation d’ordre <span class="citation">(<a href="entropie.html#ref-Tothmeresz1995" role="doc-biblioref">Tothmeresz 1995</a>)</span>.</p>
+<p><span class="citation">Lande, DeVries, and Walla (<a href="entropie.html#ref-Lande2000" role="doc-biblioref">2000</a>)</span> montrent que si la diversité de Simpson et la richesse de deux communautés n’ont pas le même ordre, alors les courbes d’accumulation du nombre d’espèces en fonction du nombre d’individus échantillonnés se croisent aussi.</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:ProfilDivFig"></span>
+<img src="MesuresBD_files/figure-html/ProfilDivFig-1.png" alt="Profils de diversité des quatre carrés de la parcelle 6 de Paracou. La correction du biais d’estimation est celle de Chao et Jost. Le carré 2 est plus divers que le carré 4, mais pas que les carrés 1 et 3, qui sont plus divers dans les grands ordres de diversité. Le profil de diversité est tracé ici jusqu’à l’ordre \(q = 3\)." width="80%"><p class="caption">
+Figure 4.4: Profils de diversité des quatre carrés de la parcelle 6 de Paracou. La correction du biais d’estimation est celle de Chao et Jost. Le carré 2 est plus divers que le carré 4, mais pas que les carrés 1 et 3, qui sont plus divers dans les grands ordres de diversité. Le profil de diversité est tracé ici jusqu’à l’ordre <span class="math inline">\(q = 3\)</span>.
+</p>
+</div>
+<p></p>
+<p>Code R pour réaliser la figure <a href="entropie.html#fig:ProfilDivFig">4.4</a> :</p>
+<p></p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">paracou_6_abd</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Suppression de "subplot_" dans les noms des carrés</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>site <span class="op">=</span> <span class="fu">str_replace</span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">site</span>, <span class="st">"subplot_"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Profil</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/profile_hill.html">profile_hill</a></span><span class="op">(</span>orders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">.1</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"ChaoJost"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Carré"</span><span class="op">)</span></span></code></pre></div>
+<p></p>
+<p><span class="citation">Pallmann et al. (<a href="entropie.html#ref-Pallmann2012" role="doc-biblioref">2012</a>)</span> ont développé un test statistique pour comparer la diversité de deux communautés pour plusieurs valeurs de <span class="math inline">\(q\)</span> simultanément.</p>
+<p><span class="citation">C. Liu et al. (<a href="entropie.html#ref-Liu2006" role="doc-biblioref">2006</a>)</span> nomment <em>séparables</em> des communautés dont les profils ne se croisent pas.
+Ils montrent que des communautés peuvent être séparables en selon un profil de diversité de <span class="math inline">\(^{q}\!D\)</span> sans l’être forcément selon un profil de diversité de Hurlbert (section <a href="chap-MesuresNeutres.html#sec-Hurlbert">3.4</a>), et inversement.
+Ils montrent que les communautés séparables selon un troisième type de profil, celui de la queue de distribution <span class="citation">(<a href="entropie.html#ref-Patil1982" role="doc-biblioref">Patil and Taillie 1982</a>)</span>, le sont dans tous les cas.
+Le profil de la queue de distribution est construit en classant les espèces de la plus fréquente à la plus rare et en traçant la probabilité qu’un individu appartienne à une espèce plus rare que l’espèce en abscisse (figure <a href="entropie.html#fig:ProfilQueueFig">4.5</a>).</p>
+
+<p></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:ProfilQueueFig"></span>
+<img src="MesuresBD_files/figure-html/ProfilQueueFig-1.png" alt="Profil de queue de distribution calculé pour les carrés de la parcelle 6 de Paracou. En abscisse : rang de l’espèce dans le classement de la plus fréquente à la plus rare ; en ordonnée : probabilité qu’un individu de la communauté appartienne à une espèce plus rare. Les profils de queue de distribution se croisent d’autant plus tôt qu’ils se croisent pour de grands ordres de diversité dans la figure 4.4." width="80%"><p class="caption">
+Figure 4.5: Profil de queue de distribution calculé pour les carrés de la parcelle 6 de Paracou. En abscisse : rang de l’espèce dans le classement de la plus fréquente à la plus <span style="white-space:nowrap">rare ;</span> en ordonnée : probabilité qu’un individu de la communauté appartienne à une espèce plus rare. Les profils de queue de distribution se croisent d’autant plus tôt qu’ils se croisent pour de grands ordres de diversité dans la figure <a href="entropie.html#fig:ProfilDivFig">4.4</a>.
+</p>
+</div>
+<p></p>
+<p>Code R :</p>
+<p></p>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">paracou_6_abd</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Transformation en probabilités</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_probabilities</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Elimination des colonnes de description</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Tri des espèces par ordre croissant de probabilité</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>MARGIN <span class="op">=</span> <span class="fl">1</span>, FUN <span class="op">=</span> <span class="va">sort</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Cumul des probabilités. Attention: apply a transposé la matrice</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">cumsum</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Classement par valeurs décroissantes</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">rev</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Création d'un tibble pour le graphique</span></span>
+<span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Nom des colonnes: 1 à 4</span></span>
+<span>  <span class="fu">rename_with</span><span class="op">(</span><span class="op">~</span> <span class="fu">str_replace</span><span class="op">(</span><span class="va">.</span>, <span class="st">"V"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Ajout d'une colonne pour l'ordre</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># Création du graphique</span></span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">rank</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">rank</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">name</span>, lty <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">scale_x_log10</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="st">"Rang de l'espèce"</span>, </span>
+<span>      y <span class="op">=</span> <span class="st">"Probabilité"</span>, </span>
+<span>      color <span class="op">=</span> <span class="st">"Carré"</span>,</span>
+<span>      lty <span class="op">=</span> <span class="st">"Carré"</span></span>
+<span>    <span class="op">)</span> </span></code></pre></div>
+<p></p>
+<p>Les coordonnées des points du profil sont définies par
+<span class="math display" id="eq:ProfilQueue">\[\begin{equation}
+  \tag{4.21}
+  y(x) = \sum_{s=x+1}^{S}{p_{[s]}},\ x\in \{0, 1, \dots, S\}.
+\end{equation}\]</span></p>
+<p><span class="math inline">\(p_{[s]}\)</span> est la probabilité de l’espèce <span class="math inline">\(s\)</span>; les espèces sont classées par probabilité décroissante.</p>
+<p>Ce profil est exhaustif (toutes les espèces sont représentées) alors que les autres profils de diversité ne sont représentés que pour un intervalle restreint du paramètre et qu’un croisement de courbes peut se produire au-delà.
+En revanche, il ne prend pas en compte les espèces non observées.</p>
+<p><span class="citation">Fattorini and Marcheselli (<a href="entropie.html#ref-Fattorini1999" role="doc-biblioref">1999</a>)</span> proposent un test pour comparer deux profils de queue de distribution à partir d’échantillonnages multiples (nécessaires pour évaluer la variance de chacune des probabilités) mais qui néglige les espèces non observées.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Adelman1969" class="csl-entry">
+Adelman, M. A. 1969. <span>“Comment on the "<span>H</span>" Concentration Measure as a Numbers-Equivalent.”</span> <em>The Review of Economics and Statistics</em> 51 (1): 99–101. <a href="https://doi.org/10.2307/1926955">https://doi.org/10.2307/1926955</a>.
+</div>
+<div id="ref-Agapow2004" class="csl-entry">
+Agapow, Paul Michael, Olaf R. P. Binindal-Emonds, Keith A. Crandall, John L. Gittleman, Georgina M. Mace, Jonathon C. Marshall, and Andy Purvis. 2004. <span>“The Impact of Species Concept on Biodiversity Studies.”</span> <em>The Quarterly Review of Biology</em> 79 (2): 161–79. <a href="https://doi.org/10.1086/383542">https://doi.org/10.1086/383542</a>.
+</div>
+<div id="ref-Ashbridge2000" class="csl-entry">
+Ashbridge, J., and Ian B. J. Goudie. 2000. <span>“Coverage-Adjusted Estimators for Mark-Recapture in Heterogeneous Populations.”</span> <em>Communications in Statistics - Simulation and Computation</em> 29 (4): 1215–37. <a href="https://doi.org/10.1080/03610910008813661">https://doi.org/10.1080/03610910008813661</a>.
+</div>
+<div id="ref-Balmford1996a" class="csl-entry">
+Balmford, Andrew, M. J. B. Green, and M. G. Murray. 1996. <span>“Using Higher-Taxon Richness as a Surrogate for Species Richness: <span>I</span>. <span>Regional</span> Tests.”</span> <em>Proceedings of the Royal Society of London, Series B: Biological Sciences</em> 263: 1267–74. <a href="https://doi.org/10.1098/rspb.1996.0186">https://doi.org/10.1098/rspb.1996.0186</a>.
+</div>
+<div id="ref-Balmford2003" class="csl-entry">
+Balmford, Andrew, Rhys E. Green, and Martin Jenkins. 2003. <span>“Measuring the Changing State of Nature.”</span> <em>Trends in Ecology &amp; Evolution</em> 18 (7): 326–30. <a href="https://doi.org/10.1016/S0169-5347(03)00067-3">https://doi.org/10.1016/S0169-5347(03)00067-3</a>.
+</div>
+<div id="ref-Balmford1996b" class="csl-entry">
+Balmford, Andrew, A. H. M. Jayasuriya, and M. J. B. Green. 1996. <span>“Using Higher-Taxon Richness as a Surrogate for Species Richness: <span>II</span>. <span>Local</span> Applications.”</span> <em>Proceedings of the Royal Society of London, Series B: Biological Sciences</em> 263: 1571–75. <a href="https://doi.org/10.1098/rspb.1996.0230">https://doi.org/10.1098/rspb.1996.0230</a>.
+</div>
+<div id="ref-Barberousse2014" class="csl-entry">
+Barberousse, Anouk, and Sarah Samadi. 2014. <span>“La Taxonomie Et Les Collections d’histoire Naturelle à l’heure de La Sixième Extinction.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 155–82. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Basharin1959" class="csl-entry">
+Basharin, G. P. 1959. <span>“On a Statistical Estimate for the Entropy of a Sequence of Independent Random Variables.”</span> <em>Theory of Probability and Its Applications</em> 4 (3): 333–36. <a href="https://doi.org/10.1137/1104033">https://doi.org/10.1137/1104033</a>.
+</div>
+<div id="ref-Basset2012" class="csl-entry">
+Basset, Yves, Lukas Cizek, Philippe Cuénoud, Raphael K. Didham, François Guilhaumon, Olivier Missa, Vojtech Novotny, et al. 2012. <span>“Arthropod Diversity in a Tropical Forest.”</span> <em>Science</em> 338 (6113): 1481–84. <a href="https://doi.org/10.1126/science.1226727">https://doi.org/10.1126/science.1226727</a>.
+</div>
+<div id="ref-Beck2010" class="csl-entry">
+Beck, Jan, and Wolfgang Schwanghart. 2010. <span>“Comparing Measures of Species Diversity from Incomplete Inventories: An Update.”</span> <em>Methods in Ecology and Evolution</em> 1 (1): 38–44. <a href="https://doi.org/10.1111/j.2041-210X.2009.00003.x">https://doi.org/10.1111/j.2041-210X.2009.00003.x</a>.
+</div>
+<div id="ref-Beguinot2014" class="csl-entry">
+Béguinot, Jean. 2014. <span>“An Algebraic Derivation of <span>Chao</span>’s Estimator of the Number of Species in a Community Highlights the Condition Allowing <span>Chao</span> to Deliver Centered Estimates.”</span> <em>International Scholarly Research Notices</em> 2014. <a href="https://doi.org/10.1155/2014/847328">https://doi.org/10.1155/2014/847328</a>.
+</div>
+<div id="ref-Beguinot2015a" class="csl-entry">
+———. 2015. <span>“Extrapolation of the Species Accumulation Curve for Incomplete Species Samplings: <span>A</span> New Nonparametric Approach to Estimate the Degree of Sample Completeness and Decide When to Stop Sampling.”</span> <em>Annual Research &amp; Review in Biology</em> 8 (5): 1–9. <a href="https://doi.org/10.9734/ARRB/2015/22351">https://doi.org/10.9734/ARRB/2015/22351</a>.
+</div>
+<div id="ref-Beguinot2016" class="csl-entry">
+———. 2016. <span>“Basic Theoretical Arguments Advocating Jackknife-2 as Usually Being the Most Appropriate Nonparametric Estimator of Total Species Richness.”</span> <em>Annual Research &amp; Review in Biology</em> 10 (1): 1–12. <a href="https://doi.org/10.9734/ARRB/2016/25104">https://doi.org/10.9734/ARRB/2016/25104</a>.
+</div>
+<div id="ref-Berger1970" class="csl-entry">
+Berger, Wolfgang H., and Frances L. Parker. 1970. <span>“Diversity of Planktonic Foraminifera in Deep-Sea Sediments.”</span> <em>Science</em> 168 (3937): 1345–47. <a href="https://doi.org/10.1126/science.168.3937.1345">https://doi.org/10.1126/science.168.3937.1345</a>.
+</div>
+<div id="ref-Blandin2014" class="csl-entry">
+Blandin, Patrick. 2014. <span>“La Diversité Du Vivant Avant (Et Après) La Biodiversité : Repères Historiques Et Épistémologiques.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 31–68. <span>Paris</span>: <span>Editions Matériologiques</span>.
+</div>
+<div id="ref-Bonachela2008" class="csl-entry">
+Bonachela, Juan A., Haye Hinrichsen, and Miguel A. Muñoz. 2008. <span>“Entropy Estimates of Small Data Sets.”</span> <em>Journal of Physics A: Mathematical and Theoretical</em> 41 (202001): 1–9. <a href="https://doi.org/10.1088/1751-8113/41/20/202001">https://doi.org/10.1088/1751-8113/41/20/202001</a>.
+</div>
+<div id="ref-Box1964" class="csl-entry">
+Box, G. E. P., and D. R. Cox. 1964. <span>“An Analysis of Transformations.”</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 26 (2): 211–52. <a href="https://doi.org/10.1111/j.2517-6161.1964.tb00553.x">https://doi.org/10.1111/j.2517-6161.1964.tb00553.x</a>.
+</div>
+<div id="ref-Brillouin1962" class="csl-entry">
+Brillouin, Léon. 1962. <em>Science and Information Theory</em>. 2nd ed. <span>Oxford</span>: <span>Academic Press</span>. <a href="http://store.doverpublications.com/0486497550.html">http://store.doverpublications.com/0486497550.html</a>.
+</div>
+<div id="ref-Brose2003" class="csl-entry">
+Brose, Ulrich, Neo D. Martinez, and Richard J. Williams. 2003. <span>“Estimating Species Richness: <span>Sensitivity</span> to Sample Coverage and Insensitivity to Spatial Patterns.”</span> <em>Ecology</em> 84 (9): 2364–77. <a href="https://doi.org/10.1890/02-0558">https://doi.org/10.1890/02-0558</a>.
+</div>
+<div id="ref-Bulmer1974" class="csl-entry">
+Bulmer, M. G. 1974. <span>“On Fitting the Poisson Lognormal Distribution to Species-Abundance Data.”</span> <em>Biometrics</em> 30 (1): 101–10. <a href="https://doi.org/10.2307/1939021">https://doi.org/10.2307/1939021</a>.
+</div>
+<div id="ref-Burnham1978" class="csl-entry">
+Burnham, K. P., and W. S. Overton. 1978. <span>“Estimation of the Size of a Closed Population When Capture Probabilities Vary Among Animals.”</span> <em>Biometrika</em> 65 (3): 625–33. <a href="https://doi.org/10.2307/2335915">https://doi.org/10.2307/2335915</a>.
+</div>
+<div id="ref-Burnham1979" class="csl-entry">
+———. 1979. <span>“Robust Estimation of Population Size When Capture Probabilities Vary Among Animals.”</span> <em>Ecology</em> 60 (5): 927–36. <a href="https://doi.org/10.2307/1936861">https://doi.org/10.2307/1936861</a>.
+</div>
+<div id="ref-Caldarelli2002" class="csl-entry">
+Caldarelli, Guido, A. Capocci, P. De Los Rios, and Miguel A. Muñoz. 2002. <span>“Scale-Free Networks from Varying Vertex Intrinsic Fitness.”</span> <em>Physical Review Letters</em> 89 (25): 258702. <a href="https://doi.org/10.1103/PhysRevLett.89.258702">https://doi.org/10.1103/PhysRevLett.89.258702</a>.
+</div>
+<div id="ref-Cardinale2012" class="csl-entry">
+Cardinale, Bradley J., J. Emmett Duffy, Andrew Gonzalez, David U. Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. <span>“Biodiversity Loss and Its Impact on Humanity.”</span> <em>Nature</em> 486 (7401): 59–67. <a href="https://doi.org/10.1038/nature11148">https://doi.org/10.1038/nature11148</a>.
+</div>
+<div id="ref-Cartozo2008" class="csl-entry">
+Cartozo, Cecile Caretta, Diego Garlaschelli, Carlo Ricotta, Marc Barthélemy, and Guido Caldarelli. 2008. <span>“Quantifying the Taxonomic Diversity in Real Species Communities.”</span> <em>Journal of Physics A: Mathematical and Theoretical</em> 41: 224012. <a href="https://doi.org/10.1088/1751-8113/41/22/224012">https://doi.org/10.1088/1751-8113/41/22/224012</a>.
+</div>
+<div id="ref-Casetta2014" class="csl-entry">
+Casetta, Elena. 2014. <span>“Évaluer Et Conserver La Biodiversité Face Au Problème Des Espèces.”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 139–54. <span>Paris</span>: <span>Editions Matériologiques</span>. <a href="https://www.cairn-sciences.info/la-biodiversite-en-question--9782919694549-page-139.htm">https://www.cairn-sciences.info/la-biodiversite-en-question--9782919694549-page-139.htm</a>.
+</div>
+<div id="ref-Ceballos2017" class="csl-entry">
+Ceballos, Gerardo, Paul R. Ehrlich, and Rodolfo Dirzo. 2017. <span>“Biological Annihilation via the Ongoing Sixth Mass Extinction Signaled by Vertebrate Population Losses and Declines.”</span> <em>Proceedings of the National Academy of Sciences</em>, 201704949. <a href="https://doi.org/10.1073/pnas.1704949114">https://doi.org/10.1073/pnas.1704949114</a>.
+</div>
+<div id="ref-Chao1984" class="csl-entry">
+Chao, Anne. 1984. <span>“Nonparametric Estimation of the Number of Classes in a Population.”</span> <em>Scandinavian Journal of Statistics</em> 11 (4): 265–70. <a href="http://www.jstor.org/stable/4615964">http://www.jstor.org/stable/4615964</a>.
+</div>
+<div id="ref-Chao1987" class="csl-entry">
+———. 1987. <span>“Estimating the Population Size for Capture-Recapture Data with Unequal Catchability.”</span> <em>Biometrics</em> 43 (4): 783–91. <a href="https://doi.org/10.2307/2531532">https://doi.org/10.2307/2531532</a>.
+</div>
+<div id="ref-Chao2004" class="csl-entry">
+———. 2004. <span>“Species Richness Estimation.”</span> In <em>Encyclopedia of Statistical Sciences</em>, edited by N Balakrishnan, C B Read, and B Vidakovic, 2nd ed. <span>New York</span>: <span>Wiley</span>.
+</div>
+<div id="ref-Chao2010" class="csl-entry">
+Chao, Anne, Chun-Huo Chiu, and Lou Jost. 2010. <span>“Phylogenetic Diversity Measures Based on <span>Hill</span> Numbers.”</span> <em>Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences</em> 365 (1558): 3599–609. <a href="https://doi.org/10.1098/rstb.2010.0272%20Supplementary">https://doi.org/10.1098/rstb.2010.0272 Supplementary</a>.
+</div>
+<div id="ref-Chao2017" class="csl-entry">
+Chao, Anne, Robert K. Colwell, Chun-Huo Chiu, and Ditch Townsend. 2017. <span>“Seen Once or More Than Once: Applying <span>Good-Turing</span> Theory to Estimate Species Richness Using Only Unique Observations and a Species List.”</span> <em>Methods in Ecology and Evolution</em> 8 (10): 1221–32. <a href="https://doi.org/10.1111/2041-210X.12768">https://doi.org/10.1111/2041-210X.12768</a>.
+</div>
+<div id="ref-Chao2014" class="csl-entry">
+Chao, Anne, Nicholas J. Gotelli, T. C. Hsieh, Elizabeth L. Sander, K. H. Ma, Robert K. Colwell, and Aaron M. Ellison. 2014. <span>“Rarefaction and Extrapolation with <span>Hill</span> Numbers: <span>A</span> Framework for Sampling and Estimation in Species Diversity Studies.”</span> <em>Ecological Monographs</em> 84 (1): 45–67. <a href="https://doi.org/10.1890/13-0133.1">https://doi.org/10.1890/13-0133.1</a>.
+</div>
+<div id="ref-Chao2012b" class="csl-entry">
+Chao, Anne, and Lou Jost. 2012. <span>“Coverage-Based Rarefaction and Extrapolation: Standardizing Samples by Completeness Rather Than Size.”</span> <em>Ecology</em> 93 (12): 2533–47. <a href="https://doi.org/10.1890/11-1952.1">https://doi.org/10.1890/11-1952.1</a>.
+</div>
+<div id="ref-Chao1992" class="csl-entry">
+Chao, Anne, and Shen-Ming Lee. 1992. <span>“Estimating the Number of Classes via Sample Coverage.”</span> <em>Journal of the American Statistical Association</em> 87 (417): 210–17. <a href="https://doi.org/10.1080/01621459.1992.10475194">https://doi.org/10.1080/01621459.1992.10475194</a>.
+</div>
+<div id="ref-Chao1988" class="csl-entry">
+Chao, Anne, Shen-Ming Lee, and T.-C. Chen. 1988. <span>“A Generalized <span>Good</span>’s Nonparametric Coverage Estimator.”</span> <em>Chinese Journal of Mathematics</em> 16: 189–99. <a href="http://www.jstor.org/stable/43836340">http://www.jstor.org/stable/43836340</a>.
+</div>
+<div id="ref-Chao2012" class="csl-entry">
+Chao, Anne, and Chih-Wei Lin. 2012. <span>“Nonparametric Lower Bounds for Species Richness and Shared Species Richness Under Sampling Without Replacement.”</span> <em>Biometrics</em> 68 (3): 912–21. <a href="https://doi.org/10.1111/j.1541-0420.2011.01739.x">https://doi.org/10.1111/j.1541-0420.2011.01739.x</a>.
+</div>
+<div id="ref-Chao2016c" class="csl-entry">
+Chao, Anne, K. H. Ma, T. C. Hsieh, and Chun-Huo Chiu. 2016. <span>“<span>SpadeR</span>: <span>Species</span> Prediction and Diversity Estimation with <span>R</span>.”</span> <a href="http://chao.stat.nthu.edu.tw/blog/software-download/">http://chao.stat.nthu.edu.tw/blog/software-download/</a>.
+</div>
+<div id="ref-Chao2003" class="csl-entry">
+Chao, Anne, and Tsung-Jen Shen. 2003. <span>“Nonparametric Estimation of <span>Shannon</span>’s Index of Diversity When There Are Unseen Species in Sample.”</span> <em>Environmental and Ecological Statistics</em> 10 (4): 429–43. <a href="https://doi.org/10.1023/A:1026096204727">https://doi.org/10.1023/A:1026096204727</a>.
+</div>
+<div id="ref-Chao2010a" class="csl-entry">
+———. 2010. <em>Program <span>SPADE</span>: <span>Species</span> Prediction and Diversity Estimation. <span>Program</span> and User’s Guide.</em> <span>CARE</span>. <a href="http://chao.stat.nthu.edu.tw/wordpress/wp-content/uploads/software/SPADE_UserGuide.pdf">http://chao.stat.nthu.edu.tw/wordpress/wp-content/uploads/software/SPADE_UserGuide.pdf</a>.
+</div>
+<div id="ref-Chao2013" class="csl-entry">
+Chao, Anne, Yi-Ting Wang, and Lou Jost. 2013. <span>“Entropy and the Species Accumulation Curve: A Novel Entropy Estimator via Discovery Rates of New Species.”</span> <em>Methods in Ecology and Evolution</em> 4 (11): 1091–1100. <a href="https://doi.org/10.1111/2041-210x.12108">https://doi.org/10.1111/2041-210x.12108</a>.
+</div>
+<div id="ref-Chapin2000" class="csl-entry">
+Chapin, F. Stuart III, Erika S. Zavaleta, Valerie T. Eviner, Rosamond L. Naylor, Peter M. Vitousek, Heather L. Reynolds, David U. Hooper, et al. 2000. <span>“Consequences of Changing Biodiversity.”</span> <em>Nature</em> 405 (6783): 234–42. <a href="https://doi.org/10.1038/35012241">https://doi.org/10.1038/35012241</a>.
+</div>
+<div id="ref-Chiu2014a" class="csl-entry">
+Chiu, Chun-Huo, Yi-Ting Wang, Bruno A. Walther, and Anne Chao. 2014. <span>“An Improved Nonparametric Lower Bound of Species Richness via a Modified <span>Good-Turing</span> Frequency Formula.”</span> <em>Biometrics</em> 70 (3): 671–82. <a href="https://doi.org/10.1111/biom.12200">https://doi.org/10.1111/biom.12200</a>.
+</div>
+<div id="ref-Clarke2001" class="csl-entry">
+Clarke, K. R., and R. M. Warwick. 2001. <span>“A Further Biodiversity Index Applicable to Species Lists: Variation in Taxonomic Distinctness.”</span> <em>Marine Ecology-Progress Series</em> 216: 265–78. <a href="https://doi.org/10.3354/meps216265">https://doi.org/10.3354/meps216265</a>.
+</div>
+<div id="ref-Clench1979" class="csl-entry">
+Clench, Harry K. 1979. <span>“How to Make Regional Lists of Butterflies: Some Thoughts.”</span> <em>Journal of the Lepidopterists’ Society</em> 33 (4): 216–31.
+</div>
+<div id="ref-Colwell1994" class="csl-entry">
+Colwell, Robert K., and Jonathan A. Coddington. 1994. <span>“Estimating Terrestrial Biodiversity Through Extrapolation.”</span> <em>Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences</em> 345 (1311): 101–18. <a href="https://doi.org/10.1098/rstb.1994.0091">https://doi.org/10.1098/rstb.1994.0091</a>.
+</div>
+<div id="ref-Conceicao2000" class="csl-entry">
+Conceição, Pedro, and Pedro Ferreira. 2000. <span>“The Young Person’s Guide to the <span>Theil</span> Index: <span>Suggesting</span> Intuitive Interpretations and Exploring Analytical Applications.”</span> <span>Austin, Texas</span>. <a href="http://ssrn.com/paper=228703">http://ssrn.com/paper=228703</a>.
+</div>
+<div id="ref-Condit2012" class="csl-entry">
+Condit, Richard, Ryan A. Chisholm, and Stephen P. Hubbell. 2012. <span>“Thirty Years of Forest Census at Barro Colorado and the Importance of Immigration in Maintaining Diversity.”</span> <em>PLoS ONE</em> 7 (11): e49826. <a href="https://doi.org/10.1371/journal.pone.0049826">https://doi.org/10.1371/journal.pone.0049826</a>.
+</div>
+<div id="ref-Connell1978" class="csl-entry">
+Connell, Joseph H. 1978. <span>“Diversity in Tropical Rain Forests and Coral Reefs.”</span> <em>Science</em> 199 (4335): 1302–10. <a href="https://doi.org/10.1126/science.199.4335.1302">https://doi.org/10.1126/science.199.4335.1302</a>.
+</div>
+<div id="ref-Cormack1989" class="csl-entry">
+Cormack, R. M. 1989. <span>“Log-Linear Models for Capture-Recapture.”</span> <em>Biometrics</em> 45 (2): 395–413. <a href="https://doi.org/10.2307/2531485">https://doi.org/10.2307/2531485</a>.
+</div>
+<div id="ref-Cracraft1983" class="csl-entry">
+Cracraft, Joel. 1983. <span>“Species Concepts and Speciation Analysis.”</span> In <em>Current Ornithology Volume 1</em>, edited by Richard F. Johnston, 1:159–87. Current Ornithology. <span>Springer US</span>. <a href="https://doi.org/10.1007/978-1-4615-6781-3_6">https://doi.org/10.1007/978-1-4615-6781-3_6</a>.
+</div>
+<div id="ref-Dalton1920" class="csl-entry">
+Dalton, Hugh. 1920. <span>“The Measurement of the Inequality of Incomes.”</span> <em>The Economic Journal</em> 30 (119): 348–61. <a href="https://doi.org/10.2307/2223525">https://doi.org/10.2307/2223525</a>.
+</div>
+<div id="ref-Daroczy1970" class="csl-entry">
+Daróczy, Zoltán. 1970. <span>“Generalized Information Functions.”</span> <em>Information and Control</em> 16 (1): 36–51. <a href="https://doi.org/10.1016/s0019-9958(70)80040-7">https://doi.org/10.1016/s0019-9958(70)80040-7</a>.
+</div>
+<div id="ref-Dauby2012" class="csl-entry">
+Dauby, Gilles, and Olivier J. Hardy. 2012. <span>“Sampled-Based Estimation of Diversity Sensu Stricto by Transforming <span>Hurlbert</span> Diversities into Effective Number of Species.”</span> <em>Ecography</em> 35 (7): 661–72. <a href="https://doi.org/10.1111/j.1600-0587.2011.06860.x">https://doi.org/10.1111/j.1600-0587.2011.06860.x</a>.
+</div>
+<div id="ref-Davis1941" class="csl-entry">
+Davis, H. T. 1941. <em>The Theory of Econometrics</em>. <span>Bloomington, Indiana</span>: <span>The Principia Press</span>.
+</div>
+<div id="ref-DeLong1996" class="csl-entry">
+DeLong, Don C. Jr. 1996. <span>“Defining Biodiversity.”</span> <em>Wildlife Society Bulletin</em> 24 (4): 738–49. <a href="http://www.jstor.org/stable/3783168">http://www.jstor.org/stable/3783168</a>.
+</div>
+<div id="ref-Delord2014" class="csl-entry">
+Delord, Julien. 2014. <span>“La Biodiversité : Imposture Scientifique Ou Ruse Épistémologique ?”</span> In <em>La Biodiversité En Question. <span>Enjeux</span> Philosophiques, Éthiques Et Scientifiques</em>, edited by Elena Casetta and Julien Delord, 83–118. <span>Paris</span>: <span>Editions Matériologiques</span>. <a href="https://doi.org/10.3917/edmat.delor.2014.01.0083">https://doi.org/10.3917/edmat.delor.2014.01.0083</a>.
+</div>
+<div id="ref-Dengler2009" class="csl-entry">
+Dengler, Jürgen. 2009. <span>“Which Function Describes the Species-Area Relationship Best? <span>A</span> Review and Empirical Evaluation.”</span> <em>Journal of Biogeography</em> 36 (4): 728–44. <a href="https://doi.org/10.1111/j.1365-2699.2008.02038.x">https://doi.org/10.1111/j.1365-2699.2008.02038.x</a>.
+</div>
+<div id="ref-Devictor2010" class="csl-entry">
+Devictor, Vincent, David Mouillot, Christine Meynard, Frédéric Jiguet, Wilfried Thuiller, and Nicolas Mouquet. 2010. <span>“Spatial Mismatch and Congruence Between Taxonomic, Phylogenetic and Functional Diversity: The Need for Integrative Conservation Strategies in a Changing World.”</span> <em>Ecology Letters</em> 13 (8): 1030–40. <a href="https://doi.org/10.1111/j.1461-0248.2010.01493.x">https://doi.org/10.1111/j.1461-0248.2010.01493.x</a>.
+</div>
+<div id="ref-Dobzhansky1937" class="csl-entry">
+Dobzhansky, T. 1937. <em>Genetics and the Origin of Species</em>. <span>New York</span>: <span>Columbia University Press</span>. <a href="http://en.wikipedia.org/wiki/Genetics_and_the_Origin_of_Species">http://en.wikipedia.org/wiki/Genetics_and_the_Origin_of_Species</a>.
+</div>
+<div id="ref-Ellerman2013" class="csl-entry">
+Ellerman, David. 2013. <span>“An Introduction to Logical Entropy and Its Relation to Shannon Entropy.”</span> <em>International Journal of Semantic Computing</em> 7 (02): 121–45. <a href="https://doi.org/10.1142/S1793351X13400059">https://doi.org/10.1142/S1793351X13400059</a>.
+</div>
+<div id="ref-Engen1996" class="csl-entry">
+Engen, Steinar, and Russell Lande. 1996. <span>“Population Dynamic Models Generating the Lognormal Species Abundance Distribution.”</span> <em>Mathematical Biosciences</em> 132 (2): 169–83. <a href="https://doi.org/10.1016/0025-5564(95)00054-2">https://doi.org/10.1016/0025-5564(95)00054-2</a>.
+</div>
+<div id="ref-Eren2012" class="csl-entry">
+Eren, Metin I., Anne Chao, Wen-Han Hwang, and Robert K. Colwell. 2012. <span>“Estimating the Richness of a Population When the Maximum Number of Classes Is Fixed: <span>A</span> Nonparametric Solution to an Archaeological Problem.”</span> <em>Plos One</em> 7 (5). <a href="https://doi.org/10.1371/journal.pone.0034179">https://doi.org/10.1371/journal.pone.0034179</a>.
+</div>
+<div id="ref-Esty1983" class="csl-entry">
+Esty, Warren W. 1983. <span>“A Normal Limit Law for a Nonparametric Estimator of the Coverage of a Random Sample.”</span> <em>The Annals of Statistics</em> 11 (3): 905–12. <a href="https://doi.org/10.2307/2240652">https://doi.org/10.2307/2240652</a>.
+</div>
+<div id="ref-Fattorini1999" class="csl-entry">
+Fattorini, L., and M. Marcheselli. 1999. <span>“Inference on Intrinsic Diversity Profiles of Biological Populations.”</span> <em>Environmetrics</em> 10 (5): 589–99. <a href="https://doi.org/10.1002/(SICI)1099-095X(199909/10)10:5&lt;589::AID-ENV374&gt;3.0.CO;2-0">https://doi.org/10.1002/(SICI)1099-095X(199909/10)10:5&lt;589::AID-ENV374&gt;3.0.CO;2-0</a>.
+</div>
+<div id="ref-Fisher1943" class="csl-entry">
+Fisher, Ronald Aylmer, A. Steven Corbet, and Carrington Bonsor Williams. 1943. <span>“The Relation Between the Number of Species and the Number of Individuals in a Random Sample of an Animal Population.”</span> <em>Journal of Animal Ecology</em> 12: 42–58. <a href="https://doi.org/10.2307/1411">https://doi.org/10.2307/1411</a>.
+</div>
+<div id="ref-Gadagkar1989" class="csl-entry">
+Gadagkar, Raghavendra. 1989. <span>“An Undesirable Property of <span>Hill</span>’s Diversity Index <span>N2</span>.”</span> <em>Oecologia</em> 80: 140–41. <a href="https://doi.org/10.1007/BF00789944">https://doi.org/10.1007/BF00789944</a>.
+</div>
+<div id="ref-Gaston2000" class="csl-entry">
+Gaston, Kevin J. 2000. <span>“Global Patterns in Biodiversity.”</span> <em>Nature</em> 405 (6783): 220–27. <a href="https://doi.org/10.1038/35012228">https://doi.org/10.1038/35012228</a>.
+</div>
+<div id="ref-Gini1912" class="csl-entry">
+Gini, Corrado. 1912. <em>Variabilità e Mutabilità</em>. <span>Bologna</span>: <span>C. Cuppini</span>.
+</div>
+<div id="ref-Good1953" class="csl-entry">
+Good, I. J. 1953. <span>“The Population Frequency of Species and the Estimation of Population Parameters.”</span> <em>Biometrika</em> 40 (3/4): 237–64. <a href="https://doi.org/10.1093/biomet/40.3-4.237">https://doi.org/10.1093/biomet/40.3-4.237</a>.
+</div>
+<div id="ref-Gourlet-Fleury2004" class="csl-entry">
+Gourlet-Fleury, Sylvie, Jean Marc Guehl, and Olivier Laroussinie. 2004. <em>Ecology &amp; Management of a Neotropical Rainforest. <span>Lessons</span> Drawn from <span>Paracou</span>, a Long-Term Experimental Research Site in <span>French Guiana</span></em>. <span>Paris</span>: <span>Elsevier</span>.
+</div>
+<div id="ref-Grassberger1988" class="csl-entry">
+Grassberger, Peter. 1988. <span>“Finite Sample Corrections to Entropy and Dimension Estimates.”</span> <em>Physics Letters A</em> 128 (6-7): 369–73. <a href="https://doi.org/10.1016/0375-9601(88)90193-4">https://doi.org/10.1016/0375-9601(88)90193-4</a>.
+</div>
+<div id="ref-Grassberger2003" class="csl-entry">
+———. 2003. <span>“Entropy Estimates from Insufficient Samplings.”</span> <em>arXiv Physics e-Prints</em> 0307138 (v2). <a href="http://arxiv.org/abs/physics/0307138">http://arxiv.org/abs/physics/0307138</a>.
+</div>
+<div id="ref-Gregorius1991" class="csl-entry">
+Gregorius, Hans-Rolf. 1991. <span>“On the Concept of Effective Number.”</span> <em>Theoretical Population Biology</em> 40 (2): 269–83. <a href="https://doi.org/10.1016/0040-5809(91)90056-L">https://doi.org/10.1016/0040-5809(91)90056-L</a>.
+</div>
+<div id="ref-Gregorius2010" class="csl-entry">
+———. 2010. <span>“Linking Diversity and Differentiation.”</span> <em>Diversity</em> 2 (3): 370–94. <a href="https://doi.org/10.3390/d2030370">https://doi.org/10.3390/d2030370</a>.
+</div>
+<div id="ref-Gregorius2014" class="csl-entry">
+———. 2014. <span>“Partitioning of Diversity : The "Within Communities" Component.”</span> <em>Web Ecology</em> 14: 51–60. <a href="https://doi.org/10.5194/we-14-51-2014">https://doi.org/10.5194/we-14-51-2014</a>.
+</div>
+<div id="ref-Haegeman2013" class="csl-entry">
+Haegeman, Bart, Jérôme Hamelin, John Moriarty, Peter Neal, Jonathan Dushoff, and Joshua S Weitz. 2013. <span>“Robust Estimation of Microbial Diversity in Theory and in Practice.”</span> <em>The ISME Journal</em> 7 (6): 1092–1101. <a href="https://doi.org/10.1038/ismej.2013.10">https://doi.org/10.1038/ismej.2013.10</a>.
+</div>
+<div id="ref-Hausser2009" class="csl-entry">
+Hausser, Jean, and Korbinian Strimmer. 2009. <span>“Entropy Inference and the <span>James-Stein</span> Estimator, with Application to Nonlinear Gene Association Networks.”</span> <em>Journal of Machine Learning Research</em> 10: 1469–84. <a href="http://www.jmlr.org/papers/v10/hausser09a.html">http://www.jmlr.org/papers/v10/hausser09a.html</a>.
+</div>
+<div id="ref-Havrda1967" class="csl-entry">
+Havrda, Jan, and František Charvát. 1967. <span>“Quantification Method of Classification Processes. <span>Concept</span> of Structural Alpha-Entropy.”</span> <em>Kybernetika</em> 3 (1): 30–35. <a href="https://eudml.org/doc/28681">https://eudml.org/doc/28681</a>.
+</div>
+<div id="ref-Heltshe1983" class="csl-entry">
+Heltshe, James F., and Nancy E. Forrester. 1983. <span>“Estimating Species Richness Using the Jackknife Procedure.”</span> <em>Biometrics</em> 39 (1): 1–11. <a href="https://doi.org/10.2307/2530802">https://doi.org/10.2307/2530802</a>.
+</div>
+<div id="ref-Hey2001" class="csl-entry">
+Hey, Jody. 2001. <span>“The Mind of the Species Problem.”</span> <em>Trends in Ecology &amp; Evolution</em> 16 (7): 326–29. <a href="https://doi.org/10.1016/S0169-5347(01)02145-0">https://doi.org/10.1016/S0169-5347(01)02145-0</a>.
+</div>
+<div id="ref-Hill1973" class="csl-entry">
+Hill, M. O. 1973. <span>“Diversity and Evenness: <span>A</span> Unifying Notation and Its Consequences.”</span> <em>Ecology</em> 54 (2): 427–32. <a href="https://doi.org/10.2307/1934352">https://doi.org/10.2307/1934352</a>.
+</div>
+<div id="ref-Hoffmann2008" class="csl-entry">
+Hoffmann, Sönke, and Andreas Hoffmann. 2008. <span>“Is There a "True" Diversity?”</span> <em>Ecological Economics</em> 65 (2): 213–15. <a href="https://doi.org/10.1016/j.ecolecon.2008.01.009">https://doi.org/10.1016/j.ecolecon.2008.01.009</a>.
+</div>
+<div id="ref-Holdridge1971" class="csl-entry">
+Holdridge, L. R., W. C. Grenke, W. H. Hatheway, T. Liang, and J. A. Tosi. 1971. <em>Forest Environments in Tropical Life Zones</em>. <span>Oxford</span>: <span>Pergamon Press</span>.
+</div>
+<div id="ref-Horvitz1952" class="csl-entry">
+Horvitz, D. G., and D. J. Thompson. 1952. <span>“A Generalization of Sampling Without Replacement from a Finite Universe.”</span> <em>Journal of the American Statistical Association</em> 47 (260): 663–85. <a href="https://doi.org/10.1080/01621459.1952.10483446">https://doi.org/10.1080/01621459.1952.10483446</a>.
+</div>
+<div id="ref-Hubbell2015" class="csl-entry">
+Hubbell, Stephen P. 2015. <span>“Estimating the Global Number of Tropical Tree Species, and <span>Fisher</span>’s Paradox.”</span> <em>Proceedings of the National Academy of Sciences</em> 112 (24): 7343–44. <a href="https://doi.org/10.1073/pnas.1507730112">https://doi.org/10.1073/pnas.1507730112</a>.
+</div>
+<div id="ref-Hubbell2001" class="csl-entry">
+Hubbell, Stephen P. 2001. <em>The Unified Neutral Theory of Biodiversity and Biogeography</em>. <span>Princeton University Press</span>.
+</div>
+<div id="ref-Hurlbert1971" class="csl-entry">
+Hurlbert, Stuart H. 1971. <span>“The Nonconcept of Species Diversity: <span>A</span> Critique and Alternative Parameters.”</span> <em>Ecology</em> 52 (4): 577–86. <a href="https://doi.org/10.2307/1934145">https://doi.org/10.2307/1934145</a>.
+</div>
+<div id="ref-Hutcheson1970" class="csl-entry">
+Hutcheson, Kermit. 1970. <span>“A Test for Comparing Diversities Based on the Shannon Formula.”</span> <em>Journal of Theoretical Biology</em> 29: 151–54. <a href="https://doi.org/10.1016/0022-5193(70)90124-4">https://doi.org/10.1016/0022-5193(70)90124-4</a>.
+</div>
+<div id="ref-Hwang2014" class="csl-entry">
+Hwang, Wen-Han, Chih-Wei Lin, and Tsung-Jen Shen. 2014. <span>“Good-<span>Turing</span> Frequency Estimation in a Finite Population.”</span> <em>Biometrical Journal</em> 57 (2): 321–39. <a href="https://doi.org/10.1002/bimj.201300168">https://doi.org/10.1002/bimj.201300168</a>.
+</div>
+<div id="ref-Izsak2012" class="csl-entry">
+Izsák, János, and Sandrine Pavoine. 2012. <span>“Links Between the Species Abundance Distribution and the Shape of the Corresponding Rank Abundance Curve.”</span> <em>Ecological Indicators</em> 14 (1): 1–6. <a href="https://doi.org/10.1016/j.ecolind.2011.06.030">https://doi.org/10.1016/j.ecolind.2011.06.030</a>.
+</div>
+<div id="ref-James1961" class="csl-entry">
+James, W., and Charles Stein. 1961. <span>“Estimation with Quadratic Loss.”</span> In <em>Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and Probability</em>, edited by Jerzy Neyman, 1:361–79. <span>Berkeley, California</span>: <span>University of California Press</span>.
+</div>
+<div id="ref-Jensen1906" class="csl-entry">
+Jensen, J. L. W. V. 1906. <span>“Sur les fonctions convexes et les inégalités entre les valeurs moyennes.”</span> <em>Acta Mathematica</em> 30 (1): 175–93. <a href="https://doi.org/10.1007/bf02418571">https://doi.org/10.1007/bf02418571</a>.
+</div>
+<div id="ref-Jizhong1991" class="csl-entry">
+Jizhong, Zhou, Ma Shijun, and Chen Changming. 1991. <span>“An Index of Ecosystem Diversity.”</span> <em>Ecological Modelling</em> 59: 151–63. <a href="https://doi.org/10.1016/0304-3800(91)90176-2">https://doi.org/10.1016/0304-3800(91)90176-2</a>.
+</div>
+<div id="ref-Jost2006" class="csl-entry">
+Jost, Lou. 2006. <span>“Entropy and Diversity.”</span> <em>Oikos</em> 113 (2): 363–75. <a href="https://doi.org/10.1111/j.2006.0030-1299.14714.x">https://doi.org/10.1111/j.2006.0030-1299.14714.x</a>.
+</div>
+<div id="ref-Jost2007" class="csl-entry">
+———. 2007. <span>“Partitioning Diversity into Independent Alpha and Beta Components.”</span> <em>Ecology</em> 88 (10): 2427–39. <a href="https://doi.org/10.1890/06-1736.1">https://doi.org/10.1890/06-1736.1</a>.
+</div>
+<div id="ref-Jost2009" class="csl-entry">
+———. 2009. <span>“Mismeasuring Biological Diversity: <span>Response</span> to <span>Hoffmann</span> and <span>Hoffmann</span> (2008).”</span> <em>Ecological Economics</em> 68: 925–28. <a href="https://doi.org/10.1016/j.ecolecon.2008.10.015">https://doi.org/10.1016/j.ecolecon.2008.10.015</a>.
+</div>
+<div id="ref-Jost2010" class="csl-entry">
+———. 2010. <span>“The Relation Between Evenness and Diversity.”</span> <em>Diversity</em> 2 (2): 207–32. <a href="https://doi.org/10.3390/d2020207">https://doi.org/10.3390/d2020207</a>.
+</div>
+<div id="ref-Keylock2005" class="csl-entry">
+Keylock, C. J. 2005. <span>“Simpson Diversity and the <span>Shannon-Wiener</span> Index as Special Cases of a Generalized Entropy.”</span> <em>Oikos</em> 109 (1): 203–7. <a href="https://doi.org/10.1111/j.0030-1299.2005.13735.x">https://doi.org/10.1111/j.0030-1299.2005.13735.x</a>.
+</div>
+<div id="ref-Kindt2006" class="csl-entry">
+Kindt, R., P. Van Damme, and A. J. Simons. 2006. <span>“Tree Diversity in Western <span>Kenya</span>: <span>Using</span> Profiles to Characterise Richness and Evenness.”</span> <em>Biodiversity and Conservation</em> 15 (4): 1253–70. <a href="https://doi.org/10.1007/s10531-005-0772-x">https://doi.org/10.1007/s10531-005-0772-x</a>.
+</div>
+<div id="ref-Kullback1951" class="csl-entry">
+Kullback, S., and R. A. Leibler. 1951. <span>“On Information and Sufficiency.”</span> <em>The Annals of Mathematical Statistics</em> 22 (1): 79–86. <a href="https://www.jstor.org/stable/2236703">https://www.jstor.org/stable/2236703</a>.
+</div>
+<div id="ref-Lande1996" class="csl-entry">
+Lande, Russell. 1996. <span>“Statistics and Partitioning of Species Diversity, and Similarity Among Multiple Communities.”</span> <em>Oikos</em> 76 (1): 5–13. <a href="https://doi.org/10.2307/3545743">https://doi.org/10.2307/3545743</a>.
+</div>
+<div id="ref-Lande2000" class="csl-entry">
+Lande, Russell, Philip J. DeVries, and Thomas R. Walla. 2000. <span>“When Species Accumulation Curves Intersect: Implications for Ranking Diversity Using Small Samples.”</span> <em>Oikos</em> 89 (3): 601–5. <a href="https://doi.org/10.1034/j.1600-0706.2000.890320.x">https://doi.org/10.1034/j.1600-0706.2000.890320.x</a>.
+</div>
+<div id="ref-Leinster2012" class="csl-entry">
+Leinster, Tom, and Christina Cobbold. 2012. <span>“Measuring Diversity: The Importance of Species Similarity.”</span> <em>Ecology</em> 93 (3): 477–89. <a href="https://doi.org/10.1890/10-2402.1">https://doi.org/10.1890/10-2402.1</a>.
+</div>
+<div id="ref-Lineweaver1934" class="csl-entry">
+Lineweaver, Hans, and Dean Burk. 1934. <span>“The Determination of Enzyme Dissociation Constants.”</span> <em>Journal of the American Chemical Society</em> 56 (3): 658–66. <a href="https://doi.org/10.1021/ja01318a036">https://doi.org/10.1021/ja01318a036</a>.
+</div>
+<div id="ref-Liu2006" class="csl-entry">
+Liu, Canran, Robert J. Whittaker, Keping Ma, and Jay R. Malcolm. 2006. <span>“Unifying and Distinguishing Diversity Ordering Methods for Comparing Communities.”</span> <em>Population Ecology</em> 49 (2): 89–100. <a href="https://doi.org/10.1007/s10144-006-0026-0">https://doi.org/10.1007/s10144-006-0026-0</a>.
+</div>
+<div id="ref-Liu2015" class="csl-entry">
+Liu, Dengfeng, Dong Wang, Yuankun Wang, Jichun Wu, Vijay P. Singh, Xiankui Zeng, Lachun Wang, et al. 2016. <span>“Entropy of Hydrological Systems Under Small Samples: <span>Uncertainty</span> and Variability.”</span> <em>Journal of Hydrology</em> 532: 163–76. <a href="https://doi.org/10.1016/j.jhydrol.2015.11.019">https://doi.org/10.1016/j.jhydrol.2015.11.019</a>.
+</div>
+<div id="ref-Loreau2005" class="csl-entry">
+Loreau, Michel. 2005. <span>“Discours de Clôture.”</span> In <em>Actes de La Conférence Internationale Biodiversité Science Et Gouvernance</em>, edited by Robert Barbault and Jean-Patrick Le Duc, 254–56. <span>Paris, France.</span>: <span>IRD Editions</span>.
+</div>
+<div id="ref-Maasoumi1993" class="csl-entry">
+Maasoumi, Esfandiar. 1993. <span>“A Compendium to Information Theory in Economics and Econometrics.”</span> <em>Econometric Reviews</em> 12 (2): 137–81. <a href="https://doi.org/10.1080/07474939308800260">https://doi.org/10.1080/07474939308800260</a>.
+</div>
+<div id="ref-MacArthur1955" class="csl-entry">
+MacArthur, Robert H. 1955. <span>“Fluctuations of Animal Populations and a Measure of Community Stability.”</span> <em>Ecology</em> 36 (3): 533–36. <a href="https://doi.org/doi:10.2307/1929601">https://doi.org/doi:10.2307/1929601</a>.
+</div>
+<div id="ref-MacArthur1957" class="csl-entry">
+———. 1957. <span>“On the Relative Abundance of Bird Species.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 43 (3): 293–95. <a href="https://doi.org/10.1073/pnas.43.3.293">https://doi.org/10.1073/pnas.43.3.293</a>.
+</div>
+<div id="ref-MacArthur1965" class="csl-entry">
+———. 1965. <span>“Patterns of Species Diversity.”</span> <em>Biological Reviews</em> 40 (4): 510–33. <a href="https://doi.org/10.1111/j.1469-185X.1965.tb00815.x">https://doi.org/10.1111/j.1469-185X.1965.tb00815.x</a>.
+</div>
+<div id="ref-Magurran1988" class="csl-entry">
+Magurran, Anne E. 1988. <em>Ecological Diversity and Its Measurement</em>. <span>Princeton, NJ</span>: <span>Princeton University Press</span>.
+</div>
+<div id="ref-Mao2007" class="csl-entry">
+Mao, Chang Xuan. 2007. <span>“Estimating Species Accumulation Curves and Diversity Indices.”</span> <em>Statistica Sinica</em> 17: 761–74. <a href="http://www3.stat.sinica.edu.tw/statistica/oldpdf/A17n217.pdf">http://www3.stat.sinica.edu.tw/statistica/oldpdf/A17n217.pdf</a>.
+</div>
+<div id="ref-Mao2005" class="csl-entry">
+Mao, Chang Xuan, and Robert K. Colwell. 2005. <span>“Estimation of Species Richness: <span>Mixture</span> Models, the Role of Rare Species, and Inferential Challenges.”</span> <em>Ecology</em> 86 (5): 1143–53. <a href="https://doi.org/10.1890/04-1078">https://doi.org/10.1890/04-1078</a>.
+</div>
+<div id="ref-Marcon2015a" class="csl-entry">
+Marcon, Eric. 2015. <span>“Practical Estimation of Diversity from Abundance Data.”</span> <em>HAL</em> 01212435. <a href="https://hal-agroparistech.archives-ouvertes.fr/hal-01212435">https://hal-agroparistech.archives-ouvertes.fr/hal-01212435</a>.
+</div>
+<div id="ref-Marcon2014c" class="csl-entry">
+Marcon, Eric, and Bruno Hérault. 2015. <span>“Entropart, an <span>R</span> Package to Measure and Partition Diversity.”</span> <em>Journal of Statistical Software</em> 67 (8): 1–26. <a href="https://doi.org/10.18637/jss.v067.i08">https://doi.org/10.18637/jss.v067.i08</a>.
+</div>
+<div id="ref-Marcon2012a" class="csl-entry">
+Marcon, Eric, Bruno Hérault, Christopher Baraloto, and Gabriel Lang. 2012. <span>“The Decomposition of <span>Shannon</span>’s Entropy and a Confidence Interval for <span><em>Beta</em></span> Diversity.”</span> <em>Oikos</em> 121 (4): 516–22. <a href="https://doi.org/10.1111/j.1600-0706.2011.19267.x">https://doi.org/10.1111/j.1600-0706.2011.19267.x</a>.
+</div>
+<div id="ref-Marcon2014a" class="csl-entry">
+Marcon, Eric, Ivan Scotti, Bruno Hérault, Vivien Rossi, and Gabriel Lang. 2014. <span>“Generalization of the Partitioning of <span>Shannon</span> Diversity.”</span> <em>Plos One</em> 9 (3): e90289. <a href="https://doi.org/10.1371/journal.pone.0090289">https://doi.org/10.1371/journal.pone.0090289</a>.
+</div>
+<div id="ref-May1975" class="csl-entry">
+May, Robert M. 1975. <span>“Patterns of Species Abundance and Diversity.”</span> In <em>Ecology and Evolution of Communities</em>, edited by M L Cody and J M Diamond, 81–120. <span>Harvard University Press</span>.
+</div>
+<div id="ref-May2011" class="csl-entry">
+———. 2011. <span>“Why Worry about How Many Species and Their Loss?”</span> <em>PLoS Biology</em> 9 (8): e1001130. <a href="https://doi.org/10.1371%2Fjournal.pbio.1001130">https://doi.org/10.1371%2Fjournal.pbio.1001130</a>.
+</div>
+<div id="ref-Mayden1997" class="csl-entry">
+Mayden, Richard L. 1997. <span>“A Hierarchy of Species Concepts: The Denouement in the Saga of the Species Problem.”</span> In <em>Species. <span>The</span> Units of Biodiversity.</em>, edited by M. F. Claridge, H. A. Dawah, and M. R. Wilson, 381–424. <span>London</span>: <span>Chapman and Hall</span>.
+</div>
+<div id="ref-Mayr1942" class="csl-entry">
+Mayr, Ernst. 1942. <em>Systematics and the Origin of Species from the Viewpoint of a Zoologist</em>. <span>New York</span>: <span>Columbia University Press</span>.
+</div>
+<div id="ref-McGill2007" class="csl-entry">
+McGill, Brian J., Rampal S. Etienne, John S. Gray, David Alonso, Marti J. Anderson, Habtamu Kassa Benecha, Maria Dornelas, et al. 2007. <span>“Species Abundance Distributions: Moving Beyond Single Prediction Theories to Integration Within an Ecological Framework.”</span> <em>Ecology Letters</em> 10 (10): 995–1015. <a href="https://doi.org/10.1111/j.1461-0248.2007.01094.x">https://doi.org/10.1111/j.1461-0248.2007.01094.x</a>.
+</div>
+<div id="ref-Mcintosh1967" class="csl-entry">
+Mcintosh, Robert P. 1967. <span>“An Index of Diversity and the Relation of Certain Concepts to Diversity.”</span> <em>Ecology</em> 48 (3): 392–404. <a href="https://doi.org/10.2307/1932674">https://doi.org/10.2307/1932674</a>.
+</div>
+<div id="ref-Meine2006" class="csl-entry">
+Meine, Curt, Michael Soulé, and Reed F. Noss. 2006. <span>“"<span>A</span> Mission-Driven Discipline": <span>The</span> Growth of Conservation Biology.”</span> <em>Conservation Biology</em> 20 (3): 631–51. <a href="https://doi.org/10.1111/j.1523-1739.2006.00449.x">https://doi.org/10.1111/j.1523-1739.2006.00449.x</a>.
+</div>
+<div id="ref-Mendes2008" class="csl-entry">
+Mendes, R. S., L. R. Evangelista, S. M. Thomaz, A. A. Agostinho, and L. C. Gomes. 2008. <span>“A Unified Index to Measure Ecological Diversity and Species Rarity.”</span> <em>Ecography</em> 31 (4): 450–56. <a href="https://doi.org/10.1111/j.0906-7590.2008.05469.x">https://doi.org/10.1111/j.0906-7590.2008.05469.x</a>.
+</div>
+<div id="ref-Michaelis1913" class="csl-entry">
+Michaelis, L., and Maud L. Menten. 1913. <span>“Die Kinetik Der Invertinwirkung.”</span> <em>Biochemische Zeitschrift</em> 49: 333–69. <a href="https://www.ncbi.nlm.nih.gov/pubmed/21888353">https://www.ncbi.nlm.nih.gov/pubmed/21888353</a>.
+</div>
+<div id="ref-Miller1955" class="csl-entry">
+Miller, G. A. 1955. <span>“Note on the Bias of Information Estimates.”</span> In <em>Information Theory in Psychology: <span>Problems</span> and Methods</em>, edited by Henry Quastler, 95–100. <span>Glencoe, Ill.</span>: <span>Free Press</span>.
+</div>
+<div id="ref-Miraldo2016" class="csl-entry">
+Miraldo, Andreia, Sen Li, Michael K. Borregaard, A. Florez-Rodriguez, Shyam Gopalakrishnan, Mirnesa Rizvanovic, Zhiheng Wang, Carsten Rahbek, Katharine A. Marske, and D. Nogues-Bravo. 2016. <span>“An <span>Anthropocene</span> Map of Genetic Diversity.”</span> <em>Science</em> 353 (6307): 1532–35. <a href="https://doi.org/10.1126/science.aaf4381">https://doi.org/10.1126/science.aaf4381</a>.
+</div>
+<div id="ref-Mora2011" class="csl-entry">
+Mora, Camilo, Derek P. Tittensor, Sina Adl, Alastair G. B. Simpson, and Boris Worm. 2011. <span>“How Many Species Are There on Earth and in the Ocean?”</span> <em>PLoS Biology</em> 9 (8): e1001127. <a href="https://doi.org/10.1371/journal.pbio.1001127">https://doi.org/10.1371/journal.pbio.1001127</a>.
+</div>
+<div id="ref-Moreno2010" class="csl-entry">
+Moreno, Claudia E., and Pilar Rodríguez. 2010. <span>“A Consistent Terminology for Quantifying Species Diversity?”</span> <em>Oecologia</em> 163 (2): 279–82. <a href="https://doi.org/10.1007/s00442-010-1591-7">https://doi.org/10.1007/s00442-010-1591-7</a>.
+</div>
+<div id="ref-Motomura1932" class="csl-entry">
+Motomura, I. 1932. <span>“On the statistical treatment of communities.”</span> <em>Zoological Magazine</em> 44: 379–83.
+</div>
+<div id="ref-Mouillot1999" class="csl-entry">
+Mouillot, David, and Alain Leprêtre. 1999. <span>“A Comparison of Species Diversity Estimators.”</span> <em>Researches on Population Ecology</em> 41 (2): 203–15. <a href="https://doi.org/10.1007/s101440050024">https://doi.org/10.1007/s101440050024</a>.
+</div>
+<div id="ref-Mouillot2005" class="csl-entry">
+Mouillot, David, Wendy Stubbs, Matthieu Faure, Olivier Dumay, Jean-Antoine Tomasini, J. Bastow Wilson, and Thang Do Chi. 2005. <span>“Niche Overlap Estimates Based on Quantitative Functional Traits: A New Family of Non-Parametric Indices.”</span> <em>Oecologia</em> 145 (3): 345–53. <a href="https://doi.org/10.1007/s00442-005-0151-z">https://doi.org/10.1007/s00442-005-0151-z</a>.
+</div>
+<div id="ref-Norris1998" class="csl-entry">
+Norris, J. L., and K. H. Pollock. 1998. <span>“Non-Parametric <span>MLE</span> for <span>Poisson</span> Species Abundance Models Allowing for Heterogeneity Between Species.”</span> <em>Environmental and Ecological Statistics</em> 5 (4): 391–402. <a href="https://doi.org/10.1023/A:1009659922745">https://doi.org/10.1023/A:1009659922745</a>.
+</div>
+<div id="ref-OHara2005" class="csl-entry">
+O’Hara, R. B. 2005. <span>“Species Richness Estimators: <span>How</span> Many Species Can Dance on the Head of a Pin?”</span> <em>Journal of Animal Ecology</em> 74: 375–86. <a href="https://doi.org/10.1111/j.1365-2656.2005.00940.x">https://doi.org/10.1111/j.1365-2656.2005.00940.x</a>.
+</div>
+<div id="ref-Oksanen2012" class="csl-entry">
+Oksanen, Jari, F. Guillaume Blanchet, Roeland Kindt, Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Gavin L. Simpson, Peter Solymos, M. Henry H. Stevens, and Helene Wagner. 2012. <span>“Vegan: <span>Community</span> Ecology Package.”</span> <a href="http://cran.r-project.org/package=vegan">http://cran.r-project.org/package=vegan</a>.
+</div>
+<div id="ref-Olszewski2004" class="csl-entry">
+Olszewski, Thomas D. 2004. <span>“A Unified Mathematical Framework for the Measurement of Richness and Evenness Within and Among Multiple Communities.”</span> <em>Oikos</em> 104 (2): 377–87. <a href="https://doi.org/10.1111/j.0030-1299.2004.12519.x">https://doi.org/10.1111/j.0030-1299.2004.12519.x</a>.
+</div>
+<div id="ref-Pallmann2012" class="csl-entry">
+Pallmann, Philip, Frank Schaarschmidt, Ludwig A. Hothorn, Christiane Fischer, Heiko Nacke, Kai U. Priesnitz, and Nicholas J. Schork. 2012. <span>“Assessing Group Differences in Biodiversity by Simultaneously Testing a User-Defined Selection of Diversity Indices.”</span> <em>Molecular Ecology Resources</em> 12 (6): 1068–78. <a href="https://doi.org/10.1111/1755-0998.12004">https://doi.org/10.1111/1755-0998.12004</a>.
+</div>
+<div id="ref-Patil1982" class="csl-entry">
+Patil, Ganapati P., and Charles Taillie. 1982. <span>“Diversity as a Concept and Its Measurement.”</span> <em>Journal of the American Statistical Association</em> 77 (379): 548–61. <a href="https://doi.org/10.2307/2287709">https://doi.org/10.2307/2287709</a>.
+</div>
+<div id="ref-Pavoine2011" class="csl-entry">
+Pavoine, Sandrine, and Michael B. Bonsall. 2011. <span>“Measuring Biodiversity to Explain Community Assembly: A Unified Approach.”</span> <em>Biological Reviews</em> 86 (4): 792–812. <a href="https://doi.org/10.1111/j.1469-185X.2010.00171.x">https://doi.org/10.1111/j.1469-185X.2010.00171.x</a>.
+</div>
+<div id="ref-Peet1974" class="csl-entry">
+Peet, Robert K. 1974. <span>“The Measurement of Species Diversity.”</span> <em>Annual Review of Ecology and Systematics</em> 5: 285–307. <a href="https://doi.org/10.1146/annurev.es.05.110174.001441">https://doi.org/10.1146/annurev.es.05.110174.001441</a>.
+</div>
+<div id="ref-Pernes1984" class="csl-entry">
+Pernès, J., ed. 1984. <em>Gestion Des Ressources Génétiques Des Plantes. <span>Tome</span> 2 : <span>Manuel</span></em>. <span>Paris</span>: <span>Agence de Coopération culturelle et technique</span>.
+</div>
+<div id="ref-Pielou1966" class="csl-entry">
+Pielou, Evelyn C. 1966a. <span>“Species-Diversity and Pattern-Diversity in the Study of Ecological Succession.”</span> <em>Journal of Theoretical Biology</em> 10 (2): 370–83. <a href="https://doi.org/10.1016/0022-5193(66)90133-0">https://doi.org/10.1016/0022-5193(66)90133-0</a>.
+</div>
+<div id="ref-Pielou1966a" class="csl-entry">
+———. 1966b. <span>“The Measurement of Diversity in Different Types of Biological Collections.”</span> <em>Journal of Theoretical Biology</em> 13 (C): 131–44. <a href="https://doi.org/10.1016/0022-5193(66)90013-0">https://doi.org/10.1016/0022-5193(66)90013-0</a>.
+</div>
+<div id="ref-Pielou1975" class="csl-entry">
+———. 1975. <em>Ecological Diversity</em>. <span>New York</span>: <span>Wiley</span>.
+</div>
+<div id="ref-Preston1948" class="csl-entry">
+Preston, F. W. 1948. <span>“The Commonness, and Rarity, of Species.”</span> <em>Ecology</em> 29 (3): 254–83. <a href="https://doi.org/10.2307/1930989">https://doi.org/10.2307/1930989</a>.
+</div>
+<div id="ref-Pueyo2007" class="csl-entry">
+Pueyo, Salvador, Fangliang He, and Tommaso Zillio. 2007. <span>“The Maximum Entropy Formalism and the Idiosyncratic Theory of Biodiversity.”</span> <em>Ecology Letters</em> 10 (11): 1017–28. <a href="https://doi.org/10.1111/j.1461-0248.2007.01096.x">https://doi.org/10.1111/j.1461-0248.2007.01096.x</a>.
+</div>
+<div id="ref-Purvis2000" class="csl-entry">
+Purvis, Andy, and Andy Hector. 2000. <span>“Getting the Measure of Biodiversity.”</span> <em>Nature</em> 405 (6783): 212–19. <a href="https://doi.org/10.1038/35012221">https://doi.org/10.1038/35012221</a>.
+</div>
+<div id="ref-R" class="csl-entry">
+R Core Team. 2023. <em>R: <span>A</span> Language and Environment for Statistical Computing</em>. <span>Vienna, Austria</span>: <span>R Foundation for Statistical Computing</span>. <a href="http://www.r-project.org">http://www.r-project.org</a>.
+</div>
+<div id="ref-Raaijmakers1987" class="csl-entry">
+Raaijmakers, Jeroen G. W. 1987. <span>“Statistical Analysis of the <span>Michaelis-Menten</span> Equation.”</span> <em>Biometrics</em> 43 (4): 793–803. <a href="https://doi.org/10.2307/2531533">https://doi.org/10.2307/2531533</a>.
+</div>
+<div id="ref-Renyi1961" class="csl-entry">
+Rényi, Alfréd. 1961. <span>“On Measures of Entropy and Information.”</span> In <em>4th Berkeley Symposium on Mathematical Statistics and Probability</em>, edited by Jerzy Neyman, 1:547–61. <span>Berkeley, USA</span>: <span>University of California Press</span>.
+</div>
+<div id="ref-Richards2010" class="csl-entry">
+Richards, Richard A. 2010. <em>The Species Problem. <span>A</span> Philosophical Analysis</em>. <span>Cambridge</span>: <span>Cambridge University Press</span>.
+</div>
+<div id="ref-Ricotta2005" class="csl-entry">
+Ricotta, Carlo. 2005a. <span>“On Parametric Diversity Indices in Ecology: <span>A</span> Historical Note.”</span> <em>Community Ecology</em> 6 (2): 241–44. <a href="https://doi.org/10.1556/ComEc.6.2005.2.12">https://doi.org/10.1556/ComEc.6.2005.2.12</a>.
+</div>
+<div id="ref-Ricotta2005b" class="csl-entry">
+———. 2005b. <span>“Through the Jungle of Biological Diversity.”</span> <em>Acta Biotheoretica</em> 53 (1): 29–38. <a href="https://doi.org/10.1007/s10441-005-7001-6">https://doi.org/10.1007/s10441-005-7001-6</a>.
+</div>
+<div id="ref-Ricotta2007" class="csl-entry">
+———. 2007. <span>“A Semantic Taxonomy for Diversity Measures.”</span> <em>Acta Biotheoretica</em> 55 (1): 23–33. <a href="https://doi.org/10.1007/s10441-007-9008-7">https://doi.org/10.1007/s10441-007-9008-7</a>.
+</div>
+<div id="ref-Ricotta2003c" class="csl-entry">
+Ricotta, Carlo, and Giancarlo C. Avena. 2003. <span>“An Information-Theoretical Measure of Taxonomic Diversity.”</span> <em>Acta Biotheoretica</em> 25 (51): 35–41. <a href="https://doi.org/10.1023/A:1023000322071">https://doi.org/10.1023/A:1023000322071</a>.
+</div>
+<div id="ref-Ricotta2006b" class="csl-entry">
+Ricotta, Carlo, and Laszlo Szeidl. 2006. <span>“Towards a Unifying Approach to Diversity Measures: <span>Bridging</span> the Gap Between the <span>Shannon</span> Entropy and <span>Rao</span>’s Quadratic Index.”</span> <em>Theoretical Population Biology</em> 70 (3): 237–43. <a href="https://doi.org/10.1016/j.tpb.2006.06.003">https://doi.org/10.1016/j.tpb.2006.06.003</a>.
+</div>
+<div id="ref-Runnegar1987" class="csl-entry">
+Runnegar, B. 1987. <span>“Rates and Modes of Evolution in the Mollusca.”</span> In <em>Rates of Evolution</em>, edited by M. Campbell and M. F. Day, 39–60. <span>London</span>: <span>Allen &amp; Unwin</span>.
+</div>
+<div id="ref-Scheiner2003" class="csl-entry">
+Scheiner, Samuel M. 2003. <span>“Six Types of Species-Area Curves.”</span> <em>Global Ecology and Biogeography</em> 12 (6): 441–47. <a href="https://doi.org/10.1046/j.1466-822X.2003.00061.x">https://doi.org/10.1046/j.1466-822X.2003.00061.x</a>.
+</div>
+<div id="ref-Schurmann2004" class="csl-entry">
+Schürmann, Thomas. 2004. <span>“Bias Analysis in Entropy Estimation.”</span> <em>Journal of Physics A: Mathematical and General</em> 37 (27): L295–301. <a href="https://doi.org/10.1088/0305-4470/37/27/L02">https://doi.org/10.1088/0305-4470/37/27/L02</a>.
+</div>
+<div id="ref-Shannon1948" class="csl-entry">
+Shannon, Claude E. 1948. <span>“A Mathematical Theory of Communication.”</span> <em>The Bell System Technical Journal</em> 27 (3): 379–423, 623–56. <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">https://doi.org/10.1002/j.1538-7305.1948.tb01338.x</a>.
+</div>
+<div id="ref-Shannon1963" class="csl-entry">
+Shannon, Claude E, and Warren Weaver. 1963. <em>The Mathematical Theory of Communication</em>. <span>University of Illinois Press</span>.
+</div>
+<div id="ref-Shen2003" class="csl-entry">
+Shen, Tsung-Jen, Anne Chao, and Chih-Feng Lin. 2003. <span>“Predicting the Number of New Species in a Further Taxonomic Sampling.”</span> <em>Ecology</em> 84 (3): 798–804. <a href="https://doi.org/10.1890/0012-9658(2003)084%5B0798:PTNONS%5D2.0.CO;2">https://doi.org/10.1890/0012-9658(2003)084[0798:PTNONS]2.0.CO;2</a>.
+</div>
+<div id="ref-Simpson1949" class="csl-entry">
+Simpson, E. H. 1949. <span>“Measurement of Diversity.”</span> <em>Nature</em> 163 (4148): 688. <a href="https://doi.org/10.1038/163688a0">https://doi.org/10.1038/163688a0</a>.
+</div>
+<div id="ref-Slik2015" class="csl-entry">
+Slik, J. W. Ferry, Víctor Arroyo-Rodríguez, Shin-Ichiro Aiba, Patricia Alvarez-Loayza, Luciana F. Alves, Peter S. Ashton, Patricia Balvanera, et al. 2015. <span>“An Estimate of the Number of Tropical Tree Species.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 112 (24): 7472–77. <a href="https://doi.org/10.1073/pnas.1423147112">https://doi.org/10.1073/pnas.1423147112</a>.
+</div>
+<div id="ref-Smith1984" class="csl-entry">
+Smith, Eric P., and Gerald Van Belle. 1984. <span>“Nonparametric Estimation of Species Richness.”</span> <em>Biometrics</em> 40 (1): 119–29. <a href="https://doi.org/10.1002/9780470015902.a0026329">https://doi.org/10.1002/9780470015902.a0026329</a>.
+</div>
+<div id="ref-Smith1977" class="csl-entry">
+Smith, Woollcott, and J. Frederick Grassle. 1977. <span>“Sampling Properties of a Family of Diversity Measures.”</span> <em>Biometrics</em> 33 (2): 283–92. <a href="https://doi.org/10.2307/2529778">https://doi.org/10.2307/2529778</a>.
+</div>
+<div id="ref-Soberon1993" class="csl-entry">
+Soberón M., Jorge, and Jorge Llorente B. 1993. <span>“The Use of Species Accumulation Functions for the Prediction of Species Richness.”</span> <em>Conservation Biology</em> 7 (3): 480–88. <a href="https://doi.org/10.1046/j.1523-1739.1993.07030480.x">https://doi.org/10.1046/j.1523-1739.1993.07030480.x</a>.
+</div>
+<div id="ref-Spellerberg2003" class="csl-entry">
+Spellerberg, Ian F., and Peter J. Feder. 2003. <span>“A Tribute to <span>Claude Shannon</span> (1916–2001) and a Plea for More Rigorous Use of Species Richness, Species Diversity and the ‘<span>Shannon</span>–<span>Wiener</span>’ <span>Index</span>.”</span> <em>Global Ecology and Biogeography</em> 12 (3): 177–79. <a href="https://doi.org/10.1046/j.1466-822X.2003.00015.x">https://doi.org/10.1046/j.1466-822X.2003.00015.x</a>.
+</div>
+<div id="ref-Speth1992" class="csl-entry">
+Speth, James Gustave, Martin W. Holdgate, and Mostafa K. Tolba. 1992. <span>“Foreword.”</span> In <em>Global Biodiversity Strategy</em>, edited by Kathleen Courrier, v–vi. <span>Washington, D.C.</span>: <span>WRI, IUCN, UNEP</span>.
+</div>
+<div id="ref-TerSteege2013" class="csl-entry">
+Steege, Hans ter, Nigel C. A. Pitman, Daniel Sabatier, Christopher Baraloto, Rafael P. Salomão, Juan Ernesto Guevara, Oliver L. Phillips, et al. 2013. <span>“Hyperdominance in the Amazonian Tree Flora.”</span> <em>Science</em> 342 (6156): 1243092. <a href="https://doi.org/10.1126/science.1243092">https://doi.org/10.1126/science.1243092</a>.
+</div>
+<div id="ref-Stegen2011" class="csl-entry">
+Stegen, James C., and Allen H. Hurlbert. 2011. <span>“Inferring Ecological Processes from Taxonomic, Phylogenetic and Functional Trait β-Diversity.”</span> <em>PloS One</em> 6 (6): e20906. <a href="https://doi.org/10.1371/journal.pone.0020906">https://doi.org/10.1371/journal.pone.0020906</a>.
+</div>
+<div id="ref-Stirling2007" class="csl-entry">
+Stirling, Andy. 2007. <span>“A General Framework for Analysing Diversity in Science, Technology and Society.”</span> <em>Journal of the Royal Society, Interface</em> 4 (15): 707–19. <a href="https://doi.org/10.1098/rsif.2007.0213">https://doi.org/10.1098/rsif.2007.0213</a>.
+</div>
+<div id="ref-Stoddart1983" class="csl-entry">
+Stoddart, James A. 1983. <span>“A Genotypic Diversity Measure.”</span> <em>Journal of Heredity</em> 74: 489–90. <a href="https://doi.org/10.1093/oxfordjournals.jhered.a109852">https://doi.org/10.1093/oxfordjournals.jhered.a109852</a>.
+</div>
+<div id="ref-Sukumaran2017" class="csl-entry">
+Sukumaran, Jeet, and L. Lacey Knowles. 2017. <span>“Multispecies Coalescent Delimits Structure, Not Species.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> in press. <a href="https://doi.org/10.1073/PNAS.1607921114">https://doi.org/10.1073/PNAS.1607921114</a>.
+</div>
+<div id="ref-Theil1967" class="csl-entry">
+Theil, Henri. 1967. <em>Economics and Information Theory</em>. <span>Chicago</span>: <span>Rand McNally &amp; Company</span>.
+</div>
+<div id="ref-Tothmeresz1995" class="csl-entry">
+Tothmeresz, Béla. 1995. <span>“Comparison of Different Methods for Diversity Ordering.”</span> <em>Journal of Vegetation Science</em> 6 (2): 283–90. <a href="https://doi.org/10.2307/3236223">https://doi.org/10.2307/3236223</a>.
+</div>
+<div id="ref-Tsallis1988" class="csl-entry">
+Tsallis, Constantino. 1988. <span>“Possible Generalization of Boltzmann-Gibbs Statistics.”</span> <em>Journal of Statistical Physics</em> 52 (1): 479–87. <a href="https://doi.org/10.1007/BF01016429">https://doi.org/10.1007/BF01016429</a>.
+</div>
+<div id="ref-Tsallis1994" class="csl-entry">
+———. 1994. <span>“What Are the Numbers That Experiments Provide?”</span> <em>Química Nova</em> 17 (6): 468–71. <a href="http://quimicanova.sbq.org.br/detalhe_artigo.asp?id=5517">http://quimicanova.sbq.org.br/detalhe_artigo.asp?id=5517</a>.
+</div>
+<div id="ref-Ulanowicz2001" class="csl-entry">
+Ulanowicz, Robert E. 2001. <span>“Information Theory in Ecology.”</span> <em>Computers &amp; Chemistry</em> 25 (4): 393–99. <a href="https://doi.org/10.1016/S0097-8485(01)00073-0">https://doi.org/10.1016/S0097-8485(01)00073-0</a>.
+</div>
+<div id="ref-VanValen1976" class="csl-entry">
+Van Valen, Leigh. 1976. <span>“Ecological Species, Multispecies, and Oaks.”</span> <em>Taxon</em> 25 (2/3): 233–39. <a href="https://doi.org/10.2307/1219444">https://doi.org/10.2307/1219444</a>.
+</div>
+<div id="ref-Vinck2012" class="csl-entry">
+Vinck, Martin, Francesco P. Battaglia, Vladimir B. Balakirsky, A. J. Han Vinck, and Cyriel M. A. Pennartz. 2012. <span>“Estimation of the Entropy Based on Its Polynomial Representation.”</span> <em>Physical Review E</em> 85 (5). <a href="https://doi.org/10.1103/PhysRevE.85.051139">https://doi.org/10.1103/PhysRevE.85.051139</a>.
+</div>
+<div id="ref-Volkov2003" class="csl-entry">
+Volkov, Igor, Jayanth R. Banavar, Stephen P. Hubbell, and Amos Maritan. 2003. <span>“Neutral Theory and Relative Species Abundance in Ecology.”</span> <em>Nature</em> 424 (6952): 1035–37. <a href="https://doi.org/10.1038/nature01883">https://doi.org/10.1038/nature01883</a>.
+</div>
+<div id="ref-Vu2007" class="csl-entry">
+Vu, Vincent Q., Bin Yu, and Robert E. Kass. 2007. <span>“Coverage-Adjusted Entropy Estimation.”</span> <em>Statistics in Medicine</em> 26 (21): 4039–60. <a href="https://doi.org/10.1002/sim.2942">https://doi.org/10.1002/sim.2942</a>.
+</div>
+<div id="ref-Wang2010" class="csl-entry">
+Wang, Ji-Ping. 2010. <span>“Estimating Species Richness by a <span class="nocase">Poisson-compound</span> Gamma Model.”</span> <em>Biometrika</em> 97 (3): 727–40. <a href="https://doi.org/10.1093/biomet/asq026">https://doi.org/10.1093/biomet/asq026</a>.
+</div>
+<div id="ref-Wang2011" class="csl-entry">
+———. 2011. <span>“<span>SPECIES</span>: <span>An R</span> Package for Species Richness Estimation.”</span> <em>Journal of Statistical Software</em> 40 (9): 1–15. <a href="https://doi.org/10.18637/jss.v040.i09">https://doi.org/10.18637/jss.v040.i09</a>.
+</div>
+<div id="ref-Wang2005" class="csl-entry">
+Wang, Ji-Ping, Bruce Lindsay, Liying Cui, P. Kerr Wall, Josh Marion, Jiaxuan Zhang, and Claude DePamphilis. 2005. <span>“Gene Capture Prediction and Overlap Estimation in <span>EST</span> Sequencing from One or Multiple Libraries.”</span> <em>BMC Bioinformatics</em> 6 (1): 300. <a href="https://doi.org/10.1186/1471-2105-6-300">https://doi.org/10.1186/1471-2105-6-300</a>.
+</div>
+<div id="ref-Whittaker1960" class="csl-entry">
+Whittaker, R. H. 1960. <span>“Vegetation of the <span>Siskiyou</span> Mountains, <span>Oregon</span> and <span>California</span>.”</span> <em>Ecological Monographs</em> 30 (3): 279–338. <a href="https://doi.org/10.2307/1943563">https://doi.org/10.2307/1943563</a>.
+</div>
+<div id="ref-Whittaker1965" class="csl-entry">
+———. 1965. <span>“Dominance and Diversity in Land Plant Communities.”</span> <em>Science</em> 147 (3655): 250–60. <a href="https://doi.org/10.1126/science.147.3655.250">https://doi.org/10.1126/science.147.3655.250</a>.
+</div>
+<div id="ref-Whittaker1972" class="csl-entry">
+———. 1972. <span>“Evolution and Measurement of Species Diversity.”</span> <em>Taxon</em> 21 (2/3): 213–51. <a href="https://doi.org/10.2307/1218190">https://doi.org/10.2307/1218190</a>.
+</div>
+<div id="ref-Whittaker1977" class="csl-entry">
+———. 1977. <span>“Evolution of Species Diversity in Land Communities.”</span> Edited by M. K. Hecht, W. C. Steere, and B. Wallace. <em>Evolutionary Biology</em> 10: 1–67.
+</div>
+<div id="ref-Williams1994" class="csl-entry">
+Williams, P. H., and Kevin J. Gaston. 1994. <span>“Measuring More of Biodiversity: Can Higher-Taxon Richness Predict Wholesale Species Richness?”</span> <em>Biological Conservation</em> 67: 211–17. <a href="https://doi.org/10.1016/0006-3207(94)90612-2">https://doi.org/10.1016/0006-3207(94)90612-2</a>.
+</div>
+<div id="ref-Williamson2005" class="csl-entry">
+Williamson, Mark, and Kevin J. Gaston. 2005. <span>“The Lognormal Distribution Is Not an Appropriate Null Hypothesis for the Species-Abundance Distribution.”</span> <em>Journal of Animal Ecology</em> 74 (2001): 409–22. <a href="https://doi.org/10.1111/j.1365-2656.2005.00936.x">https://doi.org/10.1111/j.1365-2656.2005.00936.x</a>.
+</div>
+<div id="ref-Williamson2001" class="csl-entry">
+Williamson, Mark, Kevin J. Gaston, and W. M. Lonsdale. 2001. <span>“The Species-Area Relationship Does Not Have an Asymptote!”</span> <em>Journal of Biogeography</em> 28 (7): 827–30. <a href="https://doi.org/10.1046/j.1365-2699.2001.00603.x">https://doi.org/10.1046/j.1365-2699.2001.00603.x</a>.
+</div>
+<div id="ref-Wilson1988" class="csl-entry">
+Wilson, Edward O., and Frances M. Peter, eds. 1988. <em>Biodiversity</em>. <span>Washington, D.C.</span>: <span>The National Academies Press</span>. <a href="https://www.nap.edu/read/989/chapter/1">https://www.nap.edu/read/989/chapter/1</a>.
+</div>
+<div id="ref-Wilson2012" class="csl-entry">
+Wilson, J. Bastow, Robert K. Peet, Jürgen Dengler, and Meelis Pärtel. 2012. <span>“Plant Species Richness: <span>The</span> World Records.”</span> <em>Journal of Vegetation Science</em> 23 (4): 796–802. <a href="https://doi.org/10.1111/j.1654-1103.2012.01400.x">https://doi.org/10.1111/j.1654-1103.2012.01400.x</a>.
+</div>
+<div id="ref-Wright1931" class="csl-entry">
+Wright, Sewall. 1931. <span>“Evolution in Mendelian Populations.”</span> <em>Genetics</em> 16 (2): 97–159. <a href="https://www.genetics.org/content/16/2/97">https://www.genetics.org/content/16/2/97</a>.
+</div>
+<div id="ref-Zhang2009" class="csl-entry">
+Zhang, Cun-Hui, and Zhiyi Zhang. 2009. <span>“Asymptotic Normality of a Nonparametric Estimator of Sample Coverage.”</span> <em>Annals of Statistics</em> 37: 2582–95. <a href="https://doi.org/10.1214/08-aos658">https://doi.org/10.1214/08-aos658</a>.
+</div>
+<div id="ref-Zhang2012" class="csl-entry">
+Zhang, Zhiyi. 2012. <span>“Entropy Estimation in Turing’s Perspective.”</span> <em>Neural Computation</em> 24 (5): 1368–89. <a href="https://doi.org/10.1162/NECO_a_00266">https://doi.org/10.1162/NECO_a_00266</a>.
+</div>
+<div id="ref-Zhang2013a" class="csl-entry">
+———. 2013. <span>“Asymptotic Normality of an Entropy Estimator with Exponentially Decaying Bias.”</span> <em>IEEE Transactions on Information Theory</em> 59 (1): 504–8. <a href="https://doi.org/10.1109/TIT.2012.2217393">https://doi.org/10.1109/TIT.2012.2217393</a>.
+</div>
+<div id="ref-Zhang2013" class="csl-entry">
+Zhang, Zhiyi, and Michael Grabchak. 2013. <span>“Bias Adjustment for a Nonparametric Entropy Estimator.”</span> <em>Entropy</em> 15 (6): 1999–2011. <a href="https://doi.org/10.3390/e15061999">https://doi.org/10.3390/e15061999</a>.
+</div>
+<div id="ref-Zhang2007" class="csl-entry">
+Zhang, Zhiyi, and Hongwei Huang. 2007. <span>“Turing’s Formula Revisited.”</span> <em>Journal of Quantitative Linguistics</em> 14 (2-3): 222–41. <a href="https://doi.org/10.1080/09296170701514189">https://doi.org/10.1080/09296170701514189</a>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chap-MesuresNeutres.html"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#entropie"><span class="header-section-number">4</span> Entropie</a></li>
+<li><a class="nav-link" href="#d%C3%A9finition-de-lentropie"><span class="header-section-number">4.1</span> Définition de l’entropie</a></li>
+<li><a class="nav-link" href="#entropie-relative"><span class="header-section-number">4.2</span> Entropie relative</a></li>
+<li><a class="nav-link" href="#lappropriation-de-lentropie-par-la-biodiversit%C3%A9"><span class="header-section-number">4.3</span> L’appropriation de l’entropie par la biodiversité</a></li>
+<li><a class="nav-link" href="#entropie-hcdt"><span class="header-section-number">4.4</span> Entropie HCDT</a></li>
+<li><a class="nav-link" href="#logarithmes-d%C3%A9form%C3%A9s"><span class="header-section-number">4.5</span> Logarithmes déformés</a></li>
+<li><a class="nav-link" href="#entropie-et-diversit%C3%A9"><span class="header-section-number">4.6</span> Entropie et diversité</a></li>
+<li><a class="nav-link" href="#synth%C3%A8se-1"><span class="header-section-number">4.7</span> Synthèse</a></li>
+<li><a class="nav-link" href="#profils-de-diversit%C3%A9"><span class="header-section-number">4.8</span> Profils de diversité</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/EricMarcon/MesuresBioDiv3/blob/master/02-Neutre.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/EricMarcon/MesuresBioDiv3/edit/master/02-Neutre.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 16/01/2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

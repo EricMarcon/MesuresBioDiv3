@@ -52,6 +52,7 @@
       margin-left: 2em;
     }
   </style>
+<link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -78,7 +79,10 @@
 <li><a class="active" href="notations.html">Notations</a></li>
 <li class="book-part">Notions</li>
 <li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
-<li><a class="" href="distribution-de-labondance-des-esp%C3%A8ces-sad.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li><a class="" href="sec-SAD.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li class="book-part">Diversité neutre d’une communauté</li>
+<li><a class="" href="chap-MesuresNeutres.html"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></li>
+<li><a class="" href="entropie.html"><span class="header-section-number">4</span> Entropie</a></li>
 </ul>
 
         <div class="book-extra">
@@ -103,7 +107,6 @@ La matrice transposée de <span class="math inline">\(\mathbf{X}\)</span> est no
 <p><span class="math inline">\({\mathbf 1}(\cdot)\)</span>: la fonction indicatrice, qui vaut 1 si la condition dans la parenthèse est vraie, 0 sinon.</p>
 <p><span class="math inline">\(\mathbf{1}_s\)</span>: le vecteur de longueur <span class="math inline">\(s\)</span> composé uniquement de 1. <span class="math inline">\(\mathbf{1}_s\mathbf{1}_s'=\mathbf{J}_s\)</span> où <span class="math inline">\(\mathbf{J}_s\)</span> est la matrice carré de taille <span class="math inline">\(s\)</span> ne contenant que des 1.</p>
 <p><span class="math inline">\(A\)</span>: l’aire d’étude, et, selon le contexte, sa surface.</p>
-<p><span class="math inline">\(\alpha_\nu\)</span>: la probabilité moyenne des espèces représentées par <span class="math inline">\(\nu\)</span> individus.</p>
 <p><span class="math inline">\(C\)</span>: le taux de couverture de l’échantillon, c’est-à-dire la probabilité qu’un individu de la communauté appartienne à une des espèces échantillonnées.
 <span class="math inline">\(C^{n}\)</span> est le taux de couverture correspondant à un échantillon de taille <span class="math inline">\(n\)</span>.</p>
 <p><span class="math inline">\(^{q}\!D\)</span>: la diversité vraie (nombre de Hill pour les diversités <span class="math inline">\(\alpha\)</span> et <span class="math inline">\(\gamma\)</span>), nombre équivalent de communautés pour la diversité <span class="math inline">\(\beta\)</span>.
@@ -111,6 +114,9 @@ La matrice transposée de <span class="math inline">\(\mathbf{X}\)</span> est no
 <span class="math inline">\(^{q}\!\bar{D}\left(T\right)\)</span> est la diversité phylogénétique.</p>
 <p><span class="math inline">\(\boldsymbol{\Delta}\)</span>: la matrice de dissimilarité dont les éléments sont <span class="math inline">\(\delta_{s,t}\)</span>, la dissimilarité entre l’espèce <span class="math inline">\(s\)</span> et l’espèce <span class="math inline">\(t\)</span>.</p>
 <p><span class="math inline">\({\mathbb E}\left(X\right)\)</span>: l’espérance de la variable aléatoire <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(f_{\nu}\)</span>: le nombre d’espèces observées <span class="math inline">\(\nu\)</span> fois dans un échantillon (qui peut être défini par sa surface ou son nombre d’individus).
+<span class="math inline">\(f_{&gt;0}\)</span> est le nombre d’espèces observées au moins une fois.
+<span class="math inline">\(f_1\)</span> s’appelle le nombre de <em>singletons</em> et <span class="math inline">\(f_2\)</span> le nombre de <em>doubletons.</em></p>
 <p><span class="math inline">\(^{q}\!H\)</span>: l’entropie de Tsallis (ou HCDT).
 <span class="math inline">\(^{q}_{i}\!H_{\alpha}\)</span> est l’entropie <span class="math inline">\(\alpha\)</span> mesurée dans la communauté <span class="math inline">\(i\)</span>.
 Si nécessaire, le vecteur des probabilités servant au calcul est précisé sous la forme <span class="math inline">\(^{q}\!H(\mathbf{p})\)</span>.
@@ -119,27 +125,24 @@ Si nécessaire, le vecteur des probabilités servant au calcul est précisé sou
 Les communautés sont indexées par <span class="math inline">\(i\)</span>.</p>
 <p><span class="math inline">\(I(p_s)\)</span>: l’information apportée par l’observation d’un évènement de probabilité <span class="math inline">\(p_s\)</span>.
 <span class="math inline">\(I(q_s,p_s)\)</span> est le gain d’information apporté par l’expérience (<span class="math inline">\(q_s\)</span> est observé) par rapport aux probabilités <span class="math inline">\(p_s\)</span> attendues.</p>
-<p><span class="math inline">\(\mathbf{I}_s\)</span>: la matrice identité de rang <span class="math inline">\(s\)</span>: matrice carrée de taille <span class="math inline">\(s\times s\)</span> dont la diagonale ne comporte que des 1 et les autres élements sont nuls.</p>
+<p><span class="math inline">\(\mathbf{I}_s\)</span>: la matrice identité de rang <span class="math inline">\(s\)</span>: matrice carrée de taille <span class="math inline">\(s\times s\)</span> dont la diagonale ne comporte que des 1 et les autres éléments sont nuls.</p>
 <p><span class="math inline">\(N\)</span>: le nombre (aléatoire) d’individus se trouvant dans l’aire d’étude.
 <span class="math inline">\(N_s\)</span> est la même variable aléatoire, mais restreinte aux individus de l’espèce <span class="math inline">\(s\)</span>.</p>
 <p><span class="math inline">\(n\)</span>: le nombre d’individus échantillonnés.
 <span class="math inline">\(n_{s,i}\)</span> est le nombre d’individus de l’espèce <span class="math inline">\(s\)</span> dans la communauté <span class="math inline">\(i\)</span>.
 Les effectifs totaux sont <span class="math inline">\(n_{s+}\)</span> (pour l’espèce <span class="math inline">\(s\)</span>), <span class="math inline">\(n_{+i}\)</span> pour la communauté <span class="math inline">\(i\)</span> et <span class="math inline">\(n\)</span> le total général.
 S’il n’y a qu’une communauté, le nombre d’individus par espèce est <span class="math inline">\(n_s\)</span>.</p>
-<p><span class="math inline">\(p_s\)</span>: la probabilité qu’un individu tiré au hasard appartienne à l’espèce <span class="math inline">\(s\)</span>.
-Son estimateur, <span class="math inline">\({\hat{p}}_s\)</span> est la fréquence observée.
-<span class="math inline">\(p_{s|i}\)</span> est la même probabilité dans la communauté <span class="math inline">\(i\)</span>.</p>
+<p><span class="math inline">\(p_s\)</span>: la probabilité qu’un individu tiré au hasard appartienne à l’espèce <span class="math inline">\(s\)</span>, autrement dit la probabilité de l’espèce <span class="math inline">\(s\)</span>.
+Son estimateur le plus simple, <span class="math inline">\({\hat{p}}_s\)</span> est la fréquence observée.
+Selon le contexte, <span class="math inline">\({\hat{p}}_s\)</span> peut désigner un estimateur plus élaboré.
+<span class="math inline">\(p_{s|i}\)</span> est la même probabilité dans la communauté <span class="math inline">\(i\)</span>.
+<span class="math inline">\(p_{\nu}\)</span> est la probabilité d’une espèce observées <span class="math inline">\(\nu\)</span> fois dans un échantillon.</p>
 <p><span class="math inline">\(\mathbf{p}=\left( p_1, p_2, \dots, p_s, \dots, p_S \right)\)</span>: le vecteur décrivant la distribution des probabilités <span class="math inline">\(p_s\)</span>, appelé simplexe en référence à sa représentation dans l’espace à <span class="math inline">\(S\)</span> dimensions.</p>
 <p><span class="math inline">\({\pi}_{\nu}\)</span>: la probabilité qu’une espèce choisie au hasard soit représentée par <span class="math inline">\(\nu\)</span> individus, <span class="math inline">\(\sum^n_{\nu=1}{{\pi}_{\nu}}\)</span>=1.
 Si l’espèce est choisie explicitement, la probabilité est notée <span class="math inline">\({\pi}_{n_s}\)</span>.</p>
 <p><span class="math inline">\(^{q}\!R\)</span>: l’entropie de Rényi d’ordre <span class="math inline">\(q\)</span>.</p>
-<p><span class="math inline">\(S\)</span>: le nombre d’espèces, considéré comme une variable aléatoire, estimé par <span class="math inline">\(\hat{S}\)</span>.</p>
-<p><span class="math inline">\(S_{\nu}(n)\)</span>: le nombre d’espèces, considéré comme une variable aléatoire, observées <span class="math inline">\(\nu\)</span> fois dans un échantillon de <span class="math inline">\(n\)</span> individus.
-L’indice est le nombre de fois où l’espèce est détectée : par exemple <span class="math inline">\(S_{1}\)</span> ou <span class="math inline">\(S_{\ne 0}\)</span>.
-La surface <span class="math inline">\(A\)</span> peut remplacer le nombre d’individus <span class="math inline">\(n\)</span>: <span class="math inline">\(S_{0}(A)\)</span> est le nombre d’espèces non rencontrées dans la surface <span class="math inline">\(A\)</span>.
-Pour alléger les notations, s’il n’y a pas d’ambiguïté, l’indice est omis pour les espèces présentes : <span class="math inline">\(S_{\ne 0}(A)\)</span> est noté <span class="math inline">\(S(A)\)</span>.</p>
-<p><span class="math inline">\(s_{\nu}(n)\)</span>: le nombre d’espèces observées, avec les mêmes notations que ci-dessus.
-<span class="math inline">\(s_{\nu}(n)\)</span> peut être considéré comme une réalisation de <span class="math inline">\(S_{\nu}(n)\)</span>.</p>
+<p><span class="math inline">\(S\)</span>: le nombre d’espèces d’une communauté, considéré comme une variable aléatoire, estimé par <span class="math inline">\(\hat{S}\)</span>.</p>
+<p><span class="math inline">\(S(A)\)</span> et <span class="math inline">\(S(n)\)</span>: le nombre d’espèces, considéré comme une fonction de la taille de l’échantillon.</p>
 <p><span class="math inline">\(t^{n}_{1-\alpha/2}\)</span>: le quantile d’une loi de Student à <span class="math inline">\(n\)</span> degrés de liberté au seuil de risque <span class="math inline">\(\alpha\)</span>, classiquement 1,96 pour <span class="math inline">\(n\)</span> grand et <span class="math inline">\(\alpha=5\%\)</span>.</p>
 <p><span class="math inline">\(\mathbf{Z}\)</span>: la matrice de similarité entre espèces dont les éléments sont <span class="math inline">\(z_{s,t}\)</span>, la similarité entre l’espèce <span class="math inline">\(s\)</span> et l’espèce <span class="math inline">\(t\)</span>.</p>
 <p><span class="math inline">\(\mathrm{\Gamma}(\cdot)\)</span>: la fonction gamma.</p>
@@ -174,7 +177,7 @@ Pour alléger les notations, s’il n’y a pas d’ambiguïté, l’indice est 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 23/12/2023.</p>
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 16/01/2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

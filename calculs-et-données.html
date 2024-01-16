@@ -52,6 +52,7 @@
       margin-left: 2em;
     }
   </style>
+<link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -78,7 +79,10 @@
 <li><a class="" href="notations.html">Notations</a></li>
 <li class="book-part">Notions</li>
 <li><a class="" href="chap-Notions.html"><span class="header-section-number">1</span> Notions de Diversité</a></li>
-<li><a class="" href="distribution-de-labondance-des-esp%C3%A8ces-sad.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li><a class="" href="sec-SAD.html"><span class="header-section-number">2</span> Distribution de l’abondance des espèces (SAD)</a></li>
+<li class="book-part">Diversité neutre d’une communauté</li>
+<li><a class="" href="chap-MesuresNeutres.html"><span class="header-section-number">3</span> Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)</a></li>
+<li><a class="" href="entropie.html"><span class="header-section-number">4</span> Entropie</a></li>
 </ul>
 
         <div class="book-extra">
@@ -91,13 +95,13 @@
 </h1>
 <p>La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
 La liste des notations est fournie ci-dessous, on s’y référera autant que nécessaire.</p>
-<p>Les calculs sont réalisés dans R <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-R" role="doc-biblioref">R Core Team 2022</a>)</span>, essentiellement avec le package <em>divent</em> <span class="citation">(<a href="#ref-R-divent" role="doc-biblioref"><strong>R-divent?</strong></a>)</span>, qui succède au package <em>entropart</em> <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Marcon2014c" role="doc-biblioref">Marcon and Hérault 2015</a>)</span>.
+<p>Les calculs sont réalisés dans R <span class="citation">(<a href="entropie.html#ref-R" role="doc-biblioref">R Core Team 2023</a>)</span>, essentiellement avec le package <em>divent</em> <span class="citation">(<a href="#ref-R-divent" role="doc-biblioref"><strong>R-divent?</strong></a>)</span>, qui succède au package <em>entropart</em> <span class="citation">(<a href="entropie.html#ref-Marcon2014c" role="doc-biblioref">Marcon and Hérault 2015</a>)</span>.
 L’ensemble du code est disponible sur GitHub<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://github.com/EricMarcon/MesuresBioDiv3/" class="uri"&gt;https://github.com/EricMarcon/MesuresBioDiv3/&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> où se trouvent les mises à jour de ce document<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://ericmarcon.github.io/MesuresBioDiv3/" class="uri"&gt;https://ericmarcon.github.io/MesuresBioDiv3/&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a>.</p>
-<p>Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure <a href="calculs-et-donn%C3%A9es.html#fig:Paracou6MapFig">0.1</a> en Guyane française <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Gourlet-Fleury2004" role="doc-biblioref">Gourlet-Fleury, Guehl, and Laroussinie 2004</a>)</span>, d’une surface de 6.25 ha.
+<p>Les données sont souvent celles de la parcelle 6 de la forêt de Paracou (figure <a href="calculs-et-donn%C3%A9es.html#fig:Paracou6MapFig">0.1</a> en Guyane française <span class="citation">(<a href="entropie.html#ref-Gourlet-Fleury2004" role="doc-biblioref">Gourlet-Fleury, Guehl, and Laroussinie 2004</a>)</span>, d’une surface de 6.25 ha.
 Tous les arbres de plus de 10 cm de diamètre à hauteur de poitrine (DBH : <em>Diameter at Breast Height</em>) y ont été inventoriés en 2016.
 La position de chaque arbre, son espèce et sa surface terrière sont fournis.</p>
-<p>D’autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Condit2012" role="doc-biblioref">Condit, Chisholm, and Hubbell 2012</a>)</span> : 50 ha de forêt tropicale dont les arbres de plus de 1 cm de diamètre à hauteur de poitrine (DBH : <em>Diameter at Breast Height</em>) ont été inventoriés.
-Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10 cm disponible dans le package <em>vegan</em> <span class="citation">(<a href="distribution-de-labondance-des-esp%C3%A8ces-sad.html#ref-Oksanen2012" role="doc-biblioref">Oksanen et al. 2012</a>)</span>, soient 21457 arbres dans 225 espèces.</p>
+<p>D’autres exemples utilisent la parcelle forestière permanente de Barro Colorado Island, souvent abrégée BCI <span class="citation">(<a href="entropie.html#ref-Condit2012" role="doc-biblioref">Condit, Chisholm, and Hubbell 2012</a>)</span> : 50 ha de forêt tropicale dont les arbres de plus de 1 cm de diamètre à hauteur de poitrine (DBH : <em>Diameter at Breast Height</em>) ont été inventoriés.
+Le jeu de données utilisé pour les exemples est une version réduite aux arbres de plus de 10 cm disponible dans le package <em>vegan</em> <span class="citation">(<a href="entropie.html#ref-Oksanen2012" role="doc-biblioref">Oksanen et al. 2012</a>)</span>, soient 21457 arbres dans 225 espèces.</p>
 
 <p></p>
 <div class="figure" style="text-align: center">
@@ -142,7 +146,7 @@ Figure 0.1: Carte de la parcelle 6 de Paracou. Les points représentent les arbr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 23/12/2023.</p>
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 16/01/2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
