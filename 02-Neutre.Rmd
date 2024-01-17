@@ -1648,7 +1648,7 @@ En se limitant à la diversité $\alpha$, on peut remarquer que l'indice de Shan
 La contribution à la divergence de chaque couple $(p_s, q_s)$ est représentées en figure \@ref(fig:KullbackLeiblerFig).
 Elle est positive quand $q_s > p_s$ (la valeur observée est plus grande que la valeur attendue), et croît avec $q_s$ pour $p_s$ fixé.
 Elle tend vers l'infini quand $p_s \to 0$.
-Les valeurs les plus négatives ne sont pas obtenues pour les valeurs minimales de $q_$ parce que les évènements très rarement observés influent peu sur la quantité d'information totale.
+Les valeurs les plus négatives ne sont pas obtenues pour les valeurs minimales de $q$ parce que les évènements très rarement observés influent peu sur la quantité d'information totale.
 Le minimum $-e^{-1} \approx 0.37$ est atteint pour $p_s = 1$ et $q_s = e^{-1}$, la valeur qui annule la dérivée de $q \ln(q)$.
 En somme, la divergence de Kullback-Leibler est surtout influencée par les évènements beaucoup plus observés qu'attendus.
 
