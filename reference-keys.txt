@@ -101,6 +101,10 @@ eq:HlnD
 eq:DexpH
 eq:EntropieRarete
 eq:DexpHSynthese
+eq:Hplugin
+eq:Grassberger
+eq:hq
+eq:Zhang2014
 fig:ProfilDivFig
 fig:ProfilQueueFig
 eq:ProfilQueue
@@ -160,4 +164,5 @@ entropie-hcdt
 logarithmes-déformés
 entropie-et-diversité
 synthèse-1
+estimation-2
 profils-de-diversité
