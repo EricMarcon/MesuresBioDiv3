@@ -1,4 +1,4 @@
-# (PART) Diversité neutre d’une communauté {-}
+# (PART) Diversité neutre d'une communauté {-}
 
 # Mesures classiques de la diversité $\alpha$ ou $\gamma$ {#chap-MesuresNeutres}
 
@@ -1171,7 +1171,7 @@ La sous-estimation est assez sévère sur cet exemple.
 
 ### Estimation {#sec-BiaisShannon}
 
-@Basharin1959 a montré que l'estimateur de l'indice de Shannon était biaisé parce que des espèces ne sont pas échantillonnées. 
+@Basharin1959 a montré que l'estimateur naïf de l'indice de Shannon était biaisé parce que des espèces ne sont pas échantillonnées. 
 Si $S$ est le nombre d'espèces réel et $n$ le nombre d'individus échantillonnés, le biais est
 
 \begin{equation}
@@ -1377,7 +1377,7 @@ ent_shannon(colSums(BCI), estimator = "ZhangHz")
 ```
 
 D'autres estimateurs peu utilisés en écologie sont disponibles dans le package *entropy* [@Hausser2009]. 
-La contraction de Stein [@James1961] consiste à estimer la distribution des probabilités d’occurrence des espèces par la pondération optimale entre un estimateur à faible biais et un estimateur à faible variance. 
+La contraction de Stein [@James1961] consiste à estimer la distribution des probabilités d'occurrence des espèces par la pondération optimale entre un estimateur à faible biais et un estimateur à faible variance. 
 L'estimateur $\hat{p}_s$ est sans biais mais a une variance importante. 
 L'estimateur $1/S$, si $S$ est connu, est de variance nulle mais est très biaisé. 
 Comme le nombre d'espèces est en général inconnu, il doit être estimé par une méthode quelconque, mais de préférence le surestimant plutôt que le sous-estimant. 
@@ -1948,7 +1948,7 @@ La diversité n'est pas une fonction linéaire des probabilités: la diversité 
 ## Synthèse
 
 L'inverse de la probabilité d'une espèce, $1/p_s$, définit sa rareté.
-L’entropie est la moyenne du logarithme de la rareté:
+L'entropie est la moyenne du logarithme de la rareté:
 
 \begin{equation}
   (\#eq:EntropieRarete)
@@ -1963,6 +1963,117 @@ La diversité est son exponentielle:
   (\#eq:DexpHSynthese)
   ^{q}\!D = e_q^{^{q}\!H}.
 \end{equation}
+
+
+## Estimation
+
+Les estimateurs peuvent être classés dans quatre méthodes principales.
+La plus simple consiste simplement à insérer l'estimateur de $p_s$  dans la définition de la diversité à évaluer pour obtenir ce que l'on appelle l'estimateur *plug-in*.
+Quand l'estimateur des probabilités est $\hat{p}_s = n_s/n$, l'estimateur est dit *naïf*.
+L'estimateur naïf de l'entropie HCDT d'ordre $q$ est:
+
+\begin{equation}
+  ^{q}{\hat{H}} = \sum_{s}{{\hat{p}}_s \ln_q{\frac{1}{\hat{p}}_s}}
+  (\#eq:Hplugin)
+\end{equation}
+
+L'estimateur naïf est inutile dans les communautés hyperdiverses car il sous-estime fortement la diversité en raison des espèces non observées et de la non-linéarité de la l'entropie en fonction des probabilités.
+
+Des progrès ont été réalisés dans l'estimation de la distribution réelle de la probabilité des espèces en ajustant un modèle de leur distribution aux données.
+La distribution des espèces non observées peut être ajoutée si leur nombre est estimé et qu'une forme de distribution est choisie.
+La première méthode d'estimation de l'entropie consiste donc à estimer précisément la distribution réelle des probabilités puis à lui appliquer l'estimateur plug-in.
+
+@Chao2014c ont utilisé un modèle à deux paramètres basé sur l'estimation de la couverture généralisée de l'échantillon (non détaillé ici), estimé la richesse totale avec l'estimateur Chao1 et modélisé les espèces non observées comme une distribution géométrique pour dévoiler la distribution complète rang-abondance d'une communauté observée.
+Ils ont appliqué l'estimateur plug-in à cette distribution pour obtenir l'estimateur appelé "Chao-unveiled" dans *divent*.
+L'estimateur "iChao-unveiled" est une variation de l'estimateur "Chao-unveiled", où la richesse est estimée par l'estimateur iChao1.
+
+L'estimateur du jackknife [@Burnham1979] a montré de bonnes performances pour estimer la richesse lorsque l'effort d'échantillonnage est trop faible pour que l'estimateur Chao1 soit performant [@Brose2003].
+
+L'estimation de la richesse à l'aide de l'estimateur du jackknife, dont l'ordre est choisi en fonction des données, définit l'estimateur "jackknife-unveiled".
+L'utilisation de l'estimateur jackknife pour estimer la queue de la distribution d'abondance n'était pas l'intention de @Chao2014c car elle n'est pas cohérente avec leur cadre théorique.
+
+La seconde méthode repose sur l'estimateur @Horvitz1952 de la somme pondérée d'une fonction de ses éléments ${x_1, x_2, ..., x_S}$, soit $\sum_{s}{p_s f(x_s)}$ lorsque certains d'entre eux ne sont pas observés.
+Un estimateur sans biais de la somme est obtenu lorsque chaque terme est divisé par sa probabilité d'être observé $1-(1-p_s)^n$.
+@Chao2003 ont proposé de le combiner avec l'estimateur de la couverture de l'échantillon: conditionnellement à l'ensemble des espèces observées, un estimateur sans biais [@Ashbridge2000] de $p_s$ est $\tilde{p}_s = \hat{C} \hat{p}_s$.
+Chao et Shen ont estimé l'entropie de Shannon; la méthode a ensuite été étendue à l'entropie HCDT [@Marcon2014a].
+
+\begin{equation}
+  ^{q}{\tilde{H}} 
+  =\sum_{s}{\frac{
+    \hat{C}{\hat{p}}_s \ln_q\dfrac{1}{\hat{C}{\hat{p}}_s}
+  }{
+    1 - {\left( 1 - \hat{C}{\hat{p}}_s \right)}^n}
+  }
+\end{equation}
+
+Un progrès supplémentaire peut être fait en remplaçant l'estimateur conditionnel des probabilités $\tilde{p}_s = \hat{C} \hat{p}_s$ par celui de @Chao2014c.
+Étant donné que l'estimateur de probabilité amélioré dépend de la couverture généralisée de l'échantillon, l'estimateur amélioré de Chao-Shen est appelé "generalized coverage".
+
+La troisième méthode a été établie par @Grassberger1988 qui a donné un estimateur à biais réduit de la valeur d'un entier à la puissance $q$.
+${p_s^q}$ s'écrit $n_s^q/n^q$ et $n_s^q$ est estimé [@Marcon2014a] par:
+
+\begin{equation}
+  \tilde{n}^{q}_{s}
+  = \frac{\mathrm{\Gamma}\left(n_s + 1 \right)}{\mathrm{\Gamma}\left( n_s - q + 1 \right)} 
+  + \frac{{\left( -1 \right)}^n \mathrm{\Gamma}\left( 1 + q \right)\sin{\pi q}}{\pi \left( n + 1 \right)}
+\end{equation}
+
+L'estimateur de ${p_s^q}$ est simplement $\tilde{p}^{q}_{s} = \tilde{n}^{q}_{s}/n^q$.
+On l'introduit dans la formule de l'entropie pour obtenir l'estimateur de Grassberger:
+
+\begin{equation}
+  ^{q}{\tilde{H}}
+  = \frac{1 - \sum_{s}{\tilde{p}^{q}_{s}}}{q - 1}
+  (\#eq:Grassberger)
+\end{equation}
+
+La dernière méthode a fait l'objet d'une importante littérature.
+Une revue peut être trouvée dans @Chao2013, Appendix A.
+Elle repose sur l'estimation de $h_q = \sum_{s}{p_s^q}$.
+$h_q$ peut être écrit comme la somme suivante:
+
+\begin{equation}
+	h_q = \sum_{r=0}^{\infty}{\binom{q - 1}{r} \left( -1 \right)^r \zeta_r}
+  (\#eq:hq)
+\end{equation}
+
+$\zeta_r$ est l'entropie de Simpson généralisée $\sum_{s}{p_s(1 - p_s)^r}$ définie par @Zhang2010.
+Les $n$ premiers éléments de la somme, notés $\tilde{h}_{q}$, peuvent être estimés sans biais [@Zhang2014]:
+
+\begin{equation}
+  \tilde{h}_{q} 
+  = \sum_{s=1}^{S}{\hat{p}_{s}
+    \sum_{v=1}^{n - n_s}{\left[ 
+      \prod_{i=1}^{v}{\frac{i - q}{i} \prod_{j=1}^{v}{\left( 1 - \frac{n_s - 1}{n - j} \right)}} 
+    \right]
+  }}
+\end{equation}
+
+@Zhang2013a montre que le biais dû à l'ignorance des termes restants est asymptotiquement normal et décroît exponentiellement vite.
+L'estimateur de @Zhang2014 est celui basé sur $\tilde{h}_{q}$:
+
+\begin{equation}
+  ^{q}{\tilde{H}} = \frac{1 - \tilde{h}_{q}}{q - 1}
+  (\#eq:Zhang2014)
+\end{equation}
+
+Des tentatives ont été faites pour estimer le biais restant [@Zhang2013].
+La plus aboutie est celle de @Chao2015, qui complète @Chao2013.
+Elle repose sur l'estimation du nombre total d'espèces par l'estimateur Chao1 et quelques approximations, notamment que les probabilités réelles des espèces non observées peuvent être supposées presque égales.
+Il en résulte que l'estimateur de la probabilité moyenne des espèces échantillonnées une fois est également égal à l'estimateur de la probabilité des espèces non observées. 
+Sa valeur est notée $A$. 
+Elle vaut $2 f_2 / [(n - 1) f_1 +2 f_2]$ si les singletons et les doubletons sont présents ou $2 / [(n - 1)(f_1 -1) + 2]$ si les doubletons sont absents.
+L'estimateur Chao-Jost de l'entropie HCDT est:
+
+\begin{equation}
+  ^{q}{\tilde{H}}
+    = \frac{1}{q - 1} \left[ 
+     1 - \tilde{h}_q - \frac{f_1}{n}{\left( 1 - A \right)}^{1 - n} 
+     \left( A^{q - 1} - \sum_{r=0}^{n-1}{\binom{q - 1}{r} {\left( A - 1 \right)}^r} \right) 
+    \right]
+\end{equation}
+      
+En l'absence de singletons et de doubletons, $A$ est fixé à 1 et l'estimateur est identique à celui de Zhang et Grabchak.
 
 
 ## Profils de diversité
