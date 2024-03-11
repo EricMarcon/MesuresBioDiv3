@@ -59,13 +59,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -73,7 +73,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -82,7 +82,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -454,7 +454,7 @@
 
 \author{Eric Marcon}
 
-\date{17/01/2024}
+\date{11/03/2024}
 
 
 % Include headers (preamble.tex) here
@@ -530,8 +530,7 @@ Les versions d'étape sont déposées sur HAL: \url{https://hal-agroparistech.ar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \LargeMargins
-\hypertarget{motivation}{%
-\chapter*{Motivation}\label{motivation}}
+\chapter*{Motivation}\label{motivation}
 \addcontentsline{toc}{chapter}{Motivation}
 
 Le terme \emph{biodiversity} est attribué \autocite{Meine2006} à Walter Rosen, un membre du \emph{National Research Council} américain, qui a commencé à contracter les termes \emph{biological diversity} pendant la préparation d'un colloque dont les actes seront publiés sous le titre \enquote{Biodiversity} \autocite{Wilson1988}.
@@ -567,8 +566,7 @@ On se référera par exemple à \textcite{Chapin2000} pour une revue sur cette q
 La mesure de la diversité est un sujet important en tant que tel \autocite{Purvis2000}, pour permettre de formaliser les concepts et de les appliquer à la réalité.
 La question est loin d'être épuisée, et fait toujours l'objet d'une recherche active et de controverses \autocite{Ricotta2005b}.
 
-\hypertarget{calculs-et-donnuxe9es}{%
-\chapter*{Calculs et données}\label{calculs-et-donnuxe9es}}
+\chapter*{Calculs et données}\label{calculs-et-donnuxe9es}
 \addcontentsline{toc}{chapter}{Calculs et données}
 
 La présentation des mesures de diversité est donnée avec un usage intensif du formalisme mathématique.
@@ -611,8 +609,7 @@ Le code R pour réaliser la figure est le suivant:
 
 \normalsize
 
-\hypertarget{notations}{%
-\chapter*{Notations}\label{notations}}
+\chapter*{Notations}\label{notations}
 \addcontentsline{toc}{chapter}{Notations}
 
 Les notations mathématiques peuvent différer de celles de la littérature citée pour l'homogénéité de ce document.
@@ -702,14 +699,11 @@ Si l'espèce est choisie explicitement, la probabilité est notée \({\pi}_{n_s}
 
 \mainmatter
 
-\hypertarget{part-notions}{%
-\part{Notions}\label{part-notions}}
+\part{Notions}\label{part-notions}
 
-\hypertarget{chap-Notions}{%
-\chapter{Notions de Diversité}\label{chap-Notions}}
+\chapter{Notions de Diversité}\label{chap-Notions}
 
-\hypertarget{composantes}{%
-\section{Composantes}\label{composantes}}
+\section{Composantes}\label{composantes}
 
 
 
@@ -729,8 +723,7 @@ Si l'espèce est choisie explicitement, la probabilité est notée \({\pi}_{n_s}
 Une communauté comprenant beaucoup d'espèces mais avec une espèce dominante n'est pas perçue intuitivement comme plus diverse qu'une communauté avec moins d'espèces, mais dont les effectifs sont proches (figure \ref{fig:Composantes}, colonne de gauche).
 La prise en compte de deux composantes de la diversité, appelées richesse et équitabilité, est nécessaire \autocite{Whittaker1965}.
 
-\hypertarget{richesse}{%
-\subsection{Richesse}\label{richesse}}
+\subsection{Richesse}\label{richesse}
 
 La richesse \autocite[terme introduit par][]{Mcintosh1967} est le nombre (ou une fonction croissante du nombre) de classes différentes présentes dans le système étudié, par exemple le nombre d'espèces d'arbres dans une forêt.
 
@@ -747,8 +740,7 @@ Un certain nombre d'hypothèses sont assumées plus ou moins explicitement:
 
 L'indice de richesse le plus simple et le plus utilisé est tout simplement le nombre d'espèces \(S\).
 
-\hypertarget{uxe9quitabilituxe9}{%
-\subsection{Équitabilité}\label{uxe9quitabilituxe9}}
+\subsection{Équitabilité}\label{uxe9quitabilituxe9}
 
 La régularité de la distribution des espèces (équitabilité en Français, \emph{evenness} ou \emph{equitability} en anglais) est un élément important de la diversité.
 Une espèce représentée abondamment ou par un seul individu n'apporte pas la même contribution à l'écosystème.
@@ -759,8 +751,7 @@ Un indice d'équitabilité est indépendant du nombre d'espèces (donc de la ric
 
 La plupart des mesures de diversité courantes, comme celle de Simpson ou de Shannon, évaluent à la fois la richesse et l'équitabilité.
 
-\hypertarget{disparituxe9}{%
-\subsection{Disparité}\label{disparituxe9}}
+\subsection{Disparité}\label{disparituxe9}
 
 Les mesures classiques de la diversité, dites mesures de diversité neutre (\emph{species-neutral diversity}) ou taxonomique ne prennent pas en compte une quelconque distance entre classes.
 Pourtant, deux espèces du même genre sont de toute évidence plus proches que deux espèces de familles différentes.
@@ -777,21 +768,18 @@ La disparité \autocite{Runnegar1987}, divergence moyenne entre deux espèces (i
 Les mesures de \emph{régularité} décrivent la façon dont les espèces occupent l'espace des niches (régularité fonctionnelle) ou la régularité dans le temps et entre les clades des évènements de spéciation représentés par un arbre phylogénétique.
 Ce concept complète celui d'équitabilité dans les mesures classiques: la diversité augmente avec la richesse, la divergence entre espèces, et la régularité (qui se réduit à l'équitabilité quand toutes les espèces sont également divergentes entre elles).
 
-\hypertarget{agruxe9gation}{%
-\subsection{Agrégation}\label{agruxe9gation}}
+\subsection{Agrégation}\label{agruxe9gation}
 
 À partir d'une large revue de la littérature dans plusieurs disciplines scientifiques s'intéressant à la diversité (au-delà de la biodiversité), \textcite{Stirling2007} estime que les trois composantes, qu'il nomme \emph{variété} (richesse), \emph{équilibre} (équitabilité) et \emph{disparité}, recouvrent tous les aspects de la diversité.
 
 Stirling définit la propriété d'\emph{agrégation} comme la capacité d'une mesure de diversité à combiner explicitement les trois composantes précédentes.
 Cela ne signifie pas que les composantes contribuent indépendamment les unes des autres à la diversité \autocite{Jost2010}.
 
-\hypertarget{niveaux-de-luxe9tude}{%
-\section{Niveaux de l'étude}\label{niveaux-de-luxe9tude}}
+\section{Niveaux de l'étude}\label{niveaux-de-luxe9tude}
 
 La diversité est classiquement estimée à plusieurs niveaux emboîtés, nommés \(\alpha\), \(\beta\) et \(\gamma\) par \textcite[page 320]{Whittaker1960} qui a nommé \(\alpha\) la diversité locale qu'il mesurait avec l'indice \(\alpha\) de Fisher (voir le chapitre \ref{chap-Fisher}) et a utilisé les lettres suivantes selon ses besoins.
 
-\hypertarget{diversituxe9-alpha-beta-et-gamma}{%
-\subsection{\texorpdfstring{Diversité \(\alpha\), \(\beta\) et \(\gamma\)}{Diversité \textbackslash alpha, \textbackslash beta et \textbackslash gamma}}\label{diversituxe9-alpha-beta-et-gamma}}
+\subsection{\texorpdfstring{Diversité \(\alpha\), \(\beta\) et \(\gamma\)}{Diversité \textbackslash alpha, \textbackslash beta et \textbackslash gamma}}\label{diversituxe9-alpha-beta-et-gamma}
 
 La diversité \(\alpha\) est la diversité locale, mesurée à l'intérieur d'un système délimité.
 Plus précisément, il s'agit de la diversité dans un habitat uniforme de taille fixe.
@@ -822,8 +810,7 @@ Cette définition assez vague a fait l'objet de nombreux débats \autocite{Moren
 Enfin, la diversité \(\gamma\) est similaire à la diversité \(\alpha\), prise en compte sur l'ensemble du système étudié.
 Les diversités \(\alpha\) et \(\gamma\) se mesurent donc de la même façon, mais à différentes échelles.
 
-\hypertarget{duxe9composition}{%
-\subsection{Décomposition}\label{duxe9composition}}
+\subsection{Décomposition}\label{duxe9composition}
 
 \textcite{Whittaker1977} a proposé sans succès une normalisation des échelles d'évaluation de la biodiversité, en introduisant la diversité régionale \(\varepsilon\) (\(\gamma\) étant réservé au paysage et \(\alpha\) à l'habitat) et la diversité \(\delta\) entre les paysages.
 Seuls les trois niveaux originaux ont été conservés par la littérature, sans définition stricte des échelles d'observation.
@@ -834,8 +821,7 @@ Il est donc important de définir une mesure qui ne dépende pas de ce découpag
 
 Nous appellerons \emph{communauté} le niveau de découpage concernant la diversité \(\alpha\) et \emph{méta-communauté} le niveau de regroupement pour l'estimation de la diversité \(\gamma\).
 
-\hypertarget{courbes-daccumulation}{%
-\section{Courbes d'accumulation}\label{courbes-daccumulation}}
+\section{Courbes d'accumulation}\label{courbes-daccumulation}
 
 
 
@@ -899,8 +885,7 @@ Il existe plusieurs façons de prendre en compte cette relation \autocite{Schein
   Pour éviter toute confusion, le terme SAR ne doit pas être utilisé pour décrire une SAC.
 \end{itemize}
 
-\hypertarget{diversituxe9-asymptotique}{%
-\section{Diversité asymptotique}\label{diversituxe9-asymptotique}}
+\section{Diversité asymptotique}\label{diversituxe9-asymptotique}
 
 Augmenter l'effort d'échantillonnage peut permettre d'atteindre un stade où la diversité n'augmente plus: sa valeur est appelée \emph{diversité asymptotique}.
 Dans des communautés très diverses comme les forêts tropicales, la diversité asymptotique ne peut en général pas être observée sur le terrain à cause de la variabilité de l'environnement: l'augmentation de la surface inventoriée amène à échantillonner dans des communautés différentes avant d'atteindre la diversité asymptotique de la communauté étudiée.
@@ -910,8 +895,7 @@ En d'autres termes, c'est la diversité d'une communauté dont l'inventaire disp
 Evaluer la diversité asymptotique nécessite d'utiliser des estimateurs de diversité, dont la précision dépend de l'exhaustivité de l'échantillonnage.
 La diversité peut aussi être estimée pour un effort donné: un hectare de forêt ou 5000 arbres par exemple, ou encore un taux de couverture choisi, qui décrit mieux la qualité de l'échantillonnage.
 
-\hypertarget{sec-Couverture}{%
-\section{Couverture}\label{sec-Couverture}}
+\section{Couverture}\label{sec-Couverture}
 
 Le taux de couverture (\emph{sample coverage}) de l'échantillon est la proportion des espèces découvertes,
 \begin{equation}
@@ -939,8 +923,7 @@ Les estimateurs de la diversité asymptotique développés plus loin reposent la
 
 Pour comparer la diversité non asymptotique de deux communautés avec le même effort d'échantillonnage, \textcite{Chao2012b} montrent que le taux de couverture plutôt que la taille de l'échantillon doit être identique.
 
-\hypertarget{formule-des-fruxe9quences-de-good-turing}{%
-\subsection{Formule des fréquences de Good-Turing}\label{formule-des-fruxe9quences-de-good-turing}}
+\subsection{Formule des fréquences de Good-Turing}\label{formule-des-fruxe9quences-de-good-turing}
 
 La relation fondamentale entre les fréquences des espèces dans un échantillon est due à Turing et a été publiée par \textcite{Good1953}.
 En absence de toute information sur la loi de distribution des espèces, en supposant seulement que les individus sont tirés indépendamment les uns des autres selon une loi multinomiale respectant ces probabilités, la formule de Good-Turing relie la probabilité attendue \({\mathbb E}(p_\nu)\) d'une espèce représentée par \(\nu\) individus au rapport entre les nombres d'espèces représentées \(\nu+1\) fois et \(\nu\) fois:
@@ -983,8 +966,7 @@ en remplaçant les espérances par les valeurs observées.
 
 Ce nouvel estimateur est à la base de l'estimateur de Chao amélioré et des estimateurs d'entropie de Chao et Jost (sections \ref{sec-BiaisShannon} et \ref{sec-BiaisHCDT}).
 
-\hypertarget{estimation-du-taux-de-couverture}{%
-\subsection{Estimation du taux de couverture}\label{estimation-du-taux-de-couverture}}
+\subsection{Estimation du taux de couverture}\label{estimation-du-taux-de-couverture}
 
 En posant \(\nu=0\) dans l'équation \eqref{eq:alphanu}, \({\mathbb E}(p_0) \times f_{0} = \pi_0\), la probabilité totale des espèces non représentées, vaut approximativement \(f_{1}/n\).
 C'est l'estimateur de Good ou Good-Turing, parfois appelé abusivement \enquote{formule de Turing} \autocite{Zhang2007}:
@@ -1087,8 +1069,7 @@ Il est moindre sur les 6.25~ha de la parcelle 6 de Paracou:
 Les estimateurs présentés ici supposent une population de taille infinie (de façon équivalente, les individus sont tirés avec remise).
 Le cas des populations de taille finie est traité par \textcite{Chao2012} et \textcite{Hwang2014}.
 
-\hypertarget{compluxe9tude}{%
-\subsection{Complétude}\label{compluxe9tude}}
+\subsection{Complétude}\label{compluxe9tude}
 
 La complétude de l'échantillonnage est la proportion du nombre d'espèces observées: \(f_{>0} / S\).
 Elle compte simplement les espèces et ne doit pas être confondue avec la couverture qui somme leurs probabilités: le taux de complétude est toujours très inférieur au taux de couverture parce que les espèces non échantillonnées sont les plus rares.
@@ -1185,8 +1166,7 @@ La complétude du même échantillon d'arbres de forêt tropicale que dans l'exe
 
 \normalsize
 
-\hypertarget{le-probluxe8me-de-lespuxe8ce}{%
-\section{Le problème de l'espèce}\label{le-probluxe8me-de-lespuxe8ce}}
+\section{Le problème de l'espèce}\label{le-probluxe8me-de-lespuxe8ce}
 
 Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n'est de toute évidence pas le cas \autocite{Casetta2014}.
 Le premier aspect du problème concerne la nature des espèces: réalité naturelle ou seulement représentation simplificatrice.
@@ -1209,8 +1189,7 @@ Des problèmes méthodologiques s'ajoutent aux problèmes conceptuels \autocite{
 L'impact du problème de l'espèce sur la mesure de la diversité reste sans solution à ce stade, si ce n'est d'utiliser les mêmes définitions si des communautés différentes doivent être comparées.
 L'approche phylogénétique (chapitre \ref{chap-Phyloentropie}) permet de contourner le problème: si deux taxons très semblables apportent à peine plus de diversité qu'un seul taxon, le choix de les distinguer ou non n'est pas critique.
 
-\hypertarget{sec-SAD}{%
-\chapter{Distribution de l'abondance des espèces (SAD)}\label{sec-SAD}}
+\chapter{Distribution de l'abondance des espèces (SAD)}\label{sec-SAD}
 
 La distribution de l'abondance des espèces (SAD: \emph{Species Abundance Distribution}) est la loi statistique qui donne l'abondance attendue de chaque espèce d'une communauté.
 Les espèces ne sont pas identifiées individuellement, mais par le nombre d'individus leur appartenant.
@@ -1305,8 +1284,7 @@ Les principales distributions, nécessaires à la compréhension de la suite son
 
 Formellement, la distribution des probabilités des espèces, notées \(p_s\), est à établir.
 
-\hypertarget{la-distribution-en-log-suxe9ries}{%
-\section{La distribution en log-séries}\label{la-distribution-en-log-suxe9ries}}
+\section{La distribution en log-séries}\label{la-distribution-en-log-suxe9ries}
 
 Cette distribution est traitée en détail dans le chapitre \ref{chap-Fisher}.
 
@@ -1316,8 +1294,7 @@ Le nombre d'espèces est lié au nombre d'individus par la relation \({\mathbb E
 La distribution a été obtenue à partir d'inventaires de communautés de papillons en Malaisie et en Angleterre.
 Le modèle est tombé en désuétude faute de confirmation empirique à l'échelle de la communauté, avant d'être remis en valeur par la théorie neutre \autocite{Hubbell2001} dans lequel la distribution de la \emph{méta-communauté} est en log-séries.
 
-\hypertarget{la-distribution-broken-stick}{%
-\section{La distribution Broken Stick}\label{la-distribution-broken-stick}}
+\section{La distribution Broken Stick}\label{la-distribution-broken-stick}
 
 Si les espèces se partagent les ressources ou l'espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les \(S-1\) cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d'espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de \textcite{MacArthur1957}.
 
@@ -1325,8 +1302,7 @@ Parmi les distributions classiques, c'est la plus équitable: la distribution un
 
 Elle est peu observée empiriquement.
 
-\hypertarget{la-distribution-log-normale}{%
-\section{La distribution log-normale}\label{la-distribution-log-normale}}
+\section{La distribution log-normale}\label{la-distribution-log-normale}
 
 Dans une distribution log-normale, le logarithme des probabilités des espèces (notées \(p_s\) pour l'espèce \(s\)) suit une loi normale.
 L'écart-type \(\sigma\) de cette distribution règle l'équitabilité de la distribution.
@@ -1358,8 +1334,7 @@ La distribution log-normale décrit assez bien (mais pas exactement) une communa
 Le nombre d'espèces rares est un peu surestimé.
 La distribution exacte est donnée par \textcite{Volkov2003}.
 
-\hypertarget{la-distribution-guxe9omuxe9trique}{%
-\section{La distribution géométrique}\label{la-distribution-guxe9omuxe9trique}}
+\section{La distribution géométrique}\label{la-distribution-guxe9omuxe9trique}
 
 Si les espèces se partagent les ressources selon un algorithme \emph{broken stick} séquentiel (comme dans la distribution log-normale) mais de proportion fixe \(0<k<1\), alors la distribution obtenue est géométrique.
 Les abondances successives sont proportionnelles à \(k, k(1-k), k(1-k)^2, \dots, k(1-k)^s, \dots, k(1-k)^S\).
@@ -1372,8 +1347,7 @@ En d'autre termes, l'ordre de grandeur de l'abondance d'une espèce est uniform�
 
 La distribution est observée dans les communautés pionnières \autocite{Bazzaz1975}, peu diverses, ou les communautés microbiennes \autocite{Haegeman2013}.
 
-\hypertarget{synthuxe8se}{%
-\section{Synthèse}\label{synthuxe8se}}
+\section{Synthèse}\label{synthuxe8se}
 
 
 
@@ -1593,11 +1567,9 @@ Les paramètres du modèle de communauté locale de la théorie neutre sont \(\t
 La différence entre les logarithmes de vraisemblance des deux modèles en faveur du modèle de Volkov, alors que le nombre de paramètres est le même.
 L'ajustement est donc meilleur mais la différence est petite et la complexité du modèle et des calculs pour l'estimer ne se justifient pas en général: le modèle de Volkov est très peu utilisé en pratique.
 
-\hypertarget{part-diversituxe9-neutre-dune-communautuxe9}{%
-\part{Diversité neutre d'une communauté}\label{part-diversituxe9-neutre-dune-communautuxe9}}
+\part{Diversité neutre d'une communauté}\label{part-diversituxe9-neutre-dune-communautuxe9}
 
-\hypertarget{chap-MesuresNeutres}{%
-\chapter{\texorpdfstring{Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)}{Mesures classiques de la diversité \textbackslash alpha ou \textbackslash gamma}}\label{chap-MesuresNeutres}}
+\chapter{\texorpdfstring{Mesures classiques de la diversité \(\alpha\) ou \(\gamma\)}{Mesures classiques de la diversité \textbackslash alpha ou \textbackslash gamma}}\label{chap-MesuresNeutres}
 
 \begin{Summary}
 Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique.
@@ -1621,8 +1593,7 @@ Elles sont sujettes à des biais d'estimation \autocite{Mouillot1999}, notamment
 
 Au chapitre suivant, l'entropie HCDT permettra d'unifier ces mesures et les nombres de Hill, et de leur donner un sens intuitif.
 
-\hypertarget{sec-Richesse}{%
-\section{Richesse spécifique}\label{sec-Richesse}}
+\section{Richesse spécifique}\label{sec-Richesse}
 
 La richesse est tout simplement le nombre d'espèces présentes dans le taxocène considéré.
 C'est la mesure conceptuellement la plus simple mais pratiquement la plus délicate dans des systèmes très riches comme les forêts tropicales: même avec des efforts d'inventaire considérables, il n'est en général pas possible de relever toutes les espèces rares, ce qui implique de recourir à des modèles mathématiques pour en estimer le nombre.
@@ -1634,8 +1605,7 @@ Une alternative consiste à inférer à partir des données les paramètres d'un
 Cette approche est bien moins répandue parce qu'elle suppose le bon choix du modèle et est beaucoup plus intensive en calcul.
 Il n'existe pas de meilleur estimateur universel \autocite{OHara2005} et il peut être efficace d'utiliser plusieurs méthodes d'estimation de façon concurrente sur les mêmes données \autocite{Basset2012}.
 
-\hypertarget{techniques-destimation-non-paramuxe9trique}{%
-\subsection{Techniques d'estimation non paramétrique}\label{techniques-destimation-non-paramuxe9trique}}
+\subsection{Techniques d'estimation non paramétrique}\label{techniques-destimation-non-paramuxe9trique}
 
 Dans le cadre d'un échantillonnage de \(n\) individus, on observe \(f_{>0}\) espèces différentes parmi les \(S\) existantes.
 Chaque individu a une probabilité \(p_s\) d'appartenir à l'espèce \(s\).
@@ -1651,8 +1621,7 @@ La probabilité de les observer est donnée par la loi binomiale: si \(np_s\) es
 Les estimateurs non paramétriques cherchent à tirer le maximum d'information de la distribution des abondances \(n_s\) pour estimer le nombre d'espèces non observées.
 Une présentation détaillée du problème et des limites à sa résolution est fournie par \textcite{Mao2005} qui concluent notamment que les estimateurs ne peuvent fournir qu'une borne inférieure de l'intervalle des possibles valeurs du nombre réel d'espèces.
 
-\hypertarget{chao1-et-chao2}{%
-\subsubsection{Chao1 et Chao2}\label{chao1-et-chao2}}
+\subsubsection{Chao1 et Chao2}\label{chao1-et-chao2}
 
 \textcite{Chao1984} estime le nombre d'espèces non observées à partir de celles observées 1 ou 2 fois.
 
@@ -1791,8 +1760,7 @@ où
 \textcite{Chao2017} étendent l'applicabilité de l'estimateur Chao2 à des données dans lesquelles les espèces sont notées uniquement comme singletons ou doubletons et plus, sans distinction entre doubletons et espèces plus fréquentes.
 Une relation entre le nombre de doubletons et les données disponibles est fournie; sa résolution numérique (le code R nécessaire est disponible avec l'article) permet d'estimer \(f_{2}\) et de l'injecter dans l'estimateur Chao2.
 
-\hypertarget{lestimateur-ace}{%
-\subsubsection{L'estimateur ACE}\label{lestimateur-ace}}
+\subsubsection{L'estimateur ACE}\label{lestimateur-ace}
 
 \textcite{Chao1992} développent l'estimateur ACE (\emph{Abundance-based coverage estimator}) à travers l'estimation du taux de couverture \(C\).
 L'estimateur ACE utilise toutes les valeurs de \(f_\nu\) correspondant aux espèces rares: concrètement, la valeur limite de \(\nu\) notée \(\kappa\) est fixée arbitrairement, généralement à 10.
@@ -1843,8 +1811,7 @@ Lorsque l'hétérogénéité est très forte, un autre estimateur est plus perfo
 L'estimateur ACE donne normalement une valeur plus grande que Chao1.
 Si ce n'est pas le cas, la limite des espèces rares \(\kappa\) doit être augmentée.
 
-\hypertarget{lestimateur-jackknife}{%
-\subsubsection{L'estimateur jackknife}\label{lestimateur-jackknife}}
+\subsubsection{L'estimateur jackknife}\label{lestimateur-jackknife}
 
 La méthode jackknife a pour objectif de réduire le biais d'un estimateur en considérant des jeux de données dans lesquels on a supprimé un certain nombre d'observations (ce nombre est l'\emph{ordre} de la méthode).
 Burnham et Overton \autocite*{Burnham1978,Burnham1979} ont utilisé cette technique pour obtenir des estimateurs du nombre d'espèces, appelés jackknife à l'ordre \(j\), prenant en compte les valeurs de \(f_1\) à \(f_j\).
@@ -2099,8 +2066,7 @@ Ce n'est pas le cas pour l'estimateur de Chao.
 
 L'estimateur du jackknife est très utilisé parce qu'il est efficace en pratique, notamment parce que son ordre peut être adapté aux données.
 
-\hypertarget{lestimateur-du-bootstrap}{%
-\subsubsection{L'estimateur du bootstrap}\label{lestimateur-du-bootstrap}}
+\subsubsection{L'estimateur du bootstrap}\label{lestimateur-du-bootstrap}
 
 L'estimateur du bootstrap \autocite{Smith1984} est
 \begin{equation} 
@@ -2110,8 +2076,7 @@ L'estimateur du bootstrap \autocite{Smith1984} est
 
 Il est peu utilisé parce que le jackknife est plus performant \autocite{Colwell1994}.
 
-\hypertarget{calcul}{%
-\subsubsection{Calcul}\label{calcul}}
+\subsubsection{Calcul}\label{calcul}
 
 Ces estimateurs peuvent être calculés de façon relativement simple à l'aide du logiciel SPADE, dans sa version pour R \autocite{Chao2016c}.
 Le guide de l'utilisateur présente quelques estimateurs supplémentaires et des directives pour choisir.
@@ -2126,8 +2091,7 @@ L'écart-type de l'estimateur est également fourni par la fonction, sauf pour l
 
 \texttt{estimateR} est basé sur les abondances des espèces et retourne un estimateur de la richesse spécifique par site et non global comme \texttt{specpool}.
 
-\hypertarget{exemple}{%
-\subsubsection{Exemple}\label{exemple}}
+\subsubsection{Exemple}\label{exemple}
 
 On utilise les données de Barro Colorado Island (BCI).
 La parcelle a été divisée en carrés de 1~ha.
@@ -2269,8 +2233,7 @@ L'estimateur du bootstrap est calculable simplement:
 
 \normalsize
 
-\hypertarget{sec-ChoixEstimateur}{%
-\subsubsection{Choix de l'estimateur}\label{sec-ChoixEstimateur}}
+\subsubsection{Choix de l'estimateur}\label{sec-ChoixEstimateur}
 
 Des tests empiriques poussés ont été menés par \textcite{Brose2003} pour permettre le choix du meilleur estimateur de la richesse en fonction de la complétude de l'échantillonnage \(f_{>0}/{S}\).
 Les auteurs appellent cette proportion couverture (\emph{coverage}).
@@ -2347,8 +2310,7 @@ Le ratio des singletons sur les doubletons diminue quand l'échantillonnage appr
 Quand le seuil de 0,6 est dépassé, la valeur de l'estimateur de Chao devient supérieur au jackknife 2 et doit être utilisé.
 Ce seuil est cohérent avec les règles de \textcite{Brose2003}.
 
-\hypertarget{sec-Extrapol}{%
-\subsubsection{Prédiction de la richesse d'un nouvel échantillon}\label{sec-Extrapol}}
+\subsubsection{Prédiction de la richesse d'un nouvel échantillon}\label{sec-Extrapol}
 
 La prédiction du nombre d'espèces \(\hat{S'}\) découvert dans une nouvelle placette d'un habitat dans lequel on a déjà échantillonné est une question importante, par exemple pour évaluer le nombre d'espèces préservées dans le cadre d'une mise en réserve, ou évaluer le nombre d'espèces perdues en réduisant la surface d'une forêt.
 
@@ -2445,11 +2407,9 @@ Le code R nécessaire pour réaliser la figure est:
 
 La question de l'extrapolation de la richesse est traitée plus en détail dans les sections \ref{sec-RarExtrapol} et \ref{sec-Extrapolation}.
 
-\hypertarget{infuxe9rence-du-nombre-despuxe8ces-uxe0-partir-de-la-sad}{%
-\subsection{Inférence du nombre d'espèces à partir de la SAD}\label{infuxe9rence-du-nombre-despuxe8ces-uxe0-partir-de-la-sad}}
+\subsection{Inférence du nombre d'espèces à partir de la SAD}\label{infuxe9rence-du-nombre-despuxe8ces-uxe0-partir-de-la-sad}
 
-\hypertarget{distribution-de-preston}{%
-\subsubsection{Distribution de Preston}\label{distribution-de-preston}}
+\subsubsection{Distribution de Preston}\label{distribution-de-preston}
 
 \textcite{Preston1948} fournit dès l'introduction de son modèle log-normal une technique d'estimation du nombre total d'espèces par la célèbre méthode des octaves.
 Elle est disponible dans le package \emph{vegan}:
@@ -2514,8 +2474,7 @@ Le code R nécessaire pour réaliser la figure est:
 
 \normalsize
 
-\hypertarget{maximum-de-vraisemblance-dune-distribution-de-fisher}{%
-\subsubsection{Maximum de vraisemblance d'une distribution de Fisher}\label{maximum-de-vraisemblance-dune-distribution-de-fisher}}
+\subsubsection{Maximum de vraisemblance d'une distribution de Fisher}\label{maximum-de-vraisemblance-dune-distribution-de-fisher}
 
 \textcite{Norris1998} supposent que la distribution des espèces suit le modèle de Fisher (voir chapitre \ref{chap-Fisher}) et infèrent le nombre d'espèces par maximum de vraisemblance non paramétrique (ils ne cherchent pas à inférer les paramètres de la loi de probabilité de \(p_s\) mais seulement à ajuster au mieux le modèle de Poisson aux valeurs de \({\hat{p}}_s\) observées).
 
@@ -2571,15 +2530,15 @@ Les calculs n'aboutissent pas si la queue de distribution n'est pas regroupée (
 \begin{verbatim}
 ## Method: Penalized NPMLE method by  Wang and Lindsay 2005. 
 ## 
-##         MLE=                                238 
+##         MLE=                                243 
 ##         Estimated zero-truncated Poisson mixture components:       
-##         p=                                  5.784922 
-##         pi=                                 1
+##         p=                                  0.9033625 3.397048 10.59029 
+##         pi=                                 0.2771211 0.3208847 0.4019942
 \end{verbatim}
 
 \begin{verbatim}
 ## $Nhat
-## [1] 238
+## [1] 243
 \end{verbatim}
 
 \normalsize
@@ -2601,8 +2560,7 @@ Son défaut est qu'il nécessite un très long temps de calcul (plusieurs heures
 
 \normalsize
 
-\hypertarget{sec-RichesseSAC}{%
-\subsection{Inférence du nombre d'espèces à partir de courbes d'accumulation}\label{sec-RichesseSAC}}
+\subsection{Inférence du nombre d'espèces à partir de courbes d'accumulation}\label{sec-RichesseSAC}
 
 Cette approche consiste à extrapoler la courbe d'accumulation observée.
 
@@ -2951,8 +2909,7 @@ Le code R nécessaire pour réaliser la figure est:
 
 \normalsize
 
-\hypertarget{diversituxe9-guxe9nuxe9rique}{%
-\subsection{Diversité générique}\label{diversituxe9-guxe9nuxe9rique}}
+\subsection{Diversité générique}\label{diversituxe9-guxe9nuxe9rique}
 
 La détermination des genres est plus facile et fiable que celle des espèces, le biais d'échantillonnage moins sensible (le nombre de singletons diminue rapidement en regroupant les données), et les coûts d'inventaire sont généralement largement réduits \autocite{Balmford1996b}.
 Le choix d'estimer la diversité de taxons de rang supérieur (genres ou même familles au lieu des espèces) est envisageable \autocite{Williams1994}.
@@ -2961,8 +2918,7 @@ Empiriquement, la corrélation entre la richesse générique et la richesse spé
 
 \textcite{Cartozo2008} ont montré que le nombre de taxons de niveau supérieur (genre par rapport aux espèces, ordres par rapport aux sous-ordres) est universellement proportionnel au nombre de taxons du niveau immédiatement inférieur à la puissance 0,61. Cette relation est validée à l'échelle mondiale pour les systèmes végétaux. La loi de puissance reste valide pour des assemblages aléatoires, c'est donc la conséquence de propriétés mathématiques \autocite{Caldarelli2002}, mais la puissance de la relation est plus élevée (les communautés réelles sont plus agrégées du point de vue phylogénétique que sous l'hypothèse nulle d'un assemblage aléatoire) et varie entre les niveaux.
 
-\hypertarget{combien-y-a-t-il-despuxe8ces-diffuxe9rentes-sur-terre}{%
-\subsection{Combien y a-t-il d'espèces différentes sur Terre?}\label{combien-y-a-t-il-despuxe8ces-diffuxe9rentes-sur-terre}}
+\subsection{Combien y a-t-il d'espèces différentes sur Terre?}\label{combien-y-a-t-il-despuxe8ces-diffuxe9rentes-sur-terre}
 
 La question de l'estimation du nombre total d'espèces génère une abondante littérature.
 \textcite{Mora2011} en font une revue et proposent une méthode nouvelle.
@@ -2994,11 +2950,9 @@ Ces relevés sont tous situés en forêt tropicale ou en prairie tempérée gér
 La relation entre le nombre d'espèces et la surface est celle d'Arrhenius.
 Son extrapolation à la surface terrestre donne environ 220000 espèces, comparables à l'estimation de 275000 espèces rapportée par Mora et al.
 
-\hypertarget{indice-de-simpson}{%
-\section{Indice de Simpson}\label{indice-de-simpson}}
+\section{Indice de Simpson}\label{indice-de-simpson}
 
-\hypertarget{duxe9finition}{%
-\subsection{Définition}\label{duxe9finition}}
+\subsection{Définition}\label{duxe9finition}
 
 On note \(p_s\) la probabilité qu'un individu tiré au hasard appartienne à l'espèce \(s\).
 L'indice de \textcite{Simpson1949}, ou Gini-Simpson, est
@@ -3059,8 +3013,7 @@ Le calcul de l'indice de Simpson peut se faire avec la fonction \texttt{diversit
 
 Un historique de la définition de l'indice, de \textcite{Gini1912} à Simpson, inspiré par Turing, est fourni par Ellerman \autocite*{Ellerman2013}.
 
-\hypertarget{estimation}{%
-\subsection{Estimation}\label{estimation}}
+\subsection{Estimation}\label{estimation}
 
 Définissons l'indicatrice \({{\mathbf 1}}_{sh}\) valant 1 si l'individu \(h\) appartient à l'espèce \(s\), 0 sinon.
 \({{\mathbf 1}}_{sh}\) suit une loi de Bernoulli d'espérance \(p_s\) et de variance \(p_s \left( 1 - p_s \right)\).
@@ -3113,11 +3066,9 @@ La fonction \texttt{ent\_simpson} de \emph{divent} accepte comme argument un vec
 
 \normalsize
 
-\hypertarget{indice-de-shannon}{%
-\section{Indice de Shannon}\label{indice-de-shannon}}
+\section{Indice de Shannon}\label{indice-de-shannon}
 
-\hypertarget{duxe9finition-1}{%
-\subsection{Définition}\label{duxe9finition-1}}
+\subsection{Définition}\label{duxe9finition-1}
 
 L'indice de Shannon \autocite{Shannon1948,Shannon1963}, aussi appelé indice de Shannon-Weaver ou Shannon-Wiener \autocite{Spellerberg2003}, ou simplement \emph{entropie} est dérivé de la théorie de l'information:
 
@@ -3220,8 +3171,7 @@ La distribution de l'estimateur est connue \autocite{Hutcheson1970} mais elle es
 
 La sous-estimation est assez sévère sur cet exemple.
 
-\hypertarget{sec-BiaisShannon}{%
-\subsection{Estimation}\label{sec-BiaisShannon}}
+\subsection{Estimation}\label{sec-BiaisShannon}
 
 \textcite{Basharin1959} a montré que l'estimateur naïf de l'indice de Shannon était biaisé parce que des espèces ne sont pas échantillonnées.
 Si \(S\) est le nombre d'espèces réel et \(n\) le nombre d'individus échantillonnés, le biais est
@@ -3604,11 +3554,9 @@ Leur utilisation dans l'estimateur plug-in donne le même résultat:
 
 Appliqué à des données de biodiversité aquatique, l'estimateur de James-Stein obtient de meilleurs résultats que celui de Chao et Shen \autocite{Liu2015} quand l'échantillonnage est réduit.
 
-\hypertarget{sec-Hurlbert}{%
-\section{Indice de Hurlbert}\label{sec-Hurlbert}}
+\section{Indice de Hurlbert}\label{sec-Hurlbert}
 
-\hypertarget{duxe9finition-2}{%
-\subsection{Définition}\label{duxe9finition-2}}
+\subsection{Définition}\label{duxe9finition-2}
 
 L'indice de \textcite{Hurlbert1971} est l'espérance du nombre d'espèces observées dans un échantillon de taille \(k\) choisie:
 
@@ -3654,8 +3602,7 @@ Pour \(q=1\), la relation est \autocite{Mao2007}
   ^{1}\!H = -1 + \sum_{k=2}^{\infty}{\frac{_{k}S}{k \left( k - 1 \right)}}.
 \end{equation}
 
-\hypertarget{estimation-1}{%
-\subsection{Estimation}\label{estimation-1}}
+\subsection{Estimation}\label{estimation-1}
 
 Hurlbert fournit un estimateur non biaisé de son indice (\(n\) est la taille de l'échantillon, \(n_s\) le nombre d'individus de l'espèce \(s\)):
 
@@ -3716,8 +3663,7 @@ Le calcul de la diversité de Hurlbert est possible dans \emph{divent}:
 
 \normalsize
 
-\hypertarget{entropie}{%
-\chapter{Entropie}\label{entropie}}
+\chapter{Entropie}\label{entropie}
 
 \begin{Summary}
 L'entropie est la surprise moyenne apportée par l'observation des individus d'une communauté, d'autant plus grande qu'un individu appartient à une espèce plus rare.
@@ -3736,8 +3682,7 @@ L'entropie peut être entendue comme la surprise moyenne fournie par l'observati
 C'est intuitivement une bonne mesure de diversité \autocite{Pielou1975}.
 Ses propriétés mathématiques permettent d'unifier les mesures de diversité dans un cadre général.
 
-\hypertarget{duxe9finition-de-lentropie}{%
-\section{Définition de l'entropie}\label{duxe9finition-de-lentropie}}
+\section{Définition de l'entropie}\label{duxe9finition-de-lentropie}
 
 Les textes fondateurs sont \textcite{Davis1941} et surtout \textcite{Theil1967} en économétrie, et Shannon \autocite*{Shannon1948,Shannon1963} pour la mesure de la diversité.
 Une revue est fournie par \textcite{Maasoumi1993}.
@@ -3839,8 +3784,7 @@ Code R:
 
 \normalsize
 
-\hypertarget{entropie-relative}{%
-\section{Entropie relative}\label{entropie-relative}}
+\section{Entropie relative}\label{entropie-relative}
 
 Considérons maintenant les probabilités \(q_s\) formant l'ensemble \(\mathbf{q}\) obtenues par la réalisation de l'expérience.
 Elles sont différentes des probabilités \(p_s\), par exemple parce que l'expérience ne s'est pas déroulée exactement comme prévu.
@@ -3920,8 +3864,7 @@ Le code R nécessaire pour réaliser la figure est:
 
 \normalsize
 
-\hypertarget{lappropriation-de-lentropie-par-la-biodiversituxe9}{%
-\section{L'appropriation de l'entropie par la biodiversité}\label{lappropriation-de-lentropie-par-la-biodiversituxe9}}
+\section{L'appropriation de l'entropie par la biodiversité}\label{lappropriation-de-lentropie-par-la-biodiversituxe9}
 
 \textcite{MacArthur1955} est le premier à avoir introduit la théorie de l'information en écologie \autocite{Ulanowicz2001}.
 MacArthur s'intéressait aux réseaux trophiques et cherchait à mesurer leur stabilité: l'indice de Shannon qui comptabilise le nombre de relations possibles lui paraissait une bonne façon de l'évaluer.
@@ -4005,8 +3948,7 @@ Ainsi, les espèces les plus originales apportent peu d'information, ce qui n'es
 Les auteurs montrent que leur mesure est la somme de l'entropie de Shannon et de la divergence de Kullback-Leibler entre les probabilités et les dissimilarités des espèces.
 \textcite{Ricotta2006b} ont défini plus tard une entropie augmentant avec l'originalité de chaque espèce, présentée au chapitre \ref{chap-LeinsterCobbold}.
 
-\hypertarget{entropie-hcdt}{%
-\section{Entropie HCDT}\label{entropie-hcdt}}
+\section{Entropie HCDT}\label{entropie-hcdt}
 
 \textcite{Tsallis1988} propose une classe de mesures appelée entropie généralisée, définie par \textcite{Havrda1967} pour la première fois et redécouverte plusieurs fois, notamment par \textcite{Daroczy1970}, d'où son nom \emph{entropie HCDT} (voir \textcite{Mendes2008}, page 451, pour un historique complet):
 
@@ -4034,8 +3976,7 @@ L'entropie HCDT est particulièrement attractive parce que sa relation avec la d
 Son biais d'estimation peut être corrigé globalement, et non seulement pour les cas particuliers (nombre d'espèces, Shannon, Simpson).
 Enfin, sa décomposition sera présentée en détail dans le chapitre \ref{chap-DedompHCDT}.
 
-\hypertarget{logarithmes-duxe9formuxe9s}{%
-\section{Logarithmes déformés}\label{logarithmes-duxe9formuxe9s}}
+\section{Logarithmes déformés}\label{logarithmes-duxe9formuxe9s}
 
 L'écriture de l'entropie HCDT est largement simplifiée en introduisant le formalisme des logarithmes déformés \autocite{Tsallis1994}.
 Le logarithme d'ordre \(q\) est défini par
@@ -4177,8 +4118,7 @@ Le calcul de \(^{q}\!H\) peut se faire avec la fonction \texttt{ent\_tsallis} de
 
 \normalsize
 
-\hypertarget{entropie-et-diversituxe9}{%
-\section{Entropie et diversité}\label{entropie-et-diversituxe9}}
+\section{Entropie et diversité}\label{entropie-et-diversituxe9}
 
 On voit immédiatement que l'entropie de Tsallis est le logarithme d'ordre \(q\) du nombre de Hill correspondant, comme l'entropie de Rényi en est le logarithme naturel:
 
@@ -4252,8 +4192,7 @@ L'entropie doit être une fonction concave des probabilités comme on l'a vu plu
 L'entropie est une moyenne pondérée par les probabilités de la fonction d'information, c'est donc une fonction linéaire des probabilités, propriété importante pour définir l'entropie \(\alpha\) (section \ref{sec-defalpha}) comme la moyenne des entropies de plusieurs communautés, ou l'entropie phylogénétique (chapitre \ref{chap-Phyloentropie}) comme la moyenne de l'entropie sur les périodes d'un arbre.
 La diversité n'est pas une fonction linéaire des probabilités: la diversité moyenne n'est en général pas la moyenne des diversités.
 
-\hypertarget{synthuxe8se-1}{%
-\section{Synthèse}\label{synthuxe8se-1}}
+\section{Synthèse}\label{synthuxe8se-1}
 
 L'inverse de la probabilité d'une espèce, \(1/p_s\), définit sa rareté.
 L'entropie est la moyenne du logarithme de la rareté:
@@ -4272,8 +4211,7 @@ La diversité est son exponentielle:
   ^{q}\!D = e_q^{^{q}\!H}.
 \end{equation}
 
-\hypertarget{estimation-2}{%
-\section{Estimation}\label{estimation-2}}
+\section{Estimation}\label{estimation-2}
 
 Les estimateurs peuvent être classés dans quatre méthodes principales.
 La plus simple consiste simplement à insérer l'estimateur de \(p_s\) dans la définition de la diversité à évaluer pour obtenir ce que l'on appelle l'estimateur \emph{plug-in}.
@@ -4383,8 +4321,7 @@ L'estimateur Chao-Jost de l'entropie HCDT est:
 
 En l'absence de singletons et de doubletons, \(A\) est fixé à 1 et l'estimateur est identique à celui de Zhang et Grabchak.
 
-\hypertarget{profils-de-diversituxe9}{%
-\section{Profils de diversité}\label{profils-de-diversituxe9}}
+\section{Profils de diversité}\label{profils-de-diversituxe9}
 
 \textcite{Leinster2012}, après \textcite{Hill1973}, \textcite{Patil1982}, \textcite{Tothmeresz1995} et \textcite{Kindt2006}, recommandent de tracer des profils de diversité, c'est-à-dire la valeur de la diversité \(^{q}\!D\) en fonction de l'ordre \(q\) (figure \ref{fig:ProfilDivFig}) pour comparer plusieurs communautés.
 Une communauté peut être déclarée plus diverse qu'une autre si son profil de diversité est au-dessus de l'autre pour toutes les valeurs de \(q\).

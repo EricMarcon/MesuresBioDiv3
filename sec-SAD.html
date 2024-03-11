@@ -7,7 +7,7 @@
 <title>2 Distribution de l’abondance des espèces (SAD) | Mesures de la Biodiversité</title>
 <meta name="author" content="Eric Marcon">
 <meta name="description" content="La distribution de l’abondance des espèces (SAD : Species Abundance Distribution) est la loi statistique qui donne l’abondance attendue de chaque espèce d’une communauté. Les espèces ne sont pas...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="2 Distribution de l’abondance des espèces (SAD) | Mesures de la Biodiversité">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/sec-SAD.html">
@@ -35,6 +35,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -105,9 +106,9 @@ Figure 2.1: Histogramme des fréquences (diagramme de Preston) des arbres du dis
 </p>
 </div>
 <p></p>
-<p>Elle peut être représentée sous la forme d’un histogramme des fréquences (diagramme de <span class="citation">Preston (<a href="entropie.html#ref-Preston1948" role="doc-biblioref">1948</a>)</span>, figure <a href="sec-SAD.html#fig:SADFig">2.1</a>) ou bien d’un diagramme rang-abondance (RAC : <em>Rank Abundance Curve</em> ou diagramme de <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1965" role="doc-biblioref">1965</a>)</span>, figure <a href="sec-SAD.html#fig:RACFig">2.2</a>).
+<p>Elle peut être représentée sous la forme d’un histogramme des fréquences (diagramme de <span class="citation">Preston (<a href="entropie.html#ref-Preston1948">1948</a>)</span>, figure <a href="sec-SAD.html#fig:SADFig">2.1</a>) ou bien d’un diagramme rang-abondance (RAC : <em>Rank Abundance Curve</em> ou diagramme de <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1965">1965</a>)</span>, figure <a href="sec-SAD.html#fig:RACFig">2.2</a>).
 Le RAC est souvent utilisé pour reconnaître des distributions connues.
-<span class="citation">Izsák and Pavoine (<a href="entropie.html#ref-Izsak2012" role="doc-biblioref">2012</a>)</span> ont étudié les propriétés des RAC pour les principales SAD.</p>
+<span class="citation">Izsák and Pavoine (<a href="entropie.html#ref-Izsak2012">2012</a>)</span> ont étudié les propriétés des RAC pour les principales SAD.</p>
 
 <p></p>
 <div class="figure" style="text-align: center">
@@ -137,21 +138,21 @@ Figure 2.2: Diagramme rang-abondance (diagramme de Whittaker) des arbres du disp
 <p>Code de la figure <a href="sec-SAD.html#fig:RACFig">2.2</a> :</p>
 <p></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ericmarcon.github.io/divent">"divent"</a></span><span class="op">)</span></span>
 <span><span class="va">BCI_abd</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span>fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span></span></code></pre></div>
 <p></p>
-<p>Les SAD sont traitées en détail par <span class="citation">Magurran (<a href="entropie.html#ref-Magurran1988" role="doc-biblioref">1988</a>)</span> ou <span class="citation">McGill et al. (<a href="entropie.html#ref-McGill2007" role="doc-biblioref">2007</a>)</span>.
+<p>Les SAD sont traitées en détail par <span class="citation">Magurran (<a href="entropie.html#ref-Magurran1988">1988</a>)</span> ou <span class="citation">McGill et al. (<a href="entropie.html#ref-McGill2007">2007</a>)</span>.
 Les principales distributions, nécessaires à la compréhension de la suite sont présentées ici :</p>
 <ul>
-<li>La distribution en log-séries de <span class="citation">Fisher, Corbet, and Williams (<a href="entropie.html#ref-Fisher1943" role="doc-biblioref">1943</a>)</span><span style="white-space:nowrap"> ;</span>
+<li>La distribution en log-séries de <span class="citation">Fisher, Corbet, and Williams (<a href="entropie.html#ref-Fisher1943">1943</a>)</span><span style="white-space:nowrap"> ;</span>
 </li>
-<li>La distribution géométrique <span class="citation">(<a href="entropie.html#ref-Motomura1932" role="doc-biblioref">Motomura 1932</a>; <a href="entropie.html#ref-Whittaker1972" role="doc-biblioref">Whittaker 1972</a>)</span><span style="white-space:nowrap"> ;</span>
+<li>La distribution géométrique <span class="citation">(<a href="entropie.html#ref-Motomura1932">Motomura 1932</a>; <a href="entropie.html#ref-Whittaker1972">Whittaker 1972</a>)</span><span style="white-space:nowrap"> ;</span>
 </li>
-<li>La distribution log-normale <span class="citation">(<a href="entropie.html#ref-Preston1948" role="doc-biblioref">Preston 1948</a>)</span><span style="white-space:nowrap"> ;</span>
+<li>La distribution log-normale <span class="citation">(<a href="entropie.html#ref-Preston1948">Preston 1948</a>)</span><span style="white-space:nowrap"> ;</span>
 </li>
-<li>Le modèle Broken Stick <span class="citation">(<a href="entropie.html#ref-MacArthur1957" role="doc-biblioref">MacArthur 1957</a>)</span>.</li>
+<li>Le modèle Broken Stick <span class="citation">(<a href="entropie.html#ref-MacArthur1957">MacArthur 1957</a>)</span>.</li>
 </ul>
 <p>Formellement, la distribution des probabilités des espèces, notées <span class="math inline">\(p_s\)</span>, est à établir.</p>
 <div id="la-distribution-en-log-séries" class="section level2" number="2.1">
@@ -162,13 +163,13 @@ Les principales distributions, nécessaires à la compréhension de la suite son
 <p>Le nombre d’espèces est lié au nombre d’individus par la relation <span class="math inline">\({\mathbb E}(S^n) = \alpha \ln(1 + n / \alpha)\)</span> où <span class="math inline">\(S^n\)</span> indique le nombre d’espèces observées dans un échantillon de <span class="math inline">\(n\)</span> individus.
 <span class="math inline">\(\alpha\)</span> est le paramètre qui fixe la pente de la partie linéaire de la relation, valide dès que <span class="math inline">\(n \gg \alpha\)</span>, où le nombre d’espèces <span class="math inline">\(S^n\)</span> augmente proportionnellement au logarithme du nombre d’individus <span class="math inline">\(\ln(n)\)</span>.</p>
 <p>La distribution a été obtenue à partir d’inventaires de communautés de papillons en Malaisie et en Angleterre.
-Le modèle est tombé en désuétude faute de confirmation empirique à l’échelle de la communauté, avant d’être remis en valeur par la théorie neutre <span class="citation">(<a href="entropie.html#ref-Hubbell2001" role="doc-biblioref">Stephen P. Hubbell 2001</a>)</span> dans lequel la distribution de la <em>méta-communauté</em> est en log-séries.</p>
+Le modèle est tombé en désuétude faute de confirmation empirique à l’échelle de la communauté, avant d’être remis en valeur par la théorie neutre <span class="citation">(<a href="entropie.html#ref-Hubbell2001">Stephen P. Hubbell 2001</a>)</span> dans lequel la distribution de la <em>méta-communauté</em> est en log-séries.</p>
 </div>
 <div id="la-distribution-broken-stick" class="section level2" number="2.2">
 <h2>
 <span class="header-section-number">2.2</span> La distribution Broken Stick<a class="anchor" aria-label="anchor" href="#la-distribution-broken-stick"><i class="fas fa-link"></i></a>
 </h2>
-<p>Si les espèces se partagent les ressources ou l’espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les <span class="math inline">\(S-1\)</span> cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d’espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de <span class="citation">MacArthur (<a href="entropie.html#ref-MacArthur1957" role="doc-biblioref">1957</a>)</span>.</p>
+<p>Si les espèces se partagent les ressources ou l’espace des niches, représentées par un bâton, par un processus de cassure aléatoire et simultanée (précisément, les <span class="math inline">\(S-1\)</span> cassures du bâton sont distribuées uniformément sur sa longueur) et que leur abondance est proportionnelle à la quantité de ressources ou d’espace de niche obtenus, alors leur distribution suit le modèle Broken Stick de <span class="citation">MacArthur (<a href="entropie.html#ref-MacArthur1957">1957</a>)</span>.</p>
 <p>Parmi les distributions classiques, c’est la plus équitable : la distribution uniforme des probabilités (<span class="math inline">\(p_s = 1 / S\)</span> pour tout <span class="math inline">\(s\)</span>) n’est jamais approchée.</p>
 <p>Elle est peu observée empiriquement.</p>
 </div>
@@ -179,9 +180,9 @@ Le modèle est tombé en désuétude faute de confirmation empirique à l’éch
 <p>Dans une distribution log-normale, le logarithme des probabilités des espèces (notées <span class="math inline">\(p_s\)</span> pour l’espèce <span class="math inline">\(s\)</span>) suit une loi normale.
 L’écart-type <span class="math inline">\(\sigma\)</span> de cette distribution règle l’équitabilité de la distribution.
 Son espérance est obtenue à partir du nombre d’espèces et de <span class="math inline">\(\sigma\)</span>, pour que la somme des probabilités égale 1.</p>
-<p><span class="citation">May (<a href="entropie.html#ref-May1975" role="doc-biblioref">1975</a>)</span> explique cette distribution par le théorème de la limite centrale : la variable aléatoire valant 1 si un individu est de l’espèce <span class="math inline">\(s\)</span> et 0 sinon est le produit de nombreuses variables de loi inconnues valant 1 en cas de succès (germination d’une graine, survie à de nombreux évènements…).
+<p><span class="citation">May (<a href="entropie.html#ref-May1975">1975</a>)</span> explique cette distribution par le théorème de la limite centrale : la variable aléatoire valant 1 si un individu est de l’espèce <span class="math inline">\(s\)</span> et 0 sinon est le produit de nombreuses variables de loi inconnues valant 1 en cas de succès (germination d’une graine, survie à de nombreux évènements…).
 Le logarithme de ce produit est une somme de variables aléatoire dont la loi est forcément normale par application du théorème de la limite centrale.</p>
-<p>La distribution est aussi le résultat d’un algorithme de bâton brisé (<em>broken stick</em>) hiérarchique <span class="citation">(<a href="entropie.html#ref-Bulmer1974" role="doc-biblioref">Bulmer 1974</a>)</span> :</p>
+<p>La distribution est aussi le résultat d’un algorithme de bâton brisé (<em>broken stick</em>) hiérarchique <span class="citation">(<a href="entropie.html#ref-Bulmer1974">Bulmer 1974</a>)</span> :</p>
 <ul>
 <li>Si les ressources (représentées par un bâton) sont partagées une première fois aléatoirement, selon une loi quelconque,</li>
 <li>Si chaque bâton obtenu est partagé à nouveau selon le même procédé, et que l’opération est répétée un assez grand nombre de fois,</li>
@@ -190,10 +191,10 @@ Le logarithme de ce produit est une somme de variables aléatoire dont la loi es
 </ul>
 <p>Ce mécanisme décrit assez bien un mécanisme de partage successif des ressources, par exemple entre groupes d’espèces de plus en plus petits, correspondant à des niches écologiques de plus en plus étroites.</p>
 <p>D’autres arguments existent dans la littérature.
-Par exemple, <span class="citation">Engen and Lande (<a href="entropie.html#ref-Engen1996" role="doc-biblioref">1996</a>)</span> obtiennent une distribution normale à partir d’un modèle de dynamique des populations.</p>
-<p>La distribution log-normale décrit assez bien (mais pas exactement) une communauté locale dans le cadre de la théorie neutre <span class="citation">(<a href="entropie.html#ref-Hubbell2001" role="doc-biblioref">Stephen P. Hubbell 2001</a>)</span> comme le montre la figure <a href="sec-SAD.html#fig:RACFig">2.2</a>.
+Par exemple, <span class="citation">Engen and Lande (<a href="entropie.html#ref-Engen1996">1996</a>)</span> obtiennent une distribution normale à partir d’un modèle de dynamique des populations.</p>
+<p>La distribution log-normale décrit assez bien (mais pas exactement) une communauté locale dans le cadre de la théorie neutre <span class="citation">(<a href="entropie.html#ref-Hubbell2001">Stephen P. Hubbell 2001</a>)</span> comme le montre la figure <a href="sec-SAD.html#fig:RACFig">2.2</a>.
 Le nombre d’espèces rares est un peu surestimé.
-La distribution exacte est donnée par <span class="citation">Volkov et al. (<a href="entropie.html#ref-Volkov2003" role="doc-biblioref">2003</a>)</span>.</p>
+La distribution exacte est donnée par <span class="citation">Volkov et al. (<a href="entropie.html#ref-Volkov2003">2003</a>)</span>.</p>
 </div>
 <div id="la-distribution-géométrique" class="section level2" number="2.4">
 <h2>
@@ -201,11 +202,11 @@ La distribution exacte est donnée par <span class="citation">Volkov et al. (<a 
 </h2>
 <p>Si les espèces se partagent les ressources selon un algorithme <em>broken stick</em> séquentiel (comme dans la distribution log-normale) mais de proportion fixe <span class="math inline">\(0&lt;k&lt;1\)</span>, alors la distribution obtenue est géométrique.
 Les abondances successives sont proportionnelles à <span class="math inline">\(k, k(1-k), k(1-k)^2, \dots, k(1-k)^s, \dots, k(1-k)^S\)</span>.</p>
-<p>Ce modèle a été établi par <span class="citation">Motomura (<a href="entropie.html#ref-Motomura1932" role="doc-biblioref">1932</a>)</span> cité par <span class="citation">May (<a href="entropie.html#ref-May1975" role="doc-biblioref">1975</a>)</span>.
-Ses propriétés ont été étudiées par <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1972" role="doc-biblioref">1972</a>)</span>.</p>
-<p>C’est la distribution qui traduit l’absence de relation entre la taille de l’échantillon et l’abondance des espèces <span class="citation">(<a href="entropie.html#ref-Pueyo2007" role="doc-biblioref">Pueyo, He, and Zillio 2007</a>)</span> : la distribution du logarithme de ses probabilités est uniforme.
+<p>Ce modèle a été établi par <span class="citation">Motomura (<a href="entropie.html#ref-Motomura1932">1932</a>)</span> cité par <span class="citation">May (<a href="entropie.html#ref-May1975">1975</a>)</span>.
+Ses propriétés ont été étudiées par <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1972">1972</a>)</span>.</p>
+<p>C’est la distribution qui traduit l’absence de relation entre la taille de l’échantillon et l’abondance des espèces <span class="citation">(<a href="entropie.html#ref-Pueyo2007">Pueyo, He, and Zillio 2007</a>)</span> : la distribution du logarithme de ses probabilités est uniforme.
 En d’autre termes, l’ordre de grandeur de l’abondance d’une espèce est uniformément distribué.</p>
-<p>La distribution est observée dans les communautés pionnières <span class="citation">(<a href="#ref-Bazzaz1975" role="doc-biblioref"><strong>Bazzaz1975?</strong></a>)</span>, peu diverses, ou les communautés microbiennes <span class="citation">(<a href="entropie.html#ref-Haegeman2013" role="doc-biblioref">Haegeman et al. 2013</a>)</span>.</p>
+<p>La distribution est observée dans les communautés pionnières <span class="citation">(<a href="#ref-Bazzaz1975"><strong>Bazzaz1975?</strong></a>)</span>, peu diverses, ou les communautés microbiennes <span class="citation">(<a href="entropie.html#ref-Haegeman2013">Haegeman et al. 2013</a>)</span>.</p>
 </div>
 <div id="synthèse" class="section level2" number="2.5">
 <h2>
@@ -220,7 +221,7 @@ Figure 2.3: Diagramme rang-fréquence des distributions de probabilité classiqu
 </p>
 </div>
 <p></p>
-<p>La figure <a href="sec-SAD.html#fig:DistributionsFig">2.3</a> est inspirée de la figure très connue de <span class="citation">Magurran (<a href="entropie.html#ref-Magurran1988" role="doc-biblioref">1988</a>)</span>.
+<p>La figure <a href="sec-SAD.html#fig:DistributionsFig">2.3</a> est inspirée de la figure très connue de <span class="citation">Magurran (<a href="entropie.html#ref-Magurran1988">1988</a>)</span>.
 Elle montre bien une gradation en termes de décroissance de probabilité entre des distributions de même richesse : de la plus équitable (broken stick) à la plus inéquitable (géométrique).
 Elle doit être nuancée : la proportion <span class="math inline">\(k\)</span> de la distribution géométrique fixe la pente de la droite qui la représente sur la figure.
 <span class="math inline">\(k=10\%\)</span> sur la figure : une valeur plus faible diminuerait la pente.
@@ -229,12 +230,12 @@ Une valeur supérieure augmenterait sa décroissance.</p>
 <p>Le code utilisé pour produire la figure <a href="sec-SAD.html#fig:DistributionsFig">2.3</a> est le suivant :</p>
 <p></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ericmarcon.github.io/divent">"divent"</a></span><span class="op">)</span></span>
 <span><span class="co"># Tirage d'une communauté en log-séries</span></span>
 <span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fl">1E5</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">11</span></span>
 <span><span class="va">species_number</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">alpha</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">alpha</span> <span class="op">/</span> <span class="op">(</span><span class="va">size</span> <span class="op">+</span> <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">abd_lseries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/rlseries.html">rlseries</a></span><span class="op">(</span><span class="va">species_number</span>, <span class="va">size</span>, <span class="va">alpha</span><span class="op">)</span></span>
+<span><span class="va">abd_lseries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/rlseries.html">rlseries</a></span><span class="op">(</span><span class="va">species_number</span>, <span class="va">size</span>, <span class="va">alpha</span><span class="op">)</span></span>
 <span><span class="co"># Part des ressources accaparées dans la distribution géométrique</span></span>
 <span><span class="va">prob</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
 <span><span class="co"># Calcul des probabilités de la distribution géométrique</span></span>
@@ -258,21 +259,21 @@ Une valeur supérieure augmenterait sa décroissance.</p>
 <span>    <span class="fu">scale_y_log10</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1E-6</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probabilité"</span>, color <span class="op">=</span> <span class="st">"Distribution"</span><span class="op">)</span></span></code></pre></div>
 <p></p>
-<p>La simulation de ces quatre distributions peut être réalisée par la fonction <code><a href="https://rdrr.io/pkg/divent/man/rcommunity.html">rcommunity()</a></code> du package <em>divent</em>, où l’argument <code>distribution</code> peut valoir “bstick”, “lnorm”, “geom” ou “lseries”.
+<p>La simulation de ces quatre distributions peut être réalisée par la fonction <code><a href="https://ericmarcon.github.io/entropart/reference/rcommunity.html">rcommunity()</a></code> du package <em>divent</em>, où l’argument <code>distribution</code> peut valoir “bstick”, “lnorm”, “geom” ou “lseries”.
 La simulation des communautés autres que log-séries passe par le tirage des probabilités des espèces (le calcul est déterministe dans le cas de la distribution géométrique) puis le tirage d’un nombre d’individus dans une loi multinomiale respectant ces probabilités et l’effectif total.</p>
-<p>La fonction <code><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac()</a></code> permet d’inférer les paramètres d’une distribution à partir d’un vecteur d’abondance.
+<p>La fonction <code><a href="https://ericmarcon.github.io/entropart/reference/fit_rac.html">fit_rac()</a></code> permet d’inférer les paramètres d’une distribution à partir d’un vecteur d’abondance.
 La distribution correspondant au modèle estimé peut être affichée sur la figure Rang-Abondance (figure <a href="sec-SAD.html#fig:SADFig">2.1</a>).</p>
 <p>Le package <em>sads</em> fournit les fonctions classiques de R (densité de probabilité, cumulative, quantile, simulation) pour les distributions utiles en écologie, au-delà de celles présentées ici.
 La distribution de Volkov notamment peut être simulée.
-Les fonctions <code>fitxxx()</code> complètent la fonction <code><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac()</a></code> de <em>divent</em>.
+Les fonctions <code>fitxxx()</code> complètent la fonction <code><a href="https://ericmarcon.github.io/entropart/reference/fit_rac.html">fit_rac()</a></code> de <em>divent</em>.
 Enfin, la fonction <code><a href="https://rdrr.io/pkg/vegan/man/radfit.html">radfit()</a></code> du package <em>vegan</em> ajuste aux données en même temps les distributions broken-stick (désignée par “Null”), géométrique (“Preemption”) et lognormale, inclut les distributions de Zipf et de Mandelbrot non traitées ici, mais ignore les log-séries.
 Les vraisemblances des différents modèles sont comparées pour choisir celui qui s’ajuste le mieux.</p>
 <p>Le code suivant montre comment ajuster une distribution log-normale aux données de BCI avec <em>divent</em> ou <em>sads</em>.</p>
 <p></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># divent</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
-<span><span class="va">fit_divent_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/fit_rac.html">fit_rac</a></span><span class="op">(</span><span class="va">BCI_abd</span>, distribution <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ericmarcon.github.io/divent">"divent"</a></span><span class="op">)</span></span>
+<span><span class="va">fit_divent_lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/fit_rac.html">fit_rac</a></span><span class="op">(</span><span class="va">BCI_abd</span>, distribution <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span></span>
 <span><span class="co"># Affichage des paramètres estimés</span></span>
 <span><span class="va">fit_divent_lnorm</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
@@ -322,7 +323,7 @@ Les vraisemblances des différents modèles sont comparées pour choisir celui q
 <p></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Comparaison graphique des deux modèles. Log-normal en rouge.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/divent/man/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span>, fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution<span class="op">=</span><span class="st">"lnorm"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/species_distribution.html">as_abundances</a></span><span class="op">(</span><span class="va">BCI_abd</span><span class="op">)</span>, fit_rac <span class="op">=</span> <span class="cn">TRUE</span>, distribution<span class="op">=</span><span class="st">"lnorm"</span><span class="op">)</span></span>
 <span><span class="co"># Volkov en vert</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span></span>
@@ -386,7 +387,7 @@ L’ajustement est donc meilleur mais la différence est petite et la complexit�
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 17/01/2024.</p>
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 11/03/2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

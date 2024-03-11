@@ -7,7 +7,7 @@
 <title>1 Notions de Diversité | Mesures de la Biodiversité</title>
 <meta name="author" content="Eric Marcon">
 <meta name="description" content="1.1 Composantes    Figure 1.1: Importance de la richesse (en haut) et de l’équitabilité (en bas) pour la définition de la diversité. Ligne du haut : toutes choses égales par ailleurs, une...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="1 Notions de Diversité | Mesures de la Biodiversité">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/EricMarcon/MesuresBioDiv3/chap-Notions.html">
@@ -35,6 +35,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -108,12 +109,12 @@ Figure 1.1: Importance de la richesse (en haut) et de l’équitabilité (en bas
 </div>
 <p></p>
 <p>Une communauté comprenant beaucoup d’espèces mais avec une espèce dominante n’est pas perçue intuitivement comme plus diverse qu’une communauté avec moins d’espèces, mais dont les effectifs sont proches (figure <a href="chap-Notions.html#fig:Composantes">1.1</a>, colonne de gauche).
-La prise en compte de deux composantes de la diversité, appelées richesse et équitabilité, est nécessaire <span class="citation">(<a href="entropie.html#ref-Whittaker1965" role="doc-biblioref">Whittaker 1965</a>)</span>.</p>
+La prise en compte de deux composantes de la diversité, appelées richesse et équitabilité, est nécessaire <span class="citation">(<a href="entropie.html#ref-Whittaker1965">Whittaker 1965</a>)</span>.</p>
 <div id="richesse" class="section level3" number="1.1.1">
 <h3>
 <span class="header-section-number">1.1.1</span> Richesse<a class="anchor" aria-label="anchor" href="#richesse"><i class="fas fa-link"></i></a>
 </h3>
-<p>La richesse <span class="citation">(terme introduit par <a href="entropie.html#ref-Mcintosh1967" role="doc-biblioref">Mcintosh 1967</a>)</span> est le nombre (ou une fonction croissante du nombre) de classes différentes présentes dans le système étudié, par exemple le nombre d’espèces d’arbres dans une forêt.</p>
+<p>La richesse <span class="citation">(terme introduit par <a href="entropie.html#ref-Mcintosh1967">Mcintosh 1967</a>)</span> est le nombre (ou une fonction croissante du nombre) de classes différentes présentes dans le système étudié, par exemple le nombre d’espèces d’arbres dans une forêt.</p>
 <p>Un certain nombre d’hypothèses sont assumées plus ou moins explicitement :</p>
 <ul>
 <li>Les classes sont bien connues : compter le nombre d’espèces a peu de sens si la taxonomie n’est pas bien établie.
@@ -140,12 +141,12 @@ Sur la figure <a href="chap-Notions.html#fig:Composantes">1.1</a>, la ligne du b
 </h3>
 <p>Les mesures classiques de la diversité, dites mesures de diversité neutre (<em>species-neutral diversity</em>) ou taxonomique ne prennent pas en compte une quelconque distance entre classes.
 Pourtant, deux espèces du même genre sont de toute évidence plus proches que deux espèces de familles différentes.
-Les mesures de diversité non neutres (chapitre <a href="#chap-cadrephyfonc"><strong>??</strong></a>) prennent en compte cette notion, qui nécessite quelques définitions supplémentaires <span class="citation">(<a href="entropie.html#ref-Mouillot2005" role="doc-biblioref">Mouillot et al. 2005</a>; <a href="entropie.html#ref-Ricotta2007" role="doc-biblioref">Ricotta 2007</a>)</span>.</p>
+Les mesures de diversité non neutres (chapitre <a href="#chap-cadrephyfonc"><strong>??</strong></a>) prennent en compte cette notion, qui nécessite quelques définitions supplémentaires <span class="citation">(<a href="entropie.html#ref-Mouillot2005">Mouillot et al. 2005</a>; <a href="entropie.html#ref-Ricotta2007">Ricotta 2007</a>)</span>.</p>
 <p>La mesure de la différence entre deux classes est souvent une distance, mais parfois une mesure qui n’a pas toutes les propriétés d’une distance : une dissimilarité.
-Les mesures de <em>divergence</em> <span class="citation">(<a href="entropie.html#ref-Pavoine2011" role="doc-biblioref">Pavoine and Bonsall 2011</a>)</span> sont construites à partir de la dissimilarité entre les classes, avec ou sans pondération par la fréquence.</p>
+Les mesures de <em>divergence</em> <span class="citation">(<a href="entropie.html#ref-Pavoine2011">Pavoine and Bonsall 2011</a>)</span> sont construites à partir de la dissimilarité entre les classes, avec ou sans pondération par la fréquence.</p>
 <p>Si la divergence entre espèces est une distance évolutive comme l’âge du plus récent ancêtre commun, la diversité sera dite phylogénétique.
 Si c’est une distance fonctionnelle, définie par exemple dans l’espace des traits fonctionnels, la diversité sera dite fonctionnelle.</p>
-<p>La disparité <span class="citation">(<a href="entropie.html#ref-Runnegar1987" role="doc-biblioref">Runnegar 1987</a>)</span>, divergence moyenne entre deux espèces (indépendamment des fréquences), ou de façon équivalente la longueur totale des branches d’un arbre phylogénétique, est la composante qui décrit à quel point les espèces sont différentes les unes des autres.</p>
+<p>La disparité <span class="citation">(<a href="entropie.html#ref-Runnegar1987">Runnegar 1987</a>)</span>, divergence moyenne entre deux espèces (indépendamment des fréquences), ou de façon équivalente la longueur totale des branches d’un arbre phylogénétique, est la composante qui décrit à quel point les espèces sont différentes les unes des autres.</p>
 <p>Les mesures de <em>régularité</em> décrivent la façon dont les espèces occupent l’espace des niches (régularité fonctionnelle) ou la régularité dans le temps et entre les clades des évènements de spéciation représentés par un arbre phylogénétique.
 Ce concept complète celui d’équitabilité dans les mesures classiques : la diversité augmente avec la richesse, la divergence entre espèces, et la régularité (qui se réduit à l’équitabilité quand toutes les espèces sont également divergentes entre elles).</p>
 </div>
@@ -153,16 +154,16 @@ Ce concept complète celui d’équitabilité dans les mesures classiques : la 
 <h3>
 <span class="header-section-number">1.1.4</span> Agrégation<a class="anchor" aria-label="anchor" href="#agr%C3%A9gation"><i class="fas fa-link"></i></a>
 </h3>
-<p>À partir d’une large revue de la littérature dans plusieurs disciplines scientifiques s’intéressant à la diversité (au-delà de la biodiversité), <span class="citation">Stirling (<a href="entropie.html#ref-Stirling2007" role="doc-biblioref">2007</a>)</span> estime que les trois composantes, qu’il nomme <em>variété</em> (richesse), <em>équilibre</em> (équitabilité) et <em>disparité</em>, recouvrent tous les aspects de la diversité.</p>
+<p>À partir d’une large revue de la littérature dans plusieurs disciplines scientifiques s’intéressant à la diversité (au-delà de la biodiversité), <span class="citation">Stirling (<a href="entropie.html#ref-Stirling2007">2007</a>)</span> estime que les trois composantes, qu’il nomme <em>variété</em> (richesse), <em>équilibre</em> (équitabilité) et <em>disparité</em>, recouvrent tous les aspects de la diversité.</p>
 <p>Stirling définit la propriété d’<em>agrégation</em> comme la capacité d’une mesure de diversité à combiner explicitement les trois composantes précédentes.
-Cela ne signifie pas que les composantes contribuent indépendamment les unes des autres à la diversité <span class="citation">(<a href="entropie.html#ref-Jost2010" role="doc-biblioref">Jost 2010</a>)</span>.</p>
+Cela ne signifie pas que les composantes contribuent indépendamment les unes des autres à la diversité <span class="citation">(<a href="entropie.html#ref-Jost2010">Jost 2010</a>)</span>.</p>
 </div>
 </div>
 <div id="niveaux-de-létude" class="section level2" number="1.2">
 <h2>
 <span class="header-section-number">1.2</span> Niveaux de l’étude<a class="anchor" aria-label="anchor" href="#niveaux-de-l%C3%A9tude"><i class="fas fa-link"></i></a>
 </h2>
-<p>La diversité est classiquement estimée à plusieurs niveaux emboîtés, nommés <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> et <span class="math inline">\(\gamma\)</span> par <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1960" role="doc-biblioref">1960, 320</a>)</span> qui a nommé <span class="math inline">\(\alpha\)</span> la diversité locale qu’il mesurait avec l’indice <span class="math inline">\(\alpha\)</span> de Fisher (voir le chapitre <a href="#chap-Fisher"><strong>??</strong></a>) et a utilisé les lettres suivantes selon ses besoins.</p>
+<p>La diversité est classiquement estimée à plusieurs niveaux emboîtés, nommés <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> et <span class="math inline">\(\gamma\)</span> par <span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1960">1960, 320</a>)</span> qui a nommé <span class="math inline">\(\alpha\)</span> la diversité locale qu’il mesurait avec l’indice <span class="math inline">\(\alpha\)</span> de Fisher (voir le chapitre <a href="#chap-Fisher"><strong>??</strong></a>) et a utilisé les lettres suivantes selon ses besoins.</p>
 <div id="diversité-alpha-beta-et-gamma" class="section level3" number="1.2.1">
 <h3>
 <span class="header-section-number">1.2.1</span> Diversité <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> et <span class="math inline">\(\gamma\)</span><a class="anchor" aria-label="anchor" href="#diversit%C3%A9-alpha-beta-et-gamma"><i class="fas fa-link"></i></a>
@@ -178,12 +179,12 @@ Figure 1.2: Patrons de biodiversité. (a) Le nombre d’espèces de vers de terr
 </p>
 </div>
 <p></p>
-<p>De façon générale <span class="citation">(<a href="entropie.html#ref-Gaston2000" role="doc-biblioref">Gaston 2000</a>)</span>, la richesse spécifique diminue avec la latitude (la diversité est plus grande dans les zones tropicales, et au sein de celles-ci, quand on se rapproche de l’équateur), voir figure <a href="chap-Notions.html#fig:Gaston2000">1.2</a> <span class="citation">(<a href="entropie.html#ref-Gaston2000" role="doc-biblioref">Gaston 2000, fig. 1</a>)</span>.
-La tendance est la même pour la diversité génétique intraspécifique <span class="citation">(<a href="entropie.html#ref-Miraldo2016" role="doc-biblioref">Miraldo et al. 2016</a>)</span>.
+<p>De façon générale <span class="citation">(<a href="entropie.html#ref-Gaston2000">Gaston 2000</a>)</span>, la richesse spécifique diminue avec la latitude (la diversité est plus grande dans les zones tropicales, et au sein de celles-ci, quand on se rapproche de l’équateur), voir figure <a href="chap-Notions.html#fig:Gaston2000">1.2</a> <span class="citation">(<a href="entropie.html#ref-Gaston2000">Gaston 2000, fig. 1</a>)</span>.
+La tendance est la même pour la diversité génétique intraspécifique <span class="citation">(<a href="entropie.html#ref-Miraldo2016">Miraldo et al. 2016</a>)</span>.
 La richesse diminue avec l’altitude.
 Elle est généralement plus faible sur les îles, où elle décroît avec la distance au continent, source de migrations.</p>
 <p>La diversité <span class="math inline">\(\beta\)</span> mesure à quel point les systèmes locaux sont différents.
-Cette définition assez vague a fait l’objet de nombreux débats <span class="citation">(<a href="entropie.html#ref-Moreno2010" role="doc-biblioref">Moreno and Rodríguez 2010</a>)</span>.</p>
+Cette définition assez vague a fait l’objet de nombreux débats <span class="citation">(<a href="entropie.html#ref-Moreno2010">Moreno and Rodríguez 2010</a>)</span>.</p>
 <p>Enfin, la diversité <span class="math inline">\(\gamma\)</span> est similaire à la diversité <span class="math inline">\(\alpha\)</span>, prise en compte sur l’ensemble du système étudié.
 Les diversités <span class="math inline">\(\alpha\)</span> et <span class="math inline">\(\gamma\)</span> se mesurent donc de la même façon, mais à différentes échelles.</p>
 </div>
@@ -191,7 +192,7 @@ Les diversités <span class="math inline">\(\alpha\)</span> et <span class="math
 <h3>
 <span class="header-section-number">1.2.2</span> Décomposition<a class="anchor" aria-label="anchor" href="#d%C3%A9composition"><i class="fas fa-link"></i></a>
 </h3>
-<p><span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1977" role="doc-biblioref">1977</a>)</span> a proposé sans succès une normalisation des échelles d’évaluation de la biodiversité, en introduisant la diversité régionale <span class="math inline">\(\varepsilon\)</span> (<span class="math inline">\(\gamma\)</span> étant réservé au paysage et <span class="math inline">\(\alpha\)</span> à l’habitat) et la diversité <span class="math inline">\(\delta\)</span> entre les paysages.
+<p><span class="citation">Whittaker (<a href="entropie.html#ref-Whittaker1977">1977</a>)</span> a proposé sans succès une normalisation des échelles d’évaluation de la biodiversité, en introduisant la diversité régionale <span class="math inline">\(\varepsilon\)</span> (<span class="math inline">\(\gamma\)</span> étant réservé au paysage et <span class="math inline">\(\alpha\)</span> à l’habitat) et la diversité <span class="math inline">\(\delta\)</span> entre les paysages.
 Seuls les trois niveaux originaux ont été conservés par la littérature, sans définition stricte des échelles d’observation.</p>
 <p>La distinction entre les diversités <span class="math inline">\(\alpha\)</span> et <span class="math inline">\(\beta\)</span> dépend de la finesse de la définition de l’habitat.
 La distinction de nombreux habitats diminue la diversité <span class="math inline">\(\alpha\)</span> au profit de la <span class="math inline">\(\beta\)</span>.
@@ -237,7 +238,7 @@ Une SAC peut être tracée en fonction de la surface, du nombre d’individus ou
 <p></p>
 <p>Les courbes d’accumulation peuvent aussi concerner la diversité (voir le chapitre <a href="#chap-Accumulation"><strong>??</strong></a>), mesurée au-delà du nombre d’espèces.</p>
 <p>Plus généralement, une courbe aire-espèces (SAR : <em>Species Area Relationship</em>) représente le nombre d’espèces observées en fonction de la surface échantillonnée (figure <a href="#fig:Williamson2001"><strong>??</strong></a>).
-Il existe plusieurs façons de prendre en compte cette relation <span class="citation">(<a href="entropie.html#ref-Scheiner2003" role="doc-biblioref">Scheiner 2003</a>)</span>, classables en deux grandes familles <span class="citation">(<a href="entropie.html#ref-Dengler2009" role="doc-biblioref">Dengler 2009</a>)</span> :</p>
+Il existe plusieurs façons de prendre en compte cette relation <span class="citation">(<a href="entropie.html#ref-Scheiner2003">Scheiner 2003</a>)</span>, classables en deux grandes familles <span class="citation">(<a href="entropie.html#ref-Dengler2009">Dengler 2009</a>)</span> :</p>
 <ul>
 <li>Dans une SAR au sens strict, chaque point représente une communauté.
 La question traitée est la relation entre le nombre d’espèces et la taille de chaque communauté, en lien avec des processus <span style="white-space:nowrap">écologiques ;</span>
@@ -269,8 +270,8 @@ La diversité peut aussi être estimée pour un effort donné : un hectare de f
 <p>où <span class="math inline">\({\mathbf 1}(\cdot)\)</span> est la fonction indicatrice.
 Son complément à 1 est appelé déficit de couverture (<em>coverage deficit</em>).</p>
 <p>Le déficit de couverture est la probabilité qu’un individu tiré au hasard dans la communauté appartienne à une espèce absente de l’échantillon inventorié.
-C’est donc aussi la probabilité qu’un individu ajouté à l’inventaire lui ajoute une nouvelle espèce <span class="citation">(<a href="entropie.html#ref-Good1953" role="doc-biblioref">Good 1953</a>)</span>.
-La pente de la courbe d’accumulation donnant l’espérance du nombre d’espèces en fonction du nombre d’individus (courbe de raréfaction de la figure <a href="#fig:Gotelli2001"><strong>??</strong></a>) est donc égale au déficit de couverture <span class="citation">(<a href="entropie.html#ref-Chao2012b" role="doc-biblioref">Chao and Jost 2012</a>)</span> :</p>
+C’est donc aussi la probabilité qu’un individu ajouté à l’inventaire lui ajoute une nouvelle espèce <span class="citation">(<a href="entropie.html#ref-Good1953">Good 1953</a>)</span>.
+La pente de la courbe d’accumulation donnant l’espérance du nombre d’espèces en fonction du nombre d’individus (courbe de raréfaction de la figure <a href="#fig:Gotelli2001"><strong>??</strong></a>) est donc égale au déficit de couverture <span class="citation">(<a href="entropie.html#ref-Chao2012b">Chao and Jost 2012</a>)</span> :</p>
 <p><span class="math display" id="eq:DefC">\[\begin{equation}
   \tag{1.2}
   1 - {\mathbb E}\left[ C\left( n \right) \right] = {\mathbb E}\left[ S\left( n + 1 \right) \right] - {\mathbb E}\left[ S\left( n \right) \right],
@@ -278,13 +279,13 @@ La pente de la courbe d’accumulation donnant l’espérance du nombre d’esp�
 <p>où <span class="math inline">\(C(n)\)</span> est le taux de couverture d’un échantillon de taille <span class="math inline">\(n\)</span> et <span class="math inline">\(S(n)\)</span> le nombre d’espèces découvertes dans cet échantillon.</p>
 <p>Le taux de couverture augmente avec l’effort d’échantillonnage.
 Plus il est élevé, meilleures seront les estimations de la diversité : la diversité asymptotique est obtenue quand il atteint 1.
-Les estimateurs de la diversité asymptotique développés plus loin reposent largement sur cette notion pour la correction du biais d’échantillonnage <span class="citation">(<a href="entropie.html#ref-Dauby2012" role="doc-biblioref">Dauby and Hardy 2012</a>)</span>, c’est-à-dire la sous-estimation systématique de la diversité due aux espèces non observées, qui est un des éléments du biais d’estimation.</p>
-<p>Pour comparer la diversité non asymptotique de deux communautés avec le même effort d’échantillonnage, <span class="citation">Chao and Jost (<a href="entropie.html#ref-Chao2012b" role="doc-biblioref">2012</a>)</span> montrent que le taux de couverture plutôt que la taille de l’échantillon doit être identique.</p>
+Les estimateurs de la diversité asymptotique développés plus loin reposent largement sur cette notion pour la correction du biais d’échantillonnage <span class="citation">(<a href="entropie.html#ref-Dauby2012">Dauby and Hardy 2012</a>)</span>, c’est-à-dire la sous-estimation systématique de la diversité due aux espèces non observées, qui est un des éléments du biais d’estimation.</p>
+<p>Pour comparer la diversité non asymptotique de deux communautés avec le même effort d’échantillonnage, <span class="citation">Chao and Jost (<a href="entropie.html#ref-Chao2012b">2012</a>)</span> montrent que le taux de couverture plutôt que la taille de l’échantillon doit être identique.</p>
 <div id="formule-des-fréquences-de-good-turing" class="section level3" number="1.5.1">
 <h3>
 <span class="header-section-number">1.5.1</span> Formule des fréquences de Good-Turing<a class="anchor" aria-label="anchor" href="#formule-des-fr%C3%A9quences-de-good-turing"><i class="fas fa-link"></i></a>
 </h3>
-<p>La relation fondamentale entre les fréquences des espèces dans un échantillon est due à Turing et a été publiée par <span class="citation">Good (<a href="entropie.html#ref-Good1953" role="doc-biblioref">1953</a>)</span>.
+<p>La relation fondamentale entre les fréquences des espèces dans un échantillon est due à Turing et a été publiée par <span class="citation">Good (<a href="entropie.html#ref-Good1953">1953</a>)</span>.
 En absence de toute information sur la loi de distribution des espèces, en supposant seulement que les individus sont tirés indépendamment les uns des autres selon une loi multinomiale respectant ces probabilités, la formule de Good-Turing relie la probabilité attendue <span class="math inline">\({\mathbb E}(p_\nu)\)</span> d’une espèce représentée par <span class="math inline">\(\nu\)</span> individus au rapport entre les nombres d’espèces représentées <span class="math inline">\(\nu+1\)</span> fois et <span class="math inline">\(\nu\)</span> fois :</p>
 <p><span class="math display" id="eq:alphanu">\[\begin{equation}
   \tag{1.3}
@@ -302,10 +303,10 @@ En absence de toute information sur la loi de distribution des espèces, en supp
 La relation de Good-Turing concerne leur espérance mais comme on ne dispose en général que d’un seul inventaire, les espérances <span class="math inline">\({\mathbb E}(f_\nu)\)</span> et <span class="math inline">\({\mathbb E}(f_{\nu + 1})\)</span> sont remplacées par les valeurs observées.
 De même, chacune des espèces observées <span class="math inline">\(\nu\)</span> fois a une probabilité différente : la relation ne permet pas de prédire précisément, pour un échantillon, les probabilités de chaque espèce.</p>
 <p>Ces relations sont le fondement de plusieurs estimateurs de biodiversité présentés plus loin.
-Les singletons (<span class="math inline">\(f_{1}\)</span>: le nombre d’espèces observées une seule fois) et les doubletons (<span class="math inline">\(f_{2}\)</span>: le nombre d’espèces observées deux fois) ont une importance centrale.
-Pour <span class="math inline">\(\nu=1\)</span>, on a par exemple <span class="math inline">\(\alpha_1 = 2 f_{2}/(nf_{1})\)</span>: la fréquence d’une espèce typiquement représentée par un singleton est proportionnelle au rapport entre le nombre des doubletons et des singletons.
-Cet estimateur de probabilité est meilleur que l’estimateur naïf <span class="math inline">\(1/n\)</span>: en d’autres termes, la distribution des fréquences observées permet d’estimer les probabilités de façon non triviale.</p>
-<p>La relation a été précisée <span class="citation">(<a href="entropie.html#ref-Chiu2014a" role="doc-biblioref">Chiu et al. 2014</a>, eq. 6 et 7a)</span> en limitant les approximations dans les calculs.
+Les singletons (<span class="math inline">\(f_{1}\)</span> : le nombre d’espèces observées une seule fois) et les doubletons (<span class="math inline">\(f_{2}\)</span> : le nombre d’espèces observées deux fois) ont une importance centrale.
+Pour <span class="math inline">\(\nu=1\)</span>, on a par exemple <span class="math inline">\(\alpha_1 = 2 f_{2}/(nf_{1})\)</span> : la fréquence d’une espèce typiquement représentée par un singleton est proportionnelle au rapport entre le nombre des doubletons et des singletons.
+Cet estimateur de probabilité est meilleur que l’estimateur naïf <span class="math inline">\(1/n\)</span> : en d’autres termes, la distribution des fréquences observées permet d’estimer les probabilités de façon non triviale.</p>
+<p>La relation a été précisée <span class="citation">(<a href="entropie.html#ref-Chiu2014a">Chiu et al. 2014</a>, eq. 6 et 7a)</span> en limitant les approximations dans les calculs.
 La seule approximation nécessaire est que les probabilités des espèces représentées le même nombre de fois <span class="math inline">\(\nu\)</span> varient peu et puissent être considérées toutes égales à <span class="math inline">\({\mathbb E}(p_\nu)\)</span>, ce qui est acceptable puisque la variance de <span class="math inline">\(p_\nu\)</span> est petite.
 On peut alors estimer directement
 <span class="math display" id="eq:GoodTuring2014">\[\begin{equation}
@@ -321,32 +322,32 @@ On peut alors estimer directement
 <span class="header-section-number">1.5.2</span> Estimation du taux de couverture<a class="anchor" aria-label="anchor" href="#estimation-du-taux-de-couverture"><i class="fas fa-link"></i></a>
 </h3>
 <p>En posant <span class="math inline">\(\nu=0\)</span> dans l’équation <a href="chap-Notions.html#eq:alphanu">(1.3)</a>, <span class="math inline">\({\mathbb E}(p_0) \times f_{0} = \pi_0\)</span>, la probabilité totale des espèces non représentées, vaut approximativement <span class="math inline">\(f_{1}/n\)</span>.
-C’est l’estimateur de Good ou Good-Turing, parfois appelé abusivement “formule de Turing” <span class="citation">(<a href="entropie.html#ref-Zhang2007" role="doc-biblioref">Z. Zhang and Huang 2007</a>)</span> :</p>
+C’est l’estimateur de Good ou Good-Turing, parfois appelé abusivement “formule de Turing” <span class="citation">(<a href="entropie.html#ref-Zhang2007">Z. Zhang and Huang 2007</a>)</span> :</p>
 <p><span class="math display" id="eq:CGood">\[\begin{equation}
   \tag{1.6}
   \hat{C} = 1 - \frac{f_1}{n}.
 \end{equation}\]</span></p>
-<p>Cet estimateur est biaisé <span class="citation">(<a href="entropie.html#ref-Zhang2007" role="doc-biblioref">Z. Zhang and Huang 2007</a>)</span>. En réalité,
+<p>Cet estimateur est biaisé <span class="citation">(<a href="entropie.html#ref-Zhang2007">Z. Zhang and Huang 2007</a>)</span>. En réalité,
 <span class="math display" id="eq:CsansBiais">\[\begin{equation}
   \tag{1.7}
   C = 1 - \frac{{\mathbb E}(f_1) - \pi_1}{n}.
 \end{equation}\]</span></p>
 <p>L’estimateur de Good néglige le terme <span class="math inline">\(\pi_1\)</span>, la somme des probabilités des espèces observées une fois.
 Ce terme peut être estimé avec un biais plus petit.
-<span class="citation">Chao, Lee, and Chen (<a href="entropie.html#ref-Chao1988" role="doc-biblioref">1988</a>)</span> puis <span class="citation">Z. Zhang and Huang (<a href="entropie.html#ref-Zhang2007" role="doc-biblioref">2007</a>)</span> proposent l’estimateur suivant, qui utilise toute l’information disponible et a le plus petit biais possible :</p>
+<span class="citation">Chao, Lee, and Chen (<a href="entropie.html#ref-Chao1988">1988</a>)</span> puis <span class="citation">Z. Zhang and Huang (<a href="entropie.html#ref-Zhang2007">2007</a>)</span> proposent l’estimateur suivant, qui utilise toute l’information disponible et a le plus petit biais possible :</p>
 <p><span class="math display" id="eq:CZhang">\[\begin{equation}
   \tag{1.8}
   \hat{C} = 1 - \sum^{n}_{\nu = 1}{\left( -1 \right)}^{\nu + 1}{\binom{n}{\nu}}^{-1}f_\nu.
 \end{equation}\]</span></p>
 <p>Les termes de la somme décroissent très vite avec <span class="math inline">\(\nu\)</span>.
 En se limitant à <span class="math inline">\(\nu=1\)</span>, l’estimateur se réduit à celui de Good.</p>
-<p><span class="citation">Esty (<a href="entropie.html#ref-Esty1983" role="doc-biblioref">1983</a>)</span>, complété par <span class="citation">C.-H. Zhang and Zhang (<a href="entropie.html#ref-Zhang2009" role="doc-biblioref">2009</a>)</span>, a montré que l’estimateur était asymptotiquement normal et a calculé l’intervalle de confiance de <span class="math inline">\(\hat{C}\)</span>:</p>
+<p><span class="citation">Esty (<a href="entropie.html#ref-Esty1983">1983</a>)</span>, complété par <span class="citation">C.-H. Zhang and Zhang (<a href="entropie.html#ref-Zhang2009">2009</a>)</span>, a montré que l’estimateur était asymptotiquement normal et a calculé l’intervalle de confiance de <span class="math inline">\(\hat{C}\)</span> :</p>
 <p><span class="math display" id="eq:hatC">\[\begin{equation}
   \tag{1.9}
   C = \hat{C} \pm t^{n}_{1 - \alpha / 2} \frac{\sqrt{f_1 \left( 1 - \frac{f_{1}}{n} \right) + 2f_2}}{n}.
 \end{equation}\]</span></p>
 <p>Où <span class="math inline">\(t^{n}_{1 - \alpha / 2}\)</span> est le quantile d’une loi de Student à <span class="math inline">\(n\)</span> degrés de libertés au seuil de risque <span class="math inline">\(\alpha\)</span>, classiquement 1,96 pour <span class="math inline">\(n\)</span> grand et <span class="math inline">\(\alpha = 5\%\)</span>.</p>
-<p>Un autre estimateur est utilisé dans le logiciel SPADE <span class="citation">(<a href="entropie.html#ref-Chao2010a" role="doc-biblioref">Chao and Shen 2010</a>)</span> et son portage sous R, le package <em>spadeR</em> <span class="citation">(<a href="entropie.html#ref-Chao2016c" role="doc-biblioref">Chao et al. 2016</a>)</span>.
+<p>Un autre estimateur est utilisé dans le logiciel SPADE <span class="citation">(<a href="entropie.html#ref-Chao2010a">Chao and Shen 2010</a>)</span> et son portage sous R, le package <em>spadeR</em> <span class="citation">(<a href="entropie.html#ref-Chao2016c">Chao et al. 2016</a>)</span>.
 Il est la base des estimateurs d’entropie de Chao et Jost (section <a href="#sec-BiaisHCDT"><strong>??</strong></a>).
 L’estimation de l’équation <a href="chap-Notions.html#eq:CsansBiais">(1.7)</a> donne la relation
 <span class="math display" id="eq:hatC2">\[\begin{equation}
@@ -365,10 +366,10 @@ Alors :</p>
 <p>Dans le package <em>divent</em>, la fonction <code>coverage</code> calcule les trois estimateurs (celui de Zhang et Huang par défaut) :</p>
 <p></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/EricMarcon/divent">"divent"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ericmarcon.github.io/divent">"divent"</a></span><span class="op">)</span></span>
 <span><span class="va">BCI</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/coverage.html">coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/coverage.html">coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   estimator  coverage
 ##   &lt;chr&gt;         &lt;dbl&gt;
@@ -380,14 +381,14 @@ Il est moindre sur les 6.25 ha de la parcelle 6 de Paracou :</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">paracou_6_abd</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/divent/man/coverage.html">coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/coverage.html">coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   estimator  coverage
 ##   &lt;chr&gt;         &lt;dbl&gt;
 ## 1 ZhangHuang    0.972</code></pre>
 <p></p>
 <p>Les estimateurs présentés ici supposent une population de taille infinie (de façon équivalente, les individus sont tirés avec remise).
-Le cas des populations de taille finie est traité par <span class="citation">Chao and Lin (<a href="entropie.html#ref-Chao2012" role="doc-biblioref">2012</a>)</span> et <span class="citation">Hwang, Lin, and Shen (<a href="entropie.html#ref-Hwang2014" role="doc-biblioref">2014</a>)</span>.</p>
+Le cas des populations de taille finie est traité par <span class="citation">Chao and Lin (<a href="entropie.html#ref-Chao2012">2012</a>)</span> et <span class="citation">Hwang, Lin, and Shen (<a href="entropie.html#ref-Hwang2014">2014</a>)</span>.</p>
 </div>
 <div id="complétude" class="section level3" number="1.5.3">
 <h3>
@@ -401,14 +402,14 @@ Elle compte simplement les espèces et ne doit pas être confondue avec la couve
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bci_abd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span>
 <span><span class="co"># Espèces observées</span></span>
-<span><span class="op">(</span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="va">bci_abd</span>, estimator  <span class="op">=</span> <span class="st">"naive"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/div_richness.html">div_richness</a></span><span class="op">(</span><span class="va">bci_abd</span>, estimator  <span class="op">=</span> <span class="st">"naive"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   estimator order diversity
 ##   &lt;chr&gt;     &lt;dbl&gt;     &lt;int&gt;
 ## 1 naive         0       225</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Richesse estimée</span></span>
-<span><span class="op">(</span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/div_richness.html">div_richness</a></span><span class="op">(</span><span class="va">bci_abd</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   estimator   order diversity
 ##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -422,14 +423,14 @@ Elle compte simplement les espèces et ne doit pas être confondue avec la couve
 <p></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Espèces observées</span></span>
-<span><span class="op">(</span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span>, estimator  <span class="op">=</span> <span class="st">"naive"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span>, estimator  <span class="op">=</span> <span class="st">"naive"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   estimator order diversity
 ##   &lt;chr&gt;     &lt;dbl&gt;     &lt;int&gt;
 ## 1 naive         0       335</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Richesse estimée</span></span>
-<span><span class="op">(</span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/divent/man/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ericmarcon.github.io/entropart/reference/div_richness.html">div_richness</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">paracou_6_abd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   estimator   order diversity
 ##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -445,21 +446,21 @@ Elle compte simplement les espèces et ne doit pas être confondue avec la couve
 <h2>
 <span class="header-section-number">1.6</span> Le problème de l’espèce<a class="anchor" aria-label="anchor" href="#le-probl%C3%A8me-de-lesp%C3%A8ce"><i class="fas fa-link"></i></a>
 </h2>
-<p>Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n’est de toute évidence pas le cas <span class="citation">(<a href="entropie.html#ref-Casetta2014" role="doc-biblioref">Casetta 2014</a>)</span>.
+<p>Évaluer la richesse spécifique suppose que les espèces soient définies clairement, ce qui n’est de toute évidence pas le cas <span class="citation">(<a href="entropie.html#ref-Casetta2014">Casetta 2014</a>)</span>.
 Le premier aspect du problème concerne la nature des espèces : réalité naturelle ou seulement représentation simplificatrice.
-Une analyse historique et philosophique en est faite par <span class="citation">Richards (<a href="entropie.html#ref-Richards2010" role="doc-biblioref">2010</a>)</span>.
+Une analyse historique et philosophique en est faite par <span class="citation">Richards (<a href="entropie.html#ref-Richards2010">2010</a>)</span>.
 L’autre aspect, avec des conséquences pratiques plus immédiates, concerne leur délimitation.
-<span class="citation">Mayden (<a href="entropie.html#ref-Mayden1997" role="doc-biblioref">1997</a>)</span> recense vingt-deux définitions différentes du concept d’espèce.
-<span class="citation">(<a href="#ref-Wilkins2011" role="doc-biblioref"><strong>Wilkins2011?</strong></a>)</span> estime qu’il n’y a qu’un seul concept d’espèce mais sept définitions, c’est-à-dire sept façons de les identifier, et vingt-sept variations ou mélanges de ces définitions.</p>
+<span class="citation">Mayden (<a href="entropie.html#ref-Mayden1997">1997</a>)</span> recense vingt-deux définitions différentes du concept d’espèce.
+<span class="citation">(<a href="#ref-Wilkins2011"><strong>Wilkins2011?</strong></a>)</span> estime qu’il n’y a qu’un seul concept d’espèce mais sept définitions, c’est-à-dire sept façons de les identifier, et vingt-sept variations ou mélanges de ces définitions.</p>
 <p>La définition historique est celle de <em>morphoespèce</em>, qui classe les espèces selon leurs formes, supposées d’abord immuables.
-La définition moderne la plus répandue est celle d’espèce <em>biologique</em> <span class="citation">(<a href="entropie.html#ref-Dobzhansky1937" role="doc-biblioref">Dobzhansky 1937</a>)</span> : un “groupe de populations naturelles isolées reproductivement les unes des autres” <span class="citation">(<a href="entropie.html#ref-Mayr1942" role="doc-biblioref">Mayr 1942</a>)</span>.
+La définition moderne la plus répandue est celle d’espèce <em>biologique</em> <span class="citation">(<a href="entropie.html#ref-Dobzhansky1937">Dobzhansky 1937</a>)</span> : un “groupe de populations naturelles isolées reproductivement les unes des autres” <span class="citation">(<a href="entropie.html#ref-Mayr1942">Mayr 1942</a>)</span>.
 Lorsque les populations d’une espèce sont isolées géographiquement, leur capacité à se reproduire ensemble est toute théorique (et rarement vérifiée expérimentalement).
-Des populations allopatriques n’ont pas de flux de gènes réels entre elles et peuvent être considérées comme des espèces distinctes selon la définition d’espèce <em>phylogénétique</em> : “le plus petit groupe identifiable d’individus avec un pattern commun d’ancêtres et de descendants” <span class="citation">(<a href="entropie.html#ref-Cracraft1983" role="doc-biblioref">Cracraft 1983</a>)</span>.
-C’est l’unité génétique détectée par la méthode du coalescent pour la délimitation des espèces <span class="citation">(<a href="entropie.html#ref-Sukumaran2017" role="doc-biblioref">Sukumaran and Knowles 2017</a>)</span>.
+Des populations allopatriques n’ont pas de flux de gènes réels entre elles et peuvent être considérées comme des espèces distinctes selon la définition d’espèce <em>phylogénétique</em> : “le plus petit groupe identifiable d’individus avec un pattern commun d’ancêtres et de descendants” <span class="citation">(<a href="entropie.html#ref-Cracraft1983">Cracraft 1983</a>)</span>.
+C’est l’unité génétique détectée par la méthode du coalescent pour la délimitation des espèces <span class="citation">(<a href="entropie.html#ref-Sukumaran2017">Sukumaran and Knowles 2017</a>)</span>.
 Le nombre d’espèces phylogénétiques est bien supérieur au nombre d’espèces biologiques.
-Enfin, <span class="citation">Van Valen (<a href="entropie.html#ref-VanValen1976" role="doc-biblioref">1976</a>)</span> définit les espèces par la niche écologique qu’elles occupent (à partir de l’exemple des chênes blancs européens) plutôt que par les flux de gènes (permanents entre les espèces distinctes) : la définition <em>écologique</em> d’espèce est proche du concept de complexe d’espèces <span class="citation">(ensemble d’espèces voisines échangeant des gènes, <a href="entropie.html#ref-Pernes1984" role="doc-biblioref">Pernès 1984</a>)</span>.</p>
-<p>Le choix de la définition modifie considérablement sur la quantification de la richesse <span class="citation">(<a href="entropie.html#ref-Agapow2004" role="doc-biblioref">Agapow et al. 2004</a>)</span>.
-Des problèmes méthodologiques s’ajoutent aux problèmes conceptuels <span class="citation">(<a href="entropie.html#ref-Hey2001" role="doc-biblioref">Hey 2001</a>)</span> : la séparation ou le regroupement de plusieurs populations ou morphotypes en un nombre plus ou moins grand d’espèces est un choix qui reflète les connaissances du moment et peut évoluer <span class="citation">(<a href="entropie.html#ref-Barberousse2014" role="doc-biblioref">Barberousse and Samadi 2014</a>)</span>.</p>
+Enfin, <span class="citation">Van Valen (<a href="entropie.html#ref-VanValen1976">1976</a>)</span> définit les espèces par la niche écologique qu’elles occupent (à partir de l’exemple des chênes blancs européens) plutôt que par les flux de gènes (permanents entre les espèces distinctes) : la définition <em>écologique</em> d’espèce est proche du concept de complexe d’espèces <span class="citation">(ensemble d’espèces voisines échangeant des gènes, <a href="entropie.html#ref-Pernes1984">Pernès 1984</a>)</span>.</p>
+<p>Le choix de la définition modifie considérablement sur la quantification de la richesse <span class="citation">(<a href="entropie.html#ref-Agapow2004">Agapow et al. 2004</a>)</span>.
+Des problèmes méthodologiques s’ajoutent aux problèmes conceptuels <span class="citation">(<a href="entropie.html#ref-Hey2001">Hey 2001</a>)</span> : la séparation ou le regroupement de plusieurs populations ou morphotypes en un nombre plus ou moins grand d’espèces est un choix qui reflète les connaissances du moment et peut évoluer <span class="citation">(<a href="entropie.html#ref-Barberousse2014">Barberousse and Samadi 2014</a>)</span>.</p>
 <p>L’impact du problème de l’espèce sur la mesure de la diversité reste sans solution à ce stade, si ce n’est d’utiliser les mêmes définitions si des communautés différentes doivent être comparées.
 L’approche phylogénétique (chapitre <a href="#chap-Phyloentropie"><strong>??</strong></a>) permet de contourner le problème : si deux taxons très semblables apportent à peine plus de diversité qu’un seul taxon, le choix de les distinguer ou non n’est pas critique.</p>
 </div>
@@ -512,7 +513,7 @@ L’approche phylogénétique (chapitre <a href="#chap-Phyloentropie"><strong>??
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 17/01/2024.</p>
+    <p>"<strong>Mesures de la Biodiversité</strong>" was written by Eric Marcon. It was last built on 11/03/2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
