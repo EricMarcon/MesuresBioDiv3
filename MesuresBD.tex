@@ -135,6 +135,7 @@
 % BibLaTeX
 \usepackage[backend=biber,style=verbose-inote,pageref=true,isbn=false,backref=true,giveninits=true,uniquename=init,maxcitenames=2,maxbibnames=150,sorting=nyt,sortcites=false]{biblatex}
 \addbibresource{references.bib}
+\addbibresource{packages.bib}
 
 % cslreferences environment required by pandoc > 2.7
 
@@ -454,7 +455,7 @@
 
 \author{Eric Marcon}
 
-\date{11/03/2024}
+\date{16/12/2024}
 
 
 % Include headers (preamble.tex) here
@@ -468,20 +469,6 @@
 	backgroundcolor=grey,
 	frametitlebackgroundcolor=grey,
 ]{greybox}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 
 
 % End of preamble
@@ -1502,7 +1489,7 @@ L'ajustement du modèle de Volkov peut être comparé à celui d'une distributio
 
 \begin{verbatim}
 ##        theta            m            J 
-## 4.767129e+01 9.238201e-02 2.145700e+04
+## 4.796210e+01 9.180496e-02 2.145700e+04
 \end{verbatim}
 
 \normalsize
@@ -1920,7 +1907,7 @@ Il est possible de vérifier que l'espérance du nombre d'espèces non observée
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 169.7165
+## [1] 169.9725
 \end{verbatim}
 
 \begin{Shaded}
@@ -1931,7 +1918,7 @@ Il est possible de vérifier que l'espérance du nombre d'espèces non observée
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 130.37
+## [1] 129.987
 \end{verbatim}
 
 \begin{Shaded}
@@ -1942,7 +1929,7 @@ Il est possible de vérifier que l'espérance du nombre d'espèces non observée
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 300.0865
+## [1] 299.9595
 \end{verbatim}
 
 \begin{Shaded}
@@ -2009,7 +1996,7 @@ Le modèle \emph{lm4} contient 4 termes \(a_1\) à \(a_4\) :
 
 \begin{verbatim}
 ##    I(1/n_seq)  I(1/n_seq^2)  I(1/n_seq^3)  I(1/n_seq^4) 
-##  5.663927e+05 -8.042330e+08  5.199467e+11 -1.184486e+14
+##  5.661773e+05 -8.025902e+08  5.183902e+11 -1.180337e+14
 \end{verbatim}
 
 \normalsize
@@ -2530,15 +2517,15 @@ Les calculs n'aboutissent pas si la queue de distribution n'est pas regroupée (
 \begin{verbatim}
 ## Method: Penalized NPMLE method by  Wang and Lindsay 2005. 
 ## 
-##         MLE=                                243 
+##         MLE=                                134 
 ##         Estimated zero-truncated Poisson mixture components:       
-##         p=                                  0.9033625 3.397048 10.59029 
-##         pi=                                 0.2771211 0.3208847 0.4019942
+##         p=                                  4.802198 
+##         pi=                                 NaN
 \end{verbatim}
 
 \begin{verbatim}
 ## $Nhat
-## [1] 243
+## [1] 134
 \end{verbatim}
 
 \normalsize
@@ -2623,7 +2610,7 @@ Le résultat se trouve en figure \ref{fig:SobLLorFig}.
 ##  residual sum-of-squares: 3066
 ## 
 ## Number of iterations to convergence: 6 
-## Achieved convergence tolerance: 7.861e-06
+## Achieved convergence tolerance: 7.866e-06
 \end{verbatim}
 
 \normalsize
@@ -2654,7 +2641,7 @@ Ses données sont utilisées ici:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.704586
+## [1] 1.712278
 \end{verbatim}
 
 \begin{Shaded}
@@ -2664,7 +2651,7 @@ Ses données sont utilisées ici:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 223.5082
+## [1] 223.6211
 \end{verbatim}
 
 \normalsize
@@ -2689,7 +2676,7 @@ Le paramètre \(K\) peut être estimé plus précisément par résolution numér
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.7046
+## [1] 1.712293
 \end{verbatim}
 
 \begin{Shaded}
@@ -2699,7 +2686,7 @@ Le paramètre \(K\) peut être estimé plus précisément par résolution numér
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 223.5084
+## [1] 223.6213
 \end{verbatim}
 
 \normalsize
@@ -2803,7 +2790,7 @@ Les paramètres peuvent être estimés par la méthode des moindres carrés:
 ##  residual sum-of-squares: 10664
 ## 
 ## Number of iterations to convergence: 13 
-## Achieved convergence tolerance: 8.047e-06
+## Achieved convergence tolerance: 8.057e-06
 \end{verbatim}
 
 \normalsize
@@ -2842,7 +2829,7 @@ Les paramètres à estimer sont \(z\), \(a\) et \(c\).
 ##  residual sum-of-squares: 446.1
 ## 
 ## Number of iterations to convergence: 4 
-## Achieved convergence tolerance: 4.366e-06
+## Achieved convergence tolerance: 4.754e-06
 \end{verbatim}
 
 \begin{Shaded}
@@ -2855,7 +2842,7 @@ Les paramètres à estimer sont \(z\), \(a\) et \(c\).
 
 \begin{verbatim}
 ##        a 
-## 259.3128
+## 259.3127
 \end{verbatim}
 
 \normalsize
@@ -3136,9 +3123,9 @@ Le calcul de l'indice de Shannon peut se faire avec la fonction \texttt{diversit
 
 \begin{verbatim}
 ## # A tibble: 1 x 5
-##   site           weight estimator order entropy
-##   <chr>           <dbl> <chr>     <dbl>   <dbl>
-## 1 site_707269321      1 naive         1    4.27
+##   site   weight estimator order entropy
+##   <chr>   <dbl> <chr>     <dbl>   <dbl>
+## 1 site_1      1 naive         1    4.27
 \end{verbatim}
 
 \normalsize
@@ -3164,7 +3151,7 @@ La distribution de l'estimateur est connue \autocite{Hutcheson1970} mais elle es
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4.148322
+## [1] 4.148323
 \end{verbatim}
 
 \normalsize
@@ -3628,9 +3615,9 @@ Le calcul de la diversité de Hurlbert est possible dans \emph{divent}:
 
 \begin{verbatim}
 ## # A tibble: 1 x 5
-##   site           weight estimator order entropy
-##   <chr>           <dbl> <chr>     <dbl>   <dbl>
-## 1 site_402217706      1 naive         2    1.97
+##   site   weight estimator order entropy
+##   <chr>   <dbl> <chr>     <dbl>   <dbl>
+## 1 site_1      1 naive         2    1.97
 \end{verbatim}
 
 \begin{Shaded}
