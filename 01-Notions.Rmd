@@ -592,7 +592,7 @@ fit_divent_lnorm$parameters
 # sads
 library("sads")
 # Estimation. Les données sont tronquées: les espèces observées 0 fois ne sont pas comptées.
-fit_sads_lnorm <- fitlnorm(BCI_abd, trunc=0)
+fit_sads_lnorm <- fitlnorm(BCI_abd, trunc = 0)
 fit_sads_lnorm@fullcoef
 #vegan
 library("vegan")
@@ -614,7 +614,7 @@ Graphiquement, l'ajustement est très proche mais la distribution de Volkov pré
 ```{r}
 #| label: BCIfit3
 # Comparaison graphique des deux modèles. Log-normal en rouge.
-plot(as_abundances(BCI_abd), fit_rac = TRUE, distribution="lnorm")
+plot(as_abundances(BCI_abd), fit_rac = TRUE, distribution = "lnorm")
 # Volkov en vert
 lines(
   sort(
@@ -626,7 +626,7 @@ lines(
     ), 
     decreasing=TRUE
   ), 
-  col="green"
+  col = "green"
 )
 ```
 

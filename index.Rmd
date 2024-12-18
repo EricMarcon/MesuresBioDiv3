@@ -73,6 +73,8 @@ biblatexoptions:
 longbibliography: true
 # Chapter summary text
 chaptersummary: "L'essentiel"
+# URL color
+urlcolor: blue
 # Back Cover
 backcover:
 - language: french
@@ -94,8 +96,6 @@ backcover:
 backcoverfontsize: normalsize
 # Figure cropping may be set to false if ghostscript is not installed
 fig_crop: true
-# URL color
-urlcolor: blue
 # Do not modify
 site: bookdown::bookdown_site
 always_allow_html: true
@@ -258,7 +258,21 @@ L'objectif de ce document est de traiter la mesure de la biodiversité, pas son 
 On se référera par exemple à @Chapin2000 pour une revue sur cette question, @Cardinale2012 pour les conséquences de l'érosion de la biodiversité sur les services écosystémiques ou @Ceballos2017 pour les propriétés autocatalytiques de la biodiversité.
 
 La mesure de la diversité est un sujet important en tant que tel [@Purvis2000], pour permettre de formaliser les concepts et de les appliquer à la réalité. 
-La question est loin d'être épuisée, et fait toujours l'objet d'une recherche active et de controverses [@Ricotta2005b].
+La question n'est pas épuisée, et fait toujours l'objet d'une recherche active et de controverses [@Ricotta2005b].
+
+Le document est organisé en 7 parties.
+En guise d'introduction, la première partie présente les *notions de diversité*, suivie des différentes approches permettant de concrétiser ces notions sous forme de mesures:
+
+- La biodiversité neutre, qui ne prend pas en compte les relations entre les espèces.
+C'est l'approche la plus commune, qui inclut par exemple la richesse spécifique et les indices de Shannon et Simpson.
+La théorie de l'information permet de généraliser les indices historiques dans un cadre robuste aboutissant à la définition des nombres effectifs d'espèces, aussi appelés nombres de @Hill1973
+- Les diversités phylogénétique et fonctionnelle, qui incluent les relations (généralement, les distances) entre espèces.
+Leur objectif est de prendre en compte l'histoire évolutive des espèces ou, dans une démarche assez différente, de considérer leur niche plutôt que leur identité.
+- La décomposition de la diversité selon plusieurs niveaux hiérarchisés.
+Cette approche permet à la fois les changements d'échelle, à travers les notions de diversité $\alpha$ et $\gamma$, et de définir deux nouvelles notions de diversité (classiquement regroupée sous le terme diversité $\beta$): la diversité de différentiation et la diversité de partitionnement.
+- La diversité jointe qui prend en compte en même temps la diversité des espèces dans chaque habitat et la diversité des habitats occupés par chaque espèce.
+- La diversité spatialement explicite qui permet de clarifier les notions d'accumulation de diversité (dépendant de l'échantillonnage) et de diversité régionale, mais aussi de spatialiser les mesures de biodiversité en lien avec les questions d'écologie.
+- Les estimations de diversité à large échelle, souvent réduite à la richesse spécifique, qui repose sur une large palette de méthodes.
 
 
 # Calculs et données {-}
@@ -312,7 +326,12 @@ autoplot(
   labelSize = expression(paste("Surface terrière (", cm^2, ")")), 
   labelColor = "Espèce"
 ) +
-theme(legend.position = "bottom", legend.direction = "vertical", legend.margin=margin())
+  scale_size(range = c(0.1, 2)) +
+  theme(
+    legend.position = "bottom", 
+    legend.direction = "vertical", 
+    legend.margin = margin()
+  )
 ```
 
 
@@ -377,8 +396,7 @@ Les effectifs totaux sont $n_{s+}$ (pour l'espèce $s$), $n_{+i}$ pour la commun
 S'il n'y a qu'une communauté, le nombre d'individus par espèce est $n_s$.
 
 \noindent $p_s$: la probabilité qu'un individu tiré au hasard appartienne à l'espèce $s$, autrement dit la probabilité de l'espèce $s$.
-Son estimateur le plus simple, ${\hat{p}}_s$ est la fréquence observée. 
-Selon le contexte,  ${\hat{p}}_s$ peut désigner un estimateur plus élaboré.
+Son estimateur le plus simple, ${\hat{p}}_s = r_s$ est la fréquence observée.
 $p_{s|i}$ est la même probabilité dans la communauté $i$.
 $p_{\nu}$ est la probabilité d'une espèce observées $\nu$ fois dans un échantillon.
 
@@ -388,6 +406,8 @@ $p_{\nu}$ est la probabilité d'une espèce observées $\nu$ fois dans un échan
 Si l'espèce est choisie explicitement, la probabilité est notée ${\pi}_{n_s}$.
 
 \noindent $^{q}\!R$: l'entropie de Rényi d'ordre $q$.
+
+\noindent $r_s$: la fréquence de l'espèce $s$ dans un échantillon.
 
 \noindent $S$: le nombre d'espèces d'une communauté, considéré comme une variable aléatoire, estimé par $\hat{S}$. 
 
