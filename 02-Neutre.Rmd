@@ -1,6 +1,7 @@
 # (PART) Diversité neutre d'une communauté {-}
 
-# Mesures classiques de la diversité $\alpha$ ou $\gamma$ {#chap-MesuresNeutres}
+
+# Des indices de diversité aux nombres de Hill {#chap-MesuresNeutres}
 
 ```{r}
 #| label: MesuresNeutres
@@ -12,8 +13,15 @@ library("gridExtra")
 
 ::: {.Summary data-latex=""}
 Les indices classiques de diversité sont ceux de Shannon et de Simpson, et la richesse spécifique.
-Ils peuvent être estimés à partir des données d'inventaire.
-L'estimation de la richesse est particulièrement difficile et fait l'objet d'une abondante littérature: les estimateurs non-paramétriques (Chao et Jackknife) sont les plus utilisés.
+
+L'entropie est la surprise moyenne apportée par l'observation des individus d'une communauté, d'autant plus grande qu'un individu appartient à une espèce plus rare. 
+L'entropie HCDT permet d'unifier les indices classiques de diversité : son paramètre, appelé ordre, fixe l'importance donnée aux espèces rares. 
+L'entropie d'ordre 0 est la richesse; celle d'ordre 1, l'indice de Shannon; celle d'ordre 2, celui de Simpson.
+L'entropie est la moyenne du logarithme déformé de la rareté des espèces, définie comme l'inverse de leur probabilité.
+
+L'entropie va de pair avec la diversité au sens strict (Nombres de Hill): le nombre d'espèces équiprobables dont l'entropie est la même que celle de la communauté réelle. 
+La diversité est l'exponentielle déformée de l'entropie. 
+Les profils de diversité représentent la diversité en fonction de son ordre et permettent la comparaison de communautés.
 :::
 
 Les mesures classiques [@Peet1974] considèrent que chaque classe d'objets est différente de toutes les autres, sans que certaines soient plus ou moins semblables. 
@@ -24,7 +32,9 @@ La diversité neutre est souvent appelée diversité taxonomique [@Devictor2010;
 Ce type de mesure n'a de sens qu'à l'intérieur d'un taxocène bien défini: sommer un nombre d'espèces d'insectes à un nombre d'espèces de mammifères a peu d'intérêt.
 Ces méthodes ne sont donc pas forcément les plus adaptées à la conservation: à grande échelle, des indicateurs de biodiversité [@Balmford2003] peuvent être plus pertinents. 
 D'autre part, les communautés sont considérées comme limitées, avec un nombre d'espèces fini: la courbe d'accumulation des espèces atteint donc théoriquement une asymptote quand l'effort d'inventaire est suffisant.
-Cette approche est opposée à celle, traitée dans les chapitres \@ref(chap-Fisher) et suivants, qui considère que la diversité augmente indéfiniment avec la surface [@Williamson2001], que ce soit par changement d'échelle (élargir l'inventaire ajoute de nouvelles communautés) ou, plus théoriquement, parce que les communautés réelles sont considérées comme un tirage aléatoire parmi une infinités d'espèces [@Fisher1943].
+Cette approche est opposée à celle, traitée dans les chapitres \@ref(chap-Fisher) et suivants, qui considère que la diversité augmente indéfiniment avec la surface [@Williamson2001], que ce soit par changement d'échelle (élargir l'inventaire ajoute de nouvelles communautés) ou, plus théoriquement, parce que les communautés réelles sont considérées comme un tirage aléatoire parmi une infinité d'espèces [@Fisher1943].
+
+TODO
 
 Les mesures présentées ici sont les plus utilisées: richesse, indices de Shannon et de Simpson, et l'indice de Hurlbert. 
 Elles sont sujettes à des biais d'estimation [@Mouillot1999], notamment (mais pas seulement) à cause des espèces non échantillonnées.
@@ -35,13 +45,664 @@ Au chapitre suivant, l'entropie HCDT permettra d'unifier ces mesures et les nomb
 ## Richesse spécifique {#sec-Richesse}
 
 La richesse est tout simplement le nombre d'espèces présentes dans le taxocène considéré.
-C'est la mesure conceptuellement la plus simple mais pratiquement la plus délicate dans des systèmes très riches comme les forêts tropicales: même avec des efforts d'inventaire considérables, il n'est en général pas possible de relever toutes les espèces rares, ce qui implique de recourir à des modèles mathématiques pour en estimer le nombre.
 
-On ne fait pas de supposition sur la forme de la SAD (voir section \@ref(sec-SAD)) quand on utilise des méthodes d'estimation non paramétriques. 
+C'est la mesure conceptuellement la plus simple mais pratiquement la plus délicate dans des systèmes très riches comme les forêts tropicales: même avec des efforts d'inventaire considérables, il n'est en général pas possible de relever toutes les espèces rares, ce qui implique de recourir à des modèles mathématiques pour en estimer le nombre, détaillés en section \@ref(#sec-est-Richesse).
+
+La détermination des genres est plus facile et fiable que celle des espèces, le biais d'échantillonnage moins sensible (il est plus facile d'observer au moins un individu d'un genre que de chacune de ses espèces), et les coûts d'inventaire sont généralement largement réduits [@Balmford1996b].
+Le choix d'estimer la diversité de taxons de rang supérieur (genres ou même familles au lieu des espèces) est envisageable [@Williams1994].
+
+Empiriquement, la corrélation entre la richesse générique et la richesse spécifique (des angiospermes, des oiseaux et des mammifères) est bonne en forêt tropicale [@Balmford1996a], suffisante pour comparer les communautés, même si la prédiction de la richesse spécifique à partir de la richesse générique est très imprécise. 
+
+@Cartozo2008 ont montré que le nombre de taxons de niveau supérieur (genre par rapport aux espèces, ordres par rapport aux sous-ordres) est universellement proportionnel au nombre de taxons du niveau immédiatement inférieur à la puissance 0,61. 
+Cette relation est validée à l'échelle mondiale pour les systèmes végétaux. 
+La loi de puissance reste valide pour des assemblages aléatoires, c'est donc la conséquence de propriétés mathématiques [@Caldarelli2002], mais la puissance de la relation est plus élevée (les communautés réelles sont plus agrégées du point de vue phylogénétique que sous l'hypothèse nulle d'un assemblage aléatoire) et varie entre les niveaux. 
+
+
+## Indice de Shannon
+
+L'indice de Shannon [@Shannon1948; @Shannon1963], aussi appelé indice de Shannon-Weaver ou Shannon-Wiener [@Spellerberg2003], ou simplement *entropie* est dérivé de la théorie de l'information:
+
+\begin{equation}
+  (\#eq:Shannon)
+  H = -\sum^S_{s=1}{p_s\ln{p_s}}.
+\end{equation}
+
+Considérons une placette forestière contenant $S$ espèces végétales différentes. 
+La probabilité qu'une plante choisie au hasard appartienne à l'espèce $s$ est notée $p_s$. 
+On prélève $n$ plantes, et on enregistre la liste ordonnée des espèces des $n$ plantes. 
+Si $n$ est suffisamment grand, le nombre de plantes de l'espèce $s$ est $np_s$. 
+On note $L$ le nombre de listes respectant ces conditions:
+
+\begin{equation}
+  (\#eq:ShannonL)
+  L = \frac{n!}{\prod^S_{i=1}{\left( {np}_s \right)!}}.
+\end{equation}
+
+Ce résultat est obtenu en calculant le nombre de positions possibles dans la liste pour les individus de la première espèce: $\binom{n}{np_1}$. 
+Le nombre de positions pour la deuxième espèce est $\binom{n-np_1}{np_2}$. 
+Pour la $S$-ième espèce, le nombre est $\binom{n-np_1-\dots -np_{s-1}}{np_i}$.
+Les produits de combinaisons se simplifient pour donner l'équation \@ref(eq:ShannonL).
+
+On peut maintenant écrire le logarithme de $L$:
+$$\ln{L} = \ln{n!} - \sum^S_{s=1}{\ln{np_s}!}.$$ 
+On utilise l'approximation de Stirling, 
+$$\ln{n!} \approx n \ln{n} - n,$$
+pour obtenir après simplifications:
+
+\begin{equation}
+  (\#eq:ShannonlnL)
+  \ln{L} = -n \sum^S_{s=1}{p_s \ln{p_s}}.
+\end{equation}
+
+$H = (\ln{L}) / n$ est l'indice de Shannon. 
+Ce résultat est connu sous le nom de formule de @Brillouin1962. 
+À l'origine, Shannon a utilisé un logarithme de base 2 pour que $H$ soit le nombre moyen de questions binaires (réponse oui ou non) nécessaire pour identifier l'espèce d'une plante (un caractère utilisé dans une chaîne dans le contexte du travail de Shannon). 
+Les logarithmes naturels, de base 2 ou 10 ont été utilisés par la suite [@Pielou1966a].
+
+La formule \@ref(eq:ShannonlnL) est celle de l'indice de @Theil1967, présenté en détail par @Conceicao2000, à l'origine utilisé pour mesurer les inégalités de revenu puis pour caractériser les structures spatiales en économie. 
+L'indice est proportionnel au nombre de plantes choisies, on peut donc le diviser par $n$ et on obtient l'indice de biodiversité de Shannon. 
+Ces indices ont été définis en choisissant des lettres au hasard pour former des chaînes de caractères. 
+Leur valeur est le nombre de chaînes de caractères différentes que l'on peut obtenir avec l'ensemble des lettres disponibles, c'est-à-dire la quantité d'information contenue dans l'ensemble des lettres. 
+L'indice de Shannon donne une mesure de la biodiversité en tant que quantité d'information.
+
+L'estimateur du maximum de vraisemblance de l'indice est
+
+\begin{equation}
+  (\#eq:EstShannonML)
+  \hat{H} = -\sum^{f_{>0}}_{s=1}{\hat{p}_s \ln{\hat{p}_s}}.
+\end{equation}
+
+
+## Indice de Simpson
+
+On note $p_s$ la probabilité qu'un individu tiré au hasard appartienne à l'espèce $s$. 
+L'indice de @Simpson1949, ou Gini-Simpson, est
+
+\begin{equation}
+  (\#eq:SimpsonE)
+  E = 1 - \sum^{S}_{s = 1}{p^2_s}.
+\end{equation}
+
+Il peut être interprété comme la probabilité que deux individus tirés au hasard soient d'espèces différentes. 
+Il est compris dans l'intervalle $[0 ; 1[$. 
+Sa valeur diminue avec la régularité de la distribution: $E = 0$ si une seule espèce a une probabilité de 1, $E = 1 - 1 / S$ si les $S$ espèces ont la même probabilité $p_s = 1 / S$. 
+La valeur 1 est atteinte pour un nombre infini d'espèces, de probabilités nulles.
+
+Deux autres formes de l'indice sont utilisées. 
+Tout d'abord, la probabilité que deux individus soient de la même espèce, souvent appelée *indice de concentration de Simpson*, qui est celui défini dans l'article original de Simpson:
+
+\begin{equation}
+  (\#eq:SimpsonD)
+  D = \sum^{S}_{s = 1}{p^2_s}.
+\end{equation}
+
+L'indice de Simpson est parfois considéré comme une mesure d'équitabilité [@Olszewski2004] mais il varie avec la richesse: cette approche est donc erronée.
+@Hurlbert1971 l'a divisé par sa valeur maximale $1 - 1 / S$ pour obtenir une mesure d'équitabilité valide généralisée plus tard par @Mendes2008, voir section \@ref(sec-Mendes).
+
+Un historique de la définition de l'indice, de @Gini1912 à Simpson, inspiré par Turing, est fourni par Ellerman [-@Ellerman2013].
+
+
+## Entropie
+
+L'entropie peut être entendue comme la surprise moyenne fournie par l'observation d'un échantillon. 
+C'est intuitivement une bonne mesure de diversité [@Pielou1975]. 
+Ses propriétés mathématiques permettent d'unifier les mesures de diversité dans un cadre général.
+
+### Définition de l'entropie
+
+Les textes fondateurs sont @Davis1941 et surtout @Theil1967 en économétrie, et Shannon [-@Shannon1948; -@Shannon1963] pour la théorie de l'information. 
+Une revue est fournie par @Maasoumi1993.
+
+Considérons une expérience dont les résultats possibles sont $\{y_1, y_2, \dots , \ y_S\}$. 
+La probabilité d'obtenir $y_s$ est $p_s$, et $\mathbf{p}=(p_1, p_2, \dots, p_S)$ est le vecteur composé des probabilités d'obtenir chaque résultat. 
+Les probabilités sont connues *a priori*. 
+Tout ce qui suit est vrai aussi pour des valeurs de $y$ continues, dont on connaîtrait la densité de probabilité.
+
+On considère maintenant un échantillon de valeurs de $y$. 
+La présence de $y_s$ dans l'échantillon est peu étonnante si $p_s$ est grande: elle apporte peu d'information supplémentaire par rapport à la simple connaissance des probabilités. 
+En revanche, si $p_s$ est petite, la présence de $y_s$ est surprenante. 
+On définit donc une fonction d'information, $I(p_s)$, décroissante quand la probabilité augmente, de $I(0) > 0$ (éventuellement $+\infty$) à $I(1) = 0$, parce qu'observer un résultat certain n'apporte aucune information. 
+Chaque valeur observée dans l'échantillon apporte une certaine quantité d'information, dont la somme est l'information de l'échantillon. 
+@Patil1982 appellent l'information "rareté", mais nous ne les suivrons pas.
+
+La quantité d'information attendue de l'expérience est $\sum^S_{s=1}{p_s I(p_s) = H(\mathbf{p})}$. 
+Si on choisit $I(p_s) = -\ln(p_s)$, $H(\mathbf{p})$ est l'indice de Shannon, mais bien d'autres formes de $I(p_s)$ sont possibles. 
+$H(\mathbf{p})$ est appelée *entropie*. 
+C'est une mesure de l'incertitude (de la volatilité) du résultat de l'expérience. 
+Si le résultat est certain (une seule valeur $p_1$ vaut 1), l'entropie est nulle. 
+L'entropie est maximale quand les résultats sont équiprobables.
+
+Si $\mathbf{p}$ est la distribution des probabilité des espèces dans une communauté, @Patil1982 montrent que:
+
+* Si $I(p_s) = (1 - p_s) / {p_s}$, alors $H(\mathbf{p})$ est le nombre d'espèces $S$ moins 1;
+* Si $I(p_s) = -\ln(p_s)$, alors $H(\mathbf{p})$ est l'indice de Shannon;
+* Si $I(p_s) = 1 - p_s$, alors $H(\mathbf{p})$ est l'indice de Simpson.
+
+
+(ref:IFig) Fonctions d'information utilisées dans le nombre d'espèces (trait plein), l'indice de Shannon (pointillés longs) et l'indice de Simpson (pointillés). L'information apportée par l'observation d'espèces rares décroît du nombre d'espèces à l'indice de Simpson.
+```{r}
+#| label: IFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'ICode'
+#| fig.cap: "(ref:IFig)"
+```
+
+Ces trois fonctions d'information sont représentées en figure \@ref(fig:IFig).
+
+Le code R nécessaire pour réaliser la figure est:
+```{r}
+#| label: IFig
+#| eval: false
+I0 <- function(p) (1- p) / p
+I1 <- function(p) -log(p)
+I2 <- function(p) 1 - p
+tibble(x = c(0, 1)) %>% 
+  ggplot(aes(x)) + 
+    stat_function(fun = I0) +
+    stat_function(fun = I1, lty = 2) +
+    stat_function(fun = I2, lty = 3) +
+    coord_cartesian(ylim = c(0, 10)) +
+    labs(x = "p", y = "I(p)")
+```
+
+
+(ref:EntropieFig) Valeur de $p_{s}I(p_s)$ dans le nombre d'espèces (trait plein), l'indice de Shannon (pointillés longs) et l'indice de Simpson (pointillés). Les espèces rares contribuent peu, sauf pour le nombre d'espèces.
+```{r}
+#| label: EntropieFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'EntropieCode'
+#| fig.cap: "(ref:EntropieFig)"
+```
+
+
+La contribution de chaque espèce à la valeur totale de l'entropie est représentée figure \@ref(fig:EntropieFig).
+
+Code R:
+```{r}
+#| label: EntropieCode
+#| eval: false
+H0 <- function(p) 1 - p
+H1 <- function(p) -p * log(p)
+H2 <- function(p) p * (1 - p)
+tibble(x = c(0.001, 1)) %>% 
+  ggplot(aes(x)) + 
+    stat_function(fun = H0) +
+    stat_function(fun = H1, lty = 2) +
+    stat_function(fun = H2, lty = 3) +
+    labs(x = "p", y = "H(p)")
+```
+
+### Approche axiomatique {#sec-Axiomes}
+
+@MacArthur1955 est le premier à avoir introduit la théorie de l'information en écologie [@Ulanowicz2001]. 
+MacArthur s'intéressait aux réseaux trophiques et cherchait à mesurer leur stabilité: l'indice de Shannon qui comptabilise le nombre de relations possibles lui paraissait une bonne façon de l'évaluer. 
+Mais l'efficacité implique la spécialisation, ignorée dans $H$ qui est une mesure neutre (toutes les espèces y jouent le même rôle). 
+MacArthur a abandonné cette voie.
+
+Les premiers travaux consistant à généraliser l'indice de Shannon pour mesurer la diversité sont dus à @Renyi1961. 
+L'entropie d'ordre $q$ de Rényi est
+
+\begin{equation}
+^{q}\!R =\frac{1}{1 - q \ln\sum^S_{q=1}{p^q_s}}.
+\end{equation}
+
+L'entropie de Rényi a connu un succès important en tant que seule mesure d'entropie généralisée jusqu'à la diffusion de l'entropie HCDT.
+Son défaut est qu'elle n'est pas forcément concave [@Beck2009], ce qui empêche sa décomposition (voir chapitre \@ref(chap-DedompHCDT)).
+
+Rényi pose également les axiomes pour une mesure d'entropie $R(\mathbf{p})$, où $\mathbf{p}=(p_1, p_2, \dots, p_S)$:
+
+* La symétrie: les espèces doivent être interchangeables, aucune n'a de rôle particulier et leur ordre est indifférent;
+* La mesure doit être continue par rapport aux probabilités;
+* La valeur maximale est atteinte si toutes les probabilités sont égales.
+
+Il montre que $^{q}\!R$ respecte les 3 axiomes.
+
+@Patil1982 ont montré de plus que:
+
+* L'introduction d'une espèce dans une communauté augmente sa diversité (conséquence de la décroissance de $I(p_s)$);
+* Le remplacement d'un individu d'une espèce fréquente par un individu d'une espèce plus rare augmente l'entropie à condition que $R(\mathbf{p})$ soit concave. 
+Dans la littérature économique sur les inégalités, cette propriété est connue sous le nom de Pigou-Dalton [@Dalton1920].
+La maximisation de l'entropie est atteinte quand aucun remplacement n'est plus possible, c'est-à-dire quand toutes les probabilités sont égales.
+
+Ces axiomes sont donc tous validés par des fonctions d'information décroissantes et concaves: dans ce cadre, il toute entropie est une mesure de diversité acceptable.
+
+
+### Entropie HCDT
+
+@Tsallis1988 propose une classe de mesures appelée entropie généralisée, définie par @Havrda1967 pour la première fois et redécouverte plusieurs fois, notamment par @Daroczy1970, d'où son nom *entropie HCDT* (voir @Mendes2008, page 451, pour un historique complet):
+
+\begin{equation}
+  (\#eq:HCDT)
+  ^{q}\!H = \frac{1}{q-1} \left( 1 - \sum^S_{s=1}{p^q_s} \right).
+\end{equation}
+
+Tsallis a montré que les indices de Simpson et de Shannon étaient des cas particuliers d'entropie généralisée, retrouvant, sans faire le rapprochement [@Ricotta2005], la définition d'un indice de diversité de @Patil1982.
+
+Ces résultats ont été complétés par d'autres et repris en écologie par @Keylock2005 et Jost [-@Jost2006; -@Jost2007]. 
+Là encore:
+
+* Le nombre d'espèces moins 1 est $^{0}\!H$;
+* L'indice de Shannon est $^{1}\!H$;
+* L'indice de Gini-Simpson est $^{2}\!H$.
+
+L'entropie HCDT est particulièrement attractive parce que sa relation avec la diversité au sens strict est simple, après introduction du formalisme adapté (les logarithmes déformés). 
+Son biais d'estimation peut être corrigé globalement, et non seulement pour les cas particuliers (nombre d'espèces, Shannon, Simpson). 
+Enfin, sa décomposition sera présentée en détail dans le chapitre \@ref(chap-DedompHCDT).
+
+### Logarithmes déformés
+
+L'écriture de l'entropie HCDT est largement simplifiée en introduisant le formalisme des logarithmes déformés [@Tsallis1994]. 
+Le logarithme d'ordre $q$ est défini par
+\begin{equation}
+  (\#eq:lnq)
+  \ln_q{x} = \frac{x^{1-q} - 1}{1 - q},
+\end{equation}
+dont la forme est identique à la transformation de @Box1964 utilisée en statistiques pour normaliser une variable.
+
+Le logarithme déformé converge vers le logarithme naturel quand $q \to 1$ (figure \@ref(fig:lnqFig)).
+
+(ref:lnqFig) Valeur du logarithme d'ordre $q$ de probabilités entre 0 et 1 pour différentes valeurs de $q$: $q = 0$ (pointillés longs rouges), la courbe est une droite; $q = 1$ (trait plein): logarithme naturel; $q = 2$ (pointillés courts bleus): la courbe a la même forme que le logarithme naturel pour les valeurs positives de $q$; $q = -1$ (pointillés alternés verts): la courbe est convexe pour les valeurs négatives de $q$.
+```{r}
+#| label: lnqFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'lnqCode'
+#| fig.cap: "(ref:lnqFig)"
+```
+
+
+Le code R nécessaire pour réaliser la figure est:
+```{r}
+#| label: lnqCode
+#| eval: false
+ln0 <- function(p) lnq(p, 0)
+ln2 <- function(p) lnq(p, 2)
+lnm1 <- function(p) lnq(p, -1)
+tibble(x = c(0, 1)) %>% 
+  ggplot(aes(x)) + 
+    stat_function(fun = log) +
+    stat_function(fun = ln0, lty = 2, col = "red") +
+    stat_function(fun = ln2, lty = 3, col = "blue") +
+    stat_function(fun = lnm1, lty = 4, col = "green") +
+    coord_cartesian(ylim = c(-4, 0)) +
+    labs(x = "p", y = expression(ln[q](p)))
+```
+
+
+Sa fonction inverse est l'exponentielle d'ordre $q$:
+
+\begin{equation}
+  (\#eq:expq)
+  e^x_q = \left[ 1 + \left( 1 - q \right) x \right]^{\frac{1}{1 - q}}.
+\end{equation}
+
+Enfin, le logarithme déformé est subadditif:
+
+\begin{equation}
+  (\#eq:lnqsubadd)
+  \ln_q\left( xy \right)
+  = \ln_q{x} + \ln_q{y} 
+    - \left( q - 1 \right) \left( \ln_q{x} \right) \left( \ln_q{y} \right).
+\end{equation}
+
+Ses propriétés sont les suivantes:
+
+\begin{equation}
+  (\#eq:lnqinv)
+  \ln_q\frac{1}{x} = -x^{q - 1} \ln_q{x};
+\end{equation}
+
+\begin{equation}
+  (\#eq:lnqprod)
+  \ln_q\left( xy \right) = \ln_q{x} + x^{1-q} \ln_q{y};
+\end{equation}
+
+\begin{equation}
+  (\#eq:lnqdiv)
+  \ln_q\left( \frac{x}{y} \right)
+  = \ln_q{x} - {\left( \frac{x}{y} \right)}^{1 - q} \ln_q{y};
+\end{equation}
+
+et
+
+\begin{equation}
+  (\#eq:expqsum)
+  e^{x + y}_q = e_q^x e_q^{\frac{y}{1 + \left( 1 - q \right) x}}.
+\end{equation}
+
+Si $q > 1$, $\mathop{\lim}_{x \to +\infty}(\ln_q{x}) = {1} / {(q - 1)}$, donc $e_q^x$ n'est pas définie pour $x > 1 / (q - 1).$
+
+La dérivée du logarithme déformé est, quel que soit $q$,
+\begin{equation}
+  (\#eq:lnqprime)
+  \ln'_q\left( x \right) = x^{-q}.
+\end{equation}
+
+Les dérivées première et seconde de l'exponentielle déformée sont, quel que soit $q$:
+\begin{equation}
+  (\#eq:expqprime)
+  \exp'_q\left( x \right) = \left( e_q^x \right)^{q};
+\end{equation}
+\begin{equation}
+  (\#eq:expqsec)
+  \exp''_q\left( x \right) = \left( e_q^x \right)^{2q - 1}.
+\end{equation}
+
+Ces fonctions sont implémentées dans le package *divent*: `ln_q(x, q)` et `exp_q(x, q)`.
+
+L'entropie d'ordre $q$ s'écrit
+
+\begin{equation}
+  (\#eq:EntropieHCDT)
+  ^{q}\!H 
+  = \frac{1}{q - 1} \left( 1 - \sum^S_{s=1}{p^q_s} \right)
+  = -\sum_s{p^q_s} \ln_q{p_s}
+  = \sum_s{p_s}{\ln_q\frac{1}{p_s}}.
+\end{equation}
+
+Ces trois formes sont équivalentes mais les deux dernières s'interprètent comme une généralisation de l'entropie de Shannon [@Marcon2014a].
+La dernière est la plus intéressante parce qu'elle permet de définir l'entropie en général comme la moyenne du logarithme de l'inverse des probabilités, que nous appellerons la rareté des espèces.
+
+Le calcul de $^{q}\!H$ peut se faire avec la fonction `ent_tsallis` de la librairie *divent*:
+
+```{r}
+#| label: Tsallis
+ent_tsallis(bci_prob, q = 1.5)
+```
+
+
+## Nombres de Hill
+
+### Définition 
+
+@Hill1973 transforme l'entropie de Rényi en *nombres de Hill*, qui en sont simplement l'exponentielle:
+
+\begin{equation}
+  (\#eq:Hill1973)
+  ^{q}\!D = {\left(\sum^S_{s=1}{p^q_s}\right)}^{\frac{1}{1 - q}}.
+\end{equation}
+
+Appliqués à l'entropie HCDT, les nombres de Hill en sont l'exponentielle déformée du même ordre.
+
+Le souci de Hill était de rendre les indices de diversité intelligibles après l'article remarqué de @Hurlbert1971 intitulé "le non-concept de diversité spécifique". 
+Hurlbert reprochait à la littérature sur la diversité sa trop grande abstraction et son éloignement des réalités biologiques, notamment en fournissant des exemples dans lesquels l'ordre des communautés n'est pas le même selon l'indice de diversité choisi. 
+Les nombres de Hill sont le nombre d'espèces équiprobables donnant la même valeur de diversité que la distribution observée. 
+Ils sont des transformations simples des indices classiques:
+
+* $^{0}\!D$ est le nombre d'espèces;
+* $^{1}\!D = e^H$, l'exponentielle de l'indice de Shannon;
+* $^{2}\!D = {1} / {(1- E)}$, l'inverse de l'indice de concentration de Simpson, connu sous le nom d'indice de @Stoddart1983.
+
+Ces résultats avaient déjà été obtenus avec une autre approche par @MacArthur1965 et repris par @Adelman1969 dans la littérature économique.
+
+Les nombres de Hill sont des "nombres effectifs" ou "nombres équivalents". 
+Le concept a été défini rigoureusement par @Gregorius1991, d'après @Wright1931, qui avait le premier défini la taille effective d'une population: étant donné une variable caractéristique (ici, l'entropie) fonction seulement d'une variable numérique (ici, le nombre d'espèces), dans un cas idéal (ici, l'équiprobabilité des espèces), le nombre effectif est la valeur de la variable numérique pour laquelle la variable caractéristique est celle du jeu de données.
+
+### Moyenne généralisée
+
+La moyenne généralisée d'ordre $r$ [@Hardy1952], *generalized mean* ou *power mean* en anglais, est définie pour une distribution de valeurs de $x_s$ dont la probabilité d'occurrence est $p_s$ par
+
+\begin{equation}
+  (\#eq:Hardy1952)
+  \bar{x}={\left(\sum_s{p_s x^r_s}\right)}^{\frac{1}{r}}.
+\end{equation}
+
+(ref:MoyenneHardyFig) Moyenne généralisée d'ordre $r$ (en abscisse) d'une distribution uniforme de 10000 valeurs tirées entre 0 et 1. La moyenne arithmétique 0,5 est obtenue pour $r=1$. La moyenne généralisée tend vers la plus petite valeur (près de 0) quand $r\to -\infty$, et vers la plus grande valeur (près de 1) quand $r\to +\infty$.
+```{r}
+#| label: MoyenneHardyFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'MoyenneHardyCode'
+#| fig.cap: "(ref:MoyenneHardyFig)"
+```
+
+
+La moyenne généralisée se réduit à la moyenne arithmétique pondérée pour $r=1$. 
+Elle donne un fort poids aux petites valeurs de $x_s$ dans la moyenne pour les faibles valeurs de $r$ (qui peuvent être négatives), et un fort poids aux grandes valeurs quand $r$ est grand (figure \@ref(fig:MoyenneHardyFig)).
+
+Le code R nécessaire pour réaliser la figure est:
+```{r MoyenneHardyCode, eval=FALSE, tidy=FALSE}
+X <- runif(10000)
+# La moyenne n'est pas définie à r=0, décalage de 10^-8
+r <- seq(-5, 10, .1) + 1E-8
+# Préparation des données
+df <- data.frame(r, Moyenne = sapply(r, function(r) (mean(X^r))^(1/r)))
+ggplot(df, aes(x = r, y = Moyenne)) +
+  geom_line() +
+  geom_hline(yintercept = .5, lty = 2) +
+  geom_vline(xintercept = 1, lty = 2)
+```
+
+Les nombres de Hill peuvent être réécrits [@Leinster2012] sous la forme d'une moyenne généralisée:
+
+\begin{equation}
+  (\#eq:HillHardy)
+  ^{q}\!D = {\left(\sum^S_{s=1}{p_s}\left(\frac{1}{p_s}\right)^{1 - q}\right)}^{\frac{1}{1-q}}.
+\end{equation}
+
+La diversité est donc la moyenne généralisée d'ordre $1 - q$ de la rareté des espèces.
+Quand $q$ est grand, $1-q$ est petit: la moyenne généralisée surpondère les espèces les moins rares.
+
+Cette définition ne repose pas sur l'entropie.
+
+Une application immédiate de cette définition est que la diversité d'une communauté d'espèces équiprobables est égale à leur rareté: $S$ espèces de probabilité $1 / S$, donc de rareté égale à $S$, forment une communauté de diversité égale à $S$, quel que soit l'ordre considéré, conformément à la définition des nombres effectifs.
+
+
+## Synthèse : entropie et diversité 
+
+La rareté d'une espèce est définie par $1/p_s$.
+Le logarithme (déformé) de la rareté définit l'information.
+
+L'entropie est l'espérance de l'information:
+
+\begin{equation}
+  (\#eq:HlnD)
+  ^{q}\!H = \sum_s{{p_s} \ln_q\frac{1}{p_s}}.
+\end{equation}
+
+La diversité est son exponentielle:
+
+\begin{equation}
+  (\#eq:DexpH)
+  ^{q}\!D = e_q^{^{q}\!H}.
+\end{equation}
+
+La diversité (d'ordre $q$) est aussi la rareté moyenne (d'ordre $1 - q$).
+
+L'entropie est utile pour les calculs: la correction des biais d'estimation notamment.
+Les nombres de Hill, ou *nombres équivalents d'espèces* ou *nombres effectif d'espèces* permettent une appréhension plus intuitive de la notion de biodiversité [@Jost2006]. 
+En raison de leurs propriétés, notamment de décomposition (voir le chapitre \@ref(chap-DedompHCDT)), @Jost2007 les appelle "vraie diversité". 
+@Hoffmann2008 critiquent cette définition totalitaire et fournissent une revue historique plus lointaine sur les origines de ces mesures.
+@Jost2009 reconnaît qu'un autre terme aurait pu être choisi ("diversité neutre" ou "diversité mathématique" par exemple).
+
+@Dauby2012 écrivent "diversité au sens strict"; @Gregorius2010, "diversité explicite".
+
+Quoi qu'il en soit, les nombres de Hill respectent le principe de réplication (voir @Chao2010, section 3 pour une discussion et un historique): si $I$ communautés de même taille, de même niveau de diversité $D$, mais sans espèces en commun sont regroupées dans une méta-communauté, la diversité de la méta-communauté doit être $I \times D$.
+
+L'intérêt de ces approches est de fournir une définition paramétrique de la diversité, qui donne plus ou moins d'importance aux espèces rares:
+
+* $^{-\infty}\!D = 1 / \min(\mathbf{p})$ est l'inverse de la proportion de la communauté représentée par l'espèce la plus rare (toutes les autres espèces sont ignorées).
+Le biais d'estimation est incontrôlable: l'espèce la plus rare n'est pas dans l'échantillon tant que l'inventaire n'est pas exhaustif;
+* $^{0}\!D$ est le nombre d'espèces (alors que $^{0}\!H$ est le nombre d'espèces moins 1). 
+C'est la mesure classique qui donne le plus d'importance aux espèces rares: toutes les espèces ont la même importance, quel que soit leur effectif en termes d'individus.
+Il est bien adapté à une approche patrimoniale, celle du collectionneur qui considère que l'existence d'une espèce supplémentaire a un intérêt en soi, par exemple parce qu'elle peut contenir une molécule valorisable. 
+Comme les espèces rares sont difficiles à échantillonner, le biais d'estimation est très important, et sa résolution a généré une littérature en soi (section \@ref(sec-Richesse));
+* $^{1}\!D$ est l'exponentielle de l'indice de Shannon donne la même importance à tous les individus. 
+Il est adapté à une approche d'écologue, intéressé par les interactions possibles: le nombre de combinaisons d'espèces en est une approche satisfaisante.
+Le biais d'estimation est sensible;
+* $^{2}\!D$ est l'inverse de l'indice de concentration de Gini-Simpson donne moins d'importance aux espèces rares. 
+@Hill1973 l'appelle "le nombre d'espèces très abondantes". 
+Il comptabilise les interactions possibles entre paires d'individus: les espèces rares interviennent dans peu de paires, et influent peu sur l'indice. 
+En conséquence, le biais d'estimation est très petit; de plus, un estimateur non biaisé existe;
+* $^{\infty}\!D = 1 / d$ est l'inverse de l'indice de Berger-Parker [@Berger1970] qui est la proportion de la communauté représentée par l'espèce la plus abondante: $d = \max(\mathbf{p})$. 
+Toutes les autres espèces sont ignorées.
+
+Le calcul de $^{q}\!D$ peut se faire avec la fonction `div_hill` de la librairie *divent*:
+
+```{r}
+#| label: Dq
+div_hill(bci_prob, q = 1.5)
+```
+
+Les propriétés mathématiques de la diversité ne sont pas celles de l'entropie. 
+L'entropie doit être une fonction concave des probabilités comme on l'a vu plus haut, mais pas la diversité (un exemple de confusion est fourni par @Gadagkar1989, qui reproche à $^{2}\!D$ de ne pas être concave). 
+L'entropie est une moyenne pondérée par les probabilités de la fonction d'information, c'est donc une fonction linéaire des probabilités, propriété importante pour définir l'entropie $\alpha$ (section \@ref(sec-defalpha)) comme la moyenne des entropies de plusieurs communautés, ou l'entropie phylogénétique (chapitre \@ref(chap-Phyloentropie)) comme la moyenne de l'entropie sur les périodes d'un arbre. 
+La diversité n'est pas une fonction linéaire des probabilités: la diversité moyenne n'est en général pas la moyenne des diversités.
+
+
+## Profils de diversité
+
+@Leinster2012, après @Hill1973, @Patil1982, @Tothmeresz1995 et @Kindt2006, recommandent de tracer des profils de diversité, c'est-à-dire la valeur de la diversité $^{q}\!D$ en fonction de l'ordre $q$ (figure \@ref(fig:ProfilDivFig)) pour comparer plusieurs communautés.
+Une communauté peut être déclarée plus diverse qu'une autre si son profil de diversité est au-dessus de l'autre pour toutes les valeurs de $q$. 
+Si les courbes se croisent, il n'y a pas de relation d'ordre [@Tothmeresz1995].
+
+@Lande2000 montrent que si la diversité de Simpson et la richesse de deux communautés n'ont pas le même ordre, alors les courbes d'accumulation du nombre d'espèces en fonction du nombre d'individus échantillonnés se croisent aussi.
+
+(ref:ProfilDivFig) Profils de diversité des quatre carrés de la parcelle 6 de Paracou. Le carré 2 est plus divers que le carré 4, mais pas que les carrés 1 et 3, qui sont plus divers dans les grands ordres de diversité. Le profil de diversité est tracé ici jusqu'à l'ordre $q = 3$.
+```{r}
+#| label: ProfilDivFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'ProfilDivCode'
+#| fig.cap: "(ref:ProfilDivFig)"
+```
+
+Code R pour réaliser la figure \@ref(fig:ProfilDivFig):
+```{r}
+#| label: ProfilDivCode
+#| eval: false
+paracou_6_abd %>%
+  # Transformation des abondances en probabilités
+  # pour ignorer la question de l'estimation
+  as_probabilities() %>% 
+  # Suppression de "subplot_" dans les noms des carrés
+  mutate(site = str_replace(.$site, "subplot_", "")) %>% 
+  # Profil
+  profile_hill(orders = seq(0, 3, .1)) %>%
+  autoplot() +
+  labs(color = "Carré")
+```
+
+@Pallmann2012 ont développé un test statistique pour comparer la diversité de deux communautés pour plusieurs valeurs de $q$ simultanément.
+
+@Liu2006 nomment *séparables* des communautés dont les profils ne se croisent pas.
+Ils montrent que des communautés peuvent être séparables en selon un profil de diversité de $^{q}\!D$ sans l'être forcément selon un profil de diversité de Hurlbert (section \@ref(sec-Hurlbert)), et inversement.
+Ils montrent que les communautés séparables selon un troisième type de profil, celui de la queue de distribution [@Patil1982], le sont dans tous les cas.
+Le profil de la queue de distribution est construit en classant les espèces de la plus fréquente à la plus rare et en traçant la probabilité qu'un individu appartienne à une espèce plus rare que l'espèce en abscisse (figure \@ref(fig:ProfilQueueFig)).
+
+
+(ref:ProfilQueueFig) Profil de queue de distribution calculé pour les carrés de la parcelle 6 de Paracou. En abscisse: rang de l'espèce dans le classement de la plus fréquente à la plus rare; en ordonnée: probabilité qu'un individu de la communauté appartienne à une espèce plus rare. Les profils de queue de distribution se croisent d'autant plus tôt qu'ils se croisent pour de grands ordres de diversité dans la figure \@ref(fig:ProfilDivFig).
+```{r}
+#| label: ProfilQueueFig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'ProfilQueueCode'
+#| fig.cap: "(ref:ProfilQueueFig)"
+```
+
+Code R:
+```{r}
+#| label: ProfilQueueCode
+#| eval: false
+paracou_6_abd %>%
+  # Transformation en probabilités
+  as_probabilities() %>%
+  # Elimination des colonnes de description
+  as.matrix() %>% 
+  # Tri des espèces par ordre croissant de probabilité
+  apply(MARGIN = 1, FUN = sort) %>% 
+  # Cumul des probabilités. Attention: apply a transposé la matrice
+  apply(MARGIN = 2, FUN = cumsum) %>% 
+  # Classement par valeurs décroissantes
+  apply(MARGIN = 2, FUN = rev) %>% 
+  # Création d'un tibble pour le graphique
+  as_tibble() %>% 
+  # Nom des colonnes: 1 à 4
+  rename_with(~ str_replace(., "V", "")) %>% 
+  # Ajout d'une colonne pour l'ordre
+  mutate(rank = seq_len(nrow(.))) %>% 
+  # Création du graphique
+  pivot_longer(cols = -rank) %>% 
+  ggplot() +
+    geom_line(aes(x = rank, y = value, color = name, lty = name)) +
+    scale_x_log10() +
+    labs(
+      x = "Rang de l'espèce", 
+      y = "Probabilité", 
+      color = "Carré",
+      lty = "Carré"
+    ) 
+```
+
+Les coordonnées des points du profil sont définies par
+\begin{equation}
+  (\#eq:ProfilQueue)
+  y(x) = \sum_{s=x+1}^{S}{p_{[s]}},\ x\in \{0, 1, \dots, S\}.
+\end{equation}
+
+$p_{[s]}$ est la probabilité de l'espèce $s$; les espèces sont classées par probabilité décroissante.
+
+Ce profil est exhaustif (toutes les espèces sont représentées) alors que les autres profils de diversité ne sont représentés que pour un intervalle restreint du paramètre et qu'un croisement de courbes peut se produire au-delà.
+En revanche, il ne prend pas en compte les espèces non observées.
+
+@Fattorini1999 proposent un test pour comparer deux profils de queue de distribution à partir d'échantillonnages multiples (nécessaires pour évaluer la variance de chacune des probabilités) mais qui néglige les espèces non observées.
+
+
+# Méthodes pour l'estimation de la diversité
+
+::: {.Summary data-latex=""}
+TODO
+:::
+
+Ce chapitre présente les techniques d'estimation de la diversité asymptotique: c'est une revue de la littérature méthodologique.
+Une grande part de la littérature est consacrée à l'estimation de la richesse parce que c'est la mesure la plus simple et la plus utilisée. 
+Dans une moindre mesure, l'estimation de l'entropie de Shannon a été abondamment étudiée, notamment par la physique statistique.
+Celle de l'entropie de Simpson est anecdotique parce qu'elle est très peu sensible au biais d'estimation: par construction, plus l'ordre de diversité est grand, plus l'importance des espèces rares (responsables du biais) est faible.
+Enfin, l'estimation de l'entropie HCDT en général a connu de grands progrès dans la décennie 2010.
+
+La dernière section du chapitre introduit les méthodes d'estimation de la diversité non-asymptotique, mais à un niveau d'échantillonnage choisi, inférieur à celui des données (on parle alors de raréfaction) ou supérieur (on parle alors d'extrapolation).
+
+
+## Richesse {#sec-est-richesse}
+
+L'estimation de la richesse d'une communauté par son échantillonnage pose de grandes difficultés pratiques: dans un système hyperdivers comme une forêt tropicale humide, beaucoup d'espèces sont rares et nécessitent un effort d'échantillonnage démesuré pour être observées.
+La courbe d'accumulation des espèces (SAC) n'atteint en pratique jamais son asymptote, à l'image d'un carré de 1,65ha de la parcelle 6 de Paracou (figure \@ref(fig:SACP6Fig)).
+
+(ref:SACFig) Courbe d'accumulation des espèces d'arbres du carré 1 de la parcelle 6 de Paracou (1,65ha).
+```{r}
+#| label: SACP6Fig
+#| echo: false
+#| results: 'hide'
+#| ref.label: 'SACCode'
+#| fig.cap: "(ref:SACP6Fig)"
+```
+
+
+Code R pour réaliser la figure \@ref(fig:SACP6Fig):
+```{r}
+#| label: SACP6Code
+#| eval: FALSE
+paracou_6_abd %>% 
+  filter(site == "subplot_1") %>% 
+  accum_hill(q = 0) %>% 
+  autoplot()
+```
+
+Plus l'ordre de la diversité est faible, plus l'importance des espèces rares dans son évalutation est grande.
+La richesse est donc la mesure la plus sensible au biais d'échantillonnage.
+Mais c'est aussi la mesure la plus simple et la plus utilisée: elle a donc été largement étudiée et bénéficie d'une large gamme de techniques d'estimations.
+
+Les méthodes les plus utilisées sont dites non paramétriques.
+Elles ne font pas de supposition sur la forme de la courbe d'accumulation des espèces ni sur la distribution des abondances
 Les estimateurs les plus connus sont ceux de @Chao1984 et le *jackknife* [@Burnham1979].
 
-Une alternative consiste à inférer à partir des données les paramètres d'une SAD choisie, et particulièrement le nombre total d'espèces. 
+Une alternative consiste à inférer à partir des données les paramètres d'une distribution d'abondance choisie.
 Cette approche est bien moins répandue parce qu'elle suppose le bon choix du modèle et est beaucoup plus intensive en calcul.
+
+Enfin, l'extrapolation de la courbe d'accumulation a été proposée par quelques auteurs.
+
 Il n'existe pas de meilleur estimateur universel [@OHara2005] et il peut être efficace d'utiliser plusieurs méthodes d'estimation de façon concurrente sur les mêmes données [@Basset2012].
 
 
@@ -80,7 +741,8 @@ L'espérance du nombre d'espèces observées $\nu$ fois, ${\mathbb E}(f_{\nu})$,
   {\mathbb E}\left( f_{\nu} \right) = \binom{n}{\nu} \sum_s{p_s^\nu \left( 1 - p_s \right)^{n - \nu}}.
 \end{equation}
 
-Le carré de la norme du vecteur en $S$ dimensions dont les coordonnées sont $(1 - p_s)^{n / 2}$ est 
+L'estimation du nombre d'espèces non observées passe par une représentation géométrique.
+Dans un espace à $S$ dimensions, le carré de la norme du vecteur dont les coordonnées sont $(1 - p_s)^{n / 2}$ est 
 $$\sum_s{(1 - p_s)^n},$$
 c'est-à-dire ${\mathbb E}(f_{0})$, l'espérance du nombre d'espèces non observées.
 Celui du vecteur de coordonnées $p_s (1 - p_s)^{n / 2 - 1}$ est 
@@ -201,7 +863,7 @@ où
   {\hat{S}}_\mathit{iChao1} 
   = {\hat{S}}_\mathit{Chao1} 
     + \frac{f_{3}}{4f_{4}}
-    \,\max\left( f_{1} - \frac{f_{2}f_{3}}{2f_{4}} ; 0 \right).
+    \,\max{\left( f_{1} - \frac{f_{2}f_{3}}{2f_{4}} ; 0 \right)}.
 \end{equation}
 
 @Chao2017 étendent l'applicabilité de l'estimateur Chao2 à des données dans lesquelles les espèces sont notées uniquement comme singletons ou doubletons et plus, sans distinction entre doubletons et espèces plus fréquentes.
@@ -259,6 +921,8 @@ Lorsque l'hétérogénéité est très forte, un autre estimateur est plus perfo
 @Chao2010a conseillent d'utiliser le deuxième estimateur dès que ${\hat{\gamma}}^2_\mathit{rare}$ dépasse 0,8. 
 L'estimateur ACE donne normalement une valeur plus grande que Chao1. 
 Si ce n'est pas le cas, la limite des espèces rares $\kappa$ doit être augmentée.
+
+Cet estimateur est bien moins répandu que les précédents, notamment à cause de la nécessité de choisir $\kappa$ sans base théorique.
 
 
 #### L'estimateur jackknife
@@ -950,195 +1614,7 @@ tibble(
 ```
 
 
-
-### Diversité générique
-
-La détermination des genres est plus facile et fiable que celle des espèces, le biais d'échantillonnage moins sensible (le nombre de singletons diminue rapidement en regroupant les données), et les coûts d'inventaire sont généralement largement réduits [@Balmford1996b].
-Le choix d'estimer la diversité de taxons de rang supérieur (genres ou même familles au lieu des espèces) est envisageable [@Williams1994].
-
-Empiriquement, la corrélation entre la richesse générique et la richesse spécifique (des angiospermes, des oiseaux et des mammifères) est bonne en forêt tropicale [@Balmford1996a], suffisante pour comparer les communautés, même si la prédiction de la richesse spécifique à partir de la richesse générique est très imprécise. 
-
-@Cartozo2008 ont montré que le nombre de taxons de niveau supérieur (genre par rapport aux espèces, ordres par rapport aux sous-ordres) est universellement proportionnel au nombre de taxons du niveau immédiatement inférieur à la puissance 0,61. Cette relation est validée à l'échelle mondiale pour les systèmes végétaux. La loi de puissance reste valide pour des assemblages aléatoires, c'est donc la conséquence de propriétés mathématiques [@Caldarelli2002], mais la puissance de la relation est plus élevée (les communautés réelles sont plus agrégées du point de vue phylogénétique que sous l'hypothèse nulle d'un assemblage aléatoire) et varie entre les niveaux. 
-
-
-### Combien y a-t-il d'espèces différentes sur Terre?
-
-La question de l'estimation du nombre total d'espèces génère une abondante littérature. 
-@Mora2011 en font une revue et proposent une méthode nouvelle.
-
-Dans chaque règne, le nombre de taxons de niveaux supérieurs (phylums, classes, ordres, familles et même genres) est estimé par des modèles prolongeant jusqu'à leur asymptote les valeurs connues en fonction du temps. 
-Cette méthode est applicable jusqu'au niveau du genre (figure \@ref(fig:Mora2011), A à E). 
-Le nombre de taxon de chaque niveau est lié à celui du niveau précédent, ce qui est représenté par la figure \@ref(fig:Mora2011), G [@Mora2011, figure 1] sous la forme du relation linéaire entre le logarithme du logarithme du nombre de taxons et le rang (1 pour les phylums, 5 pour les genres). 
-La droite est prolongée jusqu'au rang 6 pour obtenir le nombre d'espèces. 
-Une façon alternative de décrire la méthode est de dire que le nombre de taxons du niveau $n+1$ est égal à celui du niveau $n$ à la puissance $k$. 
-La pente de la droite de la figure est $\ln{k}$. 
-Aucune justification de ce résultat majeur n'est donnée par les auteurs, si ce n'est leur vérification empirique.
-
-Le nombre total d'espèces estimé est 8,7 millions, tous règnes confondus, dans la fourchette des estimations précédentes (de 3 à 100 millions), et nécessitant près de 500 ans d'inventaires au rythme actuel des découvertes [@May2011].
-
-
-(ref:Mora2011) Évolution du nombre de taxons connus en fonction du temps et valeur estimée du nombre total (ligne horizontale grise, A à E). Le nombre d'espèces connues est trop faible pour utiliser cette méthode (F). Il est obtenu par extrapolation de la relation du nombre de taxons d'un niveau à celui du niveau supérieur (G).
-```{r}
-#| label: Mora2011
-#| echo: false
-#| fig._cap: "(ref:Mora2011)"
-knitr::include_graphics('images/Mora2011.png')
-```
-
-En se limitant aux arbres, l'estimation se monte à 16000 espèces pour l'Amazonie [@TerSteege2013], de l'ordre de 5000 pour l'Afrique et entre 40000 et 53000 pour l'ensemble des tropiques [@Slik2015] (donc pour l'ensemble de la planète, le nombre d'espèces non-tropicales étant négligeable).
-Ces estimations sont obtenues par extrapolation du modèle en log-séries (chapitre \@ref(chap-Fisher)) et sont sujettes au paradoxe de Fisher: les espèces représentées par un très petit nombre d'individu dans le modèle, notamment les singletons, sont les plus nombreuses.
-Une discussion approfondie est donnée par @Hubbell2015: les espèces récemment apparues au sens du modèle ne sont pas détectables avant plusieurs générations, créant un décalage entre le nombre d'espèces reconnues par la taxonomie et le modèle.
-
-@Wilson2012 compilent les relevés du nombre d'espèces de plantes vasculaires en fonction de la surface et retiennent uniquement les plus riches à chaque échelle spatiale (du millimètre carré à l'hectare).
-Ces relevés sont tous situés en forêt tropicale ou en prairie tempérée gérée (les perturbations régulières et modérées y favorisent la diversité, conformément à la théorie de la perturbation intermédiaire [@Connell1978]).
-La relation entre le nombre d'espèces et la surface est celle d'Arrhenius.
-Son extrapolation à la surface terrestre donne environ 220000 espèces, comparables à l'estimation de 275000 espèces rapportée par Mora et al.
-
-
-
-## Indice de Simpson
-
-### Définition
-
-On note $p_s$ la probabilité qu'un individu tiré au hasard appartienne à l'espèce $s$. 
-L'indice de @Simpson1949, ou Gini-Simpson, est
-
-\begin{equation}
-  (\#eq:SimpsonE)
-  E = 1 - \sum^{S}_{s=1}{p^2_s}.
-\end{equation}
-
-Il peut être interprété comme la probabilité que deux individus tirés au hasard soient d'espèces différentes. 
-Il est compris dans l'intervalle $\left[ 0 ; 1 \right[$. 
-Sa valeur diminue avec la régularité de la distribution: $E=0$ si une seule espèce a une probabilité de 1, $E = 1 - 1 / S$ si les $S$ espèces ont la même probabilité $p_s = 1 / S$. 
-La valeur 1 est atteinte pour un nombre infini d'espèces, de probabilités nulles.
-
-Deux autres formes de l'indice sont utilisées. 
-Tout d'abord, la probabilité que deux individus soient de la même espèce, souvent appelée *indice de concentration de Simpson*, qui est celui défini dans l'article original de Simpson:
-
-\begin{equation}
-  (\#eq:SimpsonD)
-  D = \sum^{S}_{s=1}{p^2_s}.
-\end{equation}
-
-L'indice de Simpson est parfois considéré comme une mesure d'équitabilité [@Olszewski2004] mais il varie avec la richesse: cette approche est donc erronée.
-@Hurlbert1971 l'a divisé par sa valeur maximale $1 - 1 / S$ pour obtenir une mesure d'équitabilité valide généralisée plus tard par @Mendes2008, voir section \@ref(sec-Mendes).
-Le nombre d'espèces doit être estimé par les méthodes présentées plus haut, pour ne pas dépendre de la taille de l'échantillon.
-
-
-L'estimateur du maximum de vraisemblance de l'indice est
-
-\begin{equation}
-  (\#eq:EstEML)
-  \hat{E} = 1 - \sum^{f_{>0}}_{s=1}{\hat{p}^2_s}.
-\end{equation}
-
-Le calcul de l'indice de Simpson peut se faire avec la fonction `diversity` disponible dans le package *vegan* de R ou avec la fonction `ent_simpson` du package *divent*, qui peut traiter plusieurs sites en même temps:
-
-```{r}
-#| label: Simpson
-paracou_6_abd %>% 
-  # Transformation des abondances en probabilités
-  as_probabilities() %>% 
-  ent_simpson()
-```
-
-Un historique de la définition de l'indice, de @Gini1912 à Simpson, inspiré par Turing, est fourni par Ellerman [-@Ellerman2013].
-
-### Estimation
-
-Définissons l'indicatrice ${{\mathbf 1}}_{sh}$ valant 1 si l'individu $h$ appartient à l'espèce $s$, 0 sinon.
-${{\mathbf 1}}_{sh}$ suit une loi de Bernoulli d'espérance $p_s$ et de variance $p_s \left( 1 - p_s \right)$. 
-$E$ est la somme sur toutes les espèces de cette variance. 
-Un estimateur non biaisé d'une variance à partir d'un échantillon est la somme des écarts quadratiques divisée par le nombre d'observation moins une. 
-L'estimateur $\hat{E}$ est légèrement biaisé parce qu'il est calculé à partir des ${\hat{p}}_s$, ce qui revient à diviser la somme des écarts par $n$, et non $n-1$. 
-Un estimateur non biaisé est [@Good1953; @Lande1996]
-
-\begin{equation} 
-  (\#eq:BiaisSimpson)
-  \tilde{E} 
-  = \left( \frac{n}{n-1} \right) \left( 1 - \sum^{f_{>0}}_{s=1}{{\hat{p}}^2_s} \right).
-\end{equation}
-
-La correction par $n / (n - 1)$ tend rapidement vers 1 quand la taille de l'échantillon augmente: l'estimateur est très peu biaisé.
-
-Le non-échantillonnage des espèces rares est pris en compte dans cette correction parce qu'elle considère que $\tilde{E}$ est l'estimateur de variance d'un échantillon et non d'une population complètement connue. 
-Il est négligeable: si $p_s$ est petit, $p^2_s$ est négligeable dans la somme.
-
-Simpson a fourni un estimateur non biaisé de $D$, à partir du calcul du nombre de paires d'individus tirés sans remise:
-
-\begin{equation}
-  (\#eq:EstSimpson1949)
-  \tilde{D} 
-  = \frac{\sum^{S}_{s=1}{n_s \left( n_s - 1 \right)}}{n \left( n - 1 \right)}.
-\end{equation}
-
-L'argumentation est totalement différente, mais le résultat est le même: $\tilde{E}=1-\tilde{D}$.
-
-La fonction `ent_simpson` de *divent* accepte comme argument un vecteur d'abondances ou un dataframe contenant les données et propose par défaut la correction de Lande:
-
-```{r}
-#| label: Simpsondivent
-paracou_6_abd %>% 
-  ent_simpson()
-```
-
-
-## Indice de Shannon
-
-### Définition
-
-L'indice de Shannon [@Shannon1948; @Shannon1963], aussi appelé indice de Shannon-Weaver ou Shannon-Wiener [@Spellerberg2003], ou simplement *entropie* est dérivé de la théorie de l'information:
-
-\begin{equation}
-  (\#eq:Shannon)
-  H = -\sum^S_{s=1}{p_s\ln{p_s}}.
-\end{equation}
-
-Considérons une placette forestière contenant $S$ espèces végétales différentes. 
-La probabilité qu'une plante choisie au hasard appartienne à l'espèce $s$ est notée $p_s$. 
-On prélève $n$ plantes, et on enregistre la liste ordonnée des espèces des $n$ plantes. 
-Si $n$ est suffisamment grand, le nombre de plantes de l'espèce $s$ est $np_s$. 
-On note $L$ le nombre de listes respectant ces conditions:
-
-\begin{equation}
-  (\#eq:ShannonL)
-  L = \frac{n!}{\prod^S_{i=1}{\left( {np}_s \right)!}}.
-\end{equation}
-
-Ce résultat est obtenu en calculant le nombre de positions possibles dans la liste pour les individus de la première espèce: $\binom{n}{np_1}$. 
-Le nombre de positions pour la deuxième espèce est $\binom{n-np_1}{np_2}$. 
-Pour la $S$-ième espèce, le nombre est $\binom{n-np_1-\dots -np_{s-1}}{np_i}$.
-Les produits de combinaisons se simplifient pour donner l'équation \@ref(eq:ShannonL).
-
-On peut maintenant écrire le logarithme de $L$:
-$$\ln{L} = \ln{n!} - \sum^S_{s=1}{\ln{np_s}!}.$$ 
-On utilise l'approximation de Stirling, 
-$$\ln{n!} \approx n \ln{n} - n,$$
-pour obtenir après simplifications:
-
-\begin{equation}
-  (\#eq:ShannonlnL)
-  \ln{L} = -n \sum^S_{s=1}{p_s \ln{p_s}}.
-\end{equation}
-
-$H = (\ln{L}) / n$ est l'indice de Shannon. 
-Ce résultat est connu sous le nom de formule de @Brillouin1962. 
-À l'origine, Shannon a utilisé un logarithme de base 2 pour que $H$ soit le nombre moyen de questions binaires (réponse oui ou non) nécessaire pour identifier l'espèce d'une plante (un caractère utilisé dans une chaîne dans le contexte du travail de Shannon). 
-Les logarithmes naturels, de base 2 ou 10 ont été utilisés par la suite [@Pielou1966a].
-
-La formule \@ref(eq:ShannonlnL) est celle de l'indice de @Theil1967, présenté en détail par @Conceicao2000, à l'origine utilisé pour mesurer les inégalités de revenu puis pour caractériser les structures spatiales en économie. 
-L'indice est proportionnel au nombre de plantes choisies, on peut donc le diviser par $n$ et on obtient l'indice de biodiversité de Shannon. 
-Ces indices ont été définis en choisissant des lettres au hasard pour former des chaînes de caractères. 
-Leur valeur est le nombre de chaînes de caractères différentes que l'on peut obtenir avec l'ensemble des lettres disponibles, c'est-à-dire la quantité d'information contenue dans l'ensemble des lettres. 
-L'indice de Shannon donne une mesure de la biodiversité en tant que quantité d'information.
-
-L'estimateur du maximum de vraisemblance de l'indice est
-
-\begin{equation}
-  (\#eq:EstShannonML)
-  \hat{H} = -\sum^{f_{>0}}_{s=1}{\hat{p}_s \ln{\hat{p}_s}}.
-\end{equation}
+## Entropie de Shannon {#sec-BiaisShannon}
 
 Le calcul de l'indice de Shannon peut se faire avec la fonction `diversity` disponible dans le package *vegan* de R ou avec la fonction `ent_shannon` de *divent*:
 
@@ -1150,26 +1626,6 @@ bci_abd %>%
 ```
 
 La distribution de l'estimateur est connue [@Hutcheson1970] mais elle est inutile en pratique à cause du biais d'estimation.
-
-@Bulmer1974 établit une relation entre l'indice de Shannon et l'indice $\alpha$ de Fisher, à condition que la distribution de l'abondance des espèces soit log-normale:
-
-\begin{equation}
-  (\#eq:Bulmer1974)
-  \hat{H} 
-  = \mathrm{\Psi} \left( \hat{\alpha} + 1 \right) - \mathrm{\Psi} \left( 1 \right).
-\end{equation}
-
-$\mathrm{\Psi}(\cdot)$ est la fonction digamma, et $\hat{\alpha}$ est l'estimateur de l'indice de Fisher \@ref(eq:AlphaFisher):
-
-```{r}
-#| label: Bulmer
-digamma(fisher.alpha(colSums(BCI)) + 1) - digamma(1)
-```
-
-La sous-estimation est assez sévère sur cet exemple.
-
-
-### Estimation {#sec-BiaisShannon}
 
 @Basharin1959 a montré que l'estimateur naïf de l'indice de Shannon était biaisé parce que des espèces ne sont pas échantillonnées. 
 Si $S$ est le nombre d'espèces réel et $n$ le nombre d'individus échantillonnés, le biais est
@@ -1424,548 +1880,64 @@ ent_shannon(freqs.shrink(c(colSums(BCI), rep(0, bci_f_0))))
 Appliqué à des données de biodiversité aquatique, l'estimateur de James-Stein obtient de meilleurs résultats que celui de Chao et Shen [@Liu2015] quand l'échantillonnage est réduit.
 
 
+## Entropie de Simpson
 
-## Indice de Hurlbert {#sec-Hurlbert}
+Le nombre d'espèces doit être estimé par les méthodes présentées plus haut, pour ne pas dépendre de la taille de l'échantillon.
 
-### Définition
-
-L'indice de @Hurlbert1971 est l'espérance du nombre d'espèces observées dans un échantillon de taille $k$ choisie:
-
-\begin{equation}
-  (\#eq:HurlbertSk)
-  _{k}S = \sum^S_{s=1}{\left[ 1 - {\left( 1 - p_s \right)}^k \right]}.
-\end{equation}
-
-Chaque terme de la somme est la probabilité d'observer au moins une fois l'espèce correspondante.
-
-L'augmentation de la valeur de $k$ permet de donner plus d'importance aux espèces rares.
-
-L'indice peut être converti en nombre équivalent d'espèces [@Dauby2012], c'est-à-dire le nombre d'espèces équiprobables nécessaire pour obtenir la même diversité, notés $_{k}D$ à partir de la relation
+L'estimateur du maximum de vraisemblance de l'indice est
 
 \begin{equation}
-  (\#eq:HurlbertD)
-  _{k}S = {_{k}D} \left[ 1 - {\left( 1 - \frac{1}{_{k}D} \right)}^k \right].
+  (\#eq:EstEML)
+  \hat{E} = 1 - \sum^{f_{>0}}_{s = 1}{\hat{p}^2_s}.
 \end{equation}
 
-L'équation doit être résolue pour obtenir $_{k}D$ à partir de la valeur de $_{k}S$ estimée, numériquement pour $k>3$.
-
-Dans deux cas particuliers, les nombres équivalents d'espèces de Hurlbert sont identiques aux nombres de Hill: $_{2}D = {^{2}\!D}$ et $_{\infty}D = {^{0}\!D}$.
-
-Pour les autres ordres entiers de diversité, il existe une correspondance parfaite entre les deux mesures [@Chao2014, Annexe S2]: la connaissance de l'une permet d'obtenir l'autre. Pour $k>1$, on a [@Leinster2012]
-
-\begin{equation}
-  (\#eq:HurlbertDq)
-  _{k}S = k + \sum_{q=2}^{k}{\binom{k}{q} \left( -1 \right)^{q + 1} \left( ^{q}\!D \right)^{1-q}}.
-\end{equation}
-
-On a vu que $^{0}\!D$ égale $_{\infty}D$, donc $_{\infty}S = {^{0}\!D}$ \@ref(eq:HurlbertD).
-
-Inversement, pour $q > 1$:
-
-\begin{equation}
-  (\#eq:DqHurlbert)
-  (^{q}\!D)^{1-q} = q + \sum_{k=2}^{q}{\binom{q}{k} \left( -1 \right)^{k + 1} {_{k}S}}.
-\end{equation}
-
-Pour $q=1$, la relation est [@Mao2007]
-\begin{equation}
-  (\#eq:Mao2007)
-  ^{1}\!H = -1 + \sum_{k=2}^{\infty}{\frac{_{k}S}{k \left( k - 1 \right)}}.
-\end{equation}
-
-
-### Estimation
-
-Hurlbert fournit un estimateur non biaisé de son indice ($n$ est la taille de l'échantillon, $n_s$ le nombre d'individus de l'espèce $s$):
-
-\begin{equation}
-  (\#eq:EstHurlbert)
-  _k{\tilde{S}}
-  = \sum_{s=1}^{f_{>0}}{\left[ 1-{\binom{n - n_s}{k}}/{\binom{n}{k}} \right]}.
-\end{equation}
-
-@Dauby2012 montrent que cet estimateur est très peu sensible à la taille de l'échantillon, et obtient de meilleurs résultats sur ce point que les estimateurs de Chao et Shen pour l'indice de Shannon ou du nombre d'espèces.
-@Smith1977 ont calculé sa variance.
-
-Le calcul de la diversité de Hurlbert est possible dans *divent*:
+Le calcul de l'indice de Simpson peut se faire avec la fonction `diversity` disponible dans le package *vegan* de R ou avec la fonction `ent_simpson` du package *divent*, qui peut traiter plusieurs sites en même temps:
 
 ```{r}
-#| label: Hurlbert
-# Indice de Hurlbert (probabilités)
-ent_hurlbert(as_probabilities(colSums(BCI)), k = 2)
-# Estimateur sans biais (abondances)
-ent_hurlbert(colSums(BCI), k = 2)
-# Nombre effectif d'espèces
-div_hurlbert(colSums(BCI), k = 2)
+#| label: Simpson
+paracou_6_abd %>% 
+  # Transformation des abondances en probabilités
+  as_probabilities() %>% 
+  ent_simpson()
 ```
 
+Définissons l'indicatrice ${{\mathbf 1}}_{sh}$ valant 1 si l'individu $h$ appartient à l'espèce $s$, 0 sinon.
+${{\mathbf 1}}_{sh}$ suit une loi de Bernoulli d'espérance $p_s$ et de variance $p_s \left( 1 - p_s \right)$. 
+$E$ est la somme sur toutes les espèces de cette variance. 
+Un estimateur non biaisé d'une variance à partir d'un échantillon est la somme des écarts quadratiques divisée par le nombre d'observation moins une. 
+L'estimateur $\hat{E}$ est légèrement biaisé parce qu'il est calculé à partir des ${\hat{p}}_s$, ce qui revient à diviser la somme des écarts par $n$, et non $n-1$. 
+Un estimateur non biaisé est [@Good1953; @Lande1996]
 
-
-# Entropie
-
-::: {.Summary data-latex=""}
-  L'entropie est la surprise moyenne apportée par l'observation des individus d'une communauté, d'autant plus grande qu'un individu appartient à une espèce plus rare.
-  L'entropie HCDT permet d'unifier les indices classiques de diversité: son paramètre, appelé ordre, fixe l'importance donnée aux espèces rares. L'entropie d'ordre 0 est la richesse; celle d'ordre 1, l'indice de Shannon; celle d'ordre 2, celui de Simpson.
-  L'entropie est la moyenne du logarithme déformé de la rareté des espèces, définie comme l'inverse de leur probabilité.
-  
-  L'entropie va de pair avec la diversité au sens strict (Nombres de Hill): le nombre d'espèces équiprobables dont l'entropie est la même que celle de la communauté réelle.
-  La diversité est l'exponentielle déformée de l'entropie.
-  Les profils de diversité représentent la diversité en fonction de son ordre et permettent la comparaison de communautés.
-  
-  L'estimation de la diversité est difficile pour des ordres inférieurs à $0,5$ dans des taxocènes très divers comme les arbres des forêts tropicales.
-:::
-
-
-L'entropie peut être entendue comme la surprise moyenne fournie par l'observation d'un échantillon. 
-C'est intuitivement une bonne mesure de diversité [@Pielou1975]. 
-Ses propriétés mathématiques permettent d'unifier les mesures de diversité dans un cadre général.
-
-## Définition de l'entropie
-
-Les textes fondateurs sont @Davis1941 et surtout @Theil1967 en économétrie, et Shannon [-@Shannon1948; -@Shannon1963] pour la mesure de la diversité. 
-Une revue est fournie par @Maasoumi1993.
-
-Considérons une expérience dont les résultats possibles sont $\{r_1, r_2, \dots , \ r_S\}$. 
-La probabilité d'obtenir $r_s$ est $p_s$, et $\mathbf{p}=(p_1, p_2, \dots, p_S)$ est le vecteur composé des probabilités d'obtenir chaque résultat. 
-Les probabilités sont connues *a priori*. 
-Tout ce qui suit est vrai aussi pour des valeurs de $r$ continues, dont on connaîtrait la densité de probabilité.
-
-On considère maintenant un échantillon de valeurs de $r$. 
-La présence de $r_s$ dans l'échantillon est peu étonnante si $p_s$ est grande: elle apporte peu d'information supplémentaire par rapport à la simple connaissance des probabilités. 
-En revanche, si $p_s$ est petite, la présence de $r_s$ est surprenante. 
-On définit donc une fonction d'information, $I(p_s)$, décroissante quand la probabilité augmente, de $I(0) > 0$ (éventuellement $+\infty$) à $I(1) = 0$, parce qu'observer un résultat certain n'apporte aucune information. 
-Chaque valeur observée dans l'échantillon apporte une certaine quantité d'information, dont la somme est l'information de l'échantillon. 
-@Patil1982 appellent l'information "rareté".
-
-La quantité d'information attendue de l'expérience est $\sum^S_{s=1}{p_s I(p_s) = H(\mathbf{p})}$. 
-Si on choisit $I(p_s) = -\ln(p_s)$, $H(\mathbf{p})$ est l'indice de Shannon, mais bien d'autres formes de $I(p_s)$ sont possibles. 
-$H(\mathbf{p})$ est appelée *entropie*. 
-C'est une mesure de l'incertitude (de la volatilité) du résultat de l'expérience. 
-Si le résultat est certain (une seule valeur $p_S$ vaut 1), l'entropie est nulle. 
-L'entropie est maximale quand les résultats sont équiprobables.
-
-
-Si $\mathbf{p}$ est la distribution des probabilité des espèces dans une communauté, @Patil1982 montrent que:
-
-* Si $I(p_s) = (1 - p_s) / {p_s}$, alors $H(\mathbf{p})$ est le nombre d'espèces $S$ moins 1;
-* Si $I(p_s) = -\ln(p_s)$, alors $H(\mathbf{p})$ est l'indice de Shannon;
-* Si $I(p_s) = 1 - p_s$, alors $H(\mathbf{p})$ est l'indice de Simpson.
-
-
-(ref:IFig) Fonctions d'information utilisées dans le nombre d'espèces (trait plein), l'indice de Shannon (pointillés longs) et l'indice de Simpson (pointillés). L'information apportée par l'observation d'espèces rares décroît du nombre d'espèces à l'indice de Simpson.
-```{r}
-#| label: IFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'ICode'
-#| fig.cap: "(ref:IFig)"
-```
-
-Ces trois fonctions d'information sont représentées en figure \@ref(fig:IFig).
-
-Le code R nécessaire pour réaliser la figure est:
-```{r}
-#| label: IFig
-#| eval: false
-I0 <- function(p) (1- p) / p
-I1 <- function(p) -log(p)
-I2 <- function(p) 1 - p
-tibble(x = c(0, 1)) %>% 
-  ggplot(aes(x)) + 
-    stat_function(fun = I0) +
-    stat_function(fun = I1, lty = 2) +
-    stat_function(fun = I2, lty = 3) +
-    coord_cartesian(ylim = c(0, 10)) +
-    labs(x = "p", y = "I(p)")
-```
-
-
-(ref:EntropieFig) Valeur de $p_{s}I(p_s)$ dans le nombre d'espèces (trait plein), l'indice de Shannon (pointillés longs) et l'indice de Simpson (pointillés). Les espèces rares contribuent peu, sauf pour le nombre d'espèces.
-```{r}
-#| label: EntropieFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'EntropieCode'
-#| fig.cap: "(ref:EntropieFig)"
-```
-
-
-La contribution de chaque espèce à la valeur totale de l'entropie est représentée figure \@ref(fig:EntropieFig).
-
-Code R:
-```{r}
-#| label: EntropieCode
-#| eval: false
-H0 <- function(p) 1 - p
-H1 <- function(p) -p * log(p)
-H2 <- function(p) p * (1 - p)
-tibble(x = c(0.001, 1)) %>% 
-  ggplot(aes(x)) + 
-    stat_function(fun = H0) +
-    stat_function(fun = H1, lty = 2) +
-    stat_function(fun = H2, lty = 3) +
-    labs(x = "p", y = "H(p)")
-```
-
-
-## Entropie relative
-
-Considérons maintenant les probabilités $q_s$ formant l'ensemble $\mathbf{q}$ obtenues par la réalisation de l'expérience. 
-Elles sont différentes des probabilités $p_s$, par exemple parce que l'expérience ne s'est pas déroulée exactement comme prévu. 
-On définit le gain d'information $I(q_s, p_s)$ comme la quantité d'information supplémentaire fournie par l'observation d'un résultat de l'expérience, connaissant les probabilités *a priori*. 
-La quantité totale d'information fournie par l'expérience, $\sum^S_{s=1}{q_s I(q_s, p_s)} = H(\mathbf{q}, \mathbf{p})$, est souvent appelée entropie relative. 
-Elle peut être vue comme une distance entre la distribution *a priori* et la distribution *a posteriori*. 
-Il est possible que les distributions $\mathbf{p}$ et $\mathbf{q}$ soit identiques, que le gain d'information soit donc nul, mais les estimateurs empiriques n'étant pas exactement égaux entre eux, des tests de significativité de la valeur de $\hat{H}(\mathbf{q},\mathbf{p})$ seront nécessaires.
-
-Quelques formes possibles de $H(\mathbf{q}, \mathbf{p})$ sont:
-
-* La divergence de Kullback-Leibler [@Kullback1951] connue par les économistes comme l'indice de dissimilarité de @Theil1967:
-\begin{equation}
-  (\#eq:Theil)
-  T = \sum^S_{s=1}{q_{s}\ln\frac{q_s}{p_s}};
-\end{equation}
-* Sa proche parente, appelée parfois deuxième mesure de Theil [@Conceicao2000], qui inverse simplement les rôles de $p$ et $q$:
-\begin{equation}
-  (\#eq:Theil2)
-  L = \sum^S_{s=1}{p_{s}\ln\frac{p_s}{q_s}}.
+\begin{equation} 
+  (\#eq:BiaisSimpson)
+  \tilde{E} 
+  = \left( \frac{n}{n-1} \right) \left( 1 - \sum^{f_{>0}}_{s=1}{{\hat{p}}^2_s} \right).
 \end{equation}
 
+La correction par $n / (n - 1)$ tend rapidement vers 1 quand la taille de l'échantillon augmente: l'estimateur est très peu biaisé.
 
-(ref:KullbackLeiblerFig) Valeur de $q \ln(q / p)$ en fonction de $p$ et $q$. La divergence de Kullback-Leibler est la somme de cette valeur pour toutes les espèces
-```{r}
-#| label: KullbackLeiblerFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'KullbackLeiblerCode'
-#| fig.cap: "(ref:KullbackLeiblerFig)"
-#| fig.asp: 1
-```
+Le non-échantillonnage des espèces rares est pris en compte dans cette correction parce qu'elle considère que $\tilde{E}$ est l'estimateur de variance d'un échantillon et non d'une population complètement connue. 
+Il est négligeable: si $p_s$ est petit, $p^2_s$ est négligeable dans la somme.
 
-
-L'entropie relative est essentielle pour la définition de la diversité $\beta$ présentée dans le chapitre \@ref(chap-DedompHCDT). 
-En se limitant à la diversité $\alpha$, on peut remarquer que l'indice de Shannon est la divergence de Kullback-Leibler entre la distribution observée et l'équiprobabilité des espèces [@Marcon2012a]. 
-
-La contribution à la divergence de chaque couple $(p_s, q_s)$ est représentées en figure \@ref(fig:KullbackLeiblerFig).
-Elle est positive quand $q_s > p_s$ (la valeur observée est plus grande que la valeur attendue), et croît avec $q_s$ pour $p_s$ fixé.
-Elle tend vers l'infini quand $p_s \to 0$.
-Les valeurs les plus négatives ne sont pas obtenues pour les valeurs minimales de $q$ parce que les évènements très rarement observés influent peu sur la quantité d'information totale.
-Le minimum $-e^{-1} \approx 0.37$ est atteint pour $p_s = 1$ et $q_s = e^{-1}$, la valeur qui annule la dérivée de $q \ln(q)$.
-En somme, la divergence de Kullback-Leibler est surtout influencée par les évènements beaucoup plus observés qu'attendus.
-
-
-Le code R nécessaire pour réaliser la figure est:
-```{r}
-#| label: KullbackLeiblerCode
-#| eval: false
-p <- q <- seq(0.01, 1, .01)
-KB <- function(p, q) q * log(q / p)
-xyz <- outer(p, q, FUN = "KB")
-library("sp")
-image(
-  xyz, 
-  col = rainbow(n = 100, alpha = 0.8), 
-  xlab = "p", 
-  ylab = "q", 
-  asp = 1
-)
-contour(
-  xyz, 
-  levels = c(seq(-.3, 0, .1), c(.2, .5), seq(1, 4, 1)), 
-  labcex = 1, 
-  add = T
-)
-```
-
-
-
-## L'appropriation de l'entropie par la biodiversité
-
-@MacArthur1955 est le premier à avoir introduit la théorie de l'information en écologie [@Ulanowicz2001]. 
-MacArthur s'intéressait aux réseaux trophiques et cherchait à mesurer leur stabilité: l'indice de Shannon qui comptabilise le nombre de relations possibles lui paraissait une bonne façon de l'évaluer. 
-Mais l'efficacité implique la spécialisation, ignorée dans $H$ qui est une mesure neutre (toutes les espèces y jouent le même rôle). 
-MacArthur a abandonné cette voie.
-
-Les premiers travaux consistant à généraliser l'indice de Shannon sont dus à @Renyi1961. 
-L'entropie d'ordre $q$ de Rényi est
+Simpson a fourni un estimateur non biaisé de $D$, à partir du calcul du nombre de paires d'individus tirés sans remise:
 
 \begin{equation}
-^{q}\!R =\frac{1}{1 - q \ln\sum^S_{q=1}{p^q_s}}.
+  (\#eq:EstSimpson1949)
+  \tilde{D} 
+  = \frac{\sum^{S}_{s=1}{n_s \left( n_s - 1 \right)}}{n \left( n - 1 \right)}.
 \end{equation}
 
-Rényi pose également les axiomes pour une mesure d'entropie $R(\mathbf{p})$, où $\mathbf{p}=(p_1, p_2, \dots, p_S)$:
+L'argumentation est totalement différente, mais le résultat est le même: $\tilde{E}=1-\tilde{D}$.
 
-* La symétrie: les espèces doivent être interchangeables, aucune n'a de rôle particulier et leur ordre est indifférent;
-* La mesure doit être continue par rapport aux probabilités;
-* La valeur maximale est atteinte si toutes les probabilités sont égales.
-
-Il montre que $^{q}\!R$ respecte les 3 axiomes.
-
-@Patil1982 ont montré de plus que:
-
-* L'introduction d'une espèce dans une communauté augmente sa diversité (conséquence de la décroissance de $g(p_s)$);
-* Le remplacement d'un individu d'une espèce fréquente par un individu d'une espèce plus rare augmente l'entropie à condition que $R(\mathbf{p})$ soit concave. 
-Dans la littérature économique sur les inégalités, cette propriété est connue sous le nom de Pigou-Dalton [@Dalton1920].
-
-@Hill1973 transforme l'entropie de Rényi en *nombres de Hill*, qui en sont simplement l'exponentielle:
-
-\begin{equation}
-  (\#eq:Hill1973)
-  ^{q}\!D = {\left(\sum^S_{s=1}{p^q_s}\right)}^{\frac{1}{1 - q}}.
-\end{equation}
-
-Le souci de Hill était de rendre les indices de diversité intelligibles après l'article remarqué de @Hurlbert1971 intitulé "le non-concept de diversité spécifique". 
-Hurlbert reprochait à la littérature sur la diversité sa trop grande abstraction et son éloignement des réalités biologiques, notamment en fournissant des exemples dans lesquels l'ordre des communautés n'est pas le même selon l'indice de diversité choisi. 
-Les nombres de Hill sont le nombre d'espèces équiprobables donnant la même valeur de diversité que la distribution observée. 
-Ils sont des transformations simples des indices classiques:
-
-* $^{0}\!D$ est le nombre d'espèces;
-* $^{1}\!D = e^H$, l'exponentielle de l'indice de Shannon;
-* $^{2}\!D = {1} / {(1- E)}$, l'inverse de l'indice de concentration de Simpson, connu sous le nom d'indice de @Stoddart1983.
-
-Ces résultats avaient déjà été obtenus avec une autre approche par @MacArthur1965 et repris par @Adelman1969 dans la littérature économique.
-
-Les nombres de Hill sont des "nombres effectifs" ou "nombres équivalents". 
-Le concept a été défini rigoureusement par @Gregorius1991, d'après @Wright1931 (qui avait le premier défini la taille effective d'une population): étant donné une variable caractéristique (ici, l'entropie) fonction seulement d'une variable numérique (ici, le nombre d'espèces), dans un cas idéal (ici, l'équiprobabilité des espèces), le nombre effectif est la valeur de la variable numérique pour laquelle la variable caractéristique est celle du jeu de données. 
-
-@Gregorius2014 montre que de nombreux autres indices de diversité sont acceptables dans le sens où ils vérifient les axiomes précédents et, de plus, que la diversité d'un assemblage de communautés est obligatoirement supérieure à la diversité moyenne de ces communautés (l'égalité n'étant possible que si les communautés sont toutes identiques). 
-Cette dernière propriété sera traitée en détail dans la partie consacrée à la décomposition de la diversité. 
-Ces indices doivent vérifier deux propriétés: leur fonction d'information doit être décroissante, et ils doivent être une fonction strictement concave de $p_s$. 
-Parmi les possibilités, $I(p_s) = \cos{(p_s \pi / 2)}$ est envisageable par exemple: le choix de la fonction d'information est virtuellement illimité, mais seules quelques unes seront interprétables clairement.
-
-Un nombre équivalent d'espèces existe pour tous ces indices, il est toujours égal à l'inverse de l'image de l'indice par la réciproque de la fonction d'information:
-
-\begin{equation}
-  (\#eq:Gregorius2014)
-  D = \frac{1}{I^{-1} \left( \sum^S_{s=1}{p_s I(p_s)} \right)}.
-\end{equation}
-
-D'autres entropies ont été utilisées, avec plus ou moins de succès.
-Par exemple, @Ricotta2003c proposent d'utiliser la fonction d'information $I(p_s) = -\ln(k_s)$ où $k_s$ est la dissimilarité totale de l'espèce $s$ avec les autres (par exemple, la somme des distances aux autres espèces dans un arbre phylogénétique, voir section \@ref(sec-Dphylo)), normalisée pour que $\sum_s{k_s} = 1$.
-Ainsi, les espèces les plus originales apportent peu d'information, ce qui n'est pas très intuitif.
-Les auteurs montrent que leur mesure est la somme de l'entropie de Shannon et de la divergence de Kullback-Leibler entre les probabilités et les dissimilarités des espèces.
-@Ricotta2006b ont défini plus tard une entropie augmentant avec l'originalité de chaque espèce, présentée au chapitre \@ref(chap-LeinsterCobbold).
-
-
-## Entropie HCDT
-
-@Tsallis1988 propose une classe de mesures appelée entropie généralisée, définie par @Havrda1967 pour la première fois et redécouverte plusieurs fois, notamment par @Daroczy1970, d'où son nom *entropie HCDT* (voir @Mendes2008, page 451, pour un historique complet):
-
-\begin{equation}
-  (\#eq:HCDT)
-  ^{q}\!H = \frac{1}{q-1} \left( 1 - \sum^S_{s=1}{p^q_s} \right).
-\end{equation}
-
-Tsallis a montré que les indices de Simpson et de Shannon étaient des cas particuliers d'entropie généralisée, retrouvant, sans faire le rapprochement [@Ricotta2005], la définition d'un indice de diversité de @Patil1982.
-
-Ces résultats ont été complétés par d'autres et repris en écologie par @Keylock2005 et Jost [-@Jost2006; -@Jost2007]. 
-Là encore:
-
-* Le nombre d'espèces moins 1 est $^{0}\!H$;
-* L'indice de Shannon est $^{1}\!H$;
-* L'indice de Gini-Simpson est $^{2}\!H$.
-
-L'entropie HCDT est particulièrement attractive parce que sa relation avec la diversité au sens strict est simple, après introduction du formalisme adapté (les logarithmes déformés). 
-Son biais d'estimation peut être corrigé globalement, et non seulement pour les cas particuliers (nombre d'espèces, Shannon, Simpson). 
-Enfin, sa décomposition sera présentée en détail dans le chapitre \@ref(chap-DedompHCDT).
-
-## Logarithmes déformés
-
-L'écriture de l'entropie HCDT est largement simplifiée en introduisant le formalisme des logarithmes déformés [@Tsallis1994]. 
-Le logarithme d'ordre $q$ est défini par
-\begin{equation}
-  (\#eq:lnq)
-  \ln_q{x} = \frac{x^{1-q} - 1}{1 - q},
-\end{equation}
-dont la forme est identique à la transformation de @Box1964 utilisée en statistiques pour normaliser une variable.
-
-Le logarithme déformé converge vers le logarithme naturel quand $q \to 1$ (figure \@ref(fig:lnqFig)).
-
-(ref:lnqFig) Valeur du logarithme d'ordre $q$ de probabilités entre 0 et 1 pour différentes valeurs de $q$: $q = 0$ (pointillés longs rouges), la courbe est une droite; $q = 1$ (trait plein): logarithme naturel; $q = 2$ (pointillés courts bleus): la courbe a la même forme que le logarithme naturel pour les valeurs positives de $q$; $q = -1$ (pointillés alternés verts): la courbe est convexe pour les valeurs négatives de $q$.
-```{r}
-#| label: lnqFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'lnqCode'
-#| fig.cap: "(ref:lnqFig)"
-```
-
-
-Le code R nécessaire pour réaliser la figure est:
-```{r}
-#| label: lnqCode
-#| eval: false
-ln0 <- function(p) lnq(p, 0)
-ln2 <- function(p) lnq(p, 2)
-lnm1 <- function(p) lnq(p, -1)
-tibble(x = c(0, 1)) %>% 
-  ggplot(aes(x)) + 
-    stat_function(fun = log) +
-    stat_function(fun = ln0, lty = 2, col = "red") +
-    stat_function(fun = ln2, lty = 3, col = "blue") +
-    stat_function(fun = lnm1, lty = 4, col = "green") +
-    coord_cartesian(ylim = c(-4, 0)) +
-    labs(x = "p", y = expression(ln[q](p)))
-```
-
-
-Sa fonction inverse est l'exponentielle d'ordre $q$:
-
-\begin{equation}
-  (\#eq:expq)
-  e^x_q = \left[ 1 + \left( 1 - q \right) x \right]^{\frac{1}{1 - q}}.
-\end{equation}
-
-Enfin, le logarithme déformé est subadditif:
-
-\begin{equation}
-  (\#eq:lnqsubadd)
-  \ln_q\left( xy \right)
-  = \ln_q{x} + \ln_q{y} 
-    - \left( q - 1 \right) \left( \ln_q{x} \right) \left( \ln_q{y} \right).
-\end{equation}
-
-Ses propriétés sont les suivantes:
-
-\begin{equation}
-  (\#eq:lnqinv)
-  \ln_q\frac{1}{x} = -x^{q - 1} \ln_q{x};
-\end{equation}
-
-\begin{equation}
-  (\#eq:lnqprod)
-  \ln_q\left( xy \right) = \ln_q{x} + x^{1-q} \ln_q{y};
-\end{equation}
-
-\begin{equation}
-  (\#eq:lnqdiv)
-  \ln_q\left( \frac{x}{y} \right)
-  = \ln_q{x} - {\left( \frac{x}{y} \right)}^{1 - q} \ln_q{y};
-\end{equation}
-
-et
-
-\begin{equation}
-  (\#eq:expqsum)
-  e^{x + y}_q = e_q^x e_q^{\frac{y}{1 + \left( 1 - q \right) x}}.
-\end{equation}
-
-Si $q > 1$, $\mathop{\lim}_{x \to +\infty}(\ln_q{x}) = {1} / {(q - 1)}$, donc $e_q^x$ n'est pas définie pour $x > 1 / (q - 1)$.
-
-La dérivée du logarithme déformé est, quel que soit $q$,
-\begin{equation}
-  (\#eq:lnqprime)
-  \ln'_q\left( x \right) = x^{-q}.
-\end{equation}
-
-Les dérivées première et seconde de l'exponentielle déformée sont, quel que soit $q$:
-\begin{equation}
-  (\#eq:expqprime)
-  \exp'_q\left( x \right) = \left( e_q^x \right)^{q};
-\end{equation}
-\begin{equation}
-  (\#eq:expqsec)
-  \exp''_q\left( x \right) = \left( e_q^x \right)^{2q - 1}.
-\end{equation}
-
-Ces fonctions sont implémentées dans le package *divent*: `ln_q(x, q)` et `exp_q(x, q)`.
-
-L'entropie d'ordre $q$ s'écrit
-
-\begin{equation}
-  (\#eq:EntropieHCDT)
-  ^{q}\!H 
-  = \frac{1}{q - 1} \left( 1 - \sum^S_{s=1}{p^q_s} \right)
-  = -\sum_s{p^q_s} \ln_q{p_s}
-  = \sum_s{p_s}{\ln_q\frac{1}{p_s}}.
-\end{equation}
-
-Ces trois formes sont équivalentes mais les deux dernières s'interprètent comme une généralisation de l'entropie de Shannon [@Marcon2014a].
-La dernière est la plus intéressante parce qu'elle permet de définir l'entropie en général comme la moyenne du logarithme de l'inverse des probabilités, que nous appellerons la rareté des espèces.
-
-Le calcul de $^{q}\!H$ peut se faire avec la fonction `ent_tsallis` de la librairie *divent*:
+La fonction `ent_simpson` de *divent* accepte comme argument un vecteur d'abondances ou un dataframe contenant les données et propose par défaut la correction de Lande:
 
 ```{r}
-#| label: Tsallis
-ent_tsallis(bci_prob, q= 1.5)
+#| label: Simpsondivent
+paracou_6_abd %>% 
+  ent_simpson()
 ```
 
-
-## Entropie et diversité
-
-On voit immédiatement que l'entropie de Tsallis est le logarithme d'ordre $q$ du nombre de Hill correspondant, comme l'entropie de Rényi en est le logarithme naturel:
-
-\begin{equation}
-  (\#eq:HlnD)
-  ^{q}\!H = \ln_q{^{q}\!D};
-\end{equation}
-
-\begin{equation}
-  (\#eq:DexpH)
-  ^{q}\!D = e_q^{^{q}\!H}.
-\end{equation}
-
-L'entropie est utile pour les calculs: la correction des biais d'estimation notamment.
-Les nombres de Hill, ou *nombres équivalents d'espèces* ou *nombres effectif d'espèces* permettent une appréhension plus intuitive de la notion de biodiversité [@Jost2006]. 
-En raison de leurs propriétés, notamment de décomposition (voir le chapitre \@ref(chap-DedompHCDT)), @Jost2007 les appelle "vraie diversité". 
-@Hoffmann2008 critiquent cette définition totalitaire et fournissent une revue historique plus lointaine sur les origines de ces mesures.
-@Jost2009 reconnaît qu'un autre terme aurait pu être choisi ("diversité neutre" ou "diversité mathématique" par exemple).
-
-@Dauby2012 écrivent "diversité au sens strict"; @Gregorius2010 "diversité explicite".
-
-Quoi qu'il en soit, les nombres de Hill respectent le principe de réplication (voir @Chao2010, section 3 pour une discussion et un historique): si $I$ communautés de même taille, de même niveau de diversité $D$, mais sans espèces en commun sont regroupées dans une méta-communauté, la diversité de la méta-communauté doit être $I \times D$.
-
-L'intérêt de ces approches est de fournir une définition paramétrique de la diversité, qui donne plus ou moins d'importance aux espèces rares:
-
-* $^{-\infty}\!D = {1} / {\min(p_S)}$ est l'inverse de la proportion de la communauté représentée par l'espèce la plus rare (toutes les autres espèces sont ignorées).
-Le biais d'estimation est incontrôlable: l'espèce la plus rare n'est pas dans l'échantillon tant que l'inventaire n'est pas exhaustif;
-* $^{0}\!D$ est le nombre d'espèces (alors que $^{0}\!H$ est le nombre d'espèces moins 1). 
-C'est la mesure classique qui donne le plus d'importance aux espèces rares: toutes les espèces ont la même importance, quel que soit leur effectif en termes d'individus.
-Il est bien adapté à une approche patrimoniale, celle du collectionneur qui considère que l'existence d'une espèce supplémentaire a un intérêt en soi, par exemple parce qu'elle peut contenir une molécule valorisable. 
-Comme les espèces rares sont difficiles à échantillonner, le biais d'estimation est très important, et sa résolution a généré une littérature en soi (section \@ref(sec-Richesse));
-* $^{1}\!D$ est l'exponentielle de l'indice de Shannon donne la même importance à tous les individus. 
-Il est adapté à une approche d'écologue, intéressé par les interactions possibles: le nombre de combinaisons d'espèces en est une approche satisfaisante.
-Le biais d'estimation est sensible;
-* $^{2}\!D$ est l'inverse de l'indice de concentration de Gini-Simpson donne moins d'importance aux espèces rares. 
-@Hill1973 l'appelle "le nombre d'espèces très abondantes". 
-Il comptabilise les interactions possibles entre paires d'individus: les espèces rares interviennent dans peu de paires, et influent peu sur l'indice. 
-En conséquence, le biais d'estimation est très petit; de plus, un estimateur non biaisé existe;
-* $^{\infty}\!D = {1} / {d}$ est l'inverse de l'indice de Berger-Parker [@Berger1970] qui est la proportion de la communauté représentée par l'espèce la plus abondante: $d = \max(\mathbf{p})$. 
-Toutes les autres espèces sont ignorées.
-
-Le calcul de $^{q}\!D$ peut se faire avec la fonction `div_hill` de la librairie *divent*:
-
-```{r}
-#| label: Dq
-div_hill(bci_prob, q = 1.5)
-```
-
-Les propriétés mathématiques de la diversité ne sont pas celles de l'entropie. 
-L'entropie doit être une fonction concave des probabilités comme on l'a vu plus haut, mais pas la diversité (un exemple de confusion est fourni par @Gadagkar1989, qui reproche à $^{2}\!D$ de ne pas être concave). 
-L'entropie est une moyenne pondérée par les probabilités de la fonction d'information, c'est donc une fonction linéaire des probabilités, propriété importante pour définir l'entropie $\alpha$ (section \@ref(sec-defalpha)) comme la moyenne des entropies de plusieurs communautés, ou l'entropie phylogénétique (chapitre \@ref(chap-Phyloentropie)) comme la moyenne de l'entropie sur les périodes d'un arbre. 
-La diversité n'est pas une fonction linéaire des probabilités: la diversité moyenne n'est en général pas la moyenne des diversités.
-
-
-## Synthèse
-
-L'inverse de la probabilité d'une espèce, $1/p_s$, définit sa rareté.
-L'entropie est la moyenne du logarithme de la rareté:
-
-\begin{equation}
-  (\#eq:EntropieRarete)
-  ^{q}\!H 
-  = \frac{1}{q-1} \left( 1 - \sum^S_{s=1}{p^q_s} \right)
-  = \sum_s{p_s}\ln_q\frac{1}{p_s}.
-\end{equation}
-
-La diversité est son exponentielle:
-
-\begin{equation}
-  (\#eq:DexpHSynthese)
-  ^{q}\!D = e_q^{^{q}\!H}.
-\end{equation}
-
-
-## Estimation
+## Entropie
 
 Les estimateurs peuvent être classés dans quatre méthodes principales.
 La plus simple consiste simplement à insérer l'estimateur de $p_s$  dans la définition de la diversité à évaluer pour obtenir ce que l'on appelle l'estimateur *plug-in*.
@@ -2076,96 +2048,373 @@ L'estimateur Chao-Jost de l'entropie HCDT est:
 En l'absence de singletons et de doubletons, $A$ est fixé à 1 et l'estimateur est identique à celui de Zhang et Grabchak.
 
 
-## Profils de diversité
+## Raréfaction et extrapolation
 
-@Leinster2012, après @Hill1973, @Patil1982, @Tothmeresz1995 et @Kindt2006, recommandent de tracer des profils de diversité, c'est-à-dire la valeur de la diversité $^{q}\!D$ en fonction de l'ordre $q$ (figure \@ref(fig:ProfilDivFig)) pour comparer plusieurs communautés.
-Une communauté peut être déclarée plus diverse qu'une autre si son profil de diversité est au-dessus de l'autre pour toutes les valeurs de $q$. 
-Si les courbes se croisent, il n'y a pas de relation d'ordre [@Tothmeresz1995].
+TODO
 
-@Lande2000 montrent que si la diversité de Simpson et la richesse de deux communautés n'ont pas le même ordre, alors les courbes d'accumulation du nombre d'espèces en fonction du nombre d'individus échantillonnés se croisent aussi.
+# Pratique de l'estimation de la diversité
 
-(ref:ProfilDivFig) Profils de diversité des quatre carrés de la parcelle 6 de Paracou. La correction du biais d'estimation est celle de Chao et Jost. Le carré 2 est plus divers que le carré 4, mais pas que les carrés 1 et 3, qui sont plus divers dans les grands ordres de diversité. Le profil de diversité est tracé ici jusqu'à l'ordre $q = 3$.
-```{r}
-#| label: ProfilDivFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'ProfilDivCode'
-#| fig.cap: "(ref:ProfilDivFig)"
-```
-
-Code R pour réaliser la figure \@ref(fig:ProfilDivFig):
-```{r}
-#| label: ProfilDivCode
-#| eval: false
-paracou_6_abd %>% 
-  # Suppression de "subplot_" dans les noms des carrés
-  mutate(site = str_replace(.$site, "subplot_", "")) %>% 
-  # Profil
-  profile_hill(orders = seq(0, 3, .1), estimator = "ChaoJost") %>%
-  autoplot() +
-  labs(color = "Carré")
-```
-
-@Pallmann2012 ont développé un test statistique pour comparer la diversité de deux communautés pour plusieurs valeurs de $q$ simultanément.
-
-@Liu2006 nomment *séparables* des communautés dont les profils ne se croisent pas.
-Ils montrent que des communautés peuvent être séparables en selon un profil de diversité de $^{q}\!D$ sans l'être forcément selon un profil de diversité de Hurlbert (section \@ref(sec-Hurlbert)), et inversement.
-Ils montrent que les communautés séparables selon un troisième type de profil, celui de la queue de distribution [@Patil1982], le sont dans tous les cas.
-Le profil de la queue de distribution est construit en classant les espèces de la plus fréquente à la plus rare et en traçant la probabilité qu'un individu appartienne à une espèce plus rare que l'espèce en abscisse (figure \@ref(fig:ProfilQueueFig)).
+TODO
 
 
-(ref:ProfilQueueFig) Profil de queue de distribution calculé pour les carrés de la parcelle 6 de Paracou. En abscisse: rang de l'espèce dans le classement de la plus fréquente à la plus rare; en ordonnée: probabilité qu'un individu de la communauté appartienne à une espèce plus rare. Les profils de queue de distribution se croisent d'autant plus tôt qu'ils se croisent pour de grands ordres de diversité dans la figure \@ref(fig:ProfilDivFig).
-```{r}
-#| label: ProfilQueueFig
-#| echo: false
-#| results: 'hide'
-#| ref.label: 'ProfilQueueCode'
-#| fig.cap: "(ref:ProfilQueueFig)"
-```
+# Autres approches
 
-Code R:
-```{r}
-#| label: ProfilQueueCode
-#| eval: false
-paracou_6_abd %>%
-  # Transformation en probabilités
-  as_probabilities() %>%
-  # Elimination des colonnes de description
-  as.matrix() %>% 
-  # Tri des espèces par ordre croissant de probabilité
-  apply(MARGIN = 1, FUN = sort) %>% 
-  # Cumul des probabilités. Attention: apply a transposé la matrice
-  apply(MARGIN = 2, FUN = cumsum) %>% 
-  # Classement par valeurs décroissantes
-  apply(MARGIN = 2, FUN = rev) %>% 
-  # Création d'un tibble pour le graphique
-  as_tibble() %>% 
-  # Nom des colonnes: 1 à 4
-  rename_with(~ str_replace(., "V", "")) %>% 
-  # Ajout d'une colonne pour l'ordre
-  mutate(rank = seq_len(nrow(.))) %>% 
-  # Création du graphique
-  pivot_longer(cols = -rank) %>% 
-  ggplot() +
-    geom_line(aes(x = rank, y = value, color = name, lty = name)) +
-    scale_x_log10() +
-    labs(
-      x = "Rang de l'espèce", 
-      y = "Probabilité", 
-      color = "Carré",
-      lty = "Carré"
-    ) 
-```
 
-Les coordonnées des points du profil sont définies par
+@Gregorius2014 montre que de nombreuses entropies sont acceptables dans le sens où elles vérifient les axiomes vus en section \@ref(sec:Axiomes) et, de plus, que la diversité d'un assemblage de communautés est obligatoirement supérieure à la diversité moyenne de ces communautés (l'égalité n'étant possible que si les communautés sont toutes identiques). 
+Cette dernière propriété sera traitée en détail dans la partie consacrée à la décomposition de la diversité. 
+
+Ces mesures doivent vérifier deux propriétés: leur fonction d'information doit être décroissante, et elles doivent être une fonction strictement concave de $p_s$. 
+Parmi les possibilités, $I(p_s) = \cos{(p_s \pi / 2)}$ est envisageable par exemple: le choix de la fonction d'information est virtuellement illimité, mais seules quelques unes seront interprétables clairement.
+
+Un nombre équivalent d'espèces existe pour toutes ces mesures.
+Il est toujours égal à l'inverse de l'image de l'entropie par la réciproque de la fonction d'information:
+
 \begin{equation}
-  (\#eq:ProfilQueue)
-  y(x) = \sum_{s=x+1}^{S}{p_{[s]}},\ x\in \{0, 1, \dots, S\}.
+  (\#eq:Gregorius2014)
+  D = \frac{1}{I^{-1} \left( \sum^S_{s=1}{p_s I(p_s)} \right)}.
 \end{equation}
 
-$p_{[s]}$ est la probabilité de l'espèce $s$; les espèces sont classées par probabilité décroissante.
+D'autres entropies ont été utilisées, avec plus ou moins de succès.
+Par exemple, @Ricotta2003c proposent d'utiliser la fonction d'information $I(p_s) = -\ln(k_s)$ où $k_s$ est la dissimilarité totale de l'espèce $s$ avec les autres (par exemple, la somme des distances aux autres espèces dans un arbre phylogénétique, voir section \@ref(sec-Dphylo)), normalisée pour que $\sum_s{k_s} = 1$.
+Ainsi, les espèces les plus originales apportent peu d'information, ce qui n'est pas très intuitif.
+Les auteurs montrent que leur mesure est la somme de l'entropie de Shannon et de la divergence de Kullback-Leibler entre les probabilités et les dissimilarités des espèces.
+@Ricotta2006b ont défini plus tard une entropie augmentant avec l'originalité de chaque espèce, présentée au chapitre \@ref(chap-LeinsterCobbold).
 
-Ce profil est exhaustif (toutes les espèces sont représentées) alors que les autres profils de diversité ne sont représentés que pour un intervalle restreint du paramètre et qu'un croisement de courbes peut se produire au-delà.
-En revanche, il ne prend pas en compte les espèces non observées.
+L'indice de Hurlbert, qui n'est pas une entropie, et l'entropie de Simpson généralisées sont présentées en détail ici.
 
-@Fattorini1999 proposent un test pour comparer deux profils de queue de distribution à partir d'échantillonnages multiples (nécessaires pour évaluer la variance de chacune des probabilités) mais qui néglige les espèces non observées.
+
+
+
+## Indice de Hurlbert {#sec-Hurlbert}
+
+### Définition
+
+L'indice de @Hurlbert1971 est l'espérance du nombre d'espèces observées dans un échantillon de taille $k$ choisie:
+
+\begin{equation}
+  (\#eq:HurlbertSk)
+  _{k}S = \sum^S_{s=1}{\left[ 1 - {\left( 1 - p_s \right)}^k \right]}.
+\end{equation}
+
+Chaque terme de la somme est la probabilité d'observer au moins une fois l'espèce correspondante.
+
+L'augmentation de la valeur de $k$ permet de donner plus d'importance aux espèces rares.
+
+L'indice peut être converti en nombre équivalent d'espèces [@Dauby2012], c'est-à-dire le nombre d'espèces équiprobables nécessaire pour obtenir la même diversité, notés $_{k}D$ à partir de la relation
+
+\begin{equation}
+  (\#eq:HurlbertD)
+  _{k}S = {_{k}D} \left[ 1 - {\left( 1 - \frac{1}{_{k}D} \right)}^k \right].
+\end{equation}
+
+L'équation doit être résolue pour obtenir $_{k}D$ à partir de la valeur de $_{k}S$ estimée, numériquement pour $k>3$.
+
+Dans deux cas particuliers, les nombres équivalents d'espèces de Hurlbert sont identiques aux nombres de Hill: $_{2}D = {^{2}\!D}$ et $_{\infty}D = {^{0}\!D}$.
+
+Pour les autres ordres entiers de diversité, il existe une correspondance parfaite entre les deux mesures [@Chao2014, Annexe S2]: la connaissance de l'une permet d'obtenir l'autre. Pour $k>1$, on a [@Leinster2012]
+
+\begin{equation}
+  (\#eq:HurlbertDq)
+  _{k}S = k + \sum_{q=2}^{k}{\binom{k}{q} \left( -1 \right)^{q + 1} \left( ^{q}\!D \right)^{1-q}}.
+\end{equation}
+
+On a vu que $^{0}\!D$ égale $_{\infty}D$, donc $_{\infty}S = {^{0}\!D}$ \@ref(eq:HurlbertD).
+
+Inversement, pour $q > 1$:
+
+\begin{equation}
+  (\#eq:DqHurlbert)
+  (^{q}\!D)^{1-q} = q + \sum_{k=2}^{q}{\binom{q}{k} \left( -1 \right)^{k + 1} {_{k}S}}.
+\end{equation}
+
+Pour $q=1$, la relation est [@Mao2007]
+\begin{equation}
+  (\#eq:Mao2007)
+  ^{1}\!H = -1 + \sum_{k=2}^{\infty}{\frac{_{k}S}{k \left( k - 1 \right)}}.
+\end{equation}
+
+### Estimation
+
+Hurlbert fournit un estimateur non biaisé de son indice ($n$ est la taille de l'échantillon, $n_s$ le nombre d'individus de l'espèce $s$):
+
+\begin{equation}
+  (\#eq:EstHurlbert)
+  _k{\tilde{S}}
+  = \sum_{s=1}^{f_{>0}}{\left[ 1-{\binom{n - n_s}{k}}/{\binom{n}{k}} \right]}.
+\end{equation}
+
+@Dauby2012 montrent que cet estimateur est très peu sensible à la taille de l'échantillon, et obtient de meilleurs résultats sur ce point que les estimateurs de Chao et Shen pour l'indice de Shannon ou du nombre d'espèces.
+@Smith1977 ont calculé sa variance.
+
+Le calcul de la diversité de Hurlbert est possible dans *divent*:
+
+```{r}
+#| label: Hurlbert
+# Indice de Hurlbert (probabilités)
+ent_hurlbert(as_probabilities(colSums(BCI)), k = 2)
+# Estimateur sans biais (abondances)
+ent_hurlbert(colSums(BCI), k = 2)
+# Nombre effectif d'espèces
+div_hurlbert(colSums(BCI), k = 2)
+```
+
+
+## Entropie de Simpson généralisée
+
+L'entropie de Simpson généralisée a été introduite dans une classe d'indices plus générale \@ref(eq:zeta) par @Zhang2010 et étudiée en détail par @Zhang2014.
+L'entropie d'ordre $r>0$ est
+\begin{equation}
+  (\#eq:zetar)
+  \zeta_r = \sum_{s=1}^S p_s (1 - p_s)^r.
+\end{equation}
+
+Elle se réduit à l'entropie de Simpson pour $r=1$.
+
+La fonction d'information de l'entropie de Simpson généralisée $I(p)=(1 - p)^r$ représente la probabilité de n'observer aucun individu de l'espèce de probabilité $p$ dans un échantillon de taille $r$: c'est une mesure intuitive de la rareté.
+@Chao2013 ont interprété $\zeta_r$ comme la probabilité qu'un individu échantillonné au rang $r+1$ appartienne à une espèce nouvelle dans une SAC.
+$(r+1)\zeta_r$ est aussi l'espérance du nombre de singletons dans un échantillon de taille $(r+1)$.
+
+L'intérêt majeur de cette entropie est qu'elle dispose d'un estimateur non biaisé pour toutes les valeurs de $r$ strictement inférieures à la taille de l'échantillon.
+C'est une mesure de diversité valide pour les ordres $r$ strictement inférieurs au nombre d'espèces [@Grabchak2016].
+Au-delà, elle ne respecte plus l'axiome d'équitabilité: sa valeur maximale n'est pas obtenue quand les espèces sont équiprobables.
+
+Son nombre effectif d'espèces est
+\begin{equation}
+  (\#eq:Dzeta)
+  ^{r}\!D^{\zeta} = \frac{1}{1 - \zeta_r^{\frac{1}{r}}}.
+\end{equation}
+
+L'existence d'un estimateur sans biais et d'un intervalle de confiance calculable analytiquement permet de comparer des profils de diversité de façon robuste quand l'échantillonnage est limité et la richesse élevée.
+
+La figure \@ref(fig:comProfilzetaFig)a montre les profils de diversité (en nombre effectifs d'espèces) des deux parcelles 6 et 18 de Paracou: 1&nbsp;ha inventorié, respectivement 681 et 483 arbres, pour une richesse estimée à 254 et 309 espèces par les estimateurs jackknife d'ordres 2 et 3:
+```{r}
+#| label: Paracou618S
+paracou_6_abd %>% 
+  dplyr::filter(site %in% paste("subplot", c(1,2), sep = "_")) ->
+  p_6_12_abd
+# Abondance
+p_6_12_abd %>% 
+  abd_sum() %>% 
+  inner_join(
+    # Richesse
+    p_6_12_abd %>% div_richness()
+  )
+```
+
+En comparaison, la figure \@ref(fig:comProfilzetaFig)b montre les profils de diversité HCDT des mêmes parcelles.
+Ils se chevauchent pour les petits ordres de diversité, ce qui ne permet pas de conclure.
+
+
+(ref:comProfilzetaFig) Comparaison des profils de diversité des parcelles 6 et 18 de Paracou avec leur intervalle de confiance à 95\%. La parcelle 18 est tracée en rouge, lignes continues, et la 6 en vert, lignes pointillées. (a) Diversité généralisée de Simpson (nombres effectif d'espèces): les profils sont distincts, ce qui permet de conclure que la parcelle 6 est plus diverse que la parcelle 18. (b) Diversité HCDT: les profils se chevauchent jusqu'à $q \approx 0,7$.
+```{r}
+#| label: comProfilzetaFig
+#| echo: false
+#| results: 'hide'
+#| message: 'false'
+#| ref.label: 'comProfilzetaCode'
+#| fig.cap: "(ref:comProfilzetaFig)"
+#| out.width: '100%'
+#| fig.asp: 0.5
+```
+
+La diversité est donc estimée jusqu'à l'ordre 253.
+
+Code R pour réaliser la figure \@ref(fig:comProfilzetaFig):
+```{r}
+#| label: comProfilzetaCode
+#| eval: false
+# Carré n°2 de BCI
+BCI_1ha_abd <- as.numeric(BCI[2, ])
+# Hectare sud-ouest de Paracou #6. 
+# dbmss traite la sélection dans un wmppp
+library("dbmss")
+# Arbres dans la fenêtre de coordonnées (0:100, 0:100)
+paracou_6_wmppp[owin(c(0,100), c(0,100))] %>% 
+  # Abondances
+  as_abundances() %>% 
+  # Transformation en vecteur
+  as.numeric() -> p6_1ha_abd
+# Abondances
+BCI_1ha_n <- sum(BCI_1ha_abd)
+p6_1ha_n <- sum(p6_1ha_abd)
+# Richesse
+BCI_1ha_S <- div_richness(BCI_1ha_abd, as_numeric = TRUE)
+p6_1ha_S <- div_richness(p6_1ha_abd, as_numeric = TRUE)
+# Préparation d'un tibble pour stocker les résultats
+expand.grid(Forest = c("BCI", "Paracou"), order = seq_len(min(BCI_1ha_S, p6_1ha_S) - 1)) %>% 
+  mutate(
+    n = ifelse(Forest == "BCI", BCI_1ha_n, p6_1ha_n),
+    GenSimp.z = NA, 
+    GenSimp.sd = NA
+  ) -> p_6_12_zeta
+# Calcul de l'entropie
+# Une boucle est nécessaire : les fonctions ne sont pas vectorielles
+library("EntropyEstimation")
+for (i in 1:nrow(p_6_12_zeta)) {
+  abd <- (if (p_6_12_zeta[i, "Forest"] == "BCI") BCI_1ha_abd else p6_1ha_abd)
+  order <- p_6_12_zeta[i, "order"]
+  p_6_12_zeta[i, "GenSimp.z"] <- GenSimp.z(x = abd, r = order)
+  p_6_12_zeta[i, "GenSimp.sd"] <- GenSimp.sd(x = abd, r = order)
+}
+# Intervalle de confiance
+alpha <- 0.05
+p_6_12_zeta %>% 
+  mutate(
+    # Intervalle de confiance normal
+    ci = qnorm(1 - alpha / 2) * GenSimp.sd / sqrt(n),
+    ent_inf = GenSimp.z - ci,
+    ent_sup = GenSimp.z + ci,
+    # Transformation de l'entropie en diversité
+    Diversity = 1 / (1 - GenSimp.z^(1 / order)),
+    div_inf =  1 / (1 - ent_inf^(1 / order)),
+    div_sup = 1 / (1 - ent_sup^(1 / order))
+  ) %>% 
+  ggplot(aes(x = order, color = Forest)) +
+    geom_ribbon(aes(ymin = div_inf, ymax = div_sup), alpha = 0.3) +
+    geom_line(aes(y = Diversity)) +
+    labs(
+      x = "Ordre de diversité", 
+      y = "Diversité de Simpson généralisée",
+      color = "Forêt",
+      tag = "a"
+    ) -> gga 
+# Calcul des profils HCDT
+n_simulations <- 100
+profile_hill(BCI_1ha_abd, n_simulations = n_simulations, alpha = alpha) %>% 
+  mutate(Forest = "BCI") %>% 
+  # Deuxième profil ajouté au tibble
+  bind_rows(
+    profile_hill(p6_1ha_abd, n_simulations = n_simulations, alpha = alpha) %>% 
+      mutate(Forest = "Paracou")
+  ) %>% 
+  ggplot(aes(x = order, color = Forest)) +
+    geom_ribbon(aes(ymin = inf, ymax = sup), alpha = 0.3) +
+    geom_line(aes(y = diversity)) + 
+    labs(
+      x = "Ordre de diversité", 
+      y = "Diversité",
+      color = "Forêt",
+      tag = "a"
+    ) -> ggb
+grid.arrange(gga, ggb, ncol = 2)
+```
+
+
+La distribution statistique de la différence d'entropie est connue, et peut donc être tracée (figure \@ref(fig:zetaDiffFig)).
+Son intervalle de confiance ne contient jamais la valeur 0, ce qui permet de conclure que la parcelle 18 est plus diverse.
+
+
+(ref:zetaDiffFig) Différence entre les entropies de Simpson généralisées des parcelles 18 et 6 de Paracou avec son intervalle de confiance à 95\%. La ligne horizontale représente l'hypothèse nulle d'égalité entre les entropies, qui peut être rejetée.
+```{r}
+#| label: zetaDiffFig
+#| echo: false
+#| eval: false # TODO: corriger et activer
+#| results: 'hide'
+#| message: 'false'
+#| ref.label: 'zetaDiffCode'
+#| fig.cap: "(ref:zetaDiffFig)"
+#| out.width: '100%'
+#| fig.asp: 0.5
+```
+
+Code R pour réaliser la figure:
+```{r}
+#| label: zetaDiffCode
+#| eval: false
+# Calcul de P18-P6 avec IC
+  Difference <- list(x = zeta18$x, y = zeta18$y-zeta6$y)
+  class(Difference) <- class(zeta18)
+  icDifference <- qnorm(1-0.05/2)*sqrt(sigma6^2/sum(NsP6) 
+                                       + sigma18^2/sum(NsP18))
+  Difference$low <- Difference$y - icDifference
+  Difference$high <- Difference$y + icDifference
+  # Plot
+  autoplot(Difference, xlab = "Ordre de diversité", 
+           ylab = "Différence d'entropie") + 
+    geom_hline(yintercept = 0, col = "blue", lty = 2)
+```
+
+
+La prise en compte des espèces rares est limitée par la valeur maximale de l'ordre $r$ (limité à $S-1$).
+Les espèces plus rares ne peuvent pas être prises en compte: le profil de diversité s'arrête là.
+Le nombre effectif d'espèces maximum correspond au nombre de Hill d'ordre 0,5 environ.
+Les espèces plus rares sont prises en compte dans la partie du profil de diversité HCDT d'ordre inférieur à 0,5 mais son incertitude est grande et son biais très important quand l'échantillonnage est aussi réduit [@Marcon2015a].
+
+L'entropie de Simpson généralisée est donc l'outil le plus approprié pour comparer des profils de diversité de communautés riches et sous-échantillonnées.
+
+
+## Entropie généralisée des mesures d'inégalité
+TODO: déplacer dans décomposition-autres approches.
+
+L'entropie généralisée des économistes, d'ordre $q$, est définie comme
+
+\begin{equation}
+  (\#eq:HqEco)
+  H_q = 
+    \frac{1}{q\left(q - 1\right)} 
+    \left[\frac{1}{S} \sum^S_{s=1}{\left(\frac{n_s}{\bar{n_s}}\right)^{q}} - 1\right].
+\end{equation}
+
+
+C'est en réalité une entropie relative, qui mesure l'écart entre la distribution observée $\{n_s\}$ et sa valeur moyenne. Elle tend vers l'entropie de Theil quand $q \to 1$ et la moyenne des $\ln(\frac{n_s}{\bar{n_s}})$ quand $q \to 0$.
+Elle a été conçue pour mesurer les inégalités [@Cowell2000], puis utilisée par exemple pour mesurer la concentration spatiale [@Brulhart2005].
+
+@Maasoumi1993 explicite cet usage et pour comparer la distribution de probabilité observée $\{q_s\}$ à une distribution attendue $\{p_s\}$, plutôt qu'à la distribution uniforme dont toutes les valeurs seraient $\frac{1}{S}$. En posant $r=q-1$, en transformant les abondances $\{n_s\}$ en probabilités $\{q_s\}$ et en choisissant $\{p_s\}$ arbitrairement, on obtient
+
+\begin{equation}
+  (\#eq:Maasoumi1993)
+  H_r\left(\mathbf{q},\mathbf{p}\right) = \frac{1}{r\left(r+1\right)}\left[\sum^S_{s=1}{q_s{\left(\frac{q_s}{p_s}\right)}^{r}}-1\right].
+\end{equation}
+
+
+@Cressie1984 ont défini une mesure généralisée de qualité d'ajustement (*Goodness of Fit*) de la distribution $\{q_s\}$ à celle de $\{p_s\}$. 
+Elle est identique à l'entropie généralisée (à un coefficient 2 près) bien que développée indépendamment pour d'autres motivations.
+La statistique de Cressie et Read d'ordre 1 est la divergence de @Kullback1951, celle d'ordre 2 le $\chi^2$ de @Pearson1900.
+
+@Studeny2011 définissent une mesure d'équitabilité comme la divergence entre la distribution observée $\{p_s\}$ et la distribution uniforme, ce qui les ramène à l'entropie de Cowell:
+
+\begin{equation}
+  (\#eq:Studeny2011)
+  I_r 
+  = \frac{1}{r\left(r+1\right)} \left[\sum^S_{s=1}{p_s \left(\frac{p_s}{1/S} \right)^{r}-1 } \right].
+\end{equation}
+
+
+Cette mesure inclut à la fois l'équitabilité et la richesse de la distribution.
+Il s'agit donc d'une mesure de diversité, qui est, à une normalisation près, l'écart entre la valeur de l'entropie HCDT d'ordre $q = r + 1$ et sa valeur maximale. 
+Elle généralise donc l'indice de @Theil1967:
+
+\begin{equation}
+  (\#eq:TheilGen)
+  I_r = \frac{1}{q S^{1 - q}}\left(\ln_q{S} - ^{q}\!H \right).
+\end{equation}
+
+
+## L'entropie par cas
+
+@Rajaram2016 décomposent la diversité de Shannon en produit des contributions de chaque catégorie et proposent une mesure cumulative de la diversité d'une communauté prenant en compte une partie des espèces classées selon un critère pertinent, décrivant leur complexité: par exemple, la diversité des mammifères classés par taille croissante, ou la position dans l'évolution.
+
+La fraction de la communauté dont le cumul des probabilités égale $c$ est prise en compte.
+La diversité cumulée est:
+\begin{equation}
+  (\#eq:Rajaram2016Dc)
+  \mathit{D_c} = \prod_c{p_s^{-p_s}}.
+\end{equation}
+
+La mesure normalisée est appelée *case-based entropy* en anglais et vaut 
+\begin{equation}
+  (\#eq:Rajaram2016Cc)
+  \mathit{C_c} = \frac{100 D_c}{^{1}\!D}.
+\end{equation}
+
+$\mathit{D_c}={^{1}\!D}$ quand toute la communauté est prise en compte ($c=1$).
+Les auteurs s'intéressent principalement à la courbe de $C_c$ en fonction de $c$ pour montrer [@Castellani2016] que la contribution à la diversité totale des 40\% des composants les moints complexes de systèmes très divers ("des galaxies au gènes ") atteint toujours au moins 60\%, ce résultat étant interprété comme une loi universelle de limitation de la complexité.
+
+Cette mesure peut être étendue à l'entropie HCDT sans difficulté:
+\begin{equation}
+  (\#eq:Ccq)
+  \mathit{^{q}\!C_{c}} = {\left(\sum_c{p^q_s}\right)}^{\frac{1}{1-q}}.
+\end{equation}
+
+La méthode peut être appliquée pour évaluer la contribution de n'importe quel partie de la communauté à la diversité totale.
+Il ne s'agit pas d'une décomposition de la diversité au sens classique du terme, qui consiste à partitionner la diversité totale en diversité intra et inter-groupes, mais plutôt d'une façon de prendre en compte les caractéristiques des espèces dans une approche non-neutre.
